@@ -22,4 +22,4 @@ Other parts of system configurations should be hardware agnostic. Of course don'
 
 ## Wallpaper
 
-I found it on internet some time ago, but it was bad quality. I turned it into vector image and exported 1080p and 1440p variants. If you find the author please thank him in my name.
+I found it on internet some time ago, but it was bad quality. I turned it into vector image and exported 1080p and 1440p variants. If you find the author please thank him/her in my name.
