@@ -24,7 +24,7 @@ in
     #};
 
     "org/gnome/desktop/background" = {
-      picture-uri = "file:///home/matej/Pictures/Wallpapers/tux-my-1440p.png";
+      picture-uri = "file:///home/matej/NixOS/wallpaper/tux-my-1440p.png";
     };
 
     "org/gnome/desktop/input-sources" = {
