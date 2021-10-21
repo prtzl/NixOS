@@ -16,28 +16,37 @@ Boot the usb and enter superuser: `sudo su`, no password will be required.
 ### Prepare destination drive
 
 Currently I use EFI bootloader and ext4 filesystem. Use provided tool called `parted` to partition your disk.  
-I use nvme ssd disk, therefore my disk path will be `/dev/nvme0n1`. Wherever you see this notation, replace it with your own disk name. Partition names for my disk will be `nvme0n1p1`, `nvme0n1p2` etc.  
+I use nvme ssd disk, therefore my disk path will be `/dev/nvme0n1`. Partition names for my disk will be `nvme0n1p1`, `nvme0n1p2`, etc.  
 If you have ssd disk it might look like `/dev/sda` with partition names `/dev/sda1`, `/dev/sda2` etc.  
 
-To create boot, swap and root partition, execute these lines on your drive location:
+To create boot, swap and root partition, execute following lines on your drive location. **WARNING, THIS WILL WIPE ALL DATA ON THE DRIVE.**
+
 ```shell
-parted /dev/nvme0n1 -- mklabel gpt
-parted /dev/nvme0n1 -- mkpart ESP fat32 1MiB 512MiB
-parted /dev/nvme0n1 -- set 1 esp on
-parted /dev/nvme0n1 -- mkpart primary linux-swap 512MiB 2560MiB
-parted /dev/nvme0n1 -- mkpart primary 2560MiB 100%
+parted /dev/<disk_name> -- mklabel gpt
+parted /dev/<disk_name> -- mkpart ESP fat32 1MiB 512MiB
+parted /dev/<disk_name> -- set 1 esp on
+parted /dev/<disk_name> -- mkpart primary linux-swap 512MiB 2560MiB
+parted /dev/<disk_name> -- mkpart primary 2560MiB 100%
 ```
+
+In my case `<disk_name>` is `nvme0n1` and path: `/dev/nvme0n1`.  
+
 Partitions will be numbered in order of these commands, therefore boot = 1, swap = 2, root = 3.  
 
-**TIP:** If you label your partitions the same you will be able to copy later commands with no problem, as we'll be refering to each partition by its label and not UUID.
+**TIP:** If you label your partitions the same as me, you will be able to copy later commands and system configuration with no problem, as we'll be refering to each partition by its label and not **UUID**.  
 
 To format and name(label) new partitions (use parition names, not drive name):
+
 ```shell
-mkfs.fat -F 32 -n boot /dev/nvme0n1p1
-mkswap -L swap /dev/nvme0n1p2
-mkfs.ext4 -L nixos /dev/nvme0n1p3
+mkfs.fat -F 32 -n boot /dev/<disk_partition_1>
+mkswap -L swap /dev/<disk_partition_1>
+mkfs.ext4 -L nixos /dev/<disk_partition_1>
 ```
+
+In my case `<disk_partition_{1,2,3}>` is `nvme0n1p{1,2,3}` and paths: `/dev/nvme0n1p{1,2,3}`.
+
 Partitions are named as:
+
 * /boot = boot
 * [swap] = swap
 * / = nixos
@@ -45,6 +54,7 @@ Partitions are named as:
 ### Mount partitions
 
 Mount main root partition (labeled third in steps above) to `/mnt`, create folder `/mnt/boot/efi` and mount boot partition to it. Enable swap.
+
 ```shell
 mount /dev/disk/by-label/nixos /mnt
 mkdir -p /mnt/boot/efi
@@ -54,57 +64,91 @@ swapon /dev/disk/by-label/swap
 
 ### Manage configuration and install
 
-To use the provided configuration from repository we will create our user folder and clone the repository there:
+To use the provided configuration from repository we will create our user folder in advance and clone the repository there. Use `nix-shell -p git` to download and enable git for this step.
+
 ```shell
-mkdir -p /mnt/home/matej
-cd /mnt/home/matej
+mkdir -p /mnt/home/<your_user>
+cd /mnt/home/<your_user>
 nix-shell -p git
 git clone https://github.com/prtzl/NixOS.git
 exit
 cd NixOS
 ```
 
+For me `<your_user>` is `matej` and full path `/mnt/home/matej`.
+
 We will still generate configuration just to observe settings in `/mnt/etc/nixos/hardware-configurations.nix`. Merge them into provided configurations from repository folder (NixOS): `system/bootloader.nix`, `system/filesystem.nix`.  
 
-This is also the time to check the configuration. The main file is `system/configuration.nix`. In the beginning you can include or exclude other config files. You will also have to configure your user name, system application list, network card under networking and possibly more. I use GNOME with gdm. All GUI settings are in `system/graphics.nix` along with some gui applications.   
+This is also the time to check the configuration. The main file is `system/configuration.nix`. In the beginning you can include or exclude other config files. You will also have to configure your user name, system application list, network card under networking and possibly more.  
 
-By default running `nixos-install` by itself would source `/mnt/etc/nixos/configuration.nix`. With option `-I` we can give it a path to our configuration. This is included in helper script:
+I use GNOME with gdm. All GUI settings are in `system/graphics.nix` along with some gui applications. You can swap out window manager and desktop manager with the one you like. If you choose other desktop manager other than gnome, then you can exclude `users/matej/dconf.nix`, which only applies to gnome.
+
+By default, running `nixos-install` would source `/mnt/etc/nixos/configuration.nix`. With option `-I nixos-config=<some_path>/configuration.nix` we can give it a path to our configuration. This is included in helper script:
+
 ```shell
 ./install-system.sh
 ```
-After the installation it will ask for a root user password. Once entered, reboot the system and remove the usb. You should be greeted by nixos bootloader.  
-Once booted, login window should appear. It will ask for a username. Your user exists, but the password is not set yet. Enter another terminal with `ctrl+alt+F1` and login as `root` with previously set password. Set your user password:
-```bash
+
+If the installation was successfull it will ask for a root user password. Once set, reboot the system and remove the usb. You should be greeted by nixos bootloader.  
+Once booted, (gdm) login window should appear. It will ask for a username. Your user, which was added in `system/configuration.nix` exists, but the password is not set yet. Enter another terminal with `ctrl+alt+F{1:6}` and login as `root` with previously set password. Set your user password:
+
+```shell
 passwd <your username>
 ```
-Once entered, type `exit` and navigate back to GUI with `ctrl+alt+F7`. Now you should see your user available. Login.
 
-### Install user configuration.
+Once entered, type `exit` and navigate back to GUI with `ctrl+alt+F7`. Now you should see your user available. Login with your set password.
 
-Now you have a fresh install of nixos with stock GNOME and some basic tools and gui applications to get you running. To further configure your system per user basis you can use `home-manager`; a tool which was also included in system configuration. By default is sources configuration file in `~/.config/nixpgs/home.nix`. By using option `-I` as with system configuration we can use our own - those provided in the repository.  
+### Install user configuration
 
-First as with system configuration, please checkout `users/matej/home.nix` for the configuration. You will have to change path to your user home folder along with applications you wish to have in the application list.
-After tinkering with the list you can "update" or in this case install user configuration for home manager with:
+Now you have a fresh install of nixos with stock GNOME and some basic tools and gui applications to get you running. To further configure your system we will use `home-manager`; a tool which was also included in system configuration. By default is sources configuration file in `~/.config/nixpgs/home.nix`. By using option `-f` we can use our own - those provided in the repository.  
+
+First as with system configuration, please check out `users/matej/home.nix` for the configuration settings. You will have to change path to your user home folder along with applications you wish to have in the application list.
+After tinkering with the list and other configuration files, you can "update" or in this case install user configuration for home manager with:
+
 ```shell
 ./apply-home.sh
 ```
 
-It will now download, install and apply new settings. Things like theme, icons and shortcuts will all be available. Still applications will be absent from the gnome application menu. Log out and log back in. There you have it.
+It will now download, install and apply new settings. Things like theme, icons and shortcuts will all be available and applied after the installation is finished. However applications will be absent from the gnome application menu. Log out and log back in. There you have it.
+
+## Maintenance
+
+To update home configuration data, managed by `home-manager`, use `nix-channel --update`. This will only update the current (stable) channel information, much like `apt-get update`. You still need to apply it, like with `apt-get upgrade`.
+
+```shell
+./update-home.sh
+./apply-home.sh
+```
+
+To update system configuration, use `sudo nix-channel --update`. You can use the script:
+
+```shell
+./update-system.sh
+./apply-system.sh
+```
+
+If you wish, you can run all scripts one after another, starting with system update:
+
+```shell
+./update-install-all.sh
+```
 
 ## Compatability
 
-There are a few settings to keep an eye on when porting to a different machine: 
+There are a few settings to keep an eye on when porting to a different machine:
+
 * system/hardware-configuration.nix
-    * Update list `boot.initrd.availableKernelModules` for your system
-    * My system uses EFI bootloader with following partition names:
-        * root (`/`) = "nixos"
-        * swap = "swap"
-        * boot (`/boot`) = "boot"
-* system/configuration.nix: 
-    * Name the correct network interface under:  
-        ```
-        networking.interfaces.enp<?>s0.useDHCP = true
-        ```
+  * Update list `boot.initrd.availableKernelModules` for your system
+  * My system uses EFI bootloader with following partition names:
+    * root (`/`) = "nixos"
+    * swap = "swap"
+    * boot (`/boot`) = "boot"
+* system/configuration.nix:
+  * Name the correct network interface under:
+
+    ```shell
+    networking.interfaces.enp<?>s0.useDHCP = true
+    ```
 
 Other parts of system configurations should be hardware agnostic. Of course don't forget to change username and git configuration!
 
