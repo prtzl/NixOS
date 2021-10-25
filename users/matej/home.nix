@@ -32,11 +32,13 @@ in {
     evince
     celluloid
     vscode-fhs
+    #vscode-with-extensions
     # Content creation
     audacity
     gimp
     obs-studio
     # Media
+    ffmpeg
     # Communication
     mattermost-desktop
     zoom-us

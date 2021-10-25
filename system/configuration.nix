@@ -68,7 +68,7 @@
         isNormalUser = true;
 	    isSystemUser = false;
         createHome = true;
-        extraGroups = [ "wheel" "libvirtd" "dialout" "audio" "video" "usb" ];
+        extraGroups = [ "wheel" "libvirtd" "dialout" "audio" "video" "usb" "podman" ];
       };
     };
   };
