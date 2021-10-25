@@ -15,6 +15,8 @@ Boot the usb and enter superuser: `sudo su`, no password will be required.
 
 ### Prepare destination drive
 
+I have prepared a script that paritions the **WHOLE** selected drive and formats it for BIOS or EFI. Future options will come. The manual steps are described below.  
+
 Currently I use EFI bootloader and ext4 filesystem. Use provided tool called `parted` to partition your disk.  
 I use nvme ssd disk, therefore my disk path will be `/dev/nvme0n1`. Partition names for my disk will be `nvme0n1p1`, `nvme0n1p2`, etc.  
 If you have ssd disk it might look like `/dev/sda` with partition names `/dev/sda1`, `/dev/sda2` etc.  
