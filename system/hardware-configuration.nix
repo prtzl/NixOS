@@ -39,6 +39,8 @@
     setLdLibraryPath = true;
   };
 
-  hardware.cpu.intel.updateMicrocode = true;
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  hardware.cpu.amd.updateMicrocode = true;
   hardware.pulseaudio.enable = false;
 }
