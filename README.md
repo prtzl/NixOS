@@ -5,8 +5,9 @@ It houses system configuration files and user files managed by home-manager, whi
 
 ## Installation
 
-You can clone this repository wherever you want, preferably somewhere in your user home, for example: `/home/matej`.  
-If you want to apply this configuration at first install, then follow the chapters.
+Clone this repository in your user home, for example: `/home/matej`. Some zsh aliases for updating might break.  
+The goal is to use config files inside this repository instead of defaults for system and home-manager. This is handled by a few shell aliases.  
+If you want to add this repository on startup, then you can clone it temporarily to `/tmp` on live session. Use this for runing partition script. After your drive is partitioned and mounted, create home directory and mount repository there. Execute install script from there.
 
 ### Boot installer
 
@@ -15,7 +16,19 @@ Boot the usb and enter superuser: `sudo su`, no password will be required.
 
 ### Prepare destination drive
 
-I have prepared a script that paritions the **WHOLE** selected drive and formats it for BIOS or EFI. Future options will come. The manual steps are described below.  
+I have prepared a script `prepare-disk.sh`, that paritions the **WHOLE** selected drive and formats it for BIOS or EFI:
+
+```shell
+./prepare-disk </dev/"disk_name"> <BIOS/EFI>
+```
+
+If disk is found and if BIOS/EFI options is typed correctly it will ask you for confirmation ('y'/'Y'). It will then wipe the drive, create and format the partitions and mount them to /mnt along with attaching the swap. In my case the command would be:
+
+```shell
+./prepare-disk.sh /dev/nvme0n1 EFI
+```
+
+The manual steps, that are used in the script, are described below.  
 
 Currently I use EFI bootloader and ext4 filesystem. Use provided tool called `parted` to partition your disk.  
 I use nvme ssd disk, therefore my disk path will be `/dev/nvme0n1`. Partition names for my disk will be `nvme0n1p1`, `nvme0n1p2`, etc.  
@@ -66,6 +79,14 @@ swapon /dev/disk/by-label/swap
 
 ### Manage configuration and install
 
+First let's run:
+
+```shell
+nixos-generate-config --root /mnt
+```
+
+This command will prepare a few folders along with default configuration and hardware file.  
+
 To use the provided configuration from repository we will create our user folder in advance and clone the repository there. Use `nix-shell -p git` to download and enable git for this step.
 
 ```shell
@@ -79,11 +100,11 @@ cd NixOS
 
 For me `<your_user>` is `matej` and full path `/mnt/home/matej`.
 
-We will still generate configuration just to observe settings in `/mnt/etc/nixos/hardware-configurations.nix`. Merge them into provided configurations from repository folder (NixOS): `system/bootloader.nix`, `system/filesystem.nix`.  
+Observe settings in `/mnt/etc/nixos/hardware-configurations.nix`. Merge them into provided configurations from repository folder (NixOS): `system/bootloader.nix`, `system/filesystem.nix`. A list of possible changes is in the last chapter.  
 
 This is also the time to check the configuration. The main file is `system/configuration.nix`. In the beginning you can include or exclude other config files. You will also have to configure your user name, system application list, network card under networking and possibly more.  
 
-I use GNOME with gdm. All GUI settings are in `system/graphics.nix` along with some gui applications. You can swap out window manager and desktop manager with the one you like. If you choose other desktop manager other than gnome, then you can exclude `users/matej/dconf.nix`, which only applies to gnome.
+I use GNOME with gdm. All GUI settings are in `system/graphics.nix` along with some gui applications. You can swap out window manager and desktop manager with the one you like. If you choose other desktop manager other than gnome, then you can exclude `home/dconf.nix`, which only applies to gnome.
 
 By default, running `nixos-install` would source `/mnt/etc/nixos/configuration.nix`. With option `-I nixos-config=<some_path>/configuration.nix` we can give it a path to our configuration. This is included in helper script:
 
@@ -104,55 +125,85 @@ Once entered, type `exit` and navigate back to GUI with `ctrl+alt+F7`. Now you s
 
 Now you have a fresh install of nixos with stock GNOME and some basic tools and gui applications to get you running. To further configure your system we will use `home-manager`; a tool which was also included in system configuration. By default is sources configuration file in `~/.config/nixpgs/home.nix`. By using option `-f` we can use our own - those provided in the repository.  
 
-First as with system configuration, please check out `users/matej/home.nix` for the configuration settings. You will have to change path to your user home folder along with applications you wish to have in the application list.
+First as with system configuration, please check out `home/home.nix` for the configuration settings. You will have to change path to your user home folder along with applications you wish to have in the application list.
 After tinkering with the list and other configuration files, you can "update" or in this case install user configuration for home manager with:
 
 ```shell
-./apply-home.sh
+home-manager switch -f $HOME/NixOS/home/home.nix
 ```
 
 It will now download, install and apply new settings. Things like theme, icons and shortcuts will all be available and applied after the installation is finished. However applications will be absent from the gnome application menu. Log out and log back in. There you have it.
 
 ## Maintenance
 
-To update home configuration data, managed by `home-manager`, use `nix-channel --update`. This will only update the current (stable) channel information, much like `apt-get update`. You still need to apply it, like with `apt-get upgrade`.
+To update home configuration data, managed by `home-manager`, use `nix-channel --update`. This will only update the current (stable) channel information, much like `apt-get update`. You still need to apply it, like with `apt-get upgrade`. I have created shell aliases for updating whole system and applying home and system configurations.  
+
+Update:
 
 ```shell
-./update-home.sh
-./apply-home.sh
+update = "sudo nix-channel --update && nix-channel --update";
 ```
 
-To update system configuration, use `sudo nix-channel --update`. You can use the script:
+Apply will require absolute paths to these config files. We can also create shell variable to the config folder. If you have followed my steps, you have put this repository in your user home.
 
 ```shell
-./update-system.sh
-./apply-system.sh
+NIX_CONFIG_DIR = "$HOME/NixOS";
 ```
 
-If you wish, you can run all scripts one after another, starting with system update:
+Aliases for applying system and home are as such:
 
 ```shell
-./update-install-all.sh
+aps = "sudo nixos-rebuild switch -I nix-config=$NIX_CONFIG_DIR/system/configuration.nix
+aph = "home-manager switch -f $NIX_CONFIG_DIR/home/home.nix
+```
+
+You can also add an alias to run update and apply the entire system:
+
+```shell
+upgrade-all = "update && aps && aph";
 ```
 
 ## Compatability
 
-There are a few settings to keep an eye on when porting to a different machine:
+There are a few settings to keep an eye on when porting to a different machine. Some of these were mentioned in installation process.
 
-* system/hardware-configuration.nix
-  * Update list `boot.initrd.availableKernelModules` for your system
-  * My system uses EFI bootloader with following partition names:
+* `system/hardware-configuration.nix`
+  * Update list `boot.initrd.availableKernelModules` for your system, like intel/amd options
+* `system/filesystem.nix`  
+  Rename fileSystem paritions to their labels, that we have created at formatting step
+  * EFI:
     * root (`/`) = "nixos"
-    * swap = "swap"
+    * swap ([swap]) = "swap"
     * boot (`/boot`) = "boot"
-* system/configuration.nix:
-  * Name the correct network interface under:
+  * BIOS:
+    * remove `boot` partition description
+* `system/bootloader.nix`  
+  * EFI: leave everything the same.
+  * BIOS:
+    * remove `efi` options
+    * remove `efiSupport` option or set it to false
+    * remove `gfxmodeEfi`option
+    * change `device = "nodev";` with name of **DISK** used (not partition), for example: `device = "/dev/nvme0n1`;
+* `system/configuration.nix`
+  * Network interface card under: `networking.interfaces.enp<?>s0.useDHCP = true;`  
+  * User name: `users.users.<user_name> = {};`
+  * Location settings: `time.timeZone = "<Continent/City>";`
+  * Locale: `i18n.defaultLocale = "<locale>.UTF-8";`
+  * System installed applications and shells:
 
     ```shell
-    networking.interfaces.enp<?>s0.useDHCP = true
+    environemnt.shells = with pkgs; [ <list of shells> ];
+    environemnt.variables = { EDITOR = "<your favourite editor">; };
+    environemnt.systemPackages = with pkgs; [ <list of all your system applications> ];
     ```
 
-Other parts of system configurations should be hardware agnostic. Of course don't forget to change username and git configuration!
+* `home/home.nix`
+  * username: `home.username = "<your username>";`
+  * home directory: `home.homeDirectory = "<your home directory (/home/<username>)>;`
+  * git configurations under: `programs.git = {};`
+  * Redshift locations under: `services.redshift = {}'`
+
+Other parts of system configurations should be hardware agnostic.
 
 ## Wallpaper
 

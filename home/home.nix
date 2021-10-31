@@ -17,9 +17,11 @@ in {
 
   # Packages
   home.packages = with pkgs; [
+
     # Latex
     texlive.combined.scheme-full
     texstudio
+
     # Utility
     enpass
     megasync
@@ -33,23 +35,31 @@ in {
     celluloid
     vscode-fhs
     #vscode-with-extensions
+
     # Content creation
     audacity
     gimp
     obs-studio
+
     # Media
     ffmpeg
+
     # Communication
     mattermost-desktop
     zoom-us
     teams
     skypeforlinux
+
     # GNOME
     gnomeExtensions.tray-icons-reloaded
     papirus-icon-theme
     matcha-gtk-theme
+
     # Extra
     steam
+    
+    # Games
+    minecraft
   ];
 
   # Privat git
