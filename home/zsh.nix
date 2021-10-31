@@ -1,9 +1,15 @@
 { config, lib, pkgs, ... }:
 
-{
-  home.packages = with pkgs; [
-    zsh-fzf-tab
-  ];
+let vars = import ./vars.nix;
+in {
+
+  programs.fzf = {
+      enable = true;
+      enableZshIntegration = true;
+      #defaultCommand = "fd --type file --follow"; # FZF_DEFAULT_COMMAND
+      #defaultOptions = [ "--height 20%" ]; # FZF_DEFAULT_OPTS
+      #fileWidgetCommand = "fd --type file --follow"; # FZF_CTRL_T_COMMAND
+    };
 
   programs.direnv = { 
     enable = true;
@@ -58,10 +64,17 @@
     };  
   };
 
- 
   programs.zsh = {
     enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
+
     shellAliases = {
+      # Manage updating
+      update = "sudo nix-channel --update && nix-channel --update";
+      aps = "sudo nixos-rebuild switch -I nixos-config=$NIX_CONFIG_DIR/system/configuration.nix";
+      aph = "home-manager switch -f $NIX_CONFIG_DIR/home/home.nix";
+      upgrade-all = "update && aps && aph";
       vi="vim";
       ls="ls --group-directories-first --color=auto";
       l="ls -la";
@@ -90,6 +103,7 @@
       # Pimped out auto/tab complete:
       autoload -U colors && colors
       autoload -U compinit && compinit
+      
       zstyle ':completion:*' completer _extensions _complete _approximate
       zstyle ':completion:*' use-cache on
       zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
@@ -120,6 +134,7 @@
   };
 
   home.sessionVariables = {
+    NIX_CONFIG_DIR = "$HOME/NixOS";
     LS_COLORS = "$LS_COLORS:ow=1;34:tw=1;34:";
   };
 
