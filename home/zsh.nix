@@ -1,14 +1,9 @@
 { config, lib, pkgs, ... }:
 
-let vars = import ./vars.nix;
-in {
-
+{
   programs.fzf = {
       enable = true;
       enableZshIntegration = true;
-      #defaultCommand = "fd --type file --follow"; # FZF_DEFAULT_COMMAND
-      #defaultOptions = [ "--height 20%" ]; # FZF_DEFAULT_OPTS
-      #fileWidgetCommand = "fd --type file --follow"; # FZF_CTRL_T_COMMAND
     };
 
   programs.direnv = { 
