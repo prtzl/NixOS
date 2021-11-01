@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.fzf = {
+   programs.fzf = {
       enable = true;
       enableZshIntegration = true;
     };
@@ -52,7 +52,7 @@
       nix_shell = {
         symbol = "❄️";
         style = "bold blue";
-        format = " [$symbol  $name]($style)";
+        format = "[ $symbol  $name ]($style)";
       };
       cmake.disabled = true;
       python.disabled = true;
@@ -70,11 +70,19 @@
       aps = "sudo nixos-rebuild switch -I nixos-config=$NIX_CONFIG_DIR/system/configuration.nix";
       aph = "home-manager switch -f $NIX_CONFIG_DIR/home/home.nix";
       upgrade-all = "update && aps && aph";
+
+      # Utilities 
+      nix-shell = "nix-shell --command zsh";
       vi="vim";
       ls="ls --group-directories-first --color=auto";
       l="ls -la";
       ll="ls -l";
+
+      # Programs
       pdf="evince";
+      img="eog";
+      play="celluloid";
+      sl="sl -ead -999";
     };
 
     history = {
@@ -130,7 +138,6 @@
 
   home.sessionVariables = {
     NIX_CONFIG_DIR = "$HOME/NixOS";
-    LS_COLORS = "$LS_COLORS:ow=1;34:tw=1;34:";
   };
 
  }
