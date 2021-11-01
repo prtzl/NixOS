@@ -22,6 +22,7 @@
       displayManager = {
         gdm.enable = true;
         gdm.wayland = false;
+        gdm.autoSuspend = false;
       };
     };
     gnome.core-utilities.enable = false;

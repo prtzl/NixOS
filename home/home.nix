@@ -1,11 +1,11 @@
 { config, pkgs, ... }:
 
-let stable = import <nixpgks> {};
-in {
+{
   imports = [
     ./zsh.nix
     ./dconf.nix
   ];
+  
   # Don't let home manager manage itself - by system config
   programs.home-manager.enable = false;
   
@@ -54,12 +54,13 @@ in {
     gnomeExtensions.tray-icons-reloaded
     papirus-icon-theme
     matcha-gtk-theme
-
-    # Extra
-    steam
-    
+ 
     # Games
+    steam
     minecraft
+    
+    # Extra
+    alock
   ];
 
   # Privat git
