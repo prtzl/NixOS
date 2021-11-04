@@ -87,6 +87,8 @@ in
     "org/gnome/desktop/wm/keybindings" = {
       maximize = [ "<Super>f" ];
       minimize = [ "<Super>m" ];
+      move-to-workspace-left = [ "<Primary><Shift><Alt>Left" ];
+      move-to-workspace-right = [ "<Primary><Shift><Alt>Right" ];
       show-desktop = [ "<Super>d" ];
       switch-applications = [];
       switch-applications-backward = [];
