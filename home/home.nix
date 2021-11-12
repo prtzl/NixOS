@@ -51,6 +51,7 @@
     skypeforlinux
 
     # GNOME
+    gnomeExtensions.audio-switcher-40
     gnomeExtensions.tray-icons-reloaded
     papirus-icon-theme
     matcha-gtk-theme
