@@ -91,6 +91,7 @@
     htop
     neofetch
     sl
+    lm_sensors
   ];
 
   networking.firewall.enable = true;
