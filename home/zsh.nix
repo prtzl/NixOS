@@ -77,6 +77,7 @@
       ls="ls --group-directories-first --color=auto";
       l="ls -la";
       ll="ls -l";
+      grep="grep --color=always";
 
       # Programs
       pdf="evince";
