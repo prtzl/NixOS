@@ -43,6 +43,7 @@
 
     # Media
     ffmpeg
+    libreoffice 
 
     # Communication
     mattermost-desktop
