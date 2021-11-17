@@ -58,6 +58,7 @@
     openssh.enable = true;
     localtime.enable = true;
     geoclue2.enable = true;
+    flatpak.enable = true;
   };
 
   # User sh$t
