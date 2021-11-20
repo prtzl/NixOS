@@ -50,6 +50,7 @@
     zoom-us
     teams
     skypeforlinux
+    discord
 
     # GNOME
     gnomeExtensions.audio-switcher-40
