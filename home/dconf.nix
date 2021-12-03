@@ -168,7 +168,9 @@ in
     };
 
     "org/gnome/shell" = {
-      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "audio-switcher@albertomosconi"];
+      disable-user-extensions = false;
+      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "sound-output-device-chooser@kgshank.net"];
+      disabled-extensions = [ "audio-output-switcher@anduchs" ];
       favorite-apps = [ "firefox.desktop" "org.gnome.Nautilus.desktop" ];
       welcome-dialog-last-shown-version = "40.1";
     };
