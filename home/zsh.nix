@@ -1,10 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-   programs.fzf = {
-      enable = true;
-      enableZshIntegration = true;
-    };
+  home.packages = with pkgs; [ fzf zsh-completions ];
 
   programs.direnv = { 
     enable = true;
@@ -134,7 +131,7 @@
       bindkey '^[[1;5D' backward-word
       bindkey '^[[1;5C' forward-word
       bindkey '\e[11~' "urxvt &\n"
-    '';
+   '';
   };
 
   home.sessionVariables = {

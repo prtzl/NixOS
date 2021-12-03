@@ -4,6 +4,7 @@
   imports = [
     ./zsh.nix
     ./dconf.nix
+    ./alacritty.nix
   ];
   
   # Don't let home manager manage itself - by system config
@@ -53,7 +54,6 @@
     discord
 
     # GNOME
-    gnomeExtensions.audio-switcher-40
     gnomeExtensions.tray-icons-reloaded
     papirus-icon-theme
     matcha-gtk-theme
