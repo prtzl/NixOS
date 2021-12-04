@@ -18,13 +18,8 @@ in
       volume = 1.0;
     };
 
-    # Just remember that this one exists as well
-    #"org/gnome/control-center" = {
-    #  last-panel = "background";
-    #};
-
     "org/gnome/desktop/background" = {
-      picture-uri = "file:///home/matej/NixOS/wallpaper/tux-my-1440p.png";
+      picture-uri = "file:///home/matej/NixOS/home/wallpaper/tux-my-1440p.png";
     };
 
     "org/gnome/desktop/input-sources" = {
