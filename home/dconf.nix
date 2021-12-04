@@ -41,6 +41,13 @@ in
       gtk-im-module = "gtk-im-context-simple";
       gtk-theme = "Matcha-dark-azul";
       icon-theme = "Papirus-Dark";
+      font-name = "Cantarell 11";
+      document-font-name = "Cantarell 11";
+      monospace-font-name = "Monospace 10";
+    };
+
+    "org/gnome/desktop/interface" = {
+      titlebar-font = "Cantarell 11";
     };
 
     "org/gnome/desktop/notifications" = {
@@ -152,7 +159,7 @@ in
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       binding = "<Primary><Alt>t";
-      command = "gnome-terminal";
+      command = "alacritty";
       name = "terminal";
     };
 
