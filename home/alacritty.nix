@@ -10,6 +10,11 @@
         autohint = true;
       };
       window = {
+        dynamic_title = true;
+        scrolling = {
+          history = 1000;
+          multiplier = 2;
+        };
         padding = {
           x = 10;
           y = 5;
