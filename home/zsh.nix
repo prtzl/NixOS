@@ -101,28 +101,29 @@
     ];
 
     initExtra = ''
-      # Pimped out auto/tab complete:
       autoload -U colors && colors
       autoload -U compinit && compinit
       
-      zstyle ':completion:*' completer _extensions _complete _approximate
-      zstyle ':completion:*' use-cache on
-      zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
       zstyle ':completion:*' menu select
       zstyle ':completion:*' group-name ""
-      zstyle ':completion:*' file-sort dummyvalue
       zstyle ':completion:*' matcher-list "" 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-      zstyle ':completion:*:parameters'  list-colors '=*=32'
-      zmodload zsh/complist
-      compinit
-      _comp_options+=(globdots)       # Include hidden files.
+      _comp_options+=(globdots)
+
+
+      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+      source ${pkgs.nix-zsh-completions}/share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh
+
+
+      source ${pkgs.fzf}/share/fzf/completion.zsh
+      source ${pkgs.fzf}/share/fzf/key-bindings.zsh
+      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/lib/zsh-ls-colors/ls-colors.zsh
+
 
       # Add history command complete
-      autoload -U history-search-end
-      zle -N history-beginning-search-backward-end history-search-end
-      zle -N history-beginning-search-forward-end history-search-end
-      bindkey "^[[A" history-beginning-search-backward-end
-      bindkey "^[[b" history-beginning-search-forward-end
+      source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+      bindkey "^[[A" history-substring-search-up
+      bindkey "^[[B" history-substring-search-down      
 
       # F$cked keys, give them back
       bindkey "^[[3~" delete-char
