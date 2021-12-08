@@ -54,7 +54,7 @@
   # Usefull services
   services = {
     printing.enable = true;
-    printing.drivers = [ pkgs.hplip ];
+    printing.drivers = [ pkgs.hplip pkgs.hplipWithPlugin ];
     openssh.enable = true;
     localtime.enable = true;
     geoclue2.enable = true;
