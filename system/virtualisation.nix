@@ -7,6 +7,8 @@
       enable = true;
       qemuOvmf = true;
     };
+    virtualbox.host.enable = true;
+    virtualbox.host.enableExtensionPack = true;
   };
 
   environment.systemPackages = with pkgs; [
