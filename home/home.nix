@@ -5,6 +5,7 @@
     ./zsh.nix
     ./dconf.nix
     ./alacritty.nix
+    ./vscode.nix
   ];
   
   # Don't let home manager manage itself - by system config
@@ -34,8 +35,6 @@
     transmission-gtk
     evince
     celluloid
-    vscode-fhs
-    #vscode-with-extensions
 
     # Content creation
     audacity
@@ -60,7 +59,7 @@
  
     # Games
     steam
-    minecraft
+    #minecraft
     
     # Extra
     alock
