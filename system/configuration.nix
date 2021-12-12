@@ -10,6 +10,7 @@
       ./udev.nix
       ./graphics.nix
       ./pipewire.nix
+      <home-manager/nixos>
   ];
 
   # Cleaning lady
@@ -73,6 +74,7 @@
       };
     };
   };
+  home-manager.users.matej = import ../home/home.nix;
 
   # System packages - minimal usable system
   environment.shells = with pkgs; [ bashInteractive zsh ];
@@ -83,7 +85,6 @@
     vim
     git
     parted
-    home-manager
     unzip
     file
     tio
@@ -97,6 +98,6 @@
 
   networking.firewall.enable = true;
 
-  system.stateVersion = "21.05";
+  system.stateVersion = "21.11";
 }
 
