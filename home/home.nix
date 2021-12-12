@@ -9,10 +9,10 @@
   ];
   
   # Don't let home manager manage itself - by system config
-  programs.home-manager.enable = false;
+  programs.home-manager.enable = true;
   
   # Mandatory and user stuff
-  home.stateVersion = "21.05";
+  home.stateVersion = "21.11";
   home.username = "matej";
   home.homeDirectory = "/home/matej";
   nixpkgs.config.allowUnfree = true;

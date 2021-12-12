@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ fzf zsh-completions ];
+  home.packages = with pkgs; [ fzf zsh-completions xclip ];
 
   programs.direnv = { 
     enable = true;
