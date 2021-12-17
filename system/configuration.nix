@@ -94,6 +94,7 @@
     neofetch
     sl
     lm_sensors
+    home-manager
   ];
 
   networking.firewall.enable = true;
