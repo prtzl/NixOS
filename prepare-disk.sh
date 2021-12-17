@@ -60,7 +60,7 @@ partitionEfi()
     # Mount and enable swap
     mount /dev/disk/by-label/nixos /mnt
     mkdir -p /mnt/boot/efi
-    mount /dev/disk/by-label/boot /mnt/boot
+    mount /dev/disk/by-label/boot /mnt/boot/efi
     swapon /dev/disk/by-label/swap
 }
 # BIOS
