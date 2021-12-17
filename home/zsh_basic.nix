@@ -142,7 +142,7 @@
   };
 
   home.sessionVariables = {
-    NIX_CONFIG_DIR = "$HOME/NixOS";
+    NIX_CONFIG_DIR = "$HOME/nixos";
   };
 
  }

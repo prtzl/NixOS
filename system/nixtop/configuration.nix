@@ -13,9 +13,9 @@
     #networkmanager.enable = true;
     #useNetworkd = true;
     useDHCP = false;
-    interfaces.enp0s31f6.usedhcp = true;
-    interfaces.wlp3s0.usedhcp = true;
-  };
+    interfaces.enp0s31f6.useDHCP = true;
+    interfaces.wlp3s0.useDHCP = true;
+   };
   
   # Set your time zone - where are you ?
   location.provider = "geoclue2";

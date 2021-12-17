@@ -29,7 +29,5 @@
     cpuFreqGovernor = lib.mkDefault "powersave";
   };
 
-  services.xserver.videoDrivers = [ "nvidiagpu" ];
-
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
