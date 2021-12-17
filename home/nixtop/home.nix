@@ -13,7 +13,13 @@
   nixpkgs.config.allowUnfree = true;
 
   # Packages
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [
+    gcc
+    gcc-arm-embedded
+    gnumake
+    cmake
+    python3
+  ];
 
   # Privat git
   programs.git = {
