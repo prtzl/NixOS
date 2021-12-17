@@ -70,11 +70,9 @@
     enableAutosuggestions = true;
     enableCompletion = true;
 
-    shellAliases = {
+    shellGlobalAliases = {
       # Manage updating
       update = "sudo nix-channel --update && nix-channel --update";
-      aps = "sudo nixos-rebuild switch -I nixos-config=$NIX_CONFIG_DIR/system/configuration.nix";
-      aph = "home-manager switch -f $NIX_CONFIG_DIR/home/home.nix";
       upgrade-all = "update && aps && aph";
 
       # Utilities 
