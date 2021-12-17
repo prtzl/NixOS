@@ -43,6 +43,15 @@
         format = "[ $symbol$branch]($style)";
       };
       git_status = {
+        conflicted = "🏳";
+        untracked = "🤷";
+        stashed = "📦";
+        modified = "📝";
+        staged = "[++\($count\)](green)";
+        up_to_date = "✓";
+        ahead = "⇡\($count\)";
+        diverged = "⇕⇡\($ahead_count\)⇣\($behind_count\)";
+        behind = "⇣\($count\)";
         style = " bold yellow";
         format = "[ $all_status]($style)";
       };
@@ -70,7 +79,6 @@
 
       # Utilities 
       nix-shell = "nix-shell --command zsh";
-      vi="vim";
       ls="ls --group-directories-first --color=auto";
       l="ls -la";
       ll="ls -l";

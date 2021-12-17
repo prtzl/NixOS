@@ -6,6 +6,7 @@
     ./dconf.nix
     ./alacritty.nix
     ./vscode.nix
+    ./neovim.nix
   ];
   
   # Don't let home manager manage itself - by system config
