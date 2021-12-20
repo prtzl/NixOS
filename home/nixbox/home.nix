@@ -3,7 +3,6 @@
 {
   imports = [
     ../home_basic.nix
-    ./zsh.nix
   ];
   
   # Don't let home manager manage itself - by system config

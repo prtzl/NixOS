@@ -3,7 +3,6 @@
 {
   imports = [
     ../home_basic.nix
-    ./zsh.nix
   ];
   
   # Mandatory and user stuff
