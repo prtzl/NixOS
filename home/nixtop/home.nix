@@ -21,6 +21,7 @@
     stm32cubemx
     stm32flash
     esptool
+    stlink
   ];
 
   # Privat git
