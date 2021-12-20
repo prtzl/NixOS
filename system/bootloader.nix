@@ -1,20 +1,16 @@
 { config, pkgs, ... }:
 
 {
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   boot.loader = {
+    grub.enable = false;
     systemd-boot.enable = true;
-    timeout = 5;
+    timeout = 3;
     efi = {
       canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
-    };
-    grub = {
-      device = "nodev";
-      efiSupport = true;
-      enable = true;
-      fsIdentifier = "label";
-      gfxmodeEfi = "1920x1080";
-      theme = pkgs.nixos-grub2-theme;
+      # For some reason this throws error: Directory "/boot/efi" is not the root of the file system.
+      #efiSysMountPoint = "/boot/efi";
     };
   };
 }
