@@ -19,7 +19,7 @@ in
     };
 
     "org/gnome/desktop/background" = {
-      picture-uri = "file:///home/matej/NixOS/home/wallpaper/tux-my-1440p.png";
+      picture-uri = "/home/matej/NixOS/home/wallpaper/tux-my-1440p.png";
     };
 
     "org/gnome/desktop/input-sources" = {
