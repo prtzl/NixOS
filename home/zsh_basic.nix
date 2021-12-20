@@ -72,8 +72,9 @@
 
     shellGlobalAliases = {
       # Manage updating
-      update = "sudo nix-channel --update && nix-channel --update";
-      upgrade-all = "update && aps && aph";
+      update = "sudo nix-channel --update";
+      aps = "sudo nixos-rebuild switch";
+      upgrade = "update && aps";
 
       # Utilities 
       nix-shell = "nix-shell --command zsh";
