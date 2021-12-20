@@ -144,6 +144,7 @@
 
   home.sessionVariables = {
     NIX_CONFIG_DIR = "$HOME/NixOS";
+    NIXPKGS_ALLOW_UNFREE = 1;
   };
  }
 
