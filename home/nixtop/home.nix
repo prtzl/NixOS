@@ -18,6 +18,9 @@
     gnumake
     cmake
     python3
+    stm32cubemx
+    stm32flash
+    esptool
   ];
 
   # Privat git
