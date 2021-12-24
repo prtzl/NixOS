@@ -78,19 +78,20 @@
 
       # Utilities 
       nix-shell = "nix-shell --command zsh";
-      ls="ls --group-directories-first --color=auto";
-      l="ls -la";
-      ll="ls -l";
-      grep="grep --color=always";
+      ls = "ls --group-directories-first --color=auto";
+      l = "ls -la";
+      ll = "ls -l";
+      grep = "grep --color=always";
+      ssh = "ssh -Y -C";
 
       # Programs
-      pdf="evince";
-      img="eog";
-      play="celluloid";
-      sl="sl -ead -999";
+      pdf = "evince";
+      img = "eog";
+      play = "celluloid";
+      sl = "sl -ead -999";
 
       # System
-      reboot="read \\?\"Reboot? ENTER/Ctrl+C \" && env reboot";
+      reboot = "read \\?\"Reboot? ENTER/Ctrl+C \" && env reboot";
     };
 
     history = {
@@ -148,6 +149,7 @@
   home.sessionVariables = {
     NIX_CONFIG_DIR = "$HOME/NixOS";
     NIXPKGS_ALLOW_UNFREE = 1;
+    TERM = "xterm-256color";
   };
  }
 
