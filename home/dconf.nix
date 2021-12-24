@@ -18,9 +18,8 @@ in
       volume = 1.0;
     };
 
-    "org/gnome/desktop/background" = {
-      picture-uri = "/home/matej/NixOS/home/wallpaper/tux-my-1440p.png";
-    };
+    "org/gnome/desktop/background" = { picture-uri = ".background"; };
+    "org/gnome/desktop/screensaver" = { picture-uri = ".background"; };
 
     "org/gnome/desktop/input-sources" = {
       per-window = false;
@@ -161,7 +160,7 @@ in
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
       binding = "<Super>l";
-      command = "alock";
+      command = "alock -bg image:file=.lockscreen";
       name = "alock";
     };
 
