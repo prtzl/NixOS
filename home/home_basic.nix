@@ -59,5 +59,8 @@
     latitude = "46.05";
     longitude = "14.5";
   };
+
+  home.file.".background".source = ./wallpaper/tux-my-1440p.png;
+  home.file.".lockscreen".source = ./wallpaper/lockscreen.png;
 }
 
