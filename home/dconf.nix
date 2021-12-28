@@ -3,20 +3,10 @@
 
 let
   mkTuple = lib.hm.gvariant.mkTuple;
+  mkInt = lib.hm.gvariant.mkUint32; 
 in
 {
   dconf.settings = {
-    "io/github/celluloid-player/celluloid" = {
-      settings-migrated = true;
-    };
-
-    "io/github/celluloid-player/celluloid/window-state" = {
-      loop-playlist = false;
-      maximized = true;
-      playlist-width = 250;
-      show-playlist = false;
-      volume = 1.0;
-    };
 
     "org/gnome/desktop/background" = { picture-uri = ".background"; };
     "org/gnome/desktop/screensaver" = { picture-uri = ".background"; };
@@ -43,38 +33,11 @@ in
     "org/gnome/desktop/interface" = {
       titlebar-font = "Cantarell 11";
     };
-
-    "org/gnome/desktop/notifications" = {
-      application-children = [ "org-gnome-nautilus" "megasync"  "enpass" "firefox" "transmission-gtk" "gnome-printers-panel" ];
-    };
-    
-    "org/gnome/desktop/notifications/application/megasync" = {
-      application-id = "megasync.desktop";
-    };
-    "org/gnome/desktop/notifications/application/enpass" = {
-      application-id = "enpass.desktop";
-    };
-
-    "org/gnome/desktop/notifications/application/firefox" = {
-      application-id = "firefox.desktop";
-    };
-
-    "org/gnome/desktop/notifications/application/gnome-printers-panel" = {
-      application-id = "gnome-printers-panel.desktop";
-    };
-
-    "org/gnome/desktop/notifications/application/org-gnome-nautilus" = {
-      application-id = "org.gnome.Nautilus.desktop";
-    };
-
-    "org/gnome/desktop/notifications/application/transmission-gtk" = {
-      application-id = "transmission-gtk.desktop";
-    };
-
+   
     "org/gnome/desktop/peripherals/keyboard" = {
-      delay = lib.hm.gvariant.mkUint32 200;
+      delay = mkInt 200;
       numlock-state = true;
-      repeat-interval = lib.hm.gvariant.mkUint32 18;
+      repeat-interval = mkInt 18;
     };
 
     "org/gnome/desktop/peripherals/touchpad" = {
@@ -83,7 +46,7 @@ in
     };
 
     "org/gnome/desktop/session" = {
-      idle-delay = lib.hm.gvariant.mkUint32 0;
+      idle-delay = mkInt 0;
     };
 
     "org/gnome/desktop/wm/keybindings" = {
@@ -98,33 +61,8 @@ in
       switch-windows-backward = [ "<Shift><Alt>Tab" ];
     };
 
-    "org/gnome/eog/view" = {
-      background-color = "rgb(0,0,0)";
-      use-background-color = true;
-    };
-
-    "org/gnome/evince/default" = {
-      window-ratio = mkTuple [ 1.0079358146473232 0.7126821793821045 ];
-    };
-
-    "org/gnome/evolution-data-server" = {
-      migrated = true;
-      network-monitor-gio-name = "";
-    };
-
     "org/gnome/gnome-system-monitor" = {
       cpu-stacked-area-chart = true;
-      current-tab = "resources";
-      maximized = true;
-      network-total-in-bits = false;
-      show-dependencies = false;
-      show-whose-processes = "user";
-      window-state = mkTuple [ 1920 1080 ];
-    };
-
-    "org/gnome/gnome-system-monitor/disktreenew" = {
-      col-6-visible = true;
-      col-6-width = 0;
     };
 
     "org/gnome/mutter" = {
@@ -134,17 +72,6 @@ in
       edge-tiling = true;
       focus-change-on-pointer-rest = true;
       workspaces-only-on-primary = false;
-    };
-
-    "org/gnome/nautilus/preferences" = {
-      default-folder-viewer = "list-view";
-      search-filter-time-type = "last_modified";
-      search-view = "list-view";
-    };
-
-    "org/gnome/nautilus/window-state" = {
-      initial-size = mkTuple [ 890 550 ];
-      maximized = true;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
@@ -167,6 +94,8 @@ in
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "interactive";
       sleep-inactive-ac-type = "nothing";
+      idle-dim = true;
+      idle-delay = mkInt 180;
     };
 
     "org/gnome/shell" = {
@@ -187,43 +116,13 @@ in
       name = "Matcha-dark-azul";
     };
 
-    "org/gnome/shell/keybindings" = {
-      toggle-message-tray = [];
-    };
-
     "org/gnome/tweaks" = {
       show-extensions-notice = false;
-    };
-
-    "org/gtk/settings/file-chooser" = {
-      date-format = "regular";
-      location-mode = "path-bar";
-      show-hidden = false;
-      show-size-column = true;
-      show-type-column = true;
-      sidebar-width = 161;
-      sort-column = "name";
-      sort-directories-first = true;
-      sort-order = "ascending";
-      type-format = "category";
-      window-position = mkTuple [ 2919 262 ];
-      window-size = mkTuple [ 1203 902 ];
-    };
-
-    "org/virt-manager/virt-manager" = {
-      manager-window-height = 550;
-      manager-window-width = 550;
     };
 
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = [ "qemu:///system" ];
       uris = [ "qemu:///system" ];
     };
-
-    "org/virt-manager/virt-manager/vmlist-fields" = {
-      disk-usage = false;
-      network-traffic = false;
-    };
-
   };
 }
