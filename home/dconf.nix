@@ -32,6 +32,7 @@ in
 
     "org/gnome/desktop/interface" = {
       titlebar-font = "Cantarell 11";
+      show-battery-percentage = true;
     };
    
     "org/gnome/desktop/peripherals/keyboard" = {
@@ -94,7 +95,7 @@ in
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "interactive";
       sleep-inactive-ac-type = "nothing";
-      idle-dim = true;
+      idle-dim = false;
       idle-delay = mkInt 180;
     };
 
