@@ -17,6 +17,10 @@ in
       xkb-options = [ "eurosign:e" "lv3:ralt_switch" ];
     };
 
+    "org/gnome/nautilus/list-view" = {
+      use-tree-view = true;
+    };
+
     "org/gnome/desktop/interface" = {
       clock-show-seconds = true;
       enable-animations = false;
@@ -101,7 +105,7 @@ in
 
     "org/gnome/shell" = {
       disable-user-extensions = false;
-      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "sound-output-device-chooser@kgshank.net"];
+      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "sound-output-device-chooser@kgshank.net" "wsmatrix@martin.zurowietz.de"];
       disabled-extensions = [ "audio-output-switcher@anduchs" ];
       favorite-apps = [ "firefox.desktop" "org.gnome.Nautilus.desktop" ];
       welcome-dialog-last-shown-version = "40.1";
@@ -115,6 +119,18 @@ in
 
     "org/gnome/shell/extensions/user-theme" = {
       name = "Matcha-dark-azul";
+    };
+
+    "org/gnome/shell/extensions/wsmatrix" = {
+      enable-popup-workspace-hover = false;
+      multi-monitor = true;
+      num-columns = 4;
+      num-rows = 3;
+      popup-timeout = 400;
+      scale = 1.0;
+      show-overview-grid = true;
+      show-thumbnails = true;
+      show-workspace-names = false;
     };
 
     "org/gnome/tweaks" = {
