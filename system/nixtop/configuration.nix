@@ -5,6 +5,7 @@
   imports = [
       ../configuration_basic.nix
       ./hardware-configuration.nix
+      <nixos-hardware/lenovo/thinkpad/x1-extreme/gen2>
   ];
 
   # Networking - check your interface name enp<>s0
