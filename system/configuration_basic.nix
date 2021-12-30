@@ -15,7 +15,8 @@
 
   # Cleaning lady
   nix = {
-    autoOptimiseStore = true;
+    package = pkgs.nixUnstable;
+    autoOptimiseStore = true
     gc = {
       automatic = true;
       dates = "weekly";
