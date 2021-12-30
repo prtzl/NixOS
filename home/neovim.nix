@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ nixfmt ];
+  home.packages = with pkgs; [ nixfmt neovim-qt ];
 
   programs.neovim = {
     enable = true;

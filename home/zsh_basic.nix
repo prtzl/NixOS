@@ -89,6 +89,7 @@
       img = "eog";
       play = "celluloid";
       sl = "sl -ead -999";
+      gvim = "nvim-qt"; 
 
       # System
       reboot = "read \\?\"Reboot? ENTER/Ctrl+C \" && env reboot";
