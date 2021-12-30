@@ -44,6 +44,7 @@
 
     # GNOME
     gnomeExtensions.tray-icons-reloaded
+    gnomeExtensions.workspace-matrix
     papirus-icon-theme
     matcha-gtk-theme
  

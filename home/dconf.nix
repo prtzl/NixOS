@@ -124,7 +124,7 @@ in
     "org/gnome/shell/extensions/wsmatrix" = {
       enable-popup-workspace-hover = false;
       multi-monitor = true;
-      num-columns = 4;
+      num-columns = 3;
       num-rows = 3;
       popup-timeout = 400;
       scale = 1.0;
