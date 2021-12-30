@@ -33,4 +33,9 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   hardware.cpu.amd.updateMicrocode = true;
+
+  hardware.openrazer = {
+    enable = true;
+    users = [ "matej" ];
+  };
 }
