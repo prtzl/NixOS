@@ -1,22 +1,32 @@
 { config, pkgs, ...}:
 
-{
+let
+  ovmf = pkgs.OVMF.override {
+    secureBoot = true;
+    tpmSupport = true;
+  };
+in {
   virtualisation = {
     podman.enable = true;
     docker.enable = true;
     libvirtd = {
       enable = true;
+      onBoot = "ignore";
+      onShutdown = "shutdown";
       qemu = {
-        ovmf.enable = true;
+        ovmf = {
+          enable = true;
+          package = ovmf;
+        };
         runAsRoot = false;
+        verbatimConfig = ''
+          nvram = ["${ovmf.fd}/FV/OVMF.fd:${ovmf.fd}/FV/OVMF_VARS.fd"]
+        '';
       };
     };
-    virtualbox.host.enable = true;
-    virtualbox.host.enableExtensionPack = true;
   };
 
   environment.systemPackages = with pkgs; [
-    OVMF
     libguestfs
     spice-gtk
     spice-vdagent
