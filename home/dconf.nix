@@ -8,19 +8,7 @@ in
 {
   dconf.settings = {
 
-    "org/gnome/desktop/background" = { picture-uri = ".background"; };
-    "org/gnome/desktop/screensaver" = { picture-uri = ".background"; };
-
-    "org/gnome/desktop/input-sources" = {
-      per-window = false;
-      sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "si" ]) ];
-      xkb-options = [ "eurosign:e" "lv3:ralt_switch" ];
-    };
-
-    "org/gnome/nautilus/list-view" = {
-      use-tree-view = true;
-    };
-
+    # Theming
     "org/gnome/desktop/interface" = {
       clock-show-seconds = true;
       enable-animations = false;
@@ -34,11 +22,26 @@ in
       monospace-font-name = "Monospace 10";
     };
 
+    # System configuration
+    "org/gnome/shell" = {
+      disable-user-extensions = false;
+      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "sound-output-device-chooser@kgshank.net" "wsmatrix@martin.zurowietz.de"];
+      disabled-extensions = [ "audio-output-switcher@anduchs" ];
+      favorite-apps = [ "firefox.desktop" "org.gnome.Nautilus.desktop" ];
+      welcome-dialog-last-shown-version = "40.1";
+    };
+
+    "org/gnome/desktop/input-sources" = {
+      per-window = false;
+      sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "si" ]) ];
+      xkb-options = [ "eurosign:e" "lv3:ralt_switch" ];
+    };
+
     "org/gnome/desktop/interface" = {
       titlebar-font = "Cantarell 11";
       show-battery-percentage = true;
     };
-   
+
     "org/gnome/desktop/peripherals/keyboard" = {
       delay = mkInt 200;
       numlock-state = true;
@@ -54,6 +57,23 @@ in
       idle-delay = mkInt 0;
     };
 
+    "org/gnome/settings-daemon/plugins/power" = {
+      power-button-action = "interactive";
+      sleep-inactive-ac-type = "nothing";
+      idle-dim = false;
+      idle-delay = mkInt 180;
+    };
+
+    "org/gnome/mutter" = {
+      attach-modal-dialogs = true;
+      center-new-windows = true;
+      dynamic-workspaces = false;
+      edge-tiling = true;
+      focus-change-on-pointer-rest = true;
+      workspaces-only-on-primary = false;
+    };
+
+    # Controls
     "org/gnome/desktop/wm/keybindings" = {
       maximize = [ "<Super>f" ];
       minimize = [ "<Super>m" ];
@@ -64,19 +84,6 @@ in
       switch-applications-backward = [];
       switch-windows = [ "<Alt>Tab" ];
       switch-windows-backward = [ "<Shift><Alt>Tab" ];
-    };
-
-    "org/gnome/gnome-system-monitor" = {
-      cpu-stacked-area-chart = true;
-    };
-
-    "org/gnome/mutter" = {
-      attach-modal-dialogs = true;
-      center-new-windows = true;
-      dynamic-workspaces = false;
-      edge-tiling = true;
-      focus-change-on-pointer-rest = true;
-      workspaces-only-on-primary = false;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
@@ -96,19 +103,17 @@ in
       name = "alock";
     };
 
-    "org/gnome/settings-daemon/plugins/power" = {
-      power-button-action = "interactive";
-      sleep-inactive-ac-type = "nothing";
-      idle-dim = false;
-      idle-delay = mkInt 180;
+    # GUI
+    "org/gnome/desktop/background" = { picture-uri = ".background"; };
+    "org/gnome/desktop/screensaver" = { picture-uri = ".background"; };
+
+    # Applications
+    "org/gnome/nautilus/list-view" = {
+      use-tree-view = true;
     };
 
-    "org/gnome/shell" = {
-      disable-user-extensions = false;
-      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "sound-output-device-chooser@kgshank.net" "wsmatrix@martin.zurowietz.de"];
-      disabled-extensions = [ "audio-output-switcher@anduchs" ];
-      favorite-apps = [ "firefox.desktop" "org.gnome.Nautilus.desktop" ];
-      welcome-dialog-last-shown-version = "40.1";
+    "org/gnome/gnome-system-monitor" = {
+      cpu-stacked-area-chart = true;
     };
 
     "org/gnome/shell/extensions/trayIconsReloaded" = {
@@ -126,10 +131,10 @@ in
       multi-monitor = true;
       num-columns = 3;
       num-rows = 3;
-      popup-timeout = 400;
-      scale = 1.0;
+      popup-timeout = 300;
+      scale = 0.01;
       show-overview-grid = true;
-      show-thumbnails = true;
+      show-thumbnails = false;
       show-workspace-names = false;
     };
 
