@@ -32,11 +32,13 @@
         isNormalUser = true;
 	    isSystemUser = false;
         createHome = true;
-        extraGroups = [ "wheel" "libvirtd" "networkmanager" "dialout" "audio" "video" "usb" "podman" "docker" ];
+        extraGroups = [ "wheel" "libvirtd" "networkmanager" "dialout" "audio" "video" "usb" "podman" "docker" "openrazer" ];
       };
     };
   };
   home-manager.users.matej = import ../../home/nixbox/home.nix;
+
+  environment.systemPackages = with pkgs; [ linuxKernel.packages.linux_libre.openrazer ];
 
   system.stateVersion = "21.11";
 }
