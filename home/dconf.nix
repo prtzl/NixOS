@@ -1,11 +1,18 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 let
   mkTuple = lib.hm.gvariant.mkTuple;
   mkInt = lib.hm.gvariant.mkUint32; 
 in
 {
+  home.packages = with pkgs; [
+    gnomeExtensions.tray-icons-reloaded
+    gnomeExtensions.workspace-matrix
+    papirus-icon-theme
+    matcha-gtk-theme
+  ];
+
   dconf.settings = {
 
     # Theming
