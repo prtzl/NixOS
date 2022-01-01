@@ -9,6 +9,7 @@ in {
   virtualisation = {
     podman.enable = true;
     docker.enable = true;
+    spiceUSBRedirection.enable = true;
     libvirtd = {
       enable = true;
       onBoot = "ignore";
@@ -33,9 +34,6 @@ in {
     virt-manager
     virt-viewer
   ];
-
-  #security.wrappers.spice-client-glib-usb-acl-helper.source =
-  #  "${pkgs.spice-gtk}/bin/spice-client-glib-usb-acl-helper";
 
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
 }
