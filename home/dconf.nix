@@ -9,6 +9,7 @@ in
   home.packages = with pkgs; [
     gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.workspace-matrix
+    gnomeExtensions.noannoyance-2
     papirus-icon-theme
     matcha-gtk-theme
   ];
@@ -32,8 +33,8 @@ in
     # System configuration
     "org/gnome/shell" = {
       disable-user-extensions = false;
-      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "sound-output-device-chooser@kgshank.net" "wsmatrix@martin.zurowietz.de"];
-      disabled-extensions = [ "audio-output-switcher@anduchs" ];
+      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "sound-output-device-chooser@kgshank.net" "wsmatrix@martin.zurowietz.de" "noannoyance@daase.net" ];
+      disabled-extensions = [];
       favorite-apps = [ "firefox.desktop" "org.gnome.Nautilus.desktop" ];
       welcome-dialog-last-shown-version = "40.1";
     };
