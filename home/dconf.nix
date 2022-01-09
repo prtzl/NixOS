@@ -51,7 +51,7 @@ in
     };
 
     "org/gnome/desktop/peripherals/keyboard" = {
-      delay = mkInt 200;
+      delay = mkInt 250;
       numlock-state = true;
       repeat-interval = mkInt 18;
     };
