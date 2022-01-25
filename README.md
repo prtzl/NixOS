@@ -15,9 +15,7 @@ Install git and run everything from there: `nix-shell -p git`.
 Add nix channels:
 
 ```shell
-nix-channel --add https://github.com/NixOS/nixos-hardware/archive/master.tar.gz nixos-hardware
-nix-channel --add https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz home-manager
-nix-channel --update
+./channels.sh
 ```
 
 You will also want to add them after you're booted into your system.  
@@ -34,21 +32,21 @@ You can use these to add flags for your system.
 Create your new home directory, so that we can put this repository there:
 
 ```shell
-mkdir -p /mnt/home/matej
-mv <path to cloned nixos repository> /mnt/home/matej
+mkdir -p /mnt/home/<username>
+mv <path to cloned nixos repository> /mnt/home/<username>
 ```
 
-Now remove stock configuration files and replace them with a link to the repository configuration files. In my case, they are in `system/<computer>/configuration.nix`.
+Now remove stock configuration files and replace them with a link to the repository configuration files. In my case, they are in `./system/<computer>/configuration.nix`.
 
 ```shell
 cd /mnt/etc/nixos
 rm *
-ln -s /mnt/home/matej/nixos/system/<nixbox/nixtop>/configuration.nix .
+ln -s /mnt/home/<username>/nixos/system/<computer>/configuration.nix .
 ```
 
 Run install: `nixos-install`. Set temporary root password when asked.  
 
-On first boot, go to another tty and setup new user and root password.
+On first boot go to another tty and login as root with password you have entered. Using `passwd <user>` change root and your user passwords. Switch back to your GUI tty (tty7 for GNOME) and your user should appear.
 
 ## Wallpaper
 
