@@ -39,7 +39,7 @@
   # Usefull services
   services = {
     printing.enable = true;
-    printing.drivers = [ pkgs.hplip pkgs.hplipWithPlugin ];
+    printing.drivers = [ pkgs.hplip ];
     sshd.enable = true;
     openssh.enable = true;
     openssh.forwardX11 = true;
