@@ -38,8 +38,6 @@
   };
   home-manager.users.matej = import ../../home/nixbox/home.nix;
 
-  environment.systemPackages = with pkgs; [ linuxKernel.packages.linux_libre.openrazer ];
-
   system.stateVersion = "21.11";
 }
 
