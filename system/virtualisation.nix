@@ -9,6 +9,7 @@ in {
   virtualisation = {
     podman.enable = true;
     docker.enable = true;
+    virtualbox.host.enable = true;
     spiceUSBRedirection.enable = true;
     libvirtd = {
       enable = true;

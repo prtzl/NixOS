@@ -38,8 +38,15 @@
   
   # Usefull services
   services = {
-    printing.enable = true;
-    printing.drivers = [ pkgs.hplip ];
+    avahi = {
+      enable = true;
+      nssmdns = true;
+    };
+    printing = {
+      enable = true;
+      drivers = [ pkgs.hplipWithPlugin pkgs.gutenprint pkgs.gutenprintBin ];
+      browsing = true;
+    };
     sshd.enable = true;
     openssh.enable = true;
     openssh.forwardX11 = true;
@@ -71,6 +78,10 @@
     ];
   };
 
-  networking.firewall.enable = true;
+  networking = {
+    firewall = {
+      enable = true;
+    };
+  };
 }
 
