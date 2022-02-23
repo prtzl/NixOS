@@ -5,18 +5,19 @@
       background_opacity = 1;
       font = {
         normal.family = "Source Code Pro";
-        size = 11;
+        size = 12;
         antialias = true;
         autohint = true;
       };
       window = {
+        title = "";
         dynamic_title = true;
         scrolling = {
           history = 1000;
           multiplier = 2;
         };
         padding = {
-          x = 10;
+          x = 5;
           y = 5;
         };
       };
