@@ -56,7 +56,7 @@
         diverged = "⇕⇡\($ahead_count\)⇣\($behind_count\)";
         behind = "⇣\($count\)";
         style = " bold yellow";
-        format = "([\[$all_status$ahead_behind\]]($style) )";
+        format = "[\\[$all_status$ahead_behind\\]]($style)";
       };
       nix_shell = {
         symbol = "❄️";
