@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  unstable = import <nixos-unstable> {};
+in
 {
   # Additional configuration
   imports = [
@@ -15,7 +18,7 @@
 
   # Cleaning lady
   nix = {
-    package = pkgs.nixUnstable;
+    package = unstable.nix;
     autoOptimiseStore = true;
     gc = {
       automatic = true;
@@ -24,6 +27,7 @@
     };
     maxJobs = 16;
     extraOptions = ''
+      experimental-features = nix-command flakes ca-derivations
       binary-caches-parallel-connections = 50
       keep-outputs = true
       keep-derivations = true
@@ -35,6 +39,7 @@
     allowUnfree = true;
     allowBroken = false;
   };
+  nixpkgs.overlays = [ (self: super: { inherit unstable; }) ];
   
   # Usefull services
   services = {
@@ -60,6 +65,7 @@
     shells = with pkgs; [ bashInteractive zsh ];
     variables = { EDITOR = "vim"; };
     systemPackages = with pkgs; [
+      (callPackage ./pkgs/jlink-pack {})
       wget
       firefox
       vim
