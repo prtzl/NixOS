@@ -97,6 +97,7 @@
       # System
       reboot = "read \\?\"Reboot? ENTER/Ctrl+C \" && env reboot";
       poweroff = "read \\?\"Poweroff? ENTER/Ctrl+C \" && env poweroff";
+      udevreload = "sudo udevadm control --reload-rules && sudo udevadm trigger";
     };
 
     history = {
