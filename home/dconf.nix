@@ -103,6 +103,15 @@ in
       switch-to-workspace-7 = ["<Alt>7"];
       switch-to-workspace-8 = ["<Alt>8"];
       switch-to-workspace-9 = ["<Alt>9"];
+      move-to-workspace-1 = ["<Primary><Alt>1"];
+      move-to-workspace-2 = ["<Primary><Alt>2"];
+      move-to-workspace-3 = ["<Primary><Alt>3"];
+      move-to-workspace-4 = ["<Primary><Alt>4"];
+      move-to-workspace-5 = ["<Primary><Alt>5"];
+      move-to-workspace-6 = ["<Primary><Alt>6"];
+      move-to-workspace-7 = ["<Primary><Alt>7"];
+      move-to-workspace-8 = ["<Primary><Alt>8"];
+      move-to-workspace-9 = ["<Primary><Alt>9"];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
