@@ -34,6 +34,7 @@ in {
     spice-vdagent
     virt-manager
     virt-viewer
+    docker-compose
   ];
 
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
