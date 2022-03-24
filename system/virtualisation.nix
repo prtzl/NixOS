@@ -9,6 +9,7 @@ in {
   virtualisation = {
     podman.enable = true;
     docker.enable = true;
+    virtualbox.host.enable = true;
     spiceUSBRedirection.enable = true;
     libvirtd = {
       enable = true;
@@ -33,6 +34,8 @@ in {
     spice-vdagent
     virt-manager
     virt-viewer
+    docker-compose
+    podman-compose
   ];
 
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];

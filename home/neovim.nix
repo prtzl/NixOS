@@ -35,37 +35,57 @@
       vimtex
     ];
     extraConfig = ''
-      set nocompatible            " disable compatibility to old-time vi
-      set showmatch               " show matching 
-      set ignorecase              " case insensitive 
-      set mouse=v                 " middle-click paste with 
-      set hlsearch                " highlight search 
-      set incsearch               " incremental search
-      set tabstop=4               " number of columns occupied by a tab 
-      set softtabstop=4           " see multiple spaces as tabstops so <BS> does the right thing
-      set expandtab               " converts tabs to white space
-      set shiftwidth=4            " width for autoindents
-      set autoindent              " indent a new line the same amount as the line just typed
-      set number                  " add line numbers
-      set wildmode=longest,list   " get bash-like tab completions
-      filetype plugin indent on   "allow auto-indenting depending on file type
-      syntax on                   " syntax highlighting
-      set mouse=a                 " enable gruvboxmouse click
-      set clipboard+=unnamedplus   " using system clipboard
-      filetype plugin on
-      set cursorline              " highligruvboxght current cursorline
-      set ttyfast                 " Speed up scrolling in Vim
+      "load system defaults
+      if filereadable(expand('$VIMRUNTIME/defaults.vim'))
+          unlet! g:skip_defaults_vim
+          source $VIMRUNTIME/defaults.vim
+      endif
 
-      nnoremap <silent> <space><space> :<C-u>CocFzfList<CR>
-      nnoremap <silent> <space>a       :<C-u>CocFzfList diagnostics<CR>
-      nnoremap <silent> <space>b       :<C-u>CocFzfList diagnostics --current-buf<CR>
-      nnoremap <silent> <space>c       :<C-u>CocFzfList commands<CR>
-      nnoremap <silent> <space>e       :<C-u>CocFzfList extensions<CR>
-      nnoremap <silent> <space>f       :<C-u>CocFzfList gfiles<CR>
-      nnoremap <silent> <space>l       :<C-u>CocFzfList location<CR>
-      nnoremap <silent> <space>o       :<C-u>CocFzfList outline<CR>
-      nnoremap <silent> <space>s       :<C-u>CocFzfList symbols<CR>
-      nnoremap <silent> <space>p       :<C-u>CocFzfListResume<CR>
+      "regular settings
+      "----------------
+      " ui
+      set number
+      set ruler
+      set wildmenu
+      set showcmd
+      set showmatch
+      set mouse=a
+
+      " Clipboard
+      set clipboard+=unnamedplus
+
+      " encoding/format
+      set encoding=utf-8
+      set fileformats=unix,dos,mac
+
+      " searching
+      set hlsearch
+      set incsearch
+      set ignorecase
+      set smartcase
+
+      " indent
+      set expandtab
+      set tabstop=4
+      set softtabstop=4
+      set shiftwidth=4
+      set autoindent
+
+      " key timeout values
+      set ttimeoutlen=20
+      set timeoutlen=1000
+
+      " allow syntax and filetype plugins
+      syntax enable
+      filetype plugin indent on
+
+      " Ctrl+Backspace delete word in insert mode
+      set backspace=indent,eol,start
+      noremap! <C-BS> <C-w>
+      noremap! <C-h> <C-w>
+
+      " Experiments
+      set wildmode=list:full
     '';
   };
 }

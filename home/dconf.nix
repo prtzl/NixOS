@@ -8,8 +8,10 @@ in
 {
   home.packages = with pkgs; [
     gnomeExtensions.tray-icons-reloaded
+    gnomeExtensions.sound-output-device-chooser
     gnomeExtensions.workspace-matrix
     gnomeExtensions.noannoyance-2
+    gnomeExtensions.unblank
     papirus-icon-theme
     matcha-gtk-theme
   ];
@@ -33,10 +35,10 @@ in
     # System configuration
     "org/gnome/shell" = {
       disable-user-extensions = false;
-      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "sound-output-device-chooser@kgshank.net" "wsmatrix@martin.zurowietz.de" "noannoyance@daase.net" ];
+      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "sound-output-device-chooser@kgshank.net" "wsmatrix@martin.zurowietz.de" "noannoyance@daase.net" "unblank@sun.wxg@gmail.com" ];
       disabled-extensions = [];
       favorite-apps = [ "firefox.desktop" "org.gnome.Nautilus.desktop" ];
-      welcome-dialog-last-shown-version = "40.1";
+      welcome-dialog-last-shown-version = "41.1";
     };
 
     "org/gnome/desktop/input-sources" = {
@@ -101,11 +103,20 @@ in
       switch-to-workspace-7 = ["<Alt>7"];
       switch-to-workspace-8 = ["<Alt>8"];
       switch-to-workspace-9 = ["<Alt>9"];
+      move-to-workspace-1 = ["<Primary><Alt>1"];
+      move-to-workspace-2 = ["<Primary><Alt>2"];
+      move-to-workspace-3 = ["<Primary><Alt>3"];
+      move-to-workspace-4 = ["<Primary><Alt>4"];
+      move-to-workspace-5 = ["<Primary><Alt>5"];
+      move-to-workspace-6 = ["<Primary><Alt>6"];
+      move-to-workspace-7 = ["<Primary><Alt>7"];
+      move-to-workspace-8 = ["<Primary><Alt>8"];
+      move-to-workspace-9 = ["<Primary><Alt>9"];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" ];
-      screensaver = [];
+      screensaver = [ "<Super>l" ];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -114,15 +125,15 @@ in
       name = "terminal";
     };
 
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-      binding = "<Super>l";
-      command = "alock -bg image:file=.lockscreen";
-      name = "alock";
-    };
+    #"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+    #  binding = "<Super>l";
+    #  command = "alock -bg image:file=.lockscreen";
+    #  name = "alock";
+    #};
 
     # GUI
     "org/gnome/desktop/background" = { picture-uri = ".background"; };
-    "org/gnome/desktop/screensaver" = { picture-uri = ".background"; };
+    "org/gnome/desktop/screensaver" = { picture-uri = ".lockscreen"; };
 
     # Applications
     "org/gnome/nautilus/list-view" = {

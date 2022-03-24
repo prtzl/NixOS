@@ -42,6 +42,9 @@
         style = "bold purple";
         format = "[ $symbol$branch]($style)";
       };
+      git_commit = {
+        only_detached = false;
+      };
       git_status = {
         conflicted = "🏳";
         untracked = "🤷";
@@ -53,7 +56,7 @@
         diverged = "⇕⇡\($ahead_count\)⇣\($behind_count\)";
         behind = "⇣\($count\)";
         style = " bold yellow";
-        format = "[ $all_status]($style)";
+        format = "[\\[$all_status$ahead_behind\\]]($style)";
       };
       nix_shell = {
         symbol = "❄️";
@@ -93,6 +96,8 @@
 
       # System
       reboot = "read \\?\"Reboot? ENTER/Ctrl+C \" && env reboot";
+      poweroff = "read \\?\"Poweroff? ENTER/Ctrl+C \" && env poweroff";
+      udevreload = "sudo udevadm control --reload-rules && sudo udevadm trigger";
     };
 
     history = {
