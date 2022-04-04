@@ -3,6 +3,8 @@
 {
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.kernel.sysctl = { "vm.swappiness" = 0; };
+
   boot.loader = {
     grub.enable = false;
     systemd-boot.enable = true;
