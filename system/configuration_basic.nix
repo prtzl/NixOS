@@ -49,7 +49,7 @@ in
     };
     printing = {
       enable = true;
-      drivers = [ pkgs.hplipWithPlugin pkgs.gutenprint pkgs.gutenprintBin ];
+      drivers = [];
       browsing = true;
     };
     sshd.enable = true;

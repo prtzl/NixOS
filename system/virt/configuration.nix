@@ -38,8 +38,6 @@
   };
   home-manager.users.test = import ../../home/virt/home.nix;
 
-  environment.systemPackages = with pkgs; [ linuxKernel.packages.linux ];
-
   system.stateVersion = "21.11";
 }
 
