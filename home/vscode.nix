@@ -1,13 +1,20 @@
 { config, pkgs, ...}:
 
-{
+let
+  unstable = import <nixos-unstable> {
+    config.allowUnfree = true;
+  };
+in {
   home.packages = with pkgs; [
-    vscode-fhs
-    #vscode-with-extensions
-    #vscode-extensions.ms-vsliveshare.vsliveshare 
-    #vscode-extensions.ms-python.python
-    #vscode-extensions.ms-vscode.cpptools
-    #vscode-extensions.donjayamanne.githistory
-    #vscode-extensions.file-icons.file-icons
+    (unstable.vscode-with-extensions.override {
+      vscodeExtensions = with unstable.vscode-extensions; [
+        arrterian.nix-env-selector
+        jnoortheen.nix-ide
+        ms-azuretools.vscode-docker
+        ms-vsliveshare.vsliveshare
+        vscodevim.vim
+        ms-vscode.cpptools
+      ];
+    })
   ];
 }
