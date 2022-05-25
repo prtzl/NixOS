@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 let
-  unstable = import <nixos-unstable> {};
 in
 {
   # Additional configuration
@@ -13,12 +12,11 @@ in
       ./udev.nix
       ./graphics.nix
       ./pipewire.nix
-      <home-manager/nixos>
   ];
 
   # Cleaning lady
   nix = {
-    package = unstable.nix;
+    package = pkgs.nix;
     autoOptimiseStore = true;
     gc = {
       automatic = true;
@@ -39,7 +37,6 @@ in
     allowUnfree = true;
     allowBroken = false;
   };
-  nixpkgs.overlays = [ (self: super: { inherit unstable; }) ];
   
   # Usefull services
   services = {
