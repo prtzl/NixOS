@@ -44,6 +44,9 @@
       };
       git_commit = {
         only_detached = false;
+        tag_disabled = false;
+        tag_symbol = ":";
+        format = "[\\($hash$tag\\)]($style)";
       };
       git_status = {
         conflicted = "🏳";
