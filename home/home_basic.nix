@@ -7,6 +7,7 @@
     ./alacritty.nix
     ./vscode.nix
     ./neovim.nix
+    ./tmux.nix
   ];
   
   # Don't let home manager manage itself - by system config
