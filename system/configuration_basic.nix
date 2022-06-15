@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, pkgs, ... }:
 
 {
   # Additional configuration
@@ -14,7 +14,7 @@
 
   # Cleaning lady
   nix = {
-    package = pkgs-unstable.nix;
+    package = pkgs.nixFlakes;
     autoOptimiseStore = true;
     gc = {
       automatic = true;
