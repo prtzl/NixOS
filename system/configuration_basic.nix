@@ -21,7 +21,6 @@
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
-    nixPath = [ "nixpkgs=/etc/channels/nixpkgs" ];
     maxJobs = 16;
     extraOptions = ''
       experimental-features = nix-command flakes ca-derivations
