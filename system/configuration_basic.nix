@@ -14,7 +14,7 @@
 
   # Cleaning lady
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.unstable.nix;
     autoOptimiseStore = true;
     gc = {
       automatic = true;
