@@ -29,6 +29,13 @@
       nixosConfigurations = {
         nixbox = lib.nixosSystem {
           inherit system;
+          let
+            overlay-unstable = final: prev: {
+              unstable = nixpkgs-unstable.legacyPackages.${system};
+            };
+          in {
+            nixpkgs.overlays = [ overlay-unstable ];
+          }
           modules = [ ./system/nixbox/configuration.nix ];
         };
         
