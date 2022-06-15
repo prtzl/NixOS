@@ -1,20 +1,16 @@
-{ config, pkgs, ...}:
+{ config, pkgs, unstable, ...}:
 
-let
-  unstable = import <nixos-unstable> {
-    config.allowUnfree = true;
-  };
-in {
-  home.packages = with pkgs; [
-    (unstable.vscode-with-extensions.override {
-      vscodeExtensions = with unstable.vscode-extensions; [
-        arrterian.nix-env-selector
-        jnoortheen.nix-ide
-        ms-azuretools.vscode-docker
-        ms-vsliveshare.vsliveshare
-        vscodevim.vim
-        ms-vscode.cpptools
-      ];
-    })
-  ];
+{
+#  home.packages = with pkgs; [
+#    (unstable.vscode-with-extensions.override {
+#      vscodeExtensions = with unstable.vscode-extensions; [
+#        arrterian.nix-env-selector
+#        jnoortheen.nix-ide
+#        ms-azuretools.vscode-docker
+#        ms-vsliveshare.vsliveshare
+#        vscodevim.vim
+#        ms-vscode.cpptools
+#      ];
+#    })
+#  ];
 }

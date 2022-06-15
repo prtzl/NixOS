@@ -1,7 +1,5 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
-let
-in
 {
   # Additional configuration
   imports = [
@@ -16,20 +14,23 @@ in
 
   # Cleaning lady
   nix = {
-    package = pkgs.nix;
+    package = pkgs-unstable.nix;
     autoOptimiseStore = true;
     gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
+    nixPath = [ "nixpkgs=/etc/channels/nixpkgs" ];
     maxJobs = 16;
     extraOptions = ''
       experimental-features = nix-command flakes ca-derivations
       binary-caches-parallel-connections = 50
-      keep-outputs = true
-      keep-derivations = true
+      preallocate-contents = false
+      #keep-outputs = true
+      #keep-derivations = true
     '';
+    trustedUsers = [ "root" "@wheel" ];
   };
 
   # Packages
@@ -62,7 +63,6 @@ in
     shells = with pkgs; [ bashInteractive zsh ];
     variables = { EDITOR = "vim"; };
     systemPackages = with pkgs; [
-      (callPackage ./pkgs/jlink-pack {})
       wget
       firefox
       vim
