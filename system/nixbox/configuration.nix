@@ -36,7 +36,6 @@
       };
     };
   };
-  #home-manager.users.matej = import ../../home/nixbox/home.nix;
 
   system.stateVersion = "21.11";
 }
