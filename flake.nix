@@ -59,30 +59,29 @@
       };
       
       homeConfigurations = {
-        matej-nixbox = home-manager.lib.homeManagerConfiguration {
+        matej-nixbox = home-manager.lib.homeManagerConfiguration rec {
           inherit system;
-          homeDirectory = "/home/matej";
           username = "matej";
+          homeDirectory = "/home/${username}";
           stateVersion = "21.11";
-          configuration = 
-            let
-              overlay-unstable = final: prev: {
-                unstable = nixpkgs-unstable.legacyPackages.${system};
+          configuration = {
+            nixpkgs = {
+              config = {
+                allowUnfree = true;
+                allowBroken = false;
               };
-            in {
-              nixpkgs = {
-                overlays = [ overlay-unstable ];
-                config = {
-                  allowUnfree = true;
-                  allowBroken = false;
-                };
-              };    
-              imports = [ ./home/nixbox/home.nix ];
             };
+            imports = [ ./home/nixbox/home.nix ];
+          };
         };
       };
 
-      devShell.${system} =
-        pkgs.mkShell { nativeBuildInputs = with pkgs-unstable; [ nix nixfmt ]; };
+      nixbox = self.nixosConfigurations.nixbox.config.system.build.toplevel;
+      matej-nixbox = self.homeConfigurations.matej-nixbox.activationPackage;
+
+      devShell.${system} = pkgs.mkShell {
+        name = "Installation-shell";
+        nativeBuildInputs = with pkgs-unstable; [ nix nixfmt home-manager ];
+      };
     };
 }
