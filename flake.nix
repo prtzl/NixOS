@@ -32,7 +32,7 @@
           modules = [
             (let
               overlay-unstable = final: prev: {
-              unstable = nixpkgs-unstable.legacyPackages.${system};
+              unstable = pkgs-unstable;
             };
             in {
               nixpkgs.overlays = [ overlay-unstable ];
@@ -47,7 +47,7 @@
           modules = [
             (let
               overlay-unstable = final: prev: {
-              unstable = nixpkgs-unstable.legacyPackages.${system};
+              unstable = pkgs-unstable;
             };
             in {
               nixpkgs.overlays = [ overlay-unstable ];
