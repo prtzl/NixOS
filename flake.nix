@@ -38,12 +38,23 @@
               nixpkgs.overlays = [ overlay-unstable ];
             })
             nixpkgs.nixosModules.notDetected
-            ./system/nixbox/configuration.nix ];
+            ./system/nixbox/configuration.nix
+          ];
         };
         
         nixtop = lib.nixosSystem {
           inherit system;
-          modules = [ ./system/nixtop/configuration.nix ];
+          modules = [
+            (let
+              overlay-unstable = final: prev: {
+              unstable = nixpkgs-unstable.legacyPackages.${system};
+            };
+            in {
+              nixpkgs.overlays = [ overlay-unstable ];
+            })
+            nixpkgs.nixosModules.notDetected
+            ./system/nixtop/configuration.nix
+          ];
         };
       };
       
@@ -65,8 +76,7 @@
                   allowUnfree = true;
                   allowBroken = false;
                 };
-              };
-              
+              };    
               imports = [ ./home/nixbox/home.nix ];
             };
         };
