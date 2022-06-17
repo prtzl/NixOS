@@ -44,6 +44,9 @@
       };
       git_commit = {
         only_detached = false;
+        tag_disabled = false;
+        tag_symbol = ":";
+        format = "[\\($hash$tag\\)]($style)";
       };
       git_status = {
         conflicted = "🏳";
@@ -73,7 +76,7 @@
     enableAutosuggestions = true;
     enableCompletion = true;
 
-    shellGlobalAliases = {
+    shellAliases = {
       # Manage updating
       update = "sudo nix-channel --update";
       aps = "sudo nixos-rebuild switch";
@@ -95,8 +98,8 @@
       gvim = "nvim-qt"; 
 
       # System
-      reboot = "read \\?\"Reboot? ENTER/Ctrl+C \" && env reboot";
-      poweroff = "read \\?\"Poweroff? ENTER/Ctrl+C \" && env poweroff";
+      reboot = "read -s \\?\"Reboot? [ENTER]: \" && if [ -z \"$REPLY\" ];then env reboot;else echo \"Canceled\";fi";
+      poweroff = "read -s \\?'Poweroff? [ENTER]: ' && if [ -z '$REPLY' ];then env poweroff;else echo 'Canceled';fi";
       udevreload = "sudo udevadm control --reload-rules && sudo udevadm trigger";
     };
 
