@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-21.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -63,7 +63,7 @@
           inherit system;
           username = "matej";
           homeDirectory = "/home/${username}";
-          stateVersion = "21.11";
+          stateVersion = "22.05";
           configuration = {
             nixpkgs = {
               config = {
