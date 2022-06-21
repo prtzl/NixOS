@@ -9,7 +9,7 @@ in {
   virtualisation = {
     podman.enable = true;
     docker.enable = true;
-    virtualbox.host.enable = true;
+    #virtualbox.host.enable = true; // nixos 22.05 broken!
     spiceUSBRedirection.enable = true;
     libvirtd = {
       enable = true;

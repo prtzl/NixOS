@@ -34,8 +34,9 @@
 
   hardware.cpu.amd.updateMicrocode = true;
 
-  hardware.openrazer = {
-    enable = true;
-    users = [ "matej" ];
-  };
+  # Won't compile in nixos 22.05
+#  hardware.openrazer = {
+#    enable = true;
+#    users = [ "matej" ];
+#  };
 }
