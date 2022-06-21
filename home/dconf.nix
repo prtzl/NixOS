@@ -1,9 +1,11 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 
 let
   mkTuple = lib.hm.gvariant.mkTuple;
-  mkInt = lib.hm.gvariant.mkUint32; 
+  mkInt = lib.hm.gvariant.mkUint32;
+  backgroundPath = "${config.home.homeDirectory}/.background";
+  lockscreenPath = "${config.home.homeDirectory}/.lockscreen";
 in
 {
   home.packages = with pkgs; [
@@ -132,8 +134,14 @@ in
     #};
 
     # GUI
-    "org/gnome/desktop/background" = { picture-uri = ".background"; };
-    "org/gnome/desktop/screensaver" = { picture-uri = ".lockscreen"; };
+    "org/gnome/desktop/background" = {
+      picture-uri = "${backgroundPath}"; 
+      picture-uri-dark = "${backgroundPath}";
+    };
+    "org/gnome/desktop/screensaver" = {
+      picture-uri = "${lockscreenPath}";
+      picture-uri-dark = "${lockscreenPath}";
+    };
 
     # Applications
     "org/gnome/nautilus/list-view" = {
