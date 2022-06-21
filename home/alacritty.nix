@@ -2,7 +2,6 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      background_opacity = 1;
       font = {
         normal.family = "Source Code Pro";
         size = 12;
@@ -10,6 +9,7 @@
         autohint = true;
       };
       window = {
+        opacity = 1;
         title = "";
         dynamic_title = true;
         scrolling = {

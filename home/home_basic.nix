@@ -9,7 +9,11 @@
     ./neovim.nix
     ./tmux.nix
   ];
-  
+
+  home.username = "matej";
+  home.homeDirectory ="/home/matej";
+  home.stateVersion = "22.05";
+
   # Don't let home manager manage itself - by system config
   programs.home-manager.enable = true;
   programs.direnv.nix-direnv.enable = true;
@@ -38,20 +42,13 @@
     libreoffice 
 
     # Communication
-    mattermost-desktop
     zoom-us
     teams
     skypeforlinux
     discord
 
-    # GNOME
-    
-
     # Fonts
     roboto
-
-    # Extra
-    #alock
   ];
 
   # My eyes
@@ -61,6 +58,19 @@
     temperature.day = 4000;
     latitude = "46.05";
     longitude = "14.5";
+  };
+
+  # Privat git
+  programs.git = {
+    enable = true;
+    userName  = "prtzl";
+    userEmail = "matej.blagsic@protonmail.com";
+    extraConfig = {
+      core = {
+        init.defaultBranch = "master";
+      };
+      push.default = "current";
+    };
   };
 
   home.file.".background".source = ./wallpaper/tux-my-1440p.png;
