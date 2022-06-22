@@ -1,8 +1,7 @@
 { config, pkgs, ...}:
 
 let
-  #unstable = pkgs.unstable;
-  unstable = import <nixpkgs> {};
+  unstable = pkgs.unstable;
 in {
   home.packages = with pkgs; [
     (unstable.vscode-with-extensions.override {

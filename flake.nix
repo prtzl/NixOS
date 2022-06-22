@@ -32,7 +32,7 @@
           modules = [
             (let
               overlay-unstable = final: prev: {
-              unstable = pkgs-unstable;
+                unstable = pkgs-unstable;
             };
             in {
               nixpkgs.overlays = [ overlay-unstable ];
@@ -47,7 +47,7 @@
           modules = [
             (let
               overlay-unstable = final: prev: {
-              unstable = pkgs-unstable;
+                unstable = pkgs-unstable;
             };
             in {
               nixpkgs.overlays = [ overlay-unstable ];
@@ -60,7 +60,7 @@
       
       homeConfigurations = {
         matej-nixbox = home-manager.lib.homeManagerConfiguration rec {
-          inherit system;
+          inherit system pkgs;
           username = "matej";
           homeDirectory = "/home/${username}";
           stateVersion = "22.05";
@@ -71,7 +71,16 @@
                 allowBroken = false;
               };
             };
-            imports = [ ./home/nixbox/home.nix ];
+            imports = [
+              (let
+                overlay-unstable = final: prev: {
+                  unstable = pkgs-unstable;
+              };
+              in {
+                nixpkgs.overlays = [ overlay-unstable ];
+              })
+              ./home/nixbox/home.nix
+            ];
           };
         };
       };
