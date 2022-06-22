@@ -6,6 +6,7 @@ let
   mkInt = lib.hm.gvariant.mkUint32;
   backgroundPath = "${config.home.homeDirectory}/.background";
   lockscreenPath = "${config.home.homeDirectory}/.lockscreen";
+  blackPath = "${config.home.homeDirectory}/.black";
 in
 {
   home.packages = with pkgs; [
@@ -126,7 +127,13 @@ in
       command = "alacritty";
       name = "terminal";
     };
-
+    
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      binding = "<Primary><Alt>b";
+      command = "eog ${blackPath}";
+      name = "black";
+    };
+    
     #"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
     #  binding = "<Super>l";
     #  command = "alock -bg image:file=.lockscreen";
