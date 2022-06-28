@@ -16,7 +16,6 @@
 
   # Don't let home manager manage itself - by system config
   programs.home-manager.enable = true;
-  programs.direnv.nix-direnv.enable = true;
   
   # Packages
   home.packages = with pkgs; [
