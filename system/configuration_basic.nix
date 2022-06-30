@@ -63,6 +63,7 @@
     variables = { EDITOR = "vim"; };
     systemPackages = with pkgs; [
       wget
+      nvd
       firefox
       vim
       git
