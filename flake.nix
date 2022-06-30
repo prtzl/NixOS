@@ -69,7 +69,7 @@
 
       devShell.${system} = pkgs.mkShell {
         name = "Installation-shell";
-        nativeBuildInputs = with pkgs-unstable; [ nix nixfmt home-manager ];
+        nativeBuildInputs = with pkgs-unstable; [ nix nixfmt home-manager nvd ];
       };
     };
 }
