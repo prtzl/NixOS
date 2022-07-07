@@ -1,18 +1,13 @@
-{ lib
-, writeShellApplication
-, shell-utils
+{ stdenv
+, pkgs
 , nvd
-, ...
 }:
 
-writeShellApplication {
+let
+  #script = pkgs.writeShellScriptBin { name = "dummy"; text = builtins.readFile ./nixos-update.sh; };
+  script = pkgs.writeShellScriptBin "echo hello, lemon";
+in
+stdenv.mkDerivation {
   name = "nixos-update";
-  text =
-    let utilsDir = shell-utils + "/share/shell-utils";
-    in
-    lib.concatFiles [
-      (utilsDir + "/utils.sh")
-      ./nixos-update.sh
-    ];
-  runtimeInputs = [ nvd ];
+  buildInputs = [ script ];
 }

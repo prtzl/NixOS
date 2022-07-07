@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+    nixos-update = pkgs.writeShellScriptBin "nixos-update-script" (builtins.readFile ../overlays/nixos-update/nixos-update.sh);
+in
 {
   # Additional configuration
   imports = [
@@ -62,7 +65,8 @@
     shells = with pkgs; [ bashInteractive zsh ];
     variables = { EDITOR = "vim"; };
     systemPackages = with pkgs; [
-      wget
+      hrenovka.wget
+      nixos-update
       nvd
       firefox
       vim

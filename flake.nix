@@ -33,8 +33,9 @@
           modules = [
             (let
               overlay-unstable = final: prev: {
+                hrenovka = pkgs-unstable;
                 unstable = pkgs-unstable;
-            };
+              };
             in {
               nixpkgs.overlays = [ overlay-unstable ];
             })
