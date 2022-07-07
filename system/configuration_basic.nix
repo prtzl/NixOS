@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  nixos-update = pkgs.writeShellScriptBin "nixos-update" (builtins.readFile ./pkgs/nixos-update.sh);
+in
 {
   # Additional configuration
   imports = [
@@ -62,6 +65,7 @@
     shells = with pkgs; [ bashInteractive zsh ];
     variables = { EDITOR = "vim"; };
     systemPackages = with pkgs; [
+      nixos-update
       wget
       nvd
       firefox
