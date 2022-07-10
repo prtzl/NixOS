@@ -19,7 +19,7 @@ if [[ "$answer" == [yY] ]]; then
     # new derivation is applied but not after reboot - ?
     # peval sudo result/bin/switch-to-configuration switch
     peval rm result
-    peval sudo nix-collect-garbage -d
+    #peval sudo nix-collect-garbage -d
     echo Update finished!
 else
     echo Update canceled!
