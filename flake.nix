@@ -23,7 +23,9 @@
         inherit system;
         config = { allowUnfree = true; };
       };
-      
+
+      jlink = jlink-pack.defaultPackage.${system};
+
       lib = nixpkgs-stable.lib;
     in {
       nixosConfigurations = {
@@ -60,6 +62,7 @@
             })
             ./home/nixbox/home.nix
           ];
+          extraSpecialArgs = { inherit jlink; };
         };
       };
 
