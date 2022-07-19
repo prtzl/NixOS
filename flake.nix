@@ -44,6 +44,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.matej = import ./home/nixbox/home.nix;
+              home-manager.extraSpecialArgs = { inherit jlink; };
             }
           ];
         };
