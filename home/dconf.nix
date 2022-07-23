@@ -38,7 +38,7 @@ in
     # System configuration
     "org/gnome/shell" = {
       disable-user-extensions = false;
-      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "sound-output-device-chooser@kgshank.net" "wsmatrix@martin.zurowietz.de" "noannoyance@daase.net" "unblank@sun.wxg@gmail.com" ];
+      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "sound-output-device-chooser@kgshank.net" "wsmatrix@martin.zurowietz.de" "noannoyance@daase.net" "unblank@sun.wxg@gmail.com" "native-window-placement@gnome-shell-extensions.gcampax.github.com" "workspace-indicator@gnome-shell-extensions.gcampax.github.com" "drive-menu@gnome-shell-extensions.gcampax.github.com" ];
       disabled-extensions = [];
       favorite-apps = [ "firefox.desktop" "org.gnome.Nautilus.desktop" ];
       welcome-dialog-last-shown-version = "41.1";
@@ -179,6 +179,7 @@ in
       show-overview-grid = true;
       show-thumbnails = false;
       show-workspace-names = false;
+      wraparound-mode = "next-previous-border";
     };
 
     "org/gnome/tweaks" = {
