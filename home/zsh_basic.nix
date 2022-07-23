@@ -100,7 +100,7 @@
 
       # System
       reboot = "read -s \\?\"Reboot? [ENTER]: \" && if [ -z \"$REPLY\" ];then env reboot;else echo \"Canceled\";fi";
-      poweroff = "read -s \\?'Poweroff? [ENTER]: ' && if [ -z '$REPLY' ];then env poweroff;else echo 'Canceled';fi";
+      poweroff = "read -s \\?\"Poweroff? [ENTER]: \" && if [ -z \"$REPLY\" ];then env poweroff;else echo \"Canceled\";fi";
       udevreload = "sudo udevadm control --reload-rules && sudo udevadm trigger";
     };
 
