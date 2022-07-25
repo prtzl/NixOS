@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./zsh_basic.nix
+    ./zsh.nix
     ./dconf.nix
     ./alacritty.nix
     ./vscode.nix

@@ -3,6 +3,6 @@
 {
   programs.tmux = {
     enable = true;
-    extraConfig = builtins.readFile ./dotfiles/.tmux.conf;
+    extraConfig = builtins.readFile ./dotfiles/tmux.conf;
   };
 }
