@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
-{
+let
+  home-update = pkgs.writeShellScriptBin "home-update" (builtins.readFile ./pkgs/home-update.sh);
+in {
   imports = [
     ./zsh.nix
     ./dconf.nix
@@ -19,6 +21,8 @@
   
   # Packages
   home.packages = with pkgs; [
+
+    home-update
 
     # Latex
     texlive.combined.scheme-full
