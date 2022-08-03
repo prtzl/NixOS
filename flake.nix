@@ -36,7 +36,7 @@
         nixbox = lib.nixosSystem {
           inherit system;
           modules = [
-            ({config, pkgs, ...}: {nixpkgs.overlays = [ overlay-unstable ];})
+            ({nixpkgs.overlays = [ overlay-unstable ];})
             ./system/nixbox/configuration.nix
             # Home manager as module overrides manual homeConfiguration on reboot
             #home-manager.nixosModules.home-manager {
