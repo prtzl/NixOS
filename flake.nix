@@ -25,7 +25,7 @@
       };
 
       overlay-unstable = final: prev: {
-        unstable = pkgs.unstable;
+        unstable = pkgs-unstable;
       };
 
       jlink = jlink-pack.defaultPackage.${system};
@@ -53,7 +53,7 @@
         matej-nixbox = home-manager.lib.homeManagerConfiguration rec {
           inherit pkgs;
           modules = [
-            ({config, pkgs, ...}: {nixpkgs.overlays = [ overlay-unstable ];})
+            ({nixpkgs.overlays = [ overlay-unstable ];})
             ./home/nixbox/home.nix
           ];
           extraSpecialArgs = { inherit jlink; };
