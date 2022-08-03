@@ -16,12 +16,16 @@
       
       pkgs = import nixpkgs-stable {
         inherit system;
-        config = { allowUnfree = true; };
+        config.allowUnfree = true;
       };
       
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
-        config = { allowUnfree = true; };
+        config.allowUnfree = true;
+      };
+
+      overlay-unstable = final: prev: {
+        unstable = pkgs.unstable;
       };
 
       jlink = jlink-pack.defaultPackage.${system};
@@ -32,14 +36,9 @@
         nixbox = lib.nixosSystem {
           inherit system;
           modules = [
-            (let
-              overlay-unstable = final: prev: {
-                unstable = pkgs-unstable;
-            };
-            in {
-              nixpkgs.overlays = [ overlay-unstable ];
-            })
+            ({config, pkgs, ...}: {nixpkgs.overlays = [ overlay-unstable ];})
             ./system/nixbox/configuration.nix
+            # Home manager as module overrides manual homeConfiguration on reboot
             #home-manager.nixosModules.home-manager {
             #  home-manager.useGlobalPkgs = true;
             #  home-manager.useUserPackages = true;
@@ -54,13 +53,7 @@
         matej-nixbox = home-manager.lib.homeManagerConfiguration rec {
           inherit pkgs;
           modules = [
-            (let
-              overlay-unstable = final: prev: {
-                unstable = pkgs-unstable;
-            };
-            in {
-              nixpkgs.overlays = [ overlay-unstable ];
-            })
+            ({config, pkgs, ...}: {nixpkgs.overlays = [ overlay-unstable ];})
             ./home/nixbox/home.nix
           ];
           extraSpecialArgs = { inherit jlink; };
