@@ -5,12 +5,6 @@
     ../home_basic.nix
   ];
   
-  # Mandatory and user stuff
-  home.stateVersion = "21.11";
-  home.username = "matej";
-  home.homeDirectory = "/home/matej";
-  nixpkgs.config.allowUnfree = true;
-
   # Packages
   home.packages = with pkgs; [
     gcc
