@@ -16,6 +16,9 @@ set mouse=a
 set laststatus=0
 
 " Colorscheme
+let g:jellybeans_overrides = {
+\    'background': { 'guibg': '000000' },
+\}
 colorscheme jellybeans
 
 " Improved cpp
