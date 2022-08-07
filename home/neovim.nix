@@ -4,7 +4,6 @@ let
   plugins = {
     stable = pkgs.vimPlugins;
     unstable = pkgs.unstable.vimPlugins;
-    master = pkgs.unstable.vimPlugins;
     local = pkgs.local.vimPlugins;
   };
 in {
@@ -19,7 +18,8 @@ in {
     vimdiffAlias = true;
     withNodeJs = true;
     withPython3 = true;
-    plugins = with plugins.master; [
+    plugins = with plugins.unstable; [
+      jellybeans-vim
       base16-vim
       coc-clangd
       coc-fzf

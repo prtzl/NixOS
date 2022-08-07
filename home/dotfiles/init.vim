@@ -9,10 +9,34 @@ endif
 " ui
 set number
 set ruler
-set wildmenu
 set showcmd
+set showmode
 set showmatch
 set mouse=a
+set laststatus=0
+
+" Colorscheme
+colorscheme jellybeans
+
+" Improved cpp
+let g:cpp_class_decl_highlight = 1
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+
+" Tab complete
+set wildmenu
+set wildmode=list:full
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+" Do not save backup files.
+set nobackup
+set history=1000
+
+" Cursor
+set guicursor=
+inoremap <Esc> <Esc>l
+set cursorline
+set scrolloff=5
 
 " Clipboard
 set clipboard+=unnamedplus
@@ -24,6 +48,8 @@ set fileformats=unix,dos,mac
 " searching
 set hlsearch
 set incsearch
+set ignorecase
+set smartcase
 
 " indent
 set expandtab
@@ -31,9 +57,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set autoindent
-
-" scroll 8 lines before end
-set scrolloff=8
+set nowrap
 
 " key timeout values
 set ttimeoutlen=20
@@ -56,9 +80,6 @@ imap [<tab> []<Left>
 imap {<tab> {}<Left>
 imap {<CR> {<CR>}<ESC>O
 imap {;<CR> {<CR>};<ESC>O
-
-" Experiments
-set wildmode=list:full
 
 " Print opened file in tmux bar
 if exists('$TMUX')
