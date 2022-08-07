@@ -8,14 +8,16 @@ function peval()
     fi
 }
 
+flake=$(id -un)-$(hostname)
+
 peval cd /etc/nixos
 peval nix flake update
-peval home-manager build --flake . --impure "$@"
+peval home-manager build --flake .\#$flake --impure "$@"
 peval nvd diff $HOME/.nix-profile result
 read -p "Perform switch? [Y/n] " answer
 if [[ "$answer" == [yY] ]]; then
     echo Applying update!
-    peval home-manager switch --flake .\#$(id -un)$(hostname) --impure "$@"
+    peval home-manager switch --flake .\#$flake --impure "$@"
     # new derivation is applied but not after reboot - ?
     # peval sudo result/bin/switch-to-configuration switch
     peval rm result
