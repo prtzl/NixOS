@@ -20,6 +20,7 @@ in {
     withPython3 = true;
     plugins = with plugins.unstable; [
       jellybeans-vim
+      vim-cpp-enhanced-highlight
       base16-vim
       coc-clangd
       coc-fzf
