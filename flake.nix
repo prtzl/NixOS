@@ -4,7 +4,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     jlink-pack.url = "github:prtzl/jlink-nix";
   };
@@ -49,7 +49,10 @@
         };
       };
       
-      homeConfigurations = {
+      homeConfigurations =
+        let
+            pkgs = pkgs-unstable;
+        in {
         matej-nixbox = home-manager.lib.homeManagerConfiguration rec {
           inherit pkgs;
           modules = [
