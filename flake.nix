@@ -46,6 +46,7 @@
             #  home-manager.extraSpecialArgs = { inherit jlink; };
             #}
           ];
+          specialArgs = { inherit jlink; };
         };
       };
       
