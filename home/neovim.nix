@@ -43,6 +43,7 @@ in {
       vim-pug
       vim-vue
       vimtex
+      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars)) # syntax for everything
     ];
     extraConfig = builtins.readFile ./dotfiles/init.vim;
   };
