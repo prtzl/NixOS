@@ -39,6 +39,7 @@ in {
     transmission-gtk
     evince
     celluloid
+    fd
 
     # Media
     ffmpeg

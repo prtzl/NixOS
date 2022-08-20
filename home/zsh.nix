@@ -88,7 +88,7 @@
       ls = "ls --group-directories-first --color=auto";
       l = "ls -la";
       ll = "ls -l";
-      grep = "grep --color=always";
+      grep = "grep --color=always -n -r";
       ssh = "ssh -Y -C";
 
       # Programs
