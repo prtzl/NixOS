@@ -24,6 +24,9 @@ in {
 
     home-update
 
+    # Net
+    chromium
+
     # Latex
     texlive.combined.scheme-full
     texstudio
