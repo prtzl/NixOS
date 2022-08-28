@@ -5,7 +5,7 @@
   # this will have to be like this. Also include stlink and tio
   # which have their udev configs with them, neat
   services.udev = {
-      packages = with pkgs; [ stlink tio ];
+      packages = with pkgs; [ stlink tio jlink ];
       extraRules = ''
 # Add all USB devices to usb group -> don't forget with your user
 KERNEL=="*", SUBSYSTEMS=="usb", MODE="0664", GROUP="usb"
