@@ -1,194 +1,197 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
-{ lib, pkgs, config, ... }:
+{ lib, config, ... }:
+
+with lib.hm.gvariant;
 
 let
   mkTuple = lib.hm.gvariant.mkTuple;
   mkInt = lib.hm.gvariant.mkUint32;
+  backgroundDir = "${config.home.homeDirectory}";
   backgroundPath = "${config.home.homeDirectory}/.background";
   lockscreenPath = "${config.home.homeDirectory}/.lockscreen";
   blackPath = "${config.home.homeDirectory}/.black";
-in
-{
-  home.packages = with pkgs; [
-    gnomeExtensions.tray-icons-reloaded
-    gnomeExtensions.sound-output-device-chooser
-    gnomeExtensions.workspace-matrix
-    gnomeExtensions.noannoyance-2
-    gnomeExtensions.unblank
-    papirus-icon-theme
-    matcha-gtk-theme
-  ];
+in {
+  dconf.settings = {
+    "org/cinnamon" = {
+      desklet-snap-interval = 25;
+      desktop-effects-workspace = false;
+      enable-vfade = false;
+      enabled-applets = [ "panel1:left:0:menu@cinnamon.org:0" "panel1:left:2:grouped-window-list@cinnamon.org:2" "panel1:right:1:systray@cinnamon.org:3" "panel1:right:2:xapp-status@cinnamon.org:4" "panel1:right:3:notifications@cinnamon.org:5" "panel1:right:4:printers@cinnamon.org:6" "panel1:right:5:removable-drives@cinnamon.org:7" "panel1:right:6:keyboard@cinnamon.org:8" "panel1:right:8:network@cinnamon.org:10" "panel1:right:9:sound@cinnamon.org:11" "panel1:center:0:calendar@cinnamon.org:13" "panel1:right:0:workspace-switcher@cinnamon.org:14" ];
+      enabled-desklets = [];
+      next-applet-id = 15;
+      panel-edit-mode = false;
+      panel-zone-symbolic-icon-sizes = "[{\"panelId\": 1, \"left\": 28, \"center\": 28, \"right\": 16}]";
+      panels-enabled = [ "1:0:top" ];
+      panels-height = [ "1:30" ];
+      startup-animation = false;
+      workspace-osd-visible = false;
+    };
 
-  #dconf.settings = {
+    "org/cinnamon/cinnamon-session" = {
+      quit-time-delay = 60;
+    };
 
-  #  # Theming
-  #  "org/gnome/desktop/interface" = {
-  #    clock-show-seconds = true;
-  #    enable-animations = false;
-  #    font-antialiasing = "grayscale";
-  #    font-hinting = "slight";
-  #    gtk-im-module = "gtk-im-context-simple";
-  #    gtk-theme = "Matcha-dark-azul";
-  #    icon-theme = "Papirus-Dark";
-  #    font-name = "Cantarell 11";
-  #    document-font-name = "Cantarell 11";
-  #    monospace-font-name = "Monospace 10";
-  #  };
+    "org/cinnamon/desktop/applications/calculator" = {
+      exec = "gnome-calculator";
+    };
 
-  #  # System configuration
-  #  "org/gnome/shell" = {
-  #    disable-user-extensions = false;
-  #    enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "launch-new-instance@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl" "sound-output-device-chooser@kgshank.net" "wsmatrix@martin.zurowietz.de" "noannoyance@daase.net" "unblank@sun.wxg@gmail.com" "native-window-placement@gnome-shell-extensions.gcampax.github.com" "workspace-indicator@gnome-shell-extensions.gcampax.github.com" "drive-menu@gnome-shell-extensions.gcampax.github.com" ];
-  #    disabled-extensions = [];
-  #    favorite-apps = [ "firefox.desktop" "org.gnome.Nautilus.desktop" ];
-  #    welcome-dialog-last-shown-version = "41.1";
-  #  };
+    "org/cinnamon/desktop/applications/terminal" = {
+      exec = "alacritty";
+    };
 
-  #  "org/gnome/desktop/input-sources" = {
-  #    per-window = false;
-  #    sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "si" ]) ];
-  #    xkb-options = [ "eurosign:e" "lv3:ralt_switch" ];
-  #  };
+    "org/cinnamon/desktop/background" = {
+      picture-options = "zoom";
+      picture-uri = "file://${backgroundPath}";
+      picture-uri-dark = "file://${backgroundPath}";
+    };
 
-  #  "org/gnome/desktop/interface" = {
-  #    titlebar-font = "Cantarell 11";
-  #    show-battery-percentage = true;
-  #  };
+    "org/cinnamon/desktop/screensaver" = {
+      picture-options = "zoom";
+      picture-uri = "file://${lockscreenPath}";
+      picture-uri-dark = "file://${lockscreenPath}";
+    };
 
-  #  "org/gnome/desktop/peripherals/keyboard" = {
-  #    delay = mkInt 250;
-  #    numlock-state = true;
-  #    repeat-interval = mkInt 18;
-  #  };
+    "org/cinnamon/desktop/background/slideshow" = {
+      delay = 15;
+      image-source = "directory://${backgroundDir}";
+    };
 
-  #  "org/gnome/desktop/peripherals/touchpad" = {
-  #    two-finger-scrolling-enabled = true;
-  #    tap-to-click = true;
-  #  };
+    "org/cinnamon/desktop/interface" = {
+      clock-show-date = true;
+      clock-show-seconds = true;
+      cursor-blink-time = 1200;
+      cursor-theme = "Adwaita";
+      first-day-of-week = 1;
+      gtk-theme = "Matcha-dark-azul";
+      icon-theme = "Papirus-Dark";
+      scaling-factor = mkUint32 0;
+    };
 
-  #  "org/gnome/desktop/session" = {
-  #    idle-delay = mkInt 0;
-  #  };
+    "org/cinnamon/desktop/keybindings" = {
+      custom-list = [ "__dummy__" "custom0" ];
+    };
 
-  #  "org/gnome/settings-daemon/plugins/power" = {
-  #    power-button-action = "interactive";
-  #    sleep-inactive-ac-type = "nothing";
-  #    idle-dim = false;
-  #    idle-delay = mkInt 180;
-  #  };
+    "org/cinnamon/desktop/keybindings/custom-keybindings/custom0" = {
+      binding = [ "<Primary><Alt>t" ];
+      command = "alacritty";
+      name = "alacritty";
+    };
 
-  #  "org/gnome/mutter" = {
-  #    attach-modal-dialogs = true;
-  #    center-new-windows = true;
-  #    dynamic-workspaces = false;
-  #    edge-tiling = true;
-  #    focus-change-on-pointer-rest = true;
-  #    workspaces-only-on-primary = false;
-  #  };
+    "org/cinnamon/desktop/keybindings/media-keys" = {
+      terminal = [];
+    };
 
-  #  # Controls
-  #  "org/gnome/desktop/wm/keybindings" = {
-  #    maximize = [ "<Super>f" ];
-  #    minimize = [ "<Super>m" ];
-  #    move-to-workspace-left = [ "<Primary><Shift><Alt>Left" ];
-  #    move-to-workspace-right = [ "<Primary><Shift><Alt>Right" ];
-  #    show-desktop = [ "<Super>d" ];
-  #    switch-applications = [];
-  #    switch-applications-backward = [];
-  #    switch-windows = [ "<Alt>Tab" ];
-  #    switch-windows-backward = [ "<Shift><Alt>Tab" ];
-  #    switch-to-workspace-1 = ["<Alt>1"];
-  #    switch-to-workspace-2 = ["<Alt>2"];
-  #    switch-to-workspace-3 = ["<Alt>3"];
-  #    switch-to-workspace-4 = ["<Alt>4"];
-  #    switch-to-workspace-5 = ["<Alt>5"];
-  #    switch-to-workspace-6 = ["<Alt>6"];
-  #    switch-to-workspace-7 = ["<Alt>7"];
-  #    switch-to-workspace-8 = ["<Alt>8"];
-  #    switch-to-workspace-9 = ["<Alt>9"];
-  #    move-to-workspace-1 = ["<Primary><Alt>1"];
-  #    move-to-workspace-2 = ["<Primary><Alt>2"];
-  #    move-to-workspace-3 = ["<Primary><Alt>3"];
-  #    move-to-workspace-4 = ["<Primary><Alt>4"];
-  #    move-to-workspace-5 = ["<Primary><Alt>5"];
-  #    move-to-workspace-6 = ["<Primary><Alt>6"];
-  #    move-to-workspace-7 = ["<Primary><Alt>7"];
-  #    move-to-workspace-8 = ["<Primary><Alt>8"];
-  #    move-to-workspace-9 = ["<Primary><Alt>9"];
-  #  };
+    "org/cinnamon/desktop/keybindings/wm" = {
+      maximize = [ "<Super>f" ];
+      minimize = [ "<Super>m" ];
+      switch-to-workspace-1 = [ "<Alt>1" ];
+      switch-to-workspace-2 = [ "<Alt>2" ];
+      switch-to-workspace-3 = [ "<Alt>3" ];
+      switch-to-workspace-4 = [ "<Alt>4" ];
+      switch-to-workspace-5 = [ "<Alt>5" ];
+      switch-to-workspace-6 = [ "<Alt>6" ];
+      switch-to-workspace-7 = [ "<Alt>7" ];
+      switch-to-workspace-8 = [ "<Alt>8" ];
+      switch-to-workspace-9 = [ "<Alt>9" ];
+    };
 
-  #  "org/gnome/settings-daemon/plugins/media-keys" = {
-  #    custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" ];
-  #    screensaver = [ "<Super>l" ];
-  #  };
+    "org/cinnamon/desktop/media-handling" = {
+      autorun-never = true;
+    };
 
-  #  "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-  #    binding = "<Primary><Alt>t";
-  #    command = "alacritty";
-  #    name = "terminal";
-  #  };
-  #  
-  #  "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-  #    binding = "<Primary><Alt>b";
-  #    command = "eog ${blackPath}";
-  #    name = "black";
-  #  };
-  #  
-  #  #"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-  #  #  binding = "<Super>l";
-  #  #  command = "alock -bg image:file=.lockscreen";
-  #  #  name = "alock";
-  #  #};
+    "org/cinnamon/desktop/session" = {
+      idle-delay = mkUint32 0;
+    };
 
-  #  # GUI
-  #  "org/gnome/desktop/background" = {
-  #    picture-uri = "${backgroundPath}"; 
-  #    picture-uri-dark = "${backgroundPath}";
-  #  };
-  #  "org/gnome/desktop/screensaver" = {
-  #    picture-uri = "${lockscreenPath}";
-  #    picture-uri-dark = "${lockscreenPath}";
-  #  };
+    "org/cinnamon/desktop/sound" = {
+      event-sounds = false;
+    };
 
-  #  # Applications
-  #  "org/gnome/nautilus/list-view" = {
-  #    use-tree-view = true;
-  #  };
+    "org/cinnamon/desktop/wm/preferences" = {
+      num-workspaces = 9;
+      theme = "Matcha-azul";
+    };
 
-  #  "org/gnome/gnome-system-monitor" = {
-  #    cpu-stacked-area-chart = true;
-  #  };
+    "org/cinnamon/launcher" = {
+      check-frequency = 300;
+      memory-limit = 2048;
+    };
 
-  #  "org/gnome/shell/extensions/trayIconsReloaded" = {
-  #    icon-padding-horizontal = 10;
-  #    icons-limit = 8;
-  #    tray-margin-left = 4;
-  #  };
+    "org/cinnamon/muffin" = {
+      desktop-effects = false;
+      tile-hud-threshold = 25;
+      tile-maximize = true;
+      workspace-cycle = false;
+    };
 
-  #  "org/gnome/shell/extensions/user-theme" = {
-  #    name = "Matcha-dark-azul";
-  #  };
+    "org/cinnamon/settings-daemon/peripherals/keyboard" = {
+      delay = mkUint32 190;
+      numlock-state = "off";
+      repeat-interval = mkUint32 21;
+    };
 
-  #  "org/gnome/shell/extensions/wsmatrix" = {
-  #    enable-popup-workspace-hover = false;
-  #    multi-monitor = true;
-  #    num-columns = 3;
-  #    num-rows = 3;
-  #    popup-timeout = 300;
-  #    scale = 0.01;
-  #    show-overview-grid = true;
-  #    show-thumbnails = false;
-  #    show-workspace-names = false;
-  #    wraparound-mode = "next-previous-border";
-  #  };
+    "org/cinnamon/settings-daemon/plugins/power" = {
+      sleep-display-ac = 0;
+    };
 
-  #  "org/gnome/tweaks" = {
-  #    show-extensions-notice = false;
-  #  };
+    "org/cinnamon/theme" = {
+      name = "Matcha-dark-azul";
+    };
 
-  #  "org/virt-manager/virt-manager/connections" = {
-  #    autoconnect = [ "qemu:///session" ];
-  #    uris = [ "qemu:///session" ];
-  #  };
-  #};
+    "org/gnome/calculator" = {
+      accuracy = 9;
+      angle-units = "degrees";
+      base = 10;
+      button-mode = "programming";
+      number-format = "automatic";
+      refresh-interval = 604800;
+      show-thousands = false;
+      show-zeroes = false;
+      source-currency = "";
+      source-units = "degree";
+      target-currency = "";
+      target-units = "radian";
+      word-size = 64;
+    };
+
+    "org/gnome/desktop/interface" = {
+      toolkit-accessibility = false;
+    };
+
+    "org/gnome/libgnomekbd/keyboard" = {
+      layouts = [ "us" "si" ];
+    };
+
+    "org/gnome/mutter" = {
+      dynamic-workspaces = false;
+    };
+
+    "org/gnome/nm-applet" = {
+      disable-connected-notifications = true;
+    };
+
+    "org/gtk/settings/file-chooser" = {
+      date-format = "regular";
+      location-mode = "path-bar";
+      show-hidden = false;
+      show-size-column = true;
+      show-type-column = true;
+      sidebar-width = 154;
+      sort-column = "name";
+      sort-directories-first = true;
+      sort-order = "ascending";
+      type-format = "category";
+      window-position = mkTuple [ 732 289 ];
+      window-size = mkTuple [ 1096 822 ];
+    };
+
+    "org/nemo/desktop" = {
+      computer-icon-visible = false;
+      desktop-layout = "false::false";
+      home-icon-visible = false;
+      show-orphaned-desktop-icons = false;
+      volumes-visible = false;
+    };
+
+  };
 }
