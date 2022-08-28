@@ -3,7 +3,7 @@
 let
   plugins = {
     stable = pkgs.vimPlugins;
-    unstable = pkgs.unstable.vimPlugins;
+    unstable = pkgs.vimPlugins;
     local = pkgs.local.vimPlugins;
   };
 in {

@@ -4,39 +4,52 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+    jlink-pack-stable = {
+      url = "github:prtzl/jlink-nix";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+    jlink-pack-unstable = {
+      url = "github:prtzl/jlink-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    jlink-pack.url = "github:prtzl/jlink-nix";
   };
 
   outputs = inputs:
     with inputs;
     let
       system = "x86_64-linux";
+
+      mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = null; }; });
+
+      stableOverlay = self: super: {
+          unstable = pkgs-unstable;
+          jlink = mkFree jlink-pack-stable.defaultPackage.${system};
+      };
+      unstableOverlay = self: super: {
+          jlink = mkFree jlink-pack-unstable.defaultPackage.${system};
+      };
       
       pkgs = import nixpkgs-stable {
         inherit system;
         config.allowUnfree = true;
+        overlays = [stableOverlay];
       };
       
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
+        overlays = [unstableOverlay];
       };
-
-      overlay-unstable = final: prev: {
-        unstable = pkgs-unstable;
-      };
-
-      jlink = jlink-pack.defaultPackage.${system};
-
-      lib = nixpkgs-stable.lib;
     in {
       nixosConfigurations = {
-        nixbox = lib.nixosSystem {
+        nixbox = inputs.nixpkgs-stable.lib.nixosSystem {
           inherit system;
           modules = [
-            ({nixpkgs.overlays = [ overlay-unstable ];})
+            {
+              nixpkgs.pkgs = pkgs;
+            }
             ./system/nixbox/configuration.nix
             # Home manager as module overrides manual homeConfiguration on reboot
             #home-manager.nixosModules.home-manager {
@@ -46,28 +59,25 @@
             #  home-manager.extraSpecialArgs = { inherit jlink; };
             #}
           ];
-          specialArgs = { inherit jlink; };
         };
       };
       
-      homeConfigurations =
-        let
-            pkgs = pkgs-unstable;
-        in {
-        matej-nixbox = home-manager.lib.homeManagerConfiguration rec {
+      homeConfigurations = {
+        matej-nixbox = inputs.home-manager.lib.homeManagerConfiguration rec {
           inherit pkgs;
           modules = [
-            ({nixpkgs.overlays = [ overlay-unstable ];})
             ./home/nixbox/home.nix
           ];
-          extraSpecialArgs = { inherit jlink; };
+          extraSpecialArgs = {
+            lib = import "${inputs.home-manager}/modules/lib/stdlib-extended.nix" pkgs-unstable.lib;
+          };
         };
       };
 
       nixbox = self.nixosConfigurations.nixbox.config.system.build.toplevel;
       matej-nixbox = self.homeConfigurations.matej-nixbox.activationPackage;
 
-      devShell.${system} = pkgs.mkShell {
+      devShells.${system}.default = pkgs.mkShell {
         name = "Installation-shell";
         nativeBuildInputs = with pkgs-unstable; [ nix nixfmt home-manager nvd ];
       };

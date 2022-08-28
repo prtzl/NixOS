@@ -65,6 +65,9 @@ in
     shells = with pkgs; [ bashInteractive zsh ];
     variables = { EDITOR = "vim"; };
     systemPackages = with pkgs; [
+      exa
+      ripgrep
+      fd
       nixos-update
       wget
       nvd
