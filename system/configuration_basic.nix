@@ -57,7 +57,7 @@ in
     openssh.forwardX11 = true;
     localtime.enable = true;
     geoclue2.enable = true;
-    flatpak.enable = true;
+    #flatpak.enable = true;
   };
 
   # System packages - minimal usable system
