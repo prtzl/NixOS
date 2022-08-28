@@ -1,11 +1,11 @@
-{ config, pkgs, jlink, ...}:
+{ config, pkgs, ...}:
 
 {
   # This is ugly, forgive me, but untill I make jlink package
   # this will have to be like this. Also include stlink and tio
   # which have their udev configs with them, neat
   services.udev = {
-      packages = with pkgs; [ stlink tio jlink ];
+      packages = with pkgs; [ stlink tio ];
       extraRules = ''
 # Add all USB devices to usb group -> don't forget with your user
 KERNEL=="*", SUBSYSTEMS=="usb", MODE="0664", GROUP="usb"

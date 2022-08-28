@@ -17,11 +17,12 @@
       layout = "us";
       xkbOptions = "eurosign:e";
       desktopManager = {
-        gnome.enable = true;
+        gnome.enable = false;
+        cinnamon.enable = true;
       };
       displayManager = {
         gdm.enable = true;
-        gdm.wayland = false;
+        gdm.wayland = true;
         gdm.autoSuspend = false;
       };
     };

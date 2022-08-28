@@ -84,8 +84,8 @@ in {
   home.file.".lockscreen".source = ./wallpaper/lockscreen.png;
   home.file.".black".source = ./wallpaper/black.png;
 
-  xdg.configFile."libvirt/qemu.conf".text = ''
-    nvram = ["/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd"]
-  '';
+  #xdg.configFile."libvirt/qemu.conf".text = ''
+  #  nvram = ["/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd"]
+  #'';
 }
 

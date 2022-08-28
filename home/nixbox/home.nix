@@ -1,4 +1,4 @@
-{ config, pkgs, jlink, ... }:
+{ config, pkgs, ... }:
 
 let
   stm32cubemx-override = pkgs.stm32cubemx.overrideAttrs (oldAttrs: rec {
@@ -25,7 +25,6 @@ in {
     clang-tools
     gnumake
     cmake
-    jlink
     stm32cubemx-override
 
     # Content creation
