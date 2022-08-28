@@ -51,13 +51,6 @@
               nixpkgs.pkgs = pkgs;
             }
             ./system/nixbox/configuration.nix
-            # Home manager as module overrides manual homeConfiguration on reboot
-            #home-manager.nixosModules.home-manager {
-            #  home-manager.useGlobalPkgs = true;
-            #  home-manager.useUserPackages = true;
-            #  home-manager.users.matej = import ./home/nixbox/home.nix;
-            #  home-manager.extraSpecialArgs = { inherit jlink; };
-            #}
           ];
         };
       };
