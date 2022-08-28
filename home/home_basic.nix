@@ -14,7 +14,7 @@ in {
 
   home.username = "matej";
   home.homeDirectory ="/home/matej";
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
 
   # Don't let home manager manage itself - by system config
   programs.home-manager.enable = true;

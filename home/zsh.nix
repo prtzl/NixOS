@@ -112,15 +112,6 @@
       path = "$HOME/.cache/zsh/history";
     };
 
-    plugins = with pkgs; [ 
-      {
-        name = "zsh-syntax-highlighting";
-        src = builtins.fetchGit {
-          url = https://github.com/zsh-users/zsh-syntax-highlighting.git;
-        };
-      }
-    ];
-
     initExtra = ''
       autoload -U colors && colors
       autoload -U compinit && compinit
@@ -132,6 +123,7 @@
 
 
       source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
       source ${pkgs.nix-zsh-completions}/share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh
 
 
