@@ -62,8 +62,8 @@ in {
       cursor-blink-time = 1200;
       cursor-theme = "Adwaita";
       first-day-of-week = 1;
-      gtk-theme = "Matcha-dark-azul";
-      icon-theme = "Papirus-Dark";
+      gtk-theme = "Mint-Y-Dark-Aqua";
+      icon-theme = "Mint-Y-Dark-Aqua";
       scaling-factor = mkUint32 0;
     };
 
@@ -109,7 +109,7 @@ in {
 
     "org/cinnamon/desktop/wm/preferences" = {
       num-workspaces = 9;
-      theme = "Matcha-azul";
+      theme = "Mint-Y";
     };
 
     "org/cinnamon/launcher" = {
@@ -135,7 +135,7 @@ in {
     };
 
     "org/cinnamon/theme" = {
-      name = "Matcha-dark-azul";
+      name = "Mint-Y-Dark-Aqua";
     };
 
     "org/gnome/calculator" = {
