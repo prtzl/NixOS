@@ -7,10 +7,6 @@ let
     local = pkgs.local.vimPlugins;
   };
 in {
-  home.packages = with pkgs; [
-    nixpkgs-fmt neovim-qt
-  ];
-
   programs.neovim = {
     enable = true;
     viAlias = true;
