@@ -27,6 +27,7 @@
       };
     };
     gnome.core-utilities.enable = false;
+    cinnamon.apps.enable = false;
   };
 
 }
