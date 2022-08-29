@@ -14,6 +14,7 @@ set showmode
 set showmatch
 set mouse=a
 set laststatus=0
+set noswapfile
 
 " Colorscheme
 let g:jellybeans_overrides = {
