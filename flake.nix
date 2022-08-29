@@ -53,6 +53,15 @@
             ./system/nixbox/configuration.nix
           ];
         };
+        testbox = inputs.nixpkgs-stable.lib.nixosSystem {
+          inherit system;
+          modules = [
+            {
+              nixpkgs.pkgs = pkgs;
+            }
+            ./system/testbox/configuration.nix
+          ];
+        };
       };
       
       homeConfigurations = {
@@ -77,6 +86,7 @@
       };
 
       nixbox = self.nixosConfigurations.nixbox.config.system.build.toplevel;
+      testbox = self.nixosConfigurations.testbox.config.system.build.toplevel;
       matej-nixbox = self.homeConfigurations.matej-nixbox.activationPackage;
       test-testbox = self.homeConfigurations.test-testbox.activationPackage;
 
