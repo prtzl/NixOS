@@ -10,6 +10,7 @@ in {
     ./vscode.nix
     ./neovim.nix
     ./tmux.nix
+    ./tio.nix
   ];
 
   home.username = "matej";
