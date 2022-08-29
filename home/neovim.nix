@@ -13,15 +13,14 @@ let
   unlines = lib.concatStringsSep "\n";
   loadPlugins = ps: lib.pipe ps [ (builtins.map loadPlugin) unlines ];
   plugins = with vimPlugins.unstable; [
+    (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars)) # syntax for everything
     jellybeans-vim
     vim-cpp-enhanced-highlight
-    base16-vim
-    coc-clangd
+    #coc-clangd
     coc-fzf
     coc-git
     coc-json
     coc-nvim
-    delimitMate
     fzf-lsp-nvim
     fzfWrapper
     fzf-vim
@@ -29,18 +28,11 @@ let
     neoformat
     nerdtree
     nerdtree-git-plugin
-    tagbar
     vim-airline
-    vim-code-dark
-    vim-devicons
     vim-nerdtree-syntax-highlight
-    vim-nix
-    vim-pug
-    vim-vue
     vim-lsp
-    vim-lsc
+    vim-nix
     vimtex
-    (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars)) # syntax for everything
   ];
 in {
   programs.neovim = {
