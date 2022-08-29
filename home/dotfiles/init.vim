@@ -84,6 +84,16 @@ imap {<tab> {}<Left>
 imap {<CR> {<CR>}<ESC>O
 imap {;<CR> {<CR>};<ESC>O
 
+" Nerdtree
+let g:NERDTreeDirArrowExpandable="+"
+let g:NERDTreeDirArrowCollapsable="-"
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFocus<CR>
+
+" Fuzzy find
+let g:fzf_layout = { 'down': '40%' }
+nnoremap <C-p> :Files<CR>
+
 " Print opened file in tmux bar
 if exists('$TMUX')
   let windowName = system("tmux display-message -p '#W'")
