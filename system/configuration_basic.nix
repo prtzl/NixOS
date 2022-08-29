@@ -63,6 +63,7 @@ in
     shells = with pkgs; [ bashInteractive zsh ];
     variables = { EDITOR = "vim"; };
     systemPackages = with pkgs; [
+      bat
       exa
       ripgrep
       fd
