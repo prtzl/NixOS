@@ -59,7 +59,7 @@
         matej-nixbox = inputs.home-manager.lib.homeManagerConfiguration rec {
           inherit pkgs;
           modules = [
-            ./home/nixbox/home.nix
+            ./home/matej-nixbox/home.nix
           ];
           extraSpecialArgs = {
             lib = import "${inputs.home-manager}/modules/lib/stdlib-extended.nix" pkgs-unstable.lib;

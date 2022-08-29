@@ -1,20 +1,15 @@
 { config, pkgs, ... }:
 
 let
-  home-update = pkgs.writeShellScriptBin "home-update" (builtins.readFile ./pkgs/home-update.sh);
+  home-update = pkgs.writeShellScriptBin "home-update" (builtins.readFile ./local-pkgs/home-update.sh);
 in {
   imports = [
     ./zsh.nix
-    ./dconf.nix
-    ./alacritty.nix
-    ./vscode.nix
     ./neovim.nix
     ./tmux.nix
     ./tio.nix
   ];
 
-  home.username = "matej";
-  home.homeDirectory ="/home/matej";
   home.stateVersion = "22.11";
 
   # Don't let home manager manage itself - by system config
@@ -22,41 +17,12 @@ in {
   
   # Packages
   home.packages = with pkgs; [
-
     home-update
-
-    # Net
-    chromium
-
-    # Latex
-    texlive.combined.scheme-full
-    texstudio
-
-    # Utility
-    enpass
-    megasync
+    roboto
     flac
     zip
     git-crypt
     gnupg
-    pavucontrol
-    transmission-gtk
-    evince
-    celluloid
-    fd
-
-    # Media
-    ffmpeg
-    libreoffice 
-
-    # Communication
-    zoom-us
-    teams
-    skypeforlinux
-    discord
-
-    # Fonts
-    roboto
   ];
 
   # My eyes
