@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  nixos-update = pkgs.writeShellScriptBin "nixos-update" (builtins.readFile ./pkgs/nixos-update.sh);
+  nixos-update = pkgs.writeShellScriptBin "nixos-update" (builtins.readFile ./local-pkgs/nixos-update.sh);
 in
 {
   # Additional configuration
@@ -9,9 +9,7 @@ in
       ./bootloader.nix 
       ./filesystem.nix
       ./hardware-configuration_basic.nix
-      ./virtualisation.nix
       ./udev.nix
-      ./graphics.nix
       ./pipewire.nix
   ];
 
@@ -93,5 +91,7 @@ in
       enable = true;
     };
   };
+
+  system.stateVersion = "22.05";
 }
 

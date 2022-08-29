@@ -3,8 +3,10 @@
 {
   # Additional configuration
   imports = [
-      ../configuration_basic.nix
       ./hardware-configuration.nix
+      ../configuration_basic.nix
+      ../graphics.nix
+      ../virtualisation.nix
   ];
 
   # Networking - check your interface name enp<>s0
