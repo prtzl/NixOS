@@ -24,6 +24,7 @@ let
     delimitMate
     fzf-lsp-nvim
     fzfWrapper
+    fzf-vim
     incsearch-vim
     neoformat
     nerdtree
@@ -36,6 +37,8 @@ let
     vim-nix
     vim-pug
     vim-vue
+    vim-lsp
+    vim-lsc
     vimtex
     (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars)) # syntax for everything
   ];
