@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ fzf zsh-completions xclip ];
+  home.packages = with pkgs; [ fzf zsh-completions xclip exa ];
 
   programs.direnv = { 
     enable = true;
@@ -85,7 +85,7 @@
 
       # Utilities 
       nix-shell = "nix-shell --command zsh";
-      ls = "ls --group-directories-first --color=auto";
+      ls = "exa --group-directories-first --color=always";
       l = "ls -la";
       ll = "ls -l";
       grep = "grep --color=always -n -r";
