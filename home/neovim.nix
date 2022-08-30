@@ -35,6 +35,7 @@ let
     vimtex
   ];
 in {
+  home.packages = with pkgs; [ bat ];
   programs.neovim = {
     enable = true;
     viAlias = true;
