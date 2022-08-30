@@ -6,6 +6,10 @@
     ../dconf.nix
     ../vscode.nix
     ../alacritty.nix
+    ../zsh.nix
+    ../neovim.nix
+    ../tio.nix
+    ../vscode.nix
   ];
 
   home.username = "matej";
