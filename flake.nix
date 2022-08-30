@@ -83,12 +83,22 @@
             lib = import "${inputs.home-manager}/modules/lib/stdlib-extended.nix" pkgs-unstable.lib;
           };
         };
+        matej-work = inputs.home-manager.lib.homeManagerConfiguration rec {
+          inherit pkgs;
+          modules = [
+            ./home/matej-work/home.nix
+          ];
+          extraSpecialArgs = {
+            lib = import "${inputs.home-manager}/modules/lib/stdlib-extended.nix" pkgs-unstable.lib;
+          };
+        };
       };
 
       nixbox = self.nixosConfigurations.nixbox.config.system.build.toplevel;
       testbox = self.nixosConfigurations.testbox.config.system.build.toplevel;
       matej-nixbox = self.homeConfigurations.matej-nixbox.activationPackage;
       test-testbox = self.homeConfigurations.test-testbox.activationPackage;
+      matej-work = self.homeConfigurations.matej-work.activationPackage;
 
       devShells.${system}.default = pkgs.mkShell {
         name = "Installation-shell";

@@ -3,12 +3,13 @@
 {
   imports = [
     ../home_basic.nix
-    ../vscode.nix
-    ../alacritty.nix
+    ../neovim.nix
+    ../tio.nix
+    ../tmux.nix
   ];
 
-  home.username = "test";
-  home.homeDirectory ="/home/test";
+  home.username = "matej";
+  home.homeDirectory ="/home/matej";
   home.stateVersion = "22.05";
 
   # Packages
