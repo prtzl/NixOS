@@ -35,7 +35,7 @@ let
     vimtex
   ];
 in {
-  home.packages = with pkgs; [ bat ];
+  home.packages = with pkgs; [ bat ripgrep ];
   programs.neovim = {
     enable = true;
     viAlias = true;
