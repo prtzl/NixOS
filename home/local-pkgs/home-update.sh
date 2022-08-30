@@ -8,9 +8,27 @@ function peval()
     fi
 }
 
+function checkForFlake()
+{
+    [ -f $1/flake.nix ]
+}
+
 # Default location - for me, /etc/nixos is a symlink to git repository
-flake_dir=/etc/nixos
-home_derivation=$USER-$(hostname)
+if [[ -z "$NIX_HOME_DERIVATION" ]]; then
+    home_derivation=$USER-$(hostname)
+else
+    home_derivation="$NIX_HOME_DERIVATION"
+fi
+
+# Find where the flake is: git folder link to /etc/nixos or ~/.config/nixpkgs
+if checkForFlake "$NIX_FLAKE_DIR"; then
+    flake_dir="$NIX_FLAKE_DIR"
+elif checkForFlake "$NIX_FLAKE_DIR_HOME"; then
+    flake_dir="$NIX_FLAKE_DIR_HOME"
+else
+    echo "No flake dir found in NIX_FLAKE_DIR or NIX_FLAKE_DIR_HOME"
+    exit 1
+fi
 
 # Remove arguments ment for this script and only pass ARGS to other tools
 declare -a ARGS
@@ -32,7 +50,7 @@ if [[ "$update_flake_lock" == "true" ]]; then
 fi
 
 echo "Building derivation!"
-peval home-manager build --flake .\#$home_derivation --impure "$ARGS"
+peval home-manager build --flake .\#"$home_derivation" --impure "$ARGS"
 peval nvd diff /nix/var/nix/profiles/per-user/$USER/home-manager result
 read -p "Perform switch? [y/Y] " answer
 if [[ "$answer" == [yY] ]]; then
