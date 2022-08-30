@@ -3,18 +3,8 @@
 let
   home-update = pkgs.writeShellScriptBin "home-update" (builtins.readFile ./local-pkgs/home-update.sh);
 in {
-  imports = [
-    ./zsh.nix
-    ./neovim.nix
-    ./tmux.nix
-    ./tio.nix
-  ];
-
-  home.stateVersion = "22.11";
-
-  # Don't let home manager manage itself - by system config
   programs.home-manager.enable = true;
-  
+
   # Packages
   home.packages = with pkgs; [
     home-update
@@ -24,15 +14,6 @@ in {
     git-crypt
     gnupg
   ];
-
-  # My eyes
-  services.redshift = {
-    enable = true;
-    temperature.night = 4000;
-    temperature.day = 4000;
-    latitude = "46.05";
-    longitude = "14.5";
-  };
 
   # Privat git
   programs.git = {
