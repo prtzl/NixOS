@@ -3,7 +3,6 @@
     enable = true;
     settings = {
       font = {
-        normal.family = "Source Code Pro";
         size = 12;
         antialias = true;
         autohint = true;
