@@ -11,6 +11,7 @@
     ../tio.nix
     ../vscode.nix
     ../ranger.nix
+    ../tmux.nix
   ];
 
   home.username = "matej";
