@@ -6,6 +6,7 @@
     ../neovim.nix
     ../tio.nix
     ../tmux.nix
+    ../ranger.nix
   ];
 
   home.username = "matej";

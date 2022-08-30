@@ -10,6 +10,7 @@
     ../neovim.nix
     ../tio.nix
     ../vscode.nix
+    ../ranger.nix
   ];
 
   home.username = "matej";

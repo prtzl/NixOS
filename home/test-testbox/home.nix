@@ -5,6 +5,7 @@
     ../home_basic.nix
     ../vscode.nix
     ../alacritty.nix
+    ../ranger.nix
   ];
 
   home.username = "test";
