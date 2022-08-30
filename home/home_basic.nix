@@ -27,6 +27,18 @@ in {
       };
       push.default = "current";
     };
+    aliases = {
+      ci = "commit";
+      st = "status";
+      co = "checkout";
+      di = "diff --color-words";
+      br = "branch";
+      cob = "checkout -b";
+      cm = "!git add -A && git commit -m";
+      fc = "!git fetch && git checkout";
+      save = "!git add -A && git commit -m 'SAVEPOINT'";
+      wip = "commit -am 'WIP'";
+    };
   };
 
   home.file.".background".source = ./wallpaper/tux-my-1440p.png;
