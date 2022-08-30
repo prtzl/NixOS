@@ -89,10 +89,12 @@ imap {;<CR> {<CR>};<ESC>O
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsable="-"
 nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFocus<CR>
 
 " Fuzzy find
 nnoremap <C-p> :Files<CR>
+nnoremap <C-g> :Rg<CR>
+nnoremap <C-f> :BLines<CR>
+nnoremap <C-b> :Buffers<CR>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 let $FZF_DEFAULT_COMMAND = 'rg --files --ignore-case --hidden -g "!{.git,node_modules,vendor}/*"'
