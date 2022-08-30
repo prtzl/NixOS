@@ -7,6 +7,7 @@ in {
 
   # Packages
   home.packages = with pkgs; [
+    nvd
     home-update
     roboto
     flac
@@ -31,5 +32,10 @@ in {
   home.file.".background".source = ./wallpaper/tux-my-1440p.png;
   home.file.".lockscreen".source = ./wallpaper/lockscreen.png;
   home.file.".black".source = ./wallpaper/black.png;
+
+  home.sessionVariables = {
+    NIX_FLAKE_DIR = "/etc/nixos";
+    NIX_FLAKE_DIR_HOME = "$HOME/.config/nixpkgs/";
+  };
 }
 

@@ -14,6 +14,10 @@
       url = "github:prtzl/jlink-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    nixgl = {
+      url = "github:guibou/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = inputs:
@@ -34,7 +38,7 @@
       pkgs = import nixpkgs-stable {
         inherit system;
         config.allowUnfree = true;
-        overlays = [stableOverlay];
+        overlays = [stableOverlay nixgl.overlay];
       };
       
       pkgs-unstable = import nixpkgs-unstable {

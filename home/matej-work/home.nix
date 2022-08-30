@@ -6,6 +6,7 @@
     ../neovim.nix
     ../tio.nix
     ../tmux.nix
+    ../alacritty.nix
   ];
 
   home.username = "matej";
@@ -14,6 +15,11 @@
 
   # Packages
   home.packages = with pkgs; [
+    nixgl.nixGLIntel
   ];
+
+  home.sessionVariables = {
+    NIX_HOME_DERIVATION = "matej-work";
+  };
 }
 
