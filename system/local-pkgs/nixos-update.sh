@@ -33,12 +33,14 @@ if [[ "$update_flake_lock" == "true" ]]; then
 fi
 
 echo "Building derivation!"
-peval nixos-rebuild build --flake .\#${system_derivation} --impure "$ARGS"
+peval nixos-rebuild build --flake .\#${system_derivation} "$ARGS"
 peval nvd diff /run/current-system result
 read -p "Perform switch? [y/Y] (sudo)" answer
 if [[ "$answer" == [yY] ]]; then
     echo Applying update!
-    peval sudo ./result/bin/switch-to-configuration switch
+    # this shit still does not not enter the derivation into /nix/var/nix/profiles - no changes after reboot
+    #peval sudo ./result/bin/switch-to-configuration switch
+    sudo nixos-rebuild switch --flake .\#${system_derivation} $ARGS
     echo Update finished!
 else
     echo Update canceled!
