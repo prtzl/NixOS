@@ -11,6 +11,9 @@ let
   lockscreenPath = "${config.home.homeDirectory}/.lockscreen";
   blackPath = "${config.home.homeDirectory}/.black";
 in {
+  home.file.".save-windows.sh".source = ./local-pkgs/save.sh;
+  home.file.".load-windows.sh".source = ./local-pkgs/load.sh;
+
   dconf.settings = {
     "org/cinnamon" = {
       desklet-snap-interval = 25;
@@ -68,13 +71,25 @@ in {
     };
 
     "org/cinnamon/desktop/keybindings" = {
-      custom-list = [ "__dummy__" "custom0" ];
+      custom-list = [ "__dummy__" "custom0" "custom1" "custom2" ];
     };
 
     "org/cinnamon/desktop/keybindings/custom-keybindings/custom0" = {
       binding = [ "<Primary><Alt>t" ];
       command = "alacritty";
       name = "alacritty";
+    };
+
+    "org/cinnamon/desktop/keybindings/custom-keybindings/custom1" = {
+      binding = [ "<Super>s" ];
+      command = "sh ${config.home.homeDirectory}/.save-windows.sh";
+      name = "save window states";
+    };
+
+    "org/cinnamon/desktop/keybindings/custom-keybindings/custom2" = {
+      binding = [ "<Super>r" ];
+      command = "sh ${config.home.homeDirectory}/.load-windows.sh";
+      name = "restore window states";
     };
 
     "org/cinnamon/desktop/keybindings/media-keys" = {
