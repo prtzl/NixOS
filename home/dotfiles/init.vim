@@ -100,7 +100,8 @@ nnoremap <C-f> :BLines<CR>
 nnoremap <C-b> :Buffers<CR>
 let $BAT_THEME="OneHalfDark"
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
-let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=numbers --line-range :300 {}'"
+let $FZF_DEFAULT_COMMAND="rg --files --ignore-case --sort path"
+let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=numbers,grid --line-range :300 {}'"
 command! -bang -nargs=? -complete=dir Files
      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
