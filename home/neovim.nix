@@ -33,6 +33,7 @@ let
     vim-lsp
     vim-nix
     vimtex
+    markdown-preview-nvim
   ];
 in {
   home.packages = with pkgs; [ bat ripgrep ];
