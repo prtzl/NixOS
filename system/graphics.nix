@@ -3,10 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     gnome.eog
-    gnome.gnome-terminal
-    gnome.nautilus
     gnome.gnome-system-monitor
-    gnome.gnome-tweaks
     gnome.gnome-disk-utility
     gnome.gnome-calculator
   ];
