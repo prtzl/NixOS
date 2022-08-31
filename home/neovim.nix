@@ -13,27 +13,30 @@ let
   unlines = lib.concatStringsSep "\n";
   loadPlugins = ps: lib.pipe ps [ (builtins.map loadPlugin) unlines ];
   plugins = with vimPlugins.unstable; [
+    # Plugins that I know and understand where and how they're used
     (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars)) # syntax for everything
-    jellybeans-vim
-    vim-cpp-enhanced-highlight
-    #coc-clangd
-    coc-fzf
-    coc-git
-    coc-json
-    coc-nvim
-    fzf-lsp-nvim
-    fzfWrapper
-    fzf-vim
-    incsearch-vim
-    neoformat
-    nerdtree
-    nerdtree-git-plugin
-    vim-airline
-    vim-nerdtree-syntax-highlight
-    vim-lsp
-    vim-nix
-    vimtex
-    markdown-preview-nvim
+    jellybeans-vim # theme
+    vim-cpp-enhanced-highlight # better looking cpp highlighting
+    markdown-preview-nvim # opens markdown preview in browser
+    fzfWrapper # fzf stuff
+    fzf-vim # as well
+    vim-airline # somethign with navigation
+    vim-nix # nix format
+    nerdtree # Sidebar with files
+    nerdtree-git-plugin # same
+    vim-nerdtree-syntax-highlight # more nerdtree
+    vimtex # tex formatting
+    neoformat # runs formatter for a file
+    coc-fzf # seach
+    coc-nvim # autosuggest
+    coc-git # gutter is labeled when stuff is added, changed or removed
+    coc-json # JSON tools
+    
+    # Plugins that are here and might break my config but I don't know them ...
+    #coc-clangd # this one starts complaining for everything - c++14> not found
+    fzf-lsp-nvim # does nothing .. 
+    vim-lsp # also nothing
+    incsearch-vim # also nothing
   ];
 in {
   home.packages = with pkgs; [ bat ripgrep ];
