@@ -125,9 +125,9 @@ in {
     };
 
     "org/cinnamon/settings-daemon/peripherals/keyboard" = {
-      delay = mkUint32 190;
+      delay = mkUint32 250;
       numlock-state = "off";
-      repeat-interval = mkUint32 21;
+      repeat-interval = mkUint32 18;
     };
 
     "org/cinnamon/settings-daemon/plugins/power" = {
