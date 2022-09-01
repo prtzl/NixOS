@@ -8,6 +8,7 @@ in {
   # Packages
   home.packages = with pkgs; [
     nvd
+    exa
     home-update
     roboto
     flac
