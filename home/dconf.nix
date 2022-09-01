@@ -19,7 +19,7 @@ in {
       desklet-snap-interval = 25;
       desktop-effects-workspace = false;
       enable-vfade = false;
-      enabled-applets = [ "panel1:left:0:menu@cinnamon.org:0" "panel1:left:2:grouped-window-list@cinnamon.org:2" "panel1:right:1:systray@cinnamon.org:3" "panel1:right:2:xapp-status@cinnamon.org:4" "panel1:right:3:notifications@cinnamon.org:5" "panel1:right:4:printers@cinnamon.org:6" "panel1:right:5:removable-drives@cinnamon.org:7" "panel1:right:6:keyboard@cinnamon.org:8" "panel1:right:8:network@cinnamon.org:10" "panel1:right:9:sound@cinnamon.org:11" "panel1:center:0:calendar@cinnamon.org:13" "panel1:right:0:workspace-switcher@cinnamon.org:14" ];
+      enabled-applets = [ "panel1:left:0:menu@cinnamon.org:0" "panel1:left:2:grouped-window-list@cinnamon.org:2" "panel1:right:1:systray@cinnamon.org:3" "panel1:right:2:xapp-status@cinnamon.org:4" "panel1:center:0:notifications@cinnamon.org:5" "panel1:right:4:printers@cinnamon.org:6" "panel1:right:5:removable-drives@cinnamon.org:7" "panel1:right:6:keyboard@cinnamon.org:8" "panel1:right:8:network@cinnamon.org:10" "panel1:right:9:sound@cinnamon.org:11" "panel1:center:0:calendar@cinnamon.org:13" "panel1:right:0:workspace-switcher@cinnamon.org:14" ];
       enabled-desklets = [];
       next-applet-id = 15;
       panel-edit-mode = false;
