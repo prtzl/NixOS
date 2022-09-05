@@ -4,14 +4,32 @@ function peval()
 {
     if ! eval "$@"; then
         echo Command: "$@" FAILED!
+        rm ./result
         exit 1
     fi
 }
 
+function checkForFlake()
+{
+    [ -f $1/flake.nix ]
+}
+
 # Default location - for me, /etc/nixos is a symlink to git repository
-flake_dir=/etc/nixos
-# System derivations are named the same as hostname
-system_derivation=$(hostname)
+if [[ -z "$NIX_HOME_DERIVATION" ]]; then
+    system_derivation=$USER-$(hostname)
+else
+    system_derivation="$NIX_HOME_DERIVATION"
+fi
+
+# Find where the flake is: git folder link to /etc/nixos or ~/.config/nixpkgs
+if checkForFlake "$NIX_FLAKE_DIR"; then
+    flake_dir="$NIX_FLAKE_DIR"
+elif checkForFlake "$NIX_FLAKE_DIR_HOME"; then
+    flake_dir="$NIX_FLAKE_DIR_HOME"
+else
+    echo "No flake dir found in NIX_FLAKE_DIR or NIX_FLAKE_DIR_HOME"
+    exit 1
+fi
 
 # Remove arguments ment for this script and only pass ARGS to other tools
 declare -a ARGS
