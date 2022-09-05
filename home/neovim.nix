@@ -20,13 +20,14 @@ let
     markdown-preview-nvim # opens markdown preview in browser
     fzfWrapper # fzf stuff
     fzf-vim # as well
-    vim-airline # somethign with navigation
     vim-nix # nix format
     nerdtree # Sidebar with files
     nerdtree-git-plugin # same
     vim-nerdtree-syntax-highlight # more nerdtree
     vimtex # tex formatting
     neoformat # runs formatter for a file
+    lightline-vim # status bar
+    vim-gitbranch # get git info for status bar
     coc-fzf # seach
     coc-nvim # autosuggest
     coc-git # gutter is labeled when stuff is added, changed or removed
@@ -34,9 +35,6 @@ let
     
     # Plugins that are here and might break my config but I don't know them ...
     #coc-clangd # this one starts complaining for everything - c++14> not found
-    fzf-lsp-nvim # does nothing .. 
-    vim-lsp # also nothing
-    incsearch-vim # also nothing
   ];
 in {
   home.packages = with pkgs; [ bat ripgrep ];

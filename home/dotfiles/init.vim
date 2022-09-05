@@ -1,9 +1,3 @@
-"load system defaults
-if filereadable(expand('$VIMRUNTIME/defaults.vim'))
-	unlet! g:skip_defaults_vim
-	source $VIMRUNTIME/defaults.vim
-endif
-
 "regular settings
 "----------------
 " ui
@@ -13,7 +7,6 @@ set showcmd
 set showmode
 set showmatch
 set mouse=a
-set laststatus=0
 set noswapfile
 
 " Colorscheme
@@ -21,6 +14,22 @@ let g:jellybeans_overrides = {
 \    'background': { 'guibg': '000000' },
 \}
 colorscheme jellybeans
+
+" Status bar - lightline
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype', ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
+      \ }
 
 " Improved cpp
 let g:cpp_class_decl_highlight = 1
