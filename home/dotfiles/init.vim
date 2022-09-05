@@ -1,5 +1,3 @@
-"regular settings
-"----------------
 " ui
 set number
 set ruler
@@ -70,15 +68,15 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set autoindent
+set cindent
 set nowrap
 
 " key timeout values
 set ttimeoutlen=20
 set timeoutlen=1000
 
-" allow syntax and filetype plugins
+" syntax highlighting
 syntax enable
-filetype plugin indent on
 
 " Ctrl+Backspace delete word in insert mode
 set backspace=indent,eol,start
@@ -86,13 +84,12 @@ noremap! <C-BS> <C-w>
 noremap! <C-h> <C-w>
 
 " Auto bracket closing
-imap "<tab> ""<Left>
-imap '<tab> ''<Left>
-imap (<tab> ()<Left>
-imap [<tab> []<Left>
-imap {<tab> {}<Left>
-imap {<CR> {<CR>}<ESC>O
-imap {;<CR> {<CR>};<ESC>O
+inoremap "<tab> ""<Left>
+inoremap '<tab> ''<Left>
+inoremap (<tab> ()<Left>
+inoremap [<tab> []<Left>
+inoremap {<tab> {}<Left>
+inoremap {<CR> {<CR>}<Left><CR><Up><Tab>
 
 " Nerdtree
 let g:NERDTreeDirArrowExpandable="+"
