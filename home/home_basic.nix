@@ -47,7 +47,6 @@ in {
   home.file.".black".source = ./wallpaper/black.png;
 
   home.sessionVariables = {
-    NIX_FLAKE_DIR = "/etc/nixos";
     NIX_FLAKE_DIR_HOME = "$HOME/.config/nixpkgs/";
   };
 }

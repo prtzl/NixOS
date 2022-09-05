@@ -15,10 +15,10 @@ function checkForFlake()
 }
 
 # Default location - for me, /etc/nixos is a symlink to git repository
-if [[ -z "$NIX_HOME_DERIVATION" ]]; then
-    system_derivation=$USER-$(hostname)
+if [[ -z "$NIX_SYSTEM_DERIVATION" ]]; then
+    system_derivation=$(hostname)
 else
-    system_derivation="$NIX_HOME_DERIVATION"
+    system_derivation="$NIX_SYSTEM_DERIVATION"
 fi
 
 # Find where the flake is: git folder link to /etc/nixos or ~/.config/nixpkgs

@@ -74,5 +74,9 @@
     latitude = "46.05";
     longitude = "14.5";
   };
+
+  home.sessionVariables = {
+    NIX_HOME_DERIVATION = "matej-nixbox";
+  };
 }
 

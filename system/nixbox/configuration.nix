@@ -38,5 +38,9 @@
       };
     };
   };
+
+  environment.variables = {
+    NIX_SYSTEM_DERIVATION = "nixbox";
+  };
 }
 
