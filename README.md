@@ -7,9 +7,7 @@ For longer explanation of how this works read [detailed instructions](./README_D
 ## Install
 
 First boot up NixOS minimal image and enter as root user.  
-
 Run `./prepare-disk /dev/<DISK> <EFI/BIOS>` to parition and mount your drive.  
-
 Install git and run everything from there: `nix-shell -p git`.  
 
 Setup nixos:
@@ -18,7 +16,7 @@ Setup nixos:
 nixos-generate-config --root /mnt
 ```
 
-You will find `configuration.nix` and `hardware-configuration.nix` in `/mnt/etc/nixos`. 
+You will find `configuration.nix` and `hardware-configuration.nix` in `/mnt/etc/nixos`.  
 You can use these to add flags for your system.  
 
 Create your new home directory, so that we can put this repository there:
@@ -28,23 +26,27 @@ mkdir -p /mnt/home/<username>
 mv <path to cloned nixos repository> /mnt/home/<username>
 ```
 
-Now remove stock configuration files by deleting directory `/etc/nixos` and replace it with a link to the git repository, with the same name.  
+Now remove stock configuration files by deleting directory `/etc/nixos` and replace it with a link to the git repository, with the same name.
 
 ```shell
 rm -rf /mnt/etc/nixos
 ln -s /mnt/home/<username>/NixOS /mnt/etc/nixos
 ```
 
-Install the system by entering the repository and building the system flake: `nixos-rebuild build --flake .#<nixos-system-derivation>`.  
-If the build goes without problems, switch the system to the flake: `nixos-rebuild switch --flake .#<nixos-system-derivation>`.  
+Install the system by entering the repository and building the system flake:
 
-On first boot go to another tty and login as root with password you have entered. Using `passwd <user>` change root and your user passwords. Switch back to your GUI tty (tty7 for GNOME) and your user should appear.  
+```shell
+nixos-rebuild build --flake .#<nixos-system-derivation>
+```  
 
-After installation, remove the default home-manager directory in `~/.config/nixpkgs` and replace it with a link to the git repository with the same name.  
+If the build goes without problems, switch the system to the flake:
 
-## Wallpaper
+```shell
+nixos-rebuild switch --flake .#<nixos-system-derivation>
+```
 
-I found it on internet some time ago, but it was bad quality. I turned it into vector image and exported 1080p and 1440p variants. If you find the author please thank him/her in my name.
+On first boot go to another tty and login as root with password you have entered after install. Using `passwd <user>` change root and your user passwords. Switch back to your GUI tty (tty7 for GNOME) and your user should appear.  
+After installation, remove the default home-manager directory in `~/.config/nixpkgs` and replace it with a link to the git repository with the same name (nixpkgs).  
 
 ## Maintenance
 
@@ -77,3 +79,10 @@ nvd diff /nix/var/nix/profiles/per-user/$USER/home-manager ./result
 ./result/activate
 home-manager switch --flake .#<home-derivation> # --impure
 ```
+
+Both script search for the flake repository in `/etc/nixos` and `~/.config/nixpkgs` in the same order. The paths are set with `NIX_FLAKE_DIR` and `NIX_FLAKE_DIR_HOME` in `system/configuration_basic.nix` and `home/home_basic.nix` respectively.  
+Derivation for system and home is taken from value of `NIX_SYSTEM_DERIVATION` and `NIX_HOME_DERIVATION`, which are set in currently used `configuration.nix` and `home.nix`. If not, `$(hostname)` will be used to select system derivation and `$USER-$(hostname)` will be used for home derivation. My derivations are named this way, but I still use environment variables first.
+
+## Wallpaper
+
+I found it on internet some time ago, but it was bad quality. I turned it into vector image and exported 1080p and 1440p variants. If you find the author please thank him/her in my name.
