@@ -4,6 +4,7 @@ function peval()
 {
     if ! eval "$@"; then
         echo Command: "$@" FAILED!
+        rm ./result
         exit 1
     fi
 }
