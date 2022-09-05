@@ -15,5 +15,9 @@
   # Packages
   home.packages = with pkgs; [
   ];
+
+  home.sessionVariables = {
+    NIX_HOME_DERIVATION = "test-testbox";
+  };
 }
 

@@ -13,6 +13,8 @@ in
       ./pipewire.nix
   ];
 
+  system.stateVersion = "22.05";
+
   # Cleaning lady
   nix = {
     package = pkgs.unstable.nix;
@@ -61,7 +63,10 @@ in
   # System packages - minimal usable system
   environment = {
     shells = with pkgs; [ bashInteractive zsh ];
-    variables = { EDITOR = "vim"; };
+    variables = {
+      EDITOR = "vim";
+      NIX_FLAKE_DIR = "/etc/nixos"; # a symlink to this repo
+    };
     systemPackages = with pkgs; [
       bat
       exa
@@ -92,7 +97,5 @@ in
       enable = true;
     };
   };
-
-  system.stateVersion = "22.05";
 }
 
