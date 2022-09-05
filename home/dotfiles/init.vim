@@ -71,6 +71,14 @@ set autoindent
 set cindent
 set nowrap
 
+" Window split - add command to work in insert mode as well
+set splitbelow
+set splitright
+inoremap <C-W><Left> <Esc><Right><C-W><Left><Ins>
+inoremap <C-W><Right> <Esc><Right><C-W><Right><Ins>
+inoremap <C-W><Up> <Esc><Right><C-W><Up><Ins>
+inoremap <C-W><Down> <Esc><Right><C-W><Down><Ins>
+
 " key timeout values
 set ttimeoutlen=20
 set timeoutlen=1000
