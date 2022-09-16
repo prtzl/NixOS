@@ -12,9 +12,6 @@
   # Networking - check your interface name enp<>s0
   networking = {
     hostName = "nixbox";
-    #networkmanager.enable = true;
-    #useNetworkd = true;
-    useDHCP = false;
     interfaces.enp9s0.useDHCP = true;
   };
   
@@ -28,7 +25,6 @@
 
 # User sh$t
   users = {
-    defaultUserShell = pkgs.zsh;
     users = {
       matej = {
         isNormalUser = true;
@@ -37,10 +33,6 @@
         extraGroups = [ "wheel" "libvirtd" "networkmanager" "dialout" "audio" "video" "usb" "podman" "docker" "openrazer" ];
       };
     };
-  };
-
-  environment.variables = {
-    NIX_SYSTEM_DERIVATION = "nixbox";
   };
 }
 

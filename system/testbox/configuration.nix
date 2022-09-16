@@ -9,10 +9,7 @@
 
   # Networking - check your interface name enp<>s0
   networking = {
-    hostName = "nixbox";
-    #networkmanager.enable = true;
-    #useNetworkd = true;
-    useDHCP = false;
+    hostName = "testbox";
     interfaces.enp9s0.useDHCP = true;
   };
   
@@ -26,7 +23,6 @@
 
 # User sh$t
   users = {
-    defaultUserShell = pkgs.zsh;
     users = {
       test = {
         isNormalUser = true;
@@ -35,10 +31,6 @@
         extraGroups = [ "wheel" "networkmanager" "dialout" "audio" "video" "usb" ];
       };
     };
-  };
-
-  environment.variables = {
-    NIX_SYSTEM_DERIVATION = "testbox";
   };
 }
 
