@@ -5,7 +5,7 @@ with lib.hm.gvariant;
 
 let
   mkTuple = lib.hm.gvariant.mkTuple;
-  mkInt = lib.hm.gvariant.mkUint3v2;
+  mkInt = lib.hm.gvariant.mkUint32;
   backgroundDir = "${config.home.homeDirectory}";
   backgroundPath = "${config.home.homeDirectory}/.background";
   lockscreenPath = "${config.home.homeDirectory}/.lockscreen";
