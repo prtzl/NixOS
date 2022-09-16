@@ -35,14 +35,13 @@ function checkForFlake()
 # Default location - for me, /etc/nixos is a symlink to git repository
 home_derivation=${NIX_HOME_DERIVATION:-$USER-$(hostname)}
 
-# Find where the flake is: git folder link to /etc/nixos or ~/.config/nixpkgs
+# Check for flake dir in nixos or non-nixos variables, else default in ~/.config/nixpkgs
 if checkForFlake "$NIX_FLAKE_DIR"; then
     flake_dir="$NIX_FLAKE_DIR"
 elif checkForFlake "$NIX_FLAKE_DIR_HOME"; then
     flake_dir="$NIX_FLAKE_DIR_HOME"
 else
-    info "No flake dir found in NIX_FLAKE_DIR or NIX_FLAKE_DIR_HOME"
-    exit 1
+    flake_dir="$HOME/.config/nixpkgs"
 fi
 
 # Remove arguments ment for this script and only pass ARGS to other tools
