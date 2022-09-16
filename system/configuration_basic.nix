@@ -57,8 +57,10 @@ in
     openssh.forwardX11 = true;
     localtime.enable = true;
     geoclue2.enable = true;
-    #flatpak.enable = true;
+    flatpak.enable = true;
   };
+
+  xdg.portal.enable = true; # For flatpak
 
   # System packages - minimal usable system
   environment = {
@@ -68,11 +70,11 @@ in
       NIX_FLAKE_DIR = "/etc/nixos"; # a symlink to this repo
     };
     systemPackages = with pkgs; [
+      nixos-update
       bat
       exa
       ripgrep
       fd
-      nixos-update
       wget
       nvd
       firefox
@@ -93,9 +95,13 @@ in
   };
 
   networking = {
+    networkmanager.enable = true;
+    useDHCP = false;
     firewall = {
       enable = true;
     };
   };
+
+  users.defaultUserShell = pkgs.zsh;
 }
 
