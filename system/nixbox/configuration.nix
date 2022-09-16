@@ -34,5 +34,9 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    wineWowPackages.stable
+  ];
 }
 
