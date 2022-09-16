@@ -3,6 +3,8 @@
     enable = true;
     settings = {
       font = {
+        family = "FiraCode Nerd Font";
+        style = "Regular";
         size = 12;
         antialias = true;
         autohint = true;

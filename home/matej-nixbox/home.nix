@@ -12,6 +12,7 @@
     ../vscode.nix
     ../ranger.nix
     ../tmux.nix
+    ../fonts.nix
   ];
 
   home.username = "matej";

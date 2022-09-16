@@ -8,6 +8,7 @@
     ../tmux.nix
     ../ranger.nix
     ../dconf.nix
+    ../fonts.nix
   ];
 
   home.username = "matej";

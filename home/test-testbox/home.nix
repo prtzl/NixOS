@@ -6,6 +6,7 @@
     ../vscode.nix
     ../alacritty.nix
     ../ranger.nix
+    ../fonts.nix
   ];
 
   home.username = "test";

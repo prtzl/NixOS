@@ -5,7 +5,7 @@ with lib.hm.gvariant;
 
 let
   mkTuple = lib.hm.gvariant.mkTuple;
-  mkInt = lib.hm.gvariant.mkUint32;
+  mkInt = lib.hm.gvariant.mkUint3v2;
   backgroundDir = "${config.home.homeDirectory}";
   backgroundPath = "${config.home.homeDirectory}/.background";
   lockscreenPath = "${config.home.homeDirectory}/.lockscreen";
@@ -171,6 +171,7 @@ in {
 
     "org/gnome/desktop/interface" = {
       toolkit-accessibility = false;
+      monospace-font-name = "FiraCode Nerd Font 10"; # I want "{monospace-font.family}" + " ${monospace-font.style}";
     };
 
     "org/gnome/libgnomekbd/keyboard" = {
