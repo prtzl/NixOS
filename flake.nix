@@ -31,6 +31,7 @@
           unstable = pkgs-unstable;
           jlink = mkFree jlink-pack-stable.defaultPackage.${system};
       };
+
       unstableOverlay = self: super: {
           jlink = mkFree jlink-pack-unstable.defaultPackage.${system};
       };
@@ -47,55 +48,37 @@
         overlays = [unstableOverlay];
       };
     in {
-      nixosConfigurations = {
-        nixbox = inputs.nixpkgs-stable.lib.nixosSystem {
+      nixosConfigurations =
+      let
+        mkSystem = hostname: (inputs.nixpkgs-stable.lib.nixosSystem {
           inherit system;
           modules = [
             {
               nixpkgs.pkgs = pkgs;
             }
-            ./system/nixbox/configuration.nix
+            ./system/${hostname}/configuration.nix
           ];
-        };
-        testbox = inputs.nixpkgs-stable.lib.nixosSystem {
-          inherit system;
-          modules = [
-            {
-              nixpkgs.pkgs = pkgs;
-            }
-            ./system/testbox/configuration.nix
-          ];
-        };
+        });
+      in {
+        nixbox = mkSystem "nixbox";
+        testbox = mkSystem "testbox";
       };
       
-      homeConfigurations = {
-        matej-nixbox = inputs.home-manager.lib.homeManagerConfiguration rec {
+      homeConfigurations =
+      let
+        mkHome = username: hostname: (inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            ./home/matej-nixbox/home.nix
+            ./home/${username}-${hostname}/home.nix
           ];
           extraSpecialArgs = {
             lib = import "${inputs.home-manager}/modules/lib/stdlib-extended.nix" pkgs-unstable.lib;
           };
-        };
-        test-testbox = inputs.home-manager.lib.homeManagerConfiguration rec {
-          inherit pkgs;
-          modules = [
-            ./home/test-testbox/home.nix
-          ];
-          extraSpecialArgs = {
-            lib = import "${inputs.home-manager}/modules/lib/stdlib-extended.nix" pkgs-unstable.lib;
-          };
-        };
-        matej-work = inputs.home-manager.lib.homeManagerConfiguration rec {
-          inherit pkgs;
-          modules = [
-            ./home/matej-work/home.nix
-          ];
-          extraSpecialArgs = {
-            lib = import "${inputs.home-manager}/modules/lib/stdlib-extended.nix" pkgs-unstable.lib;
-          };
-        };
+        });
+      in {
+        matej-nixbox = mkHome "matej" "nixbox";
+        test-testbox = mkHome "test" "testbox";
+        matej-work = mkHome "matej" "work";
       };
 
       nixbox = self.nixosConfigurations.nixbox.config.system.build.toplevel;
