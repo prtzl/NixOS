@@ -92,7 +92,7 @@
       ssh = "ssh -Y -C";
 
       # Programs
-      pdf = "evince";
+      pdf = "xreader";
       img = "eog";
       play = "celluloid";
       sl = "sl -ead -999";

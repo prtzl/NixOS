@@ -53,8 +53,6 @@
     megasync
     pavucontrol
     transmission-gtk
-    evince
-    celluloid
 
     # Media
     ffmpeg

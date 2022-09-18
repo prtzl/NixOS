@@ -1,11 +1,15 @@
 { config, pkgs, ... }:
 
 {
+  # This gives some basic gui applications: image viewers, players, readers ...
   environment.systemPackages = with pkgs; [
+    cinnamon.xreader
     gnome.eog
+    celluloid
     gnome.gnome-system-monitor
     gnome.gnome-disk-utility
     gnome.gnome-calculator
+    gnome.gnome-screenshot
   ];
 
   services = {
@@ -26,5 +30,4 @@
     gnome.core-utilities.enable = false;
     cinnamon.apps.enable = false;
   };
-
 }
