@@ -85,7 +85,7 @@
 
       # Utilities 
       nix-shell = "nix-shell --command zsh";
-      ls = "exa --group-directories-first --color=always";
+      ls = "exa --group-directories-first --color=always --icons";
       l = "ls -la";
       ll = "ls -l";
       grep = "grep --color=always -n -r";
