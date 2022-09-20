@@ -17,6 +17,14 @@
       log-file = /tmp/ftdi-serial.log
       color = 12
 
+      [acm ports]
+      pattern = acm([0-9]*)
+      tty = /dev/ttyACM%s
+      baudrate = 115200
+      log = enable
+      log-file = /tmp/acm-serial.log
+      color = 15
+
       [usb devices]
       pattern = usb([0-9]*)
       tty = /dev/ttyUSB%s
