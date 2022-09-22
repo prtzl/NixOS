@@ -115,6 +115,8 @@ cmp.setup({
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'nvim_lua' },
+        { name = 'texlab' },
+        { name = 'spell' },
         { name = 'omni' },
         { name = 'path' },
         { name = 'buffer' },
@@ -156,18 +158,14 @@ cmp.setup.cmdline(':', {
 })
 
 cmp.setup.cmdline('/', {
-	sources = {
-		{ name = 'buffer' }
-	}
+	sources = cmp.config.sources({
+        { name = 'nvim_lsp_signature_help' }
+	}, {
+        { name = 'buffer' }
+    })
 })
 
--- lsp signature
-require "lsp_signature".setup({
-    hint_enable = false;
-    toggle_key = '<C-s>',
-    select_signature_key = '<C-l>'
-})
-
+-- LSP servers
 -- C/C++ LSP
 require'lspconfig'.clangd.setup{
 	--on_attach = require'on-attach',
@@ -184,6 +182,15 @@ require'lspconfig'.clangd.setup{
 require'lspconfig'.rnix.setup{
 	--on_attach = require'on-attach',
 }
+
+require'lspconfig'.texlab.setup{}
+
+-- lsp signature
+require "lsp_signature".setup({
+    hint_enable = false;
+    toggle_key = '<C-s>',
+    select_signature_key = '<C-l>'
+})
 
 local signs = {
 	{ name = 'DiagnosticSignError', text = '🔥' },

@@ -21,7 +21,6 @@ let
     fzfWrapper # fzf stuff
     fzf-vim # as well
     vim-nix # nix format
-    vimtex # tex formatting
     lightline-vim # status bar
     vim-gitbranch # get git info for status bar
     impatient-nvim
@@ -41,6 +40,7 @@ let
     cmp-path
     cmp-treesitter
     cmp_luasnip
+    cmp-nvim-lsp-document-symbol
     fidget-nvim
     fzf-lsp-nvim
     lsp_extensions-nvim
@@ -52,13 +52,10 @@ let
     nvim-dap-ui
     nvim-lspconfig
     plenary-nvim
-
-    # Plugins that are here and might break my config but I don't know them ...
-    #YouCompleteMe
   ];
 in
 {
-  home.packages = with pkgs; [ bat ripgrep rnix-lsp ];
+  home.packages = with pkgs; [ bat ripgrep rnix-lsp texlab ];
   programs.neovim = {
     enable = true;
     viAlias = true;
