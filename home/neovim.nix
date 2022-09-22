@@ -14,30 +14,48 @@ let
   loadPlugins = ps: lib.pipe ps [ (builtins.map loadPlugin) unlines ];
   plugins = with vimPlugins.unstable; [
     # Plugins that I know and understand where and how they're used
-    (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars)) # syntax for everything
+    (nvim-treesitter.withPlugins (_: pkgs.unstable.tree-sitter.allGrammars)) # syntax for everything
     jellybeans-vim # theme
     vim-cpp-enhanced-highlight # better looking cpp highlighting
     markdown-preview-nvim # opens markdown preview in browser
     fzfWrapper # fzf stuff
     fzf-vim # as well
     vim-nix # nix format
-    nerdtree # Sidebar with files
-    nerdtree-git-plugin # same
-    vim-nerdtree-syntax-highlight # more nerdtree
     vimtex # tex formatting
-    neoformat # runs formatter for a file
     lightline-vim # status bar
     vim-gitbranch # get git info for status bar
-    coc-fzf # seach
-    coc-nvim # autosuggest
-    coc-git # gutter is labeled when stuff is added, changed or removed
-    coc-json # JSON tools
-    
+    impatient-nvim
+    gitsigns-nvim
+    incsearch-vim
+    colorizer # preview hex color codes  - why not
+    nvim-autopairs
+    nvim-tree-lua
+    nvim-web-devicons
+
+    # LSP stuff
+    cmp-buffer
+    cmp-cmdline
+    cmp-nvim-lsp
+    cmp-omni
+    cmp-path
+    cmp-treesitter
+    cmp_luasnip
+    fidget-nvim
+    fzf-lsp-nvim
+    lsp_extensions-nvim
+    lsp_signature-nvim
+    luasnip
+    nvim-cmp
+    nvim-dap
+    nvim-dap-ui
+    nvim-lspconfig
+    plenary-nvim
+
     # Plugins that are here and might break my config but I don't know them ...
-    #coc-clangd # this one starts complaining for everything - c++14> not found
+    #YouCompleteMe
   ];
 in {
-  home.packages = with pkgs; [ bat ripgrep ];
+  home.packages = with pkgs; [ bat ripgrep rnix-lsp ];
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -50,7 +68,10 @@ in {
       filetype off | syn off
       ${loadPlugins plugins}
       filetype indent plugin on | syn on
-      ${builtins.readFile ./dotfiles/init.vim}
+      ${builtins.readFile ./dotfiles/vim/init.vim}
+      lua << EOF
+      ${builtins.readFile ./dotfiles/vim/init.lua}
+      EOF
     '';
   };
 }
