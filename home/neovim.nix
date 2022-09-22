@@ -31,6 +31,7 @@ let
     nvim-autopairs
     nvim-tree-lua
     nvim-web-devicons
+    colorbuddy-nvim # colors for suggestions
 
     # LSP stuff
     cmp-buffer
@@ -45,6 +46,7 @@ let
     lsp_extensions-nvim
     lsp_signature-nvim
     luasnip
+    lspkind-nvim
     nvim-cmp
     nvim-dap
     nvim-dap-ui
@@ -54,7 +56,8 @@ let
     # Plugins that are here and might break my config but I don't know them ...
     #YouCompleteMe
   ];
-in {
+in
+{
   home.packages = with pkgs; [ bat ripgrep rnix-lsp ];
   programs.neovim = {
     enable = true;
