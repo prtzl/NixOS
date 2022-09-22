@@ -2,15 +2,16 @@
 
 let
   nixos-update = pkgs.writeShellScriptBin "nixos-update" (builtins.readFile ./local-pkgs/nixos-update.sh);
+  nixgen = pkgs.writeShellScriptBin "nixgen" (builtins.readFile ./local-pkgs/nixgen.sh);
 in
 {
   # Additional configuration
   imports = [
-      ./bootloader.nix 
-      ./filesystem.nix
-      ./hardware-configuration_basic.nix
-      ./udev.nix
-      ./pipewire.nix
+    ./bootloader.nix
+    ./filesystem.nix
+    ./hardware-configuration_basic.nix
+    ./udev.nix
+    ./pipewire.nix
   ];
 
   system.stateVersion = "22.05";
@@ -40,7 +41,7 @@ in
     allowUnfree = true;
     allowBroken = false;
   };
-  
+
   # Usefull services
   services = {
     avahi = {
@@ -81,6 +82,7 @@ in
       lm_sensors
       neofetch
       nix-index
+      nixgen
       nixos-update
       nvd
       parted
