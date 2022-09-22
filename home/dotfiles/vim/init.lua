@@ -34,6 +34,14 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'FocusGained', 'BufEnter' }, {
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 local cmp = require 'cmp'
 
+-- Helper function for Super tab complete
+local check_backspace = function()
+  local col = vim.fn.col "." - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+end
+
+local luasnip = require 'luasnip'
+
 -- Info on where does LSP information come from for a given suggestion
 local lspkind = require 'lspkind'
 lspkind.init()
@@ -55,15 +63,45 @@ cmp.setup({
 	-- Enable LSP snippets
 	snippet = {
 		expand = function(args)
-			require 'luasnip'.lsp_expand(args.body)
+			luasnip.lsp_expand(args.body)
 		end,
 	},
 
 	mapping = ({
-        ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-        ['<Tab>'] = cmp.mapping.select_next_item(),
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expandable() then
+            luasnip.expand()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif check_backspace() then
+            fallback()
+          else
+            fallback()
+          end
+        end, {
+          "i",
+          "s",
+        }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, {
+          "i",
+          "s",
+        }),
+        --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+        --['<Tab>'] = cmp.mapping.select_next_item(),
+        ['<C-n>'] = cmp.config.disable,
+        ['<C-p>'] = cmp.config.disable,
+        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
         ['<C-k>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm({
@@ -75,33 +113,39 @@ cmp.setup({
 	-- Installed sources
 	sources = {
         { name = 'nvim_lsp' },
+        { name = 'luasnip' },
         { name = 'nvim_lua' },
         { name = 'omni' },
-        { name = 'luasnip' },
         { name = 'path' },
         { name = 'buffer' },
         { name = 'treesitter' },
 	},
 
-    -- Display suggestion type on the left
     formatting = {
       fields = { "kind", "abbr", "menu" },
       format = function(entry, vim_item)
+        -- Kind icond
         local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
         local strings = vim.split(kind.kind, "%s", { trimempty = true })
         kind.kind = " " .. strings[1] .. " "
-        kind.menu = "    (" .. strings[2] .. ")"
-
+        kind.menu = "[" .. strings[2] .. "]"
         return kind
       end,
     },
 
     window = {
+        documentation = {
+              border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        },
         completion = {
             winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
             col_offset = -3,
             side_padding = 0,
         },
+    },
+
+    experimental = {
+        ghost_text = true,
     },
 })
 
