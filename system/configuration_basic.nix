@@ -70,27 +70,28 @@ in
       NIX_FLAKE_DIR = "/etc/nixos"; # a symlink to this repo
     };
     systemPackages = with pkgs; [
-      nixos-update
       bat
       exa
-      ripgrep
       fd
-      wget
-      nvd
-      firefox
-      vim
-      git
-      parted
-      unzip
       file
+      firefox
+      git
+      home-manager
+      htop
+      lm_sensors
+      neofetch
+      nix-index
+      nixos-update
+      nvd
+      parted
+      ripgrep
+      sl
       tio
       tree
+      unzip
       usbutils
-      htop
-      neofetch
-      sl
-      lm_sensors
-      home-manager
+      vim
+      wget
     ];
   };
 
