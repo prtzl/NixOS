@@ -45,7 +45,7 @@ set history=1000
 
 " Cursor
 set guicursor=
-inoremap <Esc> <Esc>l
+"inoremap <Esc> <Esc>l
 set cursorline
 set scrolloff=5
 
@@ -91,22 +91,6 @@ set backspace=indent,eol,start
 noremap! <C-BS> <C-w>
 noremap! <C-h> <C-w>
 
-" Auto bracket closing
-inoremap "<tab> ""<Left>
-inoremap '<tab> ''<Left>
-inoremap (<tab> ()<Left>
-inoremap [<tab> []<Left>
-inoremap {<tab> {}<Left>
-inoremap {<CR> {<CR>}<Left><CR><Up><Tab>
-
-" Nerdtree
-let g:NERDTreeDirArrowExpandable="+"
-let g:NERDTreeDirArrowCollapsable="-"
-nnoremap <C-t> :NERDTreeToggle<CR>
-
-" Autocomplete for coc
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-
 " Fuzzy find
 nnoremap <C-p> :Files<CR>
 nnoremap <C-g> :Rg<CR>
@@ -115,7 +99,7 @@ nnoremap <C-b> :Buffers<CR>
 let $BAT_THEME="OneHalfDark"
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 let $FZF_DEFAULT_COMMAND="rg --files --ignore-case --sort path"
-let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=numbers,grid --line-range :300 {}'"
+let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=numbers,grid,header --line-range :300 {}'"
 command! -bang -nargs=? -complete=dir Files
      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
