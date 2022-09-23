@@ -43,17 +43,38 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'FocusGained', 'BufEnter' }, {
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 local cmp = require 'cmp'
 
--- Helper function for Super tab complete
-local check_backspace = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-end
-
 local luasnip = require 'luasnip'
 
--- Info on where does LSP information come from for a given suggestion
-local lspkind = require 'lspkind'
-lspkind.init()
+--   פּ ﯟ   some other good icons
+local kind_icons = {
+  Text = "",
+  Method = "m",
+  Function = "",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "",
+  Interface = "",
+  Module = "",
+  Property = "",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = "",
+}
+
+
 
 cmp.setup({
     -- Disable completion on comments
@@ -105,14 +126,19 @@ cmp.setup({
 	},
 
     formatting = {
-      fields = { "kind", "abbr", "menu" },
-      format = function(entry, vim_item)
-        local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
-        local strings = vim.split(kind.kind, "%s", { trimempty = true })
-        kind.kind = " " .. strings[1] .. " "
-        kind.menu = "[" .. strings[2] .. "]"
-        return kind
-      end,
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+          -- Kind icons
+          vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+          -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+          vim_item.menu = ({
+            nvim_lsp = "[LSP]",
+            luasnip = "[Snippet]",
+            buffer = "[Buffer]",
+            path = "[Path]",
+          })[entry.source.name]
+          return vim_item
+        end,
     },
 
     window = {
@@ -145,10 +171,15 @@ cmp.setup.cmdline('/', {
     })
 })
 
+
 -- LSP servers
+-- This shit is added to every server and it made it so
+-- when you accept a suggestion like a function, it fills the signature and enters - finally
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 -- C/C++ LSP
 require'lspconfig'.clangd.setup{
-	--on_attach = require'on-attach',
+    capabilities = capabilities,
 	cmd = {
 		'clangd',
 		'--background-index',
@@ -160,10 +191,12 @@ require'lspconfig'.clangd.setup{
 
 -- Nix LSP
 require'lspconfig'.rnix.setup{
-	--on_attach = require'on-attach',
+    capabilities = capabilities,
 }
 
-require'lspconfig'.texlab.setup{}
+require'lspconfig'.texlab.setup{
+    capabilities = capabilities,
+}
 
 -- lsp signature
 require "lsp_signature".setup({
@@ -172,7 +205,8 @@ require "lsp_signature".setup({
     select_signature_key = '<C-l>'
 })
 
--- Sidebar signs
+
+-- Diagnostic signs
 local signs = {
 	{ name = 'DiagnosticSignError', text = '🔥' },
 	{ name = 'DiagnosticSignWarn', text = '!' },
@@ -203,10 +237,8 @@ vim.diagnostic.config {
 	},
 }
 
--- TODO: try to configure ccls
---require'lspconfig'.ccls.setup{
---}
 
+-- I don't know why this is here
 require 'nvim-tree'.setup {
 	open_on_setup = false,
 	open_on_setup_file = false,
@@ -233,7 +265,6 @@ require 'nvim-tree'.setup {
 		enable = true,
 	},
 }
-
 -- Automatically close the tab/vim when nvim-tree is the last window in the tab
 vim.api.nvim_create_autocmd('BufEnter', {
 	group = vim.api.nvim_create_augroup('CloseNvimTreeWhenLast', {}),

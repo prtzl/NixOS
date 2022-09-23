@@ -29,7 +29,8 @@ let
     nvim-autopairs
     nvim-tree-lua
     nvim-web-devicons
-    colorbuddy-nvim # colors for suggestions
+    nvim-base16 # colors2
+    colorbuddy-nvim # - does not work - error
 
     # LSP stuff
     cmp-buffer
