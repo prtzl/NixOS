@@ -4,7 +4,16 @@ require'nvim-autopairs'.setup {}
 
 require'fidget'.setup {}
 
-require'gitsigns'.setup {}
+require'gitsigns'.setup{
+    signs = {
+        add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+        change       = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+        delete       = {hl = 'GitSignsDelete', text = '−', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+        topdelete    = {hl = 'GitSignsDelete', text = '−', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+        changedelete = {hl = 'GitSignsChange', text = '≃', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    },
+    numhl = true,
+}
 
 -- Enable treesitter: format and color all the source files!
 require'nvim-treesitter.configs'.setup{
@@ -68,36 +77,8 @@ cmp.setup({
 	},
 
 	mapping = ({
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expandable() then
-            luasnip.expand()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif check_backspace() then
-            fallback()
-          else
-            fallback()
-          end
-        end, {
-          "i",
-          "s",
-        }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, {
-          "i",
-          "s",
-        }),
-        --['<S-Tab>'] = cmp.mapping.select_prev_item(),
-        --['<Tab>'] = cmp.mapping.select_next_item(),
+        ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+        ['<Tab>'] = cmp.mapping.select_next_item(),
         ['<C-n>'] = cmp.config.disable,
         ['<C-p>'] = cmp.config.disable,
         ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
@@ -126,7 +107,6 @@ cmp.setup({
     formatting = {
       fields = { "kind", "abbr", "menu" },
       format = function(entry, vim_item)
-        -- Kind icond
         local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
         local strings = vim.split(kind.kind, "%s", { trimempty = true })
         kind.kind = " " .. strings[1] .. " "
@@ -192,9 +172,10 @@ require "lsp_signature".setup({
     select_signature_key = '<C-l>'
 })
 
+-- Sidebar signs
 local signs = {
 	{ name = 'DiagnosticSignError', text = '🔥' },
-	{ name = 'DiagnosticSignWarn', text = '⚠️' },
+	{ name = 'DiagnosticSignWarn', text = '!' },
 	{ name = 'DiagnosticSignHint', text = '💡' },
 	{ name = 'DiagnosticSignInfo', text = '🔸' },
 }
