@@ -17,26 +17,26 @@ require'gitsigns'.setup{
 
 -- Enable treesitter: format and color all the source files!
 require'nvim-treesitter.configs'.setup{
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-	},
-	indent = {
-		enable = true,
-	},
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
+    indent = {
+        enable = true,
+    },
 }
 
 -- Format the file before it is written
 vim.api.nvim_create_autocmd('BufWritePre', {
-	group = vim.api.nvim_create_augroup('AutoformatOnWrite', {}),
-	callback = function() vim.lsp.buf.formatting_sync(nil, 1000) end
+    group = vim.api.nvim_create_augroup('AutoformatOnWrite', {}),
+    callback = function() vim.lsp.buf.formatting_sync(nil, 1000) end
 })
 
 -- Reload file when it has changed
 vim.opt.autoread = true
 vim.api.nvim_create_autocmd({ 'VimEnter', 'FocusGained', 'BufEnter' }, {
-	group = vim.api.nvim_create_augroup('ReloadFileOnChange', {}),
-	command = 'checktime',
+    group = vim.api.nvim_create_augroup('ReloadFileOnChange', {}),
+    command = 'checktime',
 })
 
 -- Setup Completion
@@ -90,14 +90,14 @@ cmp.setup({
       end
     end,
 
-	-- Enable LSP snippets
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
+    -- Enable LSP snippets
+    snippet = {
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
+        end,
+    },
 
-	mapping = ({
+    mapping = ({
         ['<S-Tab>'] = cmp.mapping.select_prev_item(),
         ['<Tab>'] = cmp.mapping.select_next_item(),
         ['<C-n>'] = cmp.config.disable,
@@ -112,8 +112,8 @@ cmp.setup({
         })
     }),
 
-	-- Installed sources
-	sources = {
+    -- Installed sources
+    sources = {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'nvim_lua' },
@@ -123,7 +123,8 @@ cmp.setup({
         { name = 'path' },
         { name = 'buffer' },
         { name = 'treesitter' },
-	},
+        { name = 'pylsp' },
+    },
 
     formatting = {
         fields = { "kind", "abbr", "menu" },
@@ -158,15 +159,15 @@ cmp.setup({
 })
 
 cmp.setup.cmdline(':', {
-	sources = {
-		{ name = 'cmdline' }
-	}
+    sources = {
+        { name = 'cmdline' }
+    }
 })
 
 cmp.setup.cmdline('/', {
-	sources = cmp.config.sources({
+    sources = cmp.config.sources({
         { name = 'nvim_lsp_signature_help' }
-	}, {
+    }, {
         { name = 'buffer' }
     })
 })
@@ -180,13 +181,13 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 -- C/C++ LSP
 require'lspconfig'.clangd.setup{
     capabilities = capabilities,
-	cmd = {
-		'clangd',
-		'--background-index',
-		'--inlay-hints',
-		'--clang-tidy',
-		'--compile-commands-dir=build',
-	},
+    cmd = {
+        'clangd',
+        '--background-index',
+        '--inlay-hints',
+        '--clang-tidy',
+        '--compile-commands-dir=build',
+    },
 }
 
 -- Nix LSP
@@ -194,7 +195,13 @@ require'lspconfig'.rnix.setup{
     capabilities = capabilities,
 }
 
+-- latex lsp
 require'lspconfig'.texlab.setup{
+    capabilities = capabilities,
+}
+
+-- Python LSP
+require'lspconfig'.pylsp.setup{
     capabilities = capabilities,
 }
 
@@ -208,66 +215,66 @@ require "lsp_signature".setup({
 
 -- Diagnostic signs
 local signs = {
-	{ name = 'DiagnosticSignError', text = '🔥' },
-	{ name = 'DiagnosticSignWarn', text = '!' },
-	{ name = 'DiagnosticSignHint', text = '💡' },
-	{ name = 'DiagnosticSignInfo', text = '🔸' },
+    { name = 'DiagnosticSignError', text = '🔥' },
+    { name = 'DiagnosticSignWarn', text = '!' },
+    { name = 'DiagnosticSignHint', text = '💡' },
+    { name = 'DiagnosticSignInfo', text = '🔸' },
 }
 
 for _, sign in ipairs(signs) do
-	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
 end
 
 vim.diagnostic.config {
-	virtual_text = true,
-	-- show signs
-	signs = {
-		active = signs,
-	},
-	update_in_insert = true,
-	underline = true,
-	severity_sort = true,
-	float = {
-		focusable = false,
-		style = 'minimal',
-		border = 'rounded',
-		source = 'always',
-		header = '',
-		prefix = '',
-	},
+    virtual_text = true,
+    -- show signs
+    signs = {
+        active = signs,
+    },
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+        focusable = false,
+        style = 'minimal',
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
+    },
 }
 
 
 -- I don't know why this is here
 require 'nvim-tree'.setup {
-	open_on_setup = false,
-	open_on_setup_file = false,
-	open_on_tab = false,
-	update_focused_file = {
-		enable = true,
-		update_cwd = true,
-	},
-	renderer = {
-		icons = {
-			webdev_colors = true,
-			git_placement = "before",
-			padding = " ",
-			symlink_arrow = " → ",
-			show = {
-				file = true,
-				folder = true,
-				folder_arrow = false,
-				git = true,
-			},
-		},
-	},
-	filesystem_watchers = {
-		enable = true,
-	},
+    open_on_setup = false,
+    open_on_setup_file = false,
+    open_on_tab = false,
+    update_focused_file = {
+        enable = true,
+        update_cwd = true,
+    },
+    renderer = {
+        icons = {
+            webdev_colors = true,
+            git_placement = "before",
+            padding = " ",
+            symlink_arrow = " → ",
+            show = {
+                file = true,
+                folder = true,
+                folder_arrow = false,
+                git = true,
+            },
+        },
+    },
+    filesystem_watchers = {
+        enable = true,
+    },
 }
 -- Automatically close the tab/vim when nvim-tree is the last window in the tab
 vim.api.nvim_create_autocmd('BufEnter', {
-	group = vim.api.nvim_create_augroup('CloseNvimTreeWhenLast', {}),
-	command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
-	nested = true,
+    group = vim.api.nvim_create_augroup('CloseNvimTreeWhenLast', {}),
+    command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
+    nested = true,
 })

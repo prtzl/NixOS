@@ -55,7 +55,13 @@ let
   ];
 in
 {
-  home.packages = with pkgs; [ bat ripgrep rnix-lsp texlab ];
+  home.packages = with pkgs; [
+    bat
+    ripgrep
+    rnix-lsp # nix lsp
+    texlab # latex lsp
+    python39Packages.python-lsp-server # python lsp
+  ];
   programs.neovim = {
     enable = true;
     viAlias = true;
