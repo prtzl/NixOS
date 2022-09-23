@@ -92,6 +92,17 @@ set backspace=indent,eol,start
 noremap! <C-BS> <C-w>
 noremap! <C-h> <C-w>
 
+" Move back and forth in buffers
+nnoremap <C-[> :bprev<cr>
+nnoremap <C-]> :bnext<cr>
+
+" lua LSP keybindings
+nnoremap gd :lua vim.lsp.buf.declaration()<CR>
+nnoremap gD :lua vim.lsp.buf.definition()<CR>
+nnoremap gh :lua vim.lsp.buf.hover()<CR>
+nnoremap gi :lua vim.lsp.buf.implementation()<CR>
+nnoremap gr :lua vim.lsp.buf.references()<CR>
+
 " Fuzzy find
 nnoremap <C-p> :Files<CR>
 nnoremap <C-g> :Rg<CR>
@@ -100,7 +111,7 @@ nnoremap <C-b> :Buffers<CR>
 let $BAT_THEME="OneHalfDark"
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 let $FZF_DEFAULT_COMMAND="rg --files --ignore-case --sort path"
-let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=numbers,grid,header --line-range :300 {}'"
+let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=numbers,grid,header-filename --line-range :300 {}'"
 command! -bang -nargs=? -complete=dir Files
      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
