@@ -16,14 +16,12 @@
   ];
 
   home.username = "matej";
-  home.homeDirectory ="/home/matej";
+  home.homeDirectory = "/home/matej";
   home.stateVersion = "22.11";
 
   # Packages
   home.packages = with pkgs; [
     # Dev
-    jetbrains.clion
-    jetbrains.pycharm-community
     gcc-arm-embedded
     gcc
     clang-tools
@@ -56,7 +54,7 @@
 
     # Media
     ffmpeg
-    libreoffice 
+    libreoffice
 
     # Communication
     zoom-us
