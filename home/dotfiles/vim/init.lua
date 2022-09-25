@@ -45,14 +45,17 @@ local cmp = require 'cmp'
 
 local luasnip = require 'luasnip'
 
---   פּ ﯟ   some other good icons
+-- Use it to format completion menu, comes with default icons as well
+local lspkind  = require 'lspkind'
+
+-- some other good icons
 local kind_icons = {
   Text = "",
-  Method = "m",
+  Method = "",
   Function = "",
   Constructor = "",
-  Field = "",
-  Variable = "",
+  Field = "ﰠ",
+  Variable = "",
   Class = "",
   Interface = "",
   Module = "",
@@ -67,14 +70,12 @@ local kind_icons = {
   Reference = "",
   Folder = "",
   EnumMember = "",
-  Constant = "",
-  Struct = "",
+  Constant = "",
+  Struct = "פּ",
   Event = "",
   Operator = "",
   TypeParameter = "",
 }
-
-
 
 cmp.setup({
     -- Disable completion on comments
@@ -126,20 +127,31 @@ cmp.setup({
         { name = 'pylsp' },
     },
 
+    -- Show: abbreviation, symbol + kind, menu
+    -- In other words: short completion stirng, completion type icon and stirng, source of completion
     formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = function(entry, vim_item)
-          -- Kind icons
-          vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-          -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-          vim_item.menu = ({
-            nvim_lsp = "[LSP]",
-            luasnip = "[Snippet]",
-            buffer = "[Buffer]",
-            path = "[Path]",
-          })[entry.source.name]
-          return vim_item
-        end,
+        fields = { "abbr", "kind", "menu" },
+        format = lspkind.cmp_format {
+          mode = "text_symbol",
+          maxwidth = 70,
+            before = function(entry, vim_item)
+            local shorten_abbr = string.sub(vim_item.abbr, 1, 30)
+            if shorten_abbr ~= vim_item.abbr then vim_item.abbr = shorten_abbr .. "..." end
+            vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
+            vim_item.menu = ({
+              buffer = "[BUF]",
+              nvim_lsp = "[LSP]",
+              luasnip = "[SNP]",
+              nvim_lua = "[API]",
+              latex_symbols = "[LTX]",
+              path = "[PTH]",
+              spell = "[SPL]",
+              omni = "[OMN]",
+              treesitter = "[TRS]"
+            })[entry.source.name] or "???"
+            return vim_item
+          end,
+        },
     },
 
     window = {
@@ -211,6 +223,29 @@ require "lsp_signature".setup({
     toggle_key = '<C-s>',
     select_signature_key = '<C-l>'
 })
+
+-- This shit has to be set so that the completion menu (possibly more) is colored
+vim.cmd 'set termguicolors'
+-- Completion menu highlights
+--  see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
+vim.cmd([[
+    " gray
+    highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+    " blue
+    highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+    highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+    " light blue
+    highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+    highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
+    highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
+    " pink
+    highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+    highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
+    " front
+    highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+    highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
+    highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
+]])
 
 
 -- Diagnostic signs
