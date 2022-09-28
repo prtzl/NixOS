@@ -307,6 +307,13 @@ require 'nvim-tree'.setup {
         enable = true,
     },
 }
+
+
+-- Spell check setup - default off, use :set spell to turn on
+vim.opt.spell = false
+vim.opt.spelllang = { 'en_us' }
+
+
 -- Automatically close the tab/vim when nvim-tree is the last window in the tab
 vim.api.nvim_create_autocmd('BufEnter', {
     group = vim.api.nvim_create_augroup('CloseNvimTreeWhenLast', {}),
