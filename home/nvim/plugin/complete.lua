@@ -1,45 +1,3 @@
-require'impatient'
-
-require'nvim-autopairs'.setup {}
-
-require'fidget'.setup {}
-
-require'gitsigns'.setup{
-    signs = {
-        add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-        change       = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-        delete       = {hl = 'GitSignsDelete', text = '−', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-        topdelete    = {hl = 'GitSignsDelete', text = '−', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-        changedelete = {hl = 'GitSignsChange', text = '≃', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    },
-    numhl = true,
-}
-
--- Enable treesitter: format and color all the source files!
-require'nvim-treesitter.configs'.setup{
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-    },
-    indent = {
-        enable = true,
-    },
-}
-
--- Format the file before it is written
-vim.api.nvim_create_autocmd('BufWritePre', {
-    group = vim.api.nvim_create_augroup('AutoformatOnWrite', {}),
-    callback = function() vim.lsp.buf.formatting_sync(nil, 1000) end
-})
-
--- Reload file when it has changed
-vim.opt.autoread = true
-vim.api.nvim_create_autocmd({ 'VimEnter', 'FocusGained', 'BufEnter' }, {
-    group = vim.api.nvim_create_augroup('ReloadFileOnChange', {}),
-    command = 'checktime',
-})
-
--- Setup Completion
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 local cmp = require 'cmp'
 
@@ -77,6 +35,11 @@ local kind_icons = {
   TypeParameter = "",
 }
 
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 cmp.setup({
     -- Disable completion on comments
     enabled = function()
@@ -99,8 +62,28 @@ cmp.setup({
     },
 
     mapping = ({
-        ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-        ['<Tab>'] = cmp.mapping.select_next_item(),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+        --['<Tab>'] = cmp.mapping.select_next_item(),
         ['<C-n>'] = cmp.config.disable,
         ['<C-p>'] = cmp.config.disable,
         ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
@@ -196,10 +179,13 @@ require'lspconfig'.clangd.setup{
     cmd = {
         'clangd',
         '--background-index',
-        '--inlay-hints',
         '--clang-tidy',
         '--compile-commands-dir=build',
+        '--header-insertion=never',
+        '--function-arg-placeholders',
+        '--header-insertion-decorators',
     },
+    filetypes = { "c", "cpp", "h", "hpp" },
 }
 
 -- Nix LSP
@@ -224,99 +210,3 @@ require "lsp_signature".setup({
     select_signature_key = '<C-l>'
 })
 
--- This shit has to be set so that the completion menu (possibly more) is colored
-vim.cmd 'set termguicolors'
--- Completion menu highlights
---  see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
-vim.cmd([[
-    " gray
-    highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
-    " blue
-    highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
-    highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
-    " light blue
-    highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
-    highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
-    highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
-    " pink
-    highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
-    highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
-    " front
-    highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
-    highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
-    highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
-]])
-
-
--- Diagnostic signs
-local signs = {
-    { name = 'DiagnosticSignError', text = '🔥' },
-    { name = 'DiagnosticSignWarn', text = '!' },
-    { name = 'DiagnosticSignHint', text = '💡' },
-    { name = 'DiagnosticSignInfo', text = '🔸' },
-}
-
-for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
-end
-
-vim.diagnostic.config {
-    virtual_text = true,
-    -- show signs
-    signs = {
-        active = signs,
-    },
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
-    float = {
-        focusable = false,
-        style = 'minimal',
-        border = 'rounded',
-        source = 'always',
-        header = '',
-        prefix = '',
-    },
-}
-
-
--- I don't know why this is here
-require 'nvim-tree'.setup {
-    open_on_setup = false,
-    open_on_setup_file = false,
-    open_on_tab = false,
-    update_focused_file = {
-        enable = true,
-        update_cwd = true,
-    },
-    renderer = {
-        icons = {
-            webdev_colors = true,
-            git_placement = "before",
-            padding = " ",
-            symlink_arrow = " → ",
-            show = {
-                file = true,
-                folder = true,
-                folder_arrow = false,
-                git = true,
-            },
-        },
-    },
-    filesystem_watchers = {
-        enable = true,
-    },
-}
-
-
--- Spell check setup - default off, use :set spell to turn on
-vim.opt.spell = false
-vim.opt.spelllang = { 'en_us' }
-
-
--- Automatically close the tab/vim when nvim-tree is the last window in the tab
-vim.api.nvim_create_autocmd('BufEnter', {
-    group = vim.api.nvim_create_augroup('CloseNvimTreeWhenLast', {}),
-    command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
-    nested = true,
-})

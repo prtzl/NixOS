@@ -7,7 +7,7 @@
     ../vscode.nix
     ../alacritty.nix
     ../zsh.nix
-    ../neovim.nix
+    ../nvim.nix
     ../tio.nix
     ../vscode.nix
     ../ranger.nix
