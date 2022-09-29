@@ -1,5 +1,12 @@
+" Mandatory settings
+syntax on
+filetype on
+filetype plugin on
+filetype indent on
+command W w
+lua require'impatient'
+
 " ui
-syntax enable
 set number
 set ruler
 set showcmd
@@ -7,8 +14,7 @@ set showmode
 set showmatch
 set mouse=a
 set noswapfile
-command W w
-lua require'impatient'
+
 
 " Colorscheme
 let g:jellybeans_overrides = {
