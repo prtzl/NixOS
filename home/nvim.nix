@@ -15,7 +15,6 @@ let
   plugins = with vimPlugins.unstable; [
     # Plugins that I know and understand where and how they're used
     (nvim-treesitter.withPlugins (_: pkgs.unstable.tree-sitter.allGrammars)) # syntax for everything
-    jellybeans-vim # theme
     vim-cpp-enhanced-highlight # better looking cpp highlighting
     markdown-preview-nvim # opens markdown preview in browser
     fzfWrapper # fzf stuff
@@ -29,8 +28,7 @@ let
     nvim-autopairs
     nvim-tree-lua
     nvim-web-devicons
-    nvim-base16 # colors2
-    colorbuddy-nvim # - does not work - error
+    nvim-base16 # themes
 
     # LSP stuff
     cmp-buffer

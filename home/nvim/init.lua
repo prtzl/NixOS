@@ -38,6 +38,7 @@ map('s', '<c-k>', '<cmd>lua require"luasnip".jump(-1)<CR>', nil)
 map('n', '<c-p>', ':Files<cr>', {silent=false})
 map('n', '<c-g>', ':Rg<cr>', {silent=false})
 map('n', '<c-f>', ':BLines<cr>', {silent=false})
+map('n', '<c-b>', ':Buffers<cr>', {silent=false})
 
 -- Diagnostic
 map('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<cr>', nil)

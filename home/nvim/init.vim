@@ -15,14 +15,6 @@ set showmatch
 set mouse=a
 set noswapfile
 
-
-" Colorscheme
-let g:jellybeans_overrides = {
-\    'background': { 'guibg': '000000' },
-\}
-colorscheme jellybeans
-
-
 " Status bar - lightline
 set laststatus=2
 let g:lightline = {
