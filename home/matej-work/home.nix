@@ -3,7 +3,7 @@
 {
   imports = [
     ../home_basic.nix
-    ../neovim.nix
+    ../nvim.nix
     ../tio.nix
     ../tmux.nix
     ../ranger.nix
@@ -12,7 +12,7 @@
   ];
 
   home.username = "matej";
-  home.homeDirectory ="/home/matej";
+  home.homeDirectory = "/home/matej";
   home.stateVersion = "22.05";
 
   # Packages
