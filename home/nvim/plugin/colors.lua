@@ -9,3 +9,10 @@ require('base16-colorscheme').setup({
     base0C = '#95e6cb', base0D = '#59c2ff', base0E = '#d2a6ff', base0F = '#e6b673'
 })
 vim.cmd 'set background=dark'
+
+vim.cmd([[
+    hi! SpellBad guifg=red gui=bold,underline
+    hi! SpellLocal guifg=red gui=bold,underline
+    hi! SpellRare guifg=red gui=bold,underline
+    hi! SpellCap guifg=red gui=bold,underline
+]])
