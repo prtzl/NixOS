@@ -25,7 +25,7 @@
     let
       system = "x86_64-linux";
 
-      mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = null; }; });
+      mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
 
       stableOverlay = self: super: {
         unstable = pkgs-unstable;

@@ -88,7 +88,7 @@ in
       parted
       ripgrep
       sl
-      tio
+      unstable.tio
       tree
       unzip
       usbutils
