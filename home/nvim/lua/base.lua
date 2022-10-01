@@ -16,6 +16,7 @@ vim.opt.cursorline = true
 vim.opt.backup = false
 vim.opt.history = 1000
 vim.opt.scrolloff = 5
+vim.opt.sidescrolloff = 10
 
 -- Clipboard
 vim.opt.clipboard:append { 'unnamedplus' }
