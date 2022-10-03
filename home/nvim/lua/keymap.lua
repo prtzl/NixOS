@@ -27,6 +27,8 @@ map('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<cr> ', nil)
 map('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>      ', nil)
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', nil)
 map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr> ', nil)
+map('n', '<f2>', '<cmd>lua vim.lsp.buf.rename()<cr>', {silent=false})
+map('n', '<f8>', '<cmd>lua vim.lsp.buf.code_action()<cr>', {silent=false})
 
 -- Snippets - move between fields
 map('i', '<c-j>', '<cmd>lua require"luasnip".jump(1)<CR>', nil)
