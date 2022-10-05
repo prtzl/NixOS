@@ -24,7 +24,6 @@ let
     impatient-nvim
     gitsigns-nvim
     incsearch-vim
-    colorizer # preview hex color codes  - why not
     nvim-autopairs
     nvim-tree-lua
     nvim-web-devicons
