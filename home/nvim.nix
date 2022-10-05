@@ -60,6 +60,7 @@ in
     rnix-lsp # nix lsp
     texlab # latex lsp
     python39Packages.python-lsp-server # python lsp
+    tree-sitter # treesitter - checkhealth fails otherwise
   ];
   programs.neovim = {
     enable = true;
