@@ -98,16 +98,17 @@ cmp.setup({
 
     -- Installed sources
     sources = {
+        -- Language servers and snippets
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-        { name = 'nvim_lua' },
-        { name = 'texlab' },
-        { name = 'spell' },
-        { name = 'omni' },
-        { name = 'path' },
+
+        -- Other sources
         { name = 'buffer' },
         { name = 'treesitter' },
-        { name = 'pylsp' },
+        { name = 'omni' },
+        { name = 'path' },
+        { name = 'spell', option = { keep_all_entries = false }, },
+        { name = 'nvim_lua' },
     },
 
     -- Show: abbreviation, symbol + kind, menu
