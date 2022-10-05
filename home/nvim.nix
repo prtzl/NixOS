@@ -28,6 +28,7 @@ let
     nvim-tree-lua
     nvim-web-devicons
     nvim-base16 # themes
+    comment-nvim
 
     # LSP stuff
     cmp-buffer
