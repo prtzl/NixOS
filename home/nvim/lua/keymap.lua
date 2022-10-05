@@ -50,3 +50,6 @@ map('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<cr>', nil)
 
 -- Spell toggle
 map('n', '<f6>', ':set spell!<cr>', nil)
+
+-- Autoformat toggle
+map('n', '<f9>', '<cmd>lua vim.g.toggleFormat()<cr>', nil)

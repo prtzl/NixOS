@@ -21,6 +21,9 @@ vim.opt.sidescrolloff = 10
 -- Clipboard
 vim.opt.clipboard:append { 'unnamedplus' }
 
+-- Enable background buffer
+vim.o.hidden = true
+
 -- Format
 vim.opt.encoding = 'utf8'
 vim.opt.fileformats = { 'unix', 'dos', 'mac' }
@@ -32,13 +35,19 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Tab
-vim.opt.expandtab = true
+vim.opt.smarttab = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.autoindent = true
-vim.opt.cindent = true
+vim.opt.shiftround = true
+vim.opt.expandtab = true
+
+-- Don't wrap
 vim.opt.wrap = false
+
+-- Autoindent
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 
 -- Window split
 vim.opt.splitbelow = true
@@ -48,8 +57,18 @@ vim.opt.splitright = true
 vim.opt.ttimeoutlen=20
 vim.opt.timeoutlen=1000
 
--- Misc
+-- Enable backspace on characters
 vim.opt.backspace = { 'indent', 'eol', 'start' }
+
+-- Grep
+if vim.fn.executable("rg") then
+    vim.opt.grepprg = "rg --vimgrep --no-heading"
+    vim.opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
+end
+
+-- Prevent strange file save behaviour.
+-- https://github.com/srid/emanote/issues/180
+vim.opt.backupcopy = 'yes'
 
 -- Can't be bothered to port
 vim.cmd([[
