@@ -2,7 +2,8 @@
 
 let
   home-update = pkgs.writeShellScriptBin "home-update" (builtins.readFile ./local-pkgs/home-update.sh);
-in {
+in
+{
   programs.home-manager.enable = true;
 
   # Packages
@@ -20,7 +21,7 @@ in {
   # Privat git
   programs.git = {
     enable = true;
-    userName  = "prtzl";
+    userName = "prtzl";
     userEmail = "matej.blagsic@protonmail.com";
     extraConfig = {
       core = {
@@ -39,6 +40,7 @@ in {
       fc = "!git fetch && git checkout";
       save = "!git add -A && git commit -m 'SAVEPOINT'";
       wip = "commit -am 'WIP'";
+      sub = "submodule update --init --recursive"; # pulls all the submodules at correct commit
     };
   };
 
