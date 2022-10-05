@@ -63,6 +63,8 @@ in
     tree-sitter # treesitter - checkhealth fails otherwise
   ];
   programs.neovim = {
+    # Default is pkgs.neovim-unwrapped
+    package = pkgs.unstable.neovim-unwrapped;
     enable = true;
     viAlias = true;
     vimAlias = true;
