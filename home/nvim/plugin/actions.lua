@@ -1,5 +1,4 @@
 -- Format the file before it is written
-
 local formatToggle = function()
     if vim.g.formatToggle then
         vim.lsp.buf.formatting()

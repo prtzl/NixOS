@@ -27,8 +27,8 @@ map('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<cr> ', nil)
 map('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>      ', nil)
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', nil)
 map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr> ', nil)
-map('n', '<f2>', '<cmd>lua vim.lsp.buf.rename()<cr>', {silent=false})
-map('n', '<f8>', '<cmd>lua vim.lsp.buf.code_action()<cr>', {silent=false})
+map('n', '<f2>', '<cmd>lua vim.lsp.buf.rename()<cr>', { silent = false })
+map('n', '<f8>', '<cmd>lua vim.lsp.buf.code_action()<cr>', { silent = false })
 
 -- Snippets - move between fields
 map('i', '<c-j>', '<cmd>lua require"luasnip".jump(1)<CR>', nil)
@@ -37,10 +37,10 @@ map('i', '<c-k>', '<cmd>lua require"luasnip".jump(-1)<CR>', nil)
 map('s', '<c-k>', '<cmd>lua require"luasnip".jump(-1)<CR>', nil)
 
 -- FZF
-map('n', '<c-p>', ':Files<cr>', {silent=false})
-map('n', '<c-g>', ':Rg<cr>', {silent=false})
-map('n', '<c-f>', ':BLines<cr>', {silent=false})
-map('n', '<c-b>', ':Buffers<cr>', {silent=false})
+map('n', '<c-p>', ':Files<cr>', { silent = false })
+map('n', '<c-g>', ':Rg<cr>', { silent = false })
+map('n', '<c-f>', ':BLines<cr>', { silent = false })
+map('n', '<c-b>', ':Buffers<cr>', { silent = false })
 
 -- Diagnostic
 map('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<cr>', nil)
@@ -56,6 +56,6 @@ map('i', '<f6>', '<cmd>lua vim.g.toggleSpell()<cr>', nil)
 map('n', '<f9>', '<cmd>lua vim.g.toggleFormat()<cr>', nil)
 
 -- Comments
-map('n', '<c-_>', 'gcc', {noremap=false})
-map('v', '<c-_>', 'gcc', {noremap=false})
-map('i', '<c-_>', '<esc>gcc<right>i', {noremap=false})
+map('n', '<c-_>', 'gcc', { noremap = false })
+map('v', '<c-_>', 'gcc', { noremap = false })
+map('i', '<c-_>', '<esc>gcc<right>i', { noremap = false })
