@@ -54,8 +54,8 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Timeout
-vim.opt.ttimeoutlen=20
-vim.opt.timeoutlen=1000
+vim.opt.ttimeoutlen = 20
+vim.opt.timeoutlen = 1000
 
 -- Enable backspace on characters
 vim.opt.backspace = { 'indent', 'eol', 'start' }

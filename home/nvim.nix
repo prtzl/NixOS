@@ -40,6 +40,7 @@ let
     cmp_luasnip
     cmp-nvim-lsp-document-symbol
     cmp-spell
+    cmp-nvim-lua
     fidget-nvim
     fzf-lsp-nvim
     lsp_extensions-nvim
@@ -60,6 +61,7 @@ in
     rnix-lsp # nix lsp
     texlab # latex lsp
     python39Packages.python-lsp-server # python lsp
+    sumneko-lua-language-server # lua lsp
     tree-sitter # treesitter - checkhealth fails otherwise
   ];
   programs.neovim = {
