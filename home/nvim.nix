@@ -87,6 +87,6 @@ in
   xdg.configFile = {
     "nvim/lua".source = ./nvim/lua;
     "nvim/plugin".source = ./nvim/plugin;
-    #"nvim/ftplugin".source = ./nvim/ftplugin;
+    "nvim/ftplugin".source = ./nvim/ftplugin;
   };
 }
