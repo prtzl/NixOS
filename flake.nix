@@ -92,12 +92,12 @@
       matej-work = self.homeConfigurations.matej-work.activationPackage;
 
     } // inputs.flake-utils.lib.eachDefaultSystem (system:
-    let
-    in
-    {
-      devShells.default = pkgs.mkShell {
-        name = "Installation-shell";
-        nativeBuildInputs = with pkgs-unstable; [ nix nixfmt home-manager nvd ];
-      };
-    });
+      let
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          name = "Installation-shell";
+          nativeBuildInputs = with pkgs-unstable; [ nix nixfmt home-manager nvd ];
+        };
+      });
 }
