@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -29,20 +30,20 @@
 
       stableOverlay = self: super: {
         unstable = pkgs-unstable;
-        jlink = mkFree jlink-pack-stable.defaultPackage.${system};
+        jlink = mkFree inputs.jlink-pack-stable.defaultPackage.${system};
       };
 
       unstableOverlay = self: super: {
-        jlink = mkFree jlink-pack-unstable.defaultPackage.${system};
+        jlink = mkFree inputs.jlink-pack-unstable.defaultPackage.${system};
       };
 
-      pkgs = import nixpkgs-stable {
+      pkgs = import inputs.nixpkgs-stable {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ stableOverlay nixgl.overlay ];
+        overlays = [ stableOverlay inputs.nixgl.overlay ];
       };
 
-      pkgs-unstable = import nixpkgs-unstable {
+      pkgs-unstable = import inputs.nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
         overlays = [ unstableOverlay ];
@@ -90,9 +91,13 @@
       test-testbox = self.homeConfigurations.test-testbox.activationPackage;
       matej-work = self.homeConfigurations.matej-work.activationPackage;
 
-      devShells.${system}.default = pkgs.mkShell {
+    } // inputs.flake-utils.lib.eachDefaultSystem (system:
+    let
+    in
+    {
+      devShells.default = pkgs.mkShell {
         name = "Installation-shell";
         nativeBuildInputs = with pkgs-unstable; [ nix nixfmt home-manager nvd ];
       };
-    };
+    });
 }
