@@ -41,8 +41,12 @@ local has_words_before = function()
 end
 
 cmp.setup({
-    -- Disable completion on comments
+    -- Disable completion on comments and big files
     enabled = function()
+        -- Disable cmp on too big files - laggy
+        if vim.api.nvim_buf_line_count(0) > 5000 then
+            return false
+        end
         -- disable completion in comments
         local context = require 'cmp.config.context'
         -- keep command mode completion enabled when cursor is in a comment
