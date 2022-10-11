@@ -16,7 +16,6 @@ in
     zip
     git-crypt
     gnupg
-    rhythmbox
   ];
 
   # Privat git

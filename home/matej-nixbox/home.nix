@@ -55,6 +55,7 @@
     # Media
     ffmpeg
     libreoffice
+    rhythmbox
 
     # Communication
     zoom-us
