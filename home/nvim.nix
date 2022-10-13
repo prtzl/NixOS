@@ -30,6 +30,7 @@ let
     nvim-base16 # color themes
     comment-nvim # smart comments
     vim-latex-live-preview # preview latex pdf inside editor
+    nvim-ts-rainbow # colored parentheses using treesitter
 
     # LSP stuff
     cmp-buffer
