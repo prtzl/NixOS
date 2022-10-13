@@ -16,6 +16,7 @@ in
     zip
     git-crypt
     gnupg
+    bottom
   ];
 
   # Privat git
