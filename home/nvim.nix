@@ -22,13 +22,14 @@ let
     lightline-vim # status bar
     vim-gitbranch # get git info for status bar
     impatient-nvim
-    gitsigns-nvim
+    gitsigns-nvim # git gutter
     incsearch-vim
-    nvim-autopairs
+    nvim-autopairs # autopair braces
     nvim-tree-lua
-    nvim-web-devicons
-    nvim-base16 # themes
-    comment-nvim
+    nvim-web-devicons # icons
+    nvim-base16 # color themes
+    comment-nvim # smart comments
+    vim-latex-live-preview # preview latex pdf inside editor
 
     # LSP stuff
     cmp-buffer
