@@ -1,12 +1,15 @@
 { config, pkgs, ... }:
 
+let
+  p = package: ./. + "/packages/${package}";
+in
 {
   imports = [
-    ../home_basic.nix
-    ../vscode.nix
-    ../alacritty.nix
-    ../ranger.nix
-    ../fonts.nix
+    (p "home_basic.nix")
+    (p "vscode.nix")
+    (p "alacritty.nix")
+    (p "ranger.nix")
+    (p "fonts.nix")
   ];
 
   home.username = "test";

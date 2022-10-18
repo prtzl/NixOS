@@ -1,18 +1,21 @@
 { config, pkgs, ... }:
 
+let
+  p = package: ./. + "/packages/${package}";
+in
 {
   imports = [
-    ../home_basic.nix
-    ../dconf.nix
-    ../vscode.nix
-    ../alacritty.nix
-    ../zsh.nix
-    ../nvim.nix
-    ../tio.nix
-    ../vscode.nix
-    ../ranger.nix
-    ../tmux.nix
-    ../fonts.nix
+    (p "home_basic.nix")
+    (p "dconf.nix")
+    (p "vscode.nix")
+    (p "alacritty.nix")
+    (p "zsh.nix")
+    (p "nvim.nix")
+    (p "tio.nix")
+    (p "vscode.nix")
+    (p "ranger.nix")
+    (p "tmux.nix")
+    (p "fonts.nix")
   ];
 
   home.username = "matej";
