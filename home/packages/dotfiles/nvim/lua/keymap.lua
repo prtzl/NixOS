@@ -59,3 +59,6 @@ map('n', '<f9>', '<cmd>lua vim.g.toggleFormat()<cr>', nil)
 map('n', '<c-_>', 'gcc', { noremap = false })
 map('v', '<c-_>', 'gcc', { noremap = false })
 map('i', '<c-_>', '<esc>gcc<right>i', { noremap = false })
+
+-- Somehow escape is mapped to do bprev - maybe something to do with line 21?
+map('n', '<escape>', '<escape>', nil)
