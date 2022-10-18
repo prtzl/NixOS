@@ -9,6 +9,7 @@
     ../ranger.nix
     ../dconf.nix
     ../fonts.nix
+    ../zsh.nix
   ];
 
   home.username = "matej";
