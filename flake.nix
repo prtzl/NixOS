@@ -83,6 +83,7 @@
           matej-nixbox = mkHome "matej-nixbox.nix";
           test-testbox = mkHome "test-testbox.nix";
           matej-work = mkHome "matej-work.nix";
+          matej-ubuntubox = mkHome "matej-ubuntubox.nix";
         };
 
       nixbox = self.nixosConfigurations.nixbox.config.system.build.toplevel;
@@ -90,6 +91,7 @@
       matej-nixbox = self.homeConfigurations.matej-nixbox.activationPackage;
       test-testbox = self.homeConfigurations.test-testbox.activationPackage;
       matej-work = self.homeConfigurations.matej-work.activationPackage;
+      matej-ubuntubox = self.homeConfigurations.matej-ubuntubox.activationPackage;
 
     } // inputs.flake-utils.lib.eachDefaultSystem (system:
       let
