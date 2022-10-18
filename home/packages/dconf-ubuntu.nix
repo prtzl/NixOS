@@ -24,6 +24,7 @@ with lib.hm.gvariant;
       gtk-theme = "Yaru-blue-dark";
       icon-theme = "Yaru-blue";
       toolkit-accessibility = false;
+      monospace-font-name = "FiraCode Nerd Font 13";
     };
 
     "org/gnome/desktop/notifications" = {
@@ -93,7 +94,8 @@ with lib.hm.gvariant;
       show-home = false;
     };
 
-    "org/gnome/desktop/wm/keybindings" = {maximize = [ "<Super>f" ];
+    "org/gnome/desktop/wm/keybindings" = {
+      maximize = [ "<Super>f" ];
       minimize = [ "<Super>m" ];
       switch-to-workspace-1 = [ "<Alt>1" ];
       switch-to-workspace-2 = [ "<Alt>2" ];
@@ -103,7 +105,8 @@ with lib.hm.gvariant;
       switch-to-workspace-6 = [ "<Alt>6" ];
       switch-to-workspace-7 = [ "<Alt>7" ];
       switch-to-workspace-8 = [ "<Alt>8" ];
-      switch-to-workspace-9 = [ "<Alt>9" ]; };
+      switch-to-workspace-9 = [ "<Alt>9" ];
+    };
 
   };
 }
