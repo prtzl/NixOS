@@ -10,7 +10,7 @@ in
     (p "tio.nix")
     (p "tmux.nix")
     (p "ranger.nix")
-    (p "dconf.nix")
+    (p "dconf-ubuntu.nix")
     (p "fonts.nix")
     (p "zsh.nix")
     (p "alacritty.nix")
@@ -26,7 +26,7 @@ in
   ];
 
   home.sessionVariables = {
-    NIX_HOME_DERIVATION = "matej-work";
+    NIX_HOME_DERIVATION = "matej-ubuntubox";
   };
 }
 
