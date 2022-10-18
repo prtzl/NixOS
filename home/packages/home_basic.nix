@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  home-update = pkgs.writeShellScriptBin "home-update" (builtins.readFile ./local-pkgs/home-update.sh);
+  home-update = pkgs.writeShellScriptBin "home-update" (builtins.readFile ./dotfiles/home-update.sh);
 in
 {
   programs.home-manager.enable = true;

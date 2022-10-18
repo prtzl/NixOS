@@ -12,8 +12,8 @@ let
   blackPath = "${config.home.homeDirectory}/.black";
 in
 {
-  home.file.".save-windows.sh".source = ./local-pkgs/save.sh;
-  home.file.".load-windows.sh".source = ./local-pkgs/load.sh;
+  home.file.".save-windows.sh".source = ./dotfiles/save.sh;
+  home.file.".load-windows.sh".source = ./dotfiles/load.sh;
 
   dconf.settings = {
     "org/cinnamon" = {

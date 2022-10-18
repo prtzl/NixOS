@@ -69,10 +69,10 @@
 
       homeConfigurations =
         let
-          mkHome = username: hostname: (inputs.home-manager.lib.homeManagerConfiguration {
+          mkHome = home-derivation: (inputs.home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [
-              ./home/${username}-${hostname}/home.nix
+              ./home/${home-derivation}
             ];
             extraSpecialArgs = {
               lib = import "${inputs.home-manager}/modules/lib/stdlib-extended.nix" pkgs-unstable.lib;
@@ -80,9 +80,9 @@
           });
         in
         {
-          matej-nixbox = mkHome "matej" "nixbox";
-          test-testbox = mkHome "test" "testbox";
-          matej-work = mkHome "matej" "work";
+          matej-nixbox = mkHome "matej-nixbox.nix";
+          test-testbox = mkHome "test-testbox.nix";
+          matej-work = mkHome "matej-work.nix";
         };
 
       nixbox = self.nixosConfigurations.nixbox.config.system.build.toplevel;
