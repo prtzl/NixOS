@@ -80,15 +80,15 @@ in
       filetype off | syn off
       ${loadPlugins plugins}
       filetype indent plugin on | syn on
-      ${builtins.readFile ./nvim/init.vim}
+      ${builtins.readFile ./dotfiles/nvim/init.vim}
       lua << EOF
-      ${builtins.readFile ./nvim/init.lua}
+      ${builtins.readFile ./dotfiles/nvim/init.lua}
       EOF
     '';
   };
   xdg.configFile = {
-    "nvim/lua".source = ./nvim/lua;
-    "nvim/plugin".source = ./nvim/plugin;
-    "nvim/ftplugin".source = ./nvim/ftplugin;
+    "nvim/lua".source = ./dotfiles/nvim/lua;
+    "nvim/plugin".source = ./dotfiles/nvim/plugin;
+    "nvim/ftplugin".source = ./dotfiles/nvim/ftplugin;
   };
 }

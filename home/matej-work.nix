@@ -1,15 +1,19 @@
 { config, pkgs, ... }:
 
+let
+  p = package: ./. + "/packages/${package}";
+in
 {
   imports = [
-    ../home_basic.nix
-    ../nvim.nix
-    ../tio.nix
-    ../tmux.nix
-    ../ranger.nix
-    ../dconf.nix
-    ../fonts.nix
-    ../zsh.nix
+    # ./packages/home_basic.nix
+    (p "home_basic.nix")
+    (p "nvim.nix")
+    (p "tio.nix")
+    (p "tmux.nix")
+    (p "ranger.nix")
+    (p "dconf.nix")
+    (p "fonts.nix")
+    (p "zsh.nix")
   ];
 
   home.username = "matej";
