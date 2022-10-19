@@ -65,7 +65,7 @@ in
     teams
     skypeforlinux
     discord
-    signal-desktop
+    patched.signal-desktop
   ];
 
   # My eyes
