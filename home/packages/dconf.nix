@@ -142,7 +142,7 @@ in
 
     "org/cinnamon/settings-daemon/peripherals/keyboard" = {
       delay = mkUint32 250;
-      numlock-state = "off";
+      numlock-state = "on";
       repeat-interval = mkUint32 18;
     };
 
