@@ -17,7 +17,7 @@ dashboard.section.buttons.val = {
 
 -- Set footer
 dashboard.section.footer.val = {
-    "(ノಠ益ಠ)ノ彡┻━┻",
+    "(ノಠ 益ಠ)ノ彡┻━┻",
 }
 
 
