@@ -31,6 +31,7 @@ let
     comment-nvim # smart comments
     vim-latex-live-preview # preview latex pdf inside editor
     nvim-ts-rainbow # colored parentheses using treesitter
+    alpha-nvim # greet dashboard
 
     # LSP stuff
     cmp-buffer
