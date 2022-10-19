@@ -19,6 +19,10 @@
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    nixpkgs-matej = {
+      url = "github:prtzl/nixpkgs/patch";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = inputs:
@@ -31,6 +35,7 @@
       stableOverlay = self: super: {
         unstable = pkgs-unstable;
         jlink = mkFree inputs.jlink-pack-stable.defaultPackage.${system};
+        patched = pkgs-matej;
       };
 
       unstableOverlay = self: super: {
@@ -47,6 +52,11 @@
         inherit system;
         config.allowUnfree = true;
         overlays = [ unstableOverlay ];
+      };
+
+      pkgs-matej = import inputs.nixpkgs-matej {
+        inherit system;
+        config.allowUnfree = true;
       };
     in
     {
