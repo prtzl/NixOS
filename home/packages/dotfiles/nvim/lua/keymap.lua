@@ -18,8 +18,9 @@ map('!', '<c-bs>', '<c-w>', nil)
 map('!', '<c-h>', '<c-w>', nil)
 
 -- Move back and forth in buffers
-map('n', '<c-[>', ':bprev<cr>', nil)
-map('n', '<c-]>', ':bnext<cr>', nil)
+-- Note so self: <c-[> is maped as if <Esc> is pressed - higher power control, abandon hope
+map('n', '[[', ':bprev<cr>', nil)
+map('n', ']]', ':bnext<cr>', nil)
 
 -- LSP
 map('n', 'gd', '<cmd>lua vim.lsp.buf.declaration()<cr>', nil)
@@ -59,6 +60,3 @@ map('n', '<f9>', '<cmd>lua vim.g.toggleFormat()<cr>', nil)
 map('n', '<c-_>', 'gcc', { noremap = false })
 map('v', '<c-_>', 'gcc', { noremap = false })
 map('i', '<c-_>', '<esc>gcc<right>i', { noremap = false })
-
--- Somehow escape is mapped to do bprev - maybe something to do with line 21?
-map('n', '<escape>', '<escape>', nil)
