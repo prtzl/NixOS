@@ -23,6 +23,7 @@ in
   # Packages
   home.packages = with pkgs; [
     nixgl.nixGLIntel
+    patched.signal-desktop
   ];
 
   home.sessionVariables = {
