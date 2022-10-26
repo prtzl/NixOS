@@ -171,7 +171,8 @@ cmp.setup.cmdline('/', {
 -- LSP servers
 -- This shit is added to every server and it made it so
 -- when you accept a suggestion like a function, it fills the signature and enters - finally
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities =  vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- C/C++ LSP
 require 'lspconfig'.clangd.setup {
