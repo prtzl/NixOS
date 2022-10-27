@@ -3,8 +3,8 @@
 {
   # This gives some basic gui applications: image viewers, players, readers ...
   environment.systemPackages = with pkgs; [
-    cinnamon.xreader
     gnome.eog
+    evince
     celluloid
     gnome.gnome-system-monitor
     gnome.gnome-disk-utility
