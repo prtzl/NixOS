@@ -9,6 +9,7 @@
         antialias = true;
         autohint = true;
       };
+      env.TERM = "xterm-256color";
       window = {
         opacity = 1;
         title = "";
