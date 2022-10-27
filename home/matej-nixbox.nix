@@ -31,7 +31,7 @@ in
     gnumake
     cmake
     unstable.jlink
-    unstable.stm32cubemx
+    patched.stm32cubemx
 
     # Content creation
     audacity
