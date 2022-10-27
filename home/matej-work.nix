@@ -28,6 +28,7 @@ in
 
   home.sessionVariables = {
     NIX_HOME_DERIVATION = "matej-work";
+
   };
 }
 

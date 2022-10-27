@@ -3,18 +3,18 @@
 {
   home.packages = with pkgs; [ fzf zsh-completions xclip exa ];
 
-  programs.direnv = { 
+  programs.direnv = {
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
-  };  
+  };
 
-  programs.starship = { 
+  programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    settings = { 
+    settings = {
       add_newline = false;
-      character = { 
+      character = {
         success_symbol = "[»](bold green)";
         error_symbol = "[»](bold green)";
         vicmd_symbol = "[«](bold green)";
@@ -69,7 +69,7 @@
       };
       cmake.disabled = true;
       python.disabled = true;
-    };  
+    };
   };
 
   programs.zsh = {
@@ -96,7 +96,7 @@
       img = "eog";
       play = "celluloid";
       sl = "sl -ead -999";
-      gvim = "nvim-qt"; 
+      gvim = "nvim-qt";
 
       # System
       reboot = "read -s \\?\"Reboot? [ENTER]: \" && if [ -z \"$REPLY\" ];then env reboot;else echo \"Canceled\";fi";
@@ -145,12 +145,15 @@
       bindkey '^[[1;5D' backward-word
       bindkey '^[[1;5C' forward-word
       bindkey '\e[11~' "urxvt &\n"
-   '';
+
+      # Add paths that can be missing sometimes (non-nixos)
+      export PATH=$PATH:/usr/sbin:/usr/local/sbin
+    '';
   };
 
   home.sessionVariables = {
     NIXPKGS_ALLOW_UNFREE = 1;
     TERM = "xterm-256color";
   };
- }
+}
 
