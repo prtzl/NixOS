@@ -32,6 +32,7 @@ in
     cmake
     unstable.jlink
     patched.stm32cubemx
+    arduino
 
     # Content creation
     audacity
@@ -59,6 +60,8 @@ in
     ffmpeg
     libreoffice
     rhythmbox
+    easytag
+    soundconverter
 
     # Communication
     zoom-us
