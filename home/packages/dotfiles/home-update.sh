@@ -68,7 +68,6 @@ info "Building derivation!"
 peval home-manager build --flake .\#"$home_derivation" --impure "$ARGS"
 peval nvd diff /nix/var/nix/profiles/per-user/$USER/home-manager result
 read -p "Perform switch? [y/Y] " answer
-answer="y"
 if [[ "$answer" == [yY] ]]; then
     info Applying update!
     if ! peval ./result/activate; then

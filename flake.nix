@@ -31,11 +31,17 @@
       system = "x86_64-linux";
 
       mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
+      glWrap = { pkg, deps ? [ ] }: pkgs.writeShellApplication {
+        name = pkg.pname;
+        runtimeInputs = deps ++ [ pkg pkgs.nixgl.nixGLIntel ];
+        text = "nixGLIntel ${pkg.pname}";
+      };
 
       stableOverlay = self: super: {
         unstable = pkgs-unstable;
         jlink = mkFree inputs.jlink-pack-stable.defaultPackage.${system};
         patched = pkgs-matej;
+        glWrap = glWrap;
       };
 
       unstableOverlay = self: super: {
