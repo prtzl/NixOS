@@ -26,6 +26,11 @@ in
     patched.signal-desktop
   ];
 
+  # Non-nixos openGL patched programs
+  programs.alacritty.package = pkgs.glWrap {
+    pkg = pkgs.alacritty;
+  };
+
   home.sessionVariables = {
     NIX_HOME_DERIVATION = "matej-work";
 
