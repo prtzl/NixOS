@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ fzf zsh-completions xclip exa ];
+  home.packages = with pkgs; [ fzf zsh-completions xclip exa fd ripgrep ];
 
   programs.direnv = {
     enable = true;
