@@ -21,7 +21,6 @@
     };
     nixpkgs-matej = {
       url = "github:prtzl/nixpkgs/patch";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
