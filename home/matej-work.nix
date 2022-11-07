@@ -27,7 +27,7 @@ in
   ];
 
   # Non-nixos openGL patched programs
-  programs.alacritty.package = pkgs.glWrap {
+  programs.alacritty.package = pkgs.glWrapIntel {
     pkg = pkgs.alacritty;
   };
 

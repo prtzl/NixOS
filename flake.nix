@@ -30,17 +30,33 @@
       system = "x86_64-linux";
 
       mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
-      glWrap = { pkg, deps ? [ ] }: pkgs.writeShellApplication {
-        name = pkg.pname;
-        runtimeInputs = deps ++ [ pkg pkgs.nixgl.nixGLIntel ];
-        text = "nixGLIntel ${pkg.pname}";
+
+      glWrapIntel = { pkg, deps ? [ ] }: pkgs.stdenv.mkDerivation rec {
+        pname = pkg.pname + "-glwrap";
+        version = pkg.version;
+        src = pkg;
+        nativeBuildInputs = [ pkg pkgs.nixgl.nixGLIntel ] ++ deps;
+        installPhase = ''
+          mkdir -p $out/bin
+          for d in `find $src -maxdepth 1 -type d ! -path $src | grep -v bin`; do
+            ln -s $d $out/$(basename $d)
+          done
+          for fpath in `find $src/bin -type f`; do
+            f=$(basename $fpath)
+            fold=$f"_base"
+            ln -s $fpath $out/bin/$fold
+            touch $out/bin/$f
+            chmod +x $out/bin/$f
+            echo "${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel $out/bin/$fold" > $out/bin/$f
+          done
+        '';
       };
 
       stableOverlay = self: super: {
         unstable = pkgs-unstable;
         jlink = mkFree inputs.jlink-pack-stable.defaultPackage.${system};
         patched = pkgs-matej;
-        glWrap = glWrap;
+        glWrapIntel = glWrapIntel;
       };
 
       unstableOverlay = self: super: {
