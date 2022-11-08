@@ -4,7 +4,7 @@
   # This gives some basic gui applications: image viewers, players, readers ...
   environment.systemPackages = with pkgs; [
     gnome.eog
-    evince
+    unstable.evince
     celluloid
     gnome.gnome-system-monitor
     gnome.gnome-disk-utility
