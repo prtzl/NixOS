@@ -33,6 +33,7 @@ in
     unstable.jlink
     patched.stm32cubemx
     arduino
+    drawio
 
     # Content creation
     audacity
