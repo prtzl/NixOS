@@ -22,8 +22,33 @@ in
 
   # Packages
   home.packages = with pkgs; [
-    nixgl.nixGLIntel
+    # Dev
+    gcc-arm-embedded
+    gcc
+    clang-tools
+    gnumake
+    cmake
+    patched.stm32cubemx
+
+    # Media
+    gimp
+    libreoffice
+    unstable.evince
+
+    # Online
+    chromium
+    megasync
+    enpass
+    transmission-gtk
+
+    # Communication
+    zoom-us
+    teams
+    skypeforlinux
     patched.signal-desktop
+
+    # Other
+    nixgl.nixGLIntel
   ];
 
   # Non-nixos openGL patched programs
