@@ -121,8 +121,16 @@ in
 
     "org/cinnamon/desktop/sound" = {
       event-sounds = false;
+      volume-sound-enabled = false;
     };
-
+    "org/cinnamon/sound" = {
+      login-enabled = false;
+      logout-enabled = false;
+      plug-enabled = false;
+      switch-enabled = false;
+      tile-enabled = false;
+      unplug-enabled = false;
+    };
     "org/cinnamon/desktop/wm/preferences" = {
       num-workspaces = 9;
       theme = "Mint-Y";
