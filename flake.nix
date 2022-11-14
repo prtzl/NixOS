@@ -95,6 +95,7 @@
         in
         {
           nixbox = mkSystem "nixbox";
+          nixtop = mkSystem "nixtop";
           testbox = mkSystem "testbox";
         };
 
