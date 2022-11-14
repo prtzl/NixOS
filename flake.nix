@@ -95,6 +95,7 @@
         in
         {
           nixbox = mkSystem "nixbox.nix";
+          nixtop = mkSystem "nixtop.nix";
           testbox = mkSystem "testbox.nix";
         };
 
@@ -112,14 +113,17 @@
         in
         {
           matej-nixbox = mkHome "matej-nixbox.nix";
+          matej-nixtop = mkHome "matej-nixtop.nix";
           test-testbox = mkHome "test-testbox.nix";
           matej-work = mkHome "matej-work.nix";
           matej-ubuntubox = mkHome "matej-ubuntubox.nix";
         };
 
       nixbox = self.nixosConfigurations.nixbox.config.system.build.toplevel;
+      nixtop = self.nixosConfigurations.nixtop.config.system.build.toplevel;
       testbox = self.nixosConfigurations.testbox.config.system.build.toplevel;
       matej-nixbox = self.homeConfigurations.matej-nixbox.activationPackage;
+      matej-nixtop = self.homeConfigurations.matej-nixtop.activationPackage;
       test-testbox = self.homeConfigurations.test-testbox.activationPackage;
       matej-work = self.homeConfigurations.matej-work.activationPackage;
       matej-ubuntubox = self.homeConfigurations.matej-ubuntubox.activationPackage;

@@ -18,12 +18,9 @@ in {
       qemu = {
         ovmf = {
           enable = true;
-          package = ovmf;
+          #package = ovmf;
         };
         runAsRoot = false;
-        verbatimConfig = ''
-          nvram = ["${ovmf.fd}/FV/OVMF.fd:${ovmf.fd}/FV/OVMF_VARS.fd"]
-        '';
       };
     };
   };

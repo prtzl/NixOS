@@ -42,6 +42,9 @@ in
     allowBroken = false;
   };
 
+  systemd.services.systemd-time-wait-sync.wantedBy = [ "multi-user.target" ];
+  systemd.additionalUpstreamSystemUnits = [ "systemd-time-wait-sync.service" ];
+
   # Usefull services
   services = {
     avahi = {
