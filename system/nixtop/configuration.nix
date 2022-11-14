@@ -11,8 +11,9 @@
 
   # Networking - check your interface name enp<>s0
   networking = {
-    hostName = "nixbox";
-    interfaces.enp9s0.useDHCP = true;
+    hostName = "nixtop";
+    interfaces.enp0s31f6.useDHCP = true;
+    interfaces.wlp61s0.useDHCP = true;
   };
 
   # Set your time zone - where are you ?
@@ -39,4 +40,3 @@
     wineWowPackages.stable
   ];
 }
-
