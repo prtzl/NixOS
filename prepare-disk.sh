@@ -55,12 +55,12 @@ partitionEfi()
     parted -s $DISK mkpart primary 2560MiB 100%
     # Format
     mkfs.fat -F 32 -n boot ${PART}1
-    mkswap -F -L swap ${PART}2
-    mkfs.ext4 -F -L nixos ${PART}3
+    mkswap -L swap ${PART}2
+    mkfs.ext4 -L nixos ${PART}3
     # Mount and enable swap
     mount /dev/disk/by-label/nixos /mnt
     mkdir -p /mnt/boot/efi
-    mount /dev/disk/by-label/boot /mnt/boot/efi
+    mount /dev/disk/by-label/boot /mnt/boot
     swapon /dev/disk/by-label/swap
 }
 # BIOS

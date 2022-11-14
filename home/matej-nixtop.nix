@@ -6,19 +6,21 @@ in
 {
   imports = [
     (p "home_basic.nix")
+    (p "dconf.nix")
+    (p "vscode.nix")
+    (p "alacritty.nix")
+    (p "zsh.nix")
     (p "nvim.nix")
     (p "tio.nix")
-    (p "tmux.nix")
+    (p "vscode.nix")
     (p "ranger.nix")
-    (p "dconf.nix")
+    (p "tmux.nix")
     (p "fonts.nix")
-    (p "zsh.nix")
-    (p "alacritty.nix")
   ];
 
   home.username = "matej";
   home.homeDirectory = "/home/matej";
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
 
   # Packages
   home.packages = with pkgs; [
@@ -28,37 +30,51 @@ in
     clang-tools
     gnumake
     cmake
+    unstable.jlink
     patched.stm32cubemx
+    arduino
+    drawio
+
+    # Content creation
+    gimp
+
+    # Net
+    chromium
+
+    # Latex
+    texlive.combined.scheme-full
+    texstudio
+
+    # Utility
+    enpass
+    megasync
+    pavucontrol
+    transmission-gtk
 
     # Media
-    gimp
+    ffmpeg
     libreoffice
-    unstable.evince
-
-    # Online
-    chromium
-    megasync
-    enpass
-    transmission-gtk
+    rhythmbox
 
     # Communication
     zoom-us
     teams
     skypeforlinux
+    discord
     patched.signal-desktop
-
-    # Other
-    nixgl.nixGLIntel
   ];
 
-  # Non-nixos openGL patched programs
-  programs.alacritty.package = pkgs.glWrapIntel {
-    pkg = pkgs.alacritty;
+  # My eyes
+  services.redshift = {
+    enable = true;
+    temperature.night = 4000;
+    temperature.day = 4000;
+    latitude = "46.05";
+    longitude = "14.5";
   };
 
   home.sessionVariables = {
-    NIX_HOME_DERIVATION = "matej-work";
-
+    NIX_HOME_DERIVATION = "matej-nixtop";
   };
 }
 
