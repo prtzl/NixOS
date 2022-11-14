@@ -81,7 +81,7 @@ If you do not plan to install and configure shell with home manager then add the
 
 ```shell
 . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-``
+```
 
 If you plan to install and configure a shell (like zsh) with home-manager then make sure to remove the existing pacakge from your system.
 
