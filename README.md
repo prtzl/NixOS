@@ -2,13 +2,15 @@
 
 This is my NixOS configuration repository.  
 It houses system configuration files and user files managed by home-manager, which is installed by system (or manualy on non-nixos platforms).  
-For longer explanation of how this works read [detailed instructions](./README_DETAILED.md).
+For longer explanation of how this works read [detailed instructions](./README_DETAILED.md).  
+More info on [nixos website](https://nixos.org).
 
-## Install
+## Install nixos
 
-First boot up NixOS minimal image and enter as root user.  
+First boot up NixOS minimal image and switch to root user: `sudo su`.  
+Enter shell with git and run everything from there: `nix-shell -p git`.  
+Clone and enter his repository: `git clone https://github.com/prtzl/NixOS && cd NixOS`.  
 Run `./prepare-disk /dev/<DISK> <EFI/BIOS>` to parition and mount your drive.  
-Install git and run everything from there: `nix-shell -p git`.  
 
 Setup nixos:
 
@@ -17,7 +19,7 @@ nixos-generate-config --root /mnt
 ```
 
 You will find `configuration.nix` and `hardware-configuration.nix` in `/mnt/etc/nixos`.  
-You can use these to add flags for your system.  
+You can use these to add flags for your system derivation.  
 
 Create your new home directory, so that we can put this repository there:
 
@@ -33,7 +35,7 @@ rm -rf /mnt/etc/nixos
 ln -s /mnt/home/<username>/NixOS /mnt/etc/nixos
 ```
 
-Install the system by entering the repository and building the system flake:
+Install the system by entering the repository:
 
 ```shell
 nixos-install --flake .#<nixos-system-derivation>
@@ -42,7 +44,46 @@ nixos-install --flake .#<nixos-system-derivation>
 When the install is finished you will be asked to set a root password. I enter "root" and change it on the first boot.  
 
 On first boot go to another tty and login as root with password you have entered after install. Using `passwd <user>` change root and your user passwords. Switch back to your GUI tty (tty7 for GNOME) and your user should appear.  
-After installation, remove the default home-manager directory in `~/.config/nixpkgs` and replace it with a link to the git repository with the same name (nixpkgs).  
+
+## Install home configuration
+
+You can use nix and home-manager as built tool and to manage your packages and configurations.  
+
+On most distributions use the daemon install method:
+
+```shell
+sh <(curl -L https://nixos.org/nix/install) --daemon
+```
+
+On distributions using SELinux (fedora) you might either have to disable it (do share a better solution for multi user setup) or use the single user installer:
+
+```shell
+sh <(curl -L https://nixos.org/nix/install) --no-daemon
+```
+
+Do read up on the [website](https://nixos.org/download.html) for more info on the installers.
+
+Now you're set! You can use nix in your shell. Check if it's working: `nix --version`.  
+
+[home-manager](https://nix-community.github.io/home-manager/index.html) is used to manager your home/user configuration. To use it on nixos, just add it to the packages or as a module (I add it as a package so that it's separate from system config).  
+
+To install home-manager enter the following lines:
+
+```shell
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz home-manager
+nix-channel --update
+export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
+nix-shell '<home-manager>' -A install
+```
+
+Here I used a stable branch as input for home-manager. To use unstable (rolling) replace the `release-22.05` with `master`.  
+If you do not plan to install and configure shell with home manager then add the following line in your shell config (.bashrc or .zshrc ...):
+
+```shell
+. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+``
+
+If you plan to install and configure a shell (like zsh) with home-manager then make sure to remove the existing pacakge from your system.
 
 ## Maintenance
 
