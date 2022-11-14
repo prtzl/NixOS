@@ -83,19 +83,19 @@
     {
       nixosConfigurations =
         let
-          mkSystem = hostname: (inputs.nixpkgs-stable.lib.nixosSystem {
+          mkSystem = configuration: (inputs.nixpkgs-stable.lib.nixosSystem {
             inherit system;
             modules = [
               {
                 nixpkgs.pkgs = pkgs;
               }
-              ./system/${hostname}/configuration.nix
+              ./system/${configuration}
             ];
           });
         in
         {
-          nixbox = mkSystem "nixbox";
-          testbox = mkSystem "testbox";
+          nixbox = mkSystem "nixbox.nix";
+          testbox = mkSystem "testbox.nix";
         };
 
       homeConfigurations =
