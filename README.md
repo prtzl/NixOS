@@ -36,14 +36,10 @@ ln -s /mnt/home/<username>/NixOS /mnt/etc/nixos
 Install the system by entering the repository and building the system flake:
 
 ```shell
-nixos-rebuild build --flake .#<nixos-system-derivation>
+nixos-install --flake .#<nixos-system-derivation>
 ```  
 
-If the build goes without problems, switch the system to the flake:
-
-```shell
-nixos-rebuild switch --flake .#<nixos-system-derivation>
-```
+When the install is finished you will be asked to set a root password. I enter "root" and change it on the first boot.  
 
 On first boot go to another tty and login as root with password you have entered after install. Using `passwd <user>` change root and your user passwords. Switch back to your GUI tty (tty7 for GNOME) and your user should appear.  
 After installation, remove the default home-manager directory in `~/.config/nixpkgs` and replace it with a link to the git repository with the same name (nixpkgs).  
