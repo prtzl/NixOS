@@ -42,6 +42,9 @@ in
     wineWowPackages.stable
   ];
 
+  services.blueman.enable = true;
+  services.hardware.bolt.enable = true;
+
   # Hardware configuration
   boot = {
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "thunderbolt" ];
@@ -68,4 +71,5 @@ in
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.bluetooth.enable = true;
 }
