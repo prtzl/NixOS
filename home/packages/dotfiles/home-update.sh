@@ -88,6 +88,20 @@ if [[ "$answer" == [yY] ]]; then
             fi
             ln -s $fsrc $fdest
         done
+        src_path=~/.nix-profile/share/icons
+        dest_path=~/.local/share/icons
+        if [ ! -d "$dest_path" ]; then
+            mkdir -p $dest_path
+        fi
+        for f in $src_path/*; do
+            fname=$(basename $f)
+            fsrc=$src_path/$fname
+            fdest=$dest_path/$fname
+            if [ -f "$fdest" ]; then
+                rm -f $fdest
+            fi
+            ln -s $fsrc $fdest
+        done
     fi
 
     info Update finished!
