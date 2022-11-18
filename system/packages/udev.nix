@@ -10,8 +10,8 @@
       # RS232 devucesm yee
       SUBSYSTEMS=="usb", KERNEL=="ttyUSB[0-9]*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", SYMLINK+="sensors/ftdi_%s{serial}", GROUP="dialout"
 
-      ATTR{idProduct}=="0101", ATTR{idVendor}=="1366", MODE="666"
-      ATTR{idProduct}=="0105", ATTR{idVendor}=="1366", MODE="666"
+      # Somehow added jlink file to udev does not get picked up :/
+      ${builtins.readFile "${pkgs.jlink}/lib/udev/rules.d/99-jlink.rules"}
     '';
   };
 }   
