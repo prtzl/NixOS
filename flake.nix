@@ -3,6 +3,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -83,20 +84,21 @@
     {
       nixosConfigurations =
         let
-          mkSystem = configuration: (inputs.nixpkgs-stable.lib.nixosSystem {
+          mkSystem = { configuration, hardware ? "" }: (inputs.nixpkgs-stable.lib.nixosSystem {
             inherit system;
             modules = [
               {
                 nixpkgs.pkgs = pkgs;
               }
               ./system/${configuration}
+              hardware
             ];
           });
         in
         {
-          nixbox = mkSystem "nixbox.nix";
-          nixtop = mkSystem "nixtop.nix";
-          testbox = mkSystem "testbox.nix";
+          nixbox = mkSystem { configuration = "nixbox.nix"; };
+          nixtop = mkSystem { configuration = "nixtop.nix"; hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s; };
+          testbox = mkSystem { configuration = "testbox.nix"; };
         };
 
       homeConfigurations =

@@ -42,8 +42,10 @@ in
     wineWowPackages.stable
   ];
 
-  services.blueman.enable = true;
-  services.hardware.bolt.enable = true;
+  services = {
+    blueman.enable = true;
+    hardware.bolt.enable = true;
+  };
 
   # Hardware configuration
   boot = {

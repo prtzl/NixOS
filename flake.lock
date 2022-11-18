@@ -112,6 +112,21 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1668334946,
+        "narHash": "sha256-omMbUj4r5DVBWh7KxkoO/Z/1V1shVR6Ls4jXNB4mr3U=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "e0452b33ab0ef16ffe075e980644ed92a6a200bb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs-matej": {
       "locked": {
         "lastModified": 1666908120,
@@ -167,6 +182,7 @@
         "jlink-pack-stable": "jlink-pack-stable",
         "jlink-pack-unstable": "jlink-pack-unstable",
         "nixgl": "nixgl",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs-matej": "nixpkgs-matej",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable"
