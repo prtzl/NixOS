@@ -32,6 +32,7 @@ let
     vim-latex-live-preview # preview latex pdf inside editor
     nvim-ts-rainbow # colored parentheses using treesitter
     alpha-nvim # greet dashboard
+    indentLine # Show indentation levels
 
     # LSP stuff
     cmp-buffer
