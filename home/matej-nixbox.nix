@@ -63,6 +63,7 @@ in
     rhythmbox
     easytag
     soundconverter
+    jamesdsp
 
     # Communication
     zoom-us
