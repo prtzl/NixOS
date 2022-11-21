@@ -50,6 +50,7 @@
         format = "[\\($hash$tag\\)]($style)";
       };
       git_status = {
+        disabled = true; # Lots of times it's slow as shit on large repos
         conflicted = "🏳";
         untracked = "🤷";
         stashed = "📦";
