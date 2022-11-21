@@ -88,8 +88,8 @@
       ls = "exa --group-directories-first --color=always --icons";
       l = "ls -la";
       ll = "ls -l";
-      grep = "grep --color=always -n -r";
-      ssh = "ssh -Y -C";
+      grep = "grep --color=always -n";
+      ssh = "ssh -C";
 
       # Programs
       pdf = "evince";
