@@ -91,7 +91,7 @@
                 nixpkgs.pkgs = pkgs;
               }
               ./system/${configuration}
-            ] ++ (if hardware ? null then hardware else [ ]);
+            ] ++ (if hardware ? null then [ ] else [ hardware ]);
           });
         in
         {
