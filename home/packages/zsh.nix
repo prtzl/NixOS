@@ -13,6 +13,7 @@
     enable = true;
     enableZshIntegration = true;
     settings = {
+      command_timeout = 50; # It's very noticable and anoying beyond this
       add_newline = false;
       character = {
         success_symbol = "[»](bold green)";
@@ -50,7 +51,7 @@
         format = "[\\($hash$tag\\)]($style)";
       };
       git_status = {
-        disabled = true; # Lots of times it's slow as shit on large repos
+        disabled = false;
         conflicted = "🏳";
         untracked = "🤷";
         stashed = "📦";
