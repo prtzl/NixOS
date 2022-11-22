@@ -37,13 +37,13 @@ in
 
     # Online
     chromium
-    megasync
+    patched.megasync
     enpass
     transmission-gtk
 
     # Communication
     zoom-us
-    teams
+    patched.teams
     skypeforlinux
     patched.signal-desktop
 
