@@ -129,14 +129,13 @@
       matej-work = self.homeConfigurations.matej-work.activationPackage;
       matej-ubuntubox = self.homeConfigurations.matej-ubuntubox.activationPackage;
 
-    } // inputs.flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-        in
-        {
-          devShells.default = pkgs.mkShell {
-            name = "Installation-shell";
-            nativeBuildInputs = with pkgs-unstable; [ nix nixfmt home-manager nvd ];
-          };
-        });
+    } // inputs.flake-utils.lib.eachDefaultSystem (system:
+      let
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          name = "Installation-shell";
+          nativeBuildInputs = with pkgs-unstable; [ nix nixfmt home-manager nvd ];
+        };
+      });
 }
