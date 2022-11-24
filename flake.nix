@@ -84,14 +84,14 @@
     {
       nixosConfigurations =
         let
-          mkSystem = { configuration, hardware ? null }: (inputs.nixpkgs-stable.lib.nixosSystem {
+          mkSystem = { configuration, hardware ? false }: (inputs.nixpkgs-stable.lib.nixosSystem {
             inherit system;
             modules = [
               {
                 nixpkgs.pkgs = pkgs;
               }
               ./system/${configuration}
-            ] ++ (if hardware ? null then [ ] else [ hardware ]);
+            ] ++ (if hardware then [ hardware ] else [ ]);
           });
         in
         {
