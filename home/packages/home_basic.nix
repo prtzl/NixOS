@@ -44,7 +44,7 @@ in
     };
   };
 
-  home.file.".background".source = ./wallpaper/tux-my-1440p.png;
+  home.file.".background".source = ./wallpaper/tux-nix-1440p.png;
   home.file.".lockscreen".source = ./wallpaper/lockscreen.png;
   home.file.".black".source = ./wallpaper/black.png;
 
