@@ -31,7 +31,7 @@ in
     gnumake
     cmake
     unstable.jlink
-    patched.stm32cubemx
+    unstable.stm32cubemx
     arduino
     drawio
 
@@ -70,7 +70,7 @@ in
     teams
     skypeforlinux
     discord
-    patched.signal-desktop
+    signal-desktop
   ];
 
   # My eyes
