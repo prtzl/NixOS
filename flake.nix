@@ -58,6 +58,7 @@
         jlink = mkFree inputs.jlink-pack-stable.defaultPackage.${system};
         patched = pkgs-matej;
         glWrapIntel = glWrapIntel;
+        signal-desktop = pkgs-matej.signal-desktop;
       };
 
       unstableOverlay = self: super: {

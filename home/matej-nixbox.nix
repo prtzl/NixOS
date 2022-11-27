@@ -2,7 +2,6 @@
 
 let
   p = package: ./. + "/packages/${package}";
-  new = import (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/29dd883f5d9c91fefddc843f10bc960b97f0b9d0){ config = config.nixpkgs.config; };
 in
 {
   imports = [
@@ -71,7 +70,7 @@ in
     teams
     skypeforlinux
     discord
-    new.signal-desktop
+    signal-desktop
   ];
 
   # My eyes

@@ -45,7 +45,7 @@ in
     zoom-us
     patched.teams
     skypeforlinux
-    patched.signal-desktop
+    signal-desktop
 
     # Other
     nixgl.nixGLIntel
