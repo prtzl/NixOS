@@ -28,7 +28,7 @@ in
     clang-tools
     gnumake
     cmake
-    patched.stm32cubemx
+    unstable.stm32cubemx
 
     # Media
     gimp
