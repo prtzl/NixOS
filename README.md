@@ -83,7 +83,16 @@ If you do not plan to install and configure shell with home manager then add the
 . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 ```
 
-If you plan to install and configure a shell (like zsh) with home-manager then make sure to remove the existing pacakge from your system.
+If you plan to install and configure a shell (like zsh) with home-manager then make sure to remove the existing pacakge from your system.  
+
+On non-nixos systems you might find, that your desktop environment does not find the applications managed by home-manager. That's because your profile does not find paths to the binaries and `.desktop` files. Add these two lines into your `~/.profile`:
+
+```shell
+export PATH=$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH
+export XDG_DATA_DIRS=$HOME/.nix-profile/share:$HOME/.share:"${XDG_DATA_DIRS:-/usr/local/share/:/usr/share/}"
+```
+
+First line inserts nix profile paths at the beginning of existing `PATH`, and the second one adds the `.nix-profile/share` to the XDG directories path. `share` includes files like `.desktop`, icons, etc.
 
 ## Maintenance
 
