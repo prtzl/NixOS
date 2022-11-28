@@ -28,7 +28,7 @@ in
     clang-tools
     gnumake
     cmake
-    unstable.stm32cubemx
+    stm32cubemx
 
     # Media
     gimp
@@ -37,13 +37,13 @@ in
 
     # Online
     chromium
-    patched.megasync
+    megasync
     enpass
     transmission-gtk
 
     # Communication
     zoom-us
-    patched.teams
+    teams
     skypeforlinux
     signal-desktop
 
