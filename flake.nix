@@ -21,7 +21,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixpkgs-matej = {
-      url = "github:prtzl/nixpkgs/patch";
+      url = "github:prtzl/nixpkgs/master";
     };
   };
 
@@ -56,9 +56,11 @@
       stableOverlay = self: super: {
         unstable = pkgs-unstable;
         jlink = mkFree inputs.jlink-pack-stable.defaultPackage.${system};
-        patched = pkgs-matej;
         glWrapIntel = glWrapIntel;
+        # Patched channel and overrides of packages for all platforms
+        patched = pkgs-matej;
         signal-desktop = pkgs-matej.signal-desktop;
+        stm32cubemx = pkgs-matej.stm32cubemx;
       };
 
       unstableOverlay = self: super: {
