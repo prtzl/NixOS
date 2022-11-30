@@ -35,6 +35,10 @@ in
     libreoffice
     unstable.evince
 
+    # Documents
+    texlive.combined.scheme-full
+    texstudio
+
     # Online
     chromium
     megasync
