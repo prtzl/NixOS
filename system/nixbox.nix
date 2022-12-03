@@ -73,4 +73,10 @@ in
   services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.cpu.amd.updateMicrocode = true;
   hardware.video.hidpi.enable = true;
+
+  fileSystems."/storage" = {
+      device = "/dev/disk/by-label/storage";
+      fsType = "ext4";
+      options = [ "defaults" "user" "rw" ];
+    };
 }
