@@ -14,18 +14,16 @@ in
     ./pipewire.nix
   ];
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "22.11";
 
   # Cleaning lady
   nix = {
     package = pkgs.unstable.nix;
-    autoOptimiseStore = true;
     gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
-    maxJobs = 16;
     extraOptions = ''
       experimental-features = nix-command flakes ca-derivations
       binary-caches-parallel-connections = 50
@@ -33,7 +31,14 @@ in
       #keep-outputs = true
       #keep-derivations = true
     '';
-    trustedUsers = [ "root" "@wheel" ];
+    settings = {
+      trusted-users = [ "root" "@wheel" ];
+      # max-jobs = maximum packages built at once
+      max-jobs = 8;
+      # cores = maximum threads used by a job/package
+      cores = 2;
+      auto-optimise-store = true;
+    };
   };
 
   # Packages
@@ -59,7 +64,7 @@ in
     sshd.enable = true;
     openssh.enable = true;
     openssh.forwardX11 = true;
-    localtime.enable = true;
+    localtimed.enable = true;
     geoclue2.enable = true;
     flatpak.enable = true;
   };

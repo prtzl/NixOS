@@ -18,7 +18,7 @@ in
 
   home.username = "matej";
   home.homeDirectory = "/home/matej";
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
 
   # Packages
   home.packages = with pkgs; [
@@ -62,7 +62,6 @@ in
 
   home.sessionVariables = {
     NIX_HOME_DERIVATION = "matej-work";
-
   };
 }
 
