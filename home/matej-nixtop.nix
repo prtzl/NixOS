@@ -76,5 +76,9 @@ in
   home.sessionVariables = {
     NIX_HOME_DERIVATION = "matej-nixtop";
   };
+
+  dconf.settings = {
+  "org/cinnamon/desktop/peripherals/touchpad" = {tap-to-click = true;};
+    };
 }
 
