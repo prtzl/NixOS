@@ -1,5 +1,5 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
 with lib.hm.gvariant;
 
@@ -14,6 +14,7 @@ in
 {
   home.file.".save-windows.sh".source = ./dotfiles/save.sh;
   home.file.".load-windows.sh".source = ./dotfiles/load.sh;
+  home.packages = with pkgs; [ wmctrl gnome.zenity xorg.xwininfo ];
 
   dconf.settings = {
     "org/cinnamon" = {
