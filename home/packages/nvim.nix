@@ -6,9 +6,9 @@ let
     unstable = pkgs.unstable.vimPlugins;
     local = pkgs.local.vimPlugins;
   };
-  loadPlugin = plugin: ''
-    set rtp^=${plugin}
-    set rtp+=${plugin}/after
+  loadPlugin = p: ''
+    set rtp^=${p.plugin or p}
+    set rtp+=${p.plugin or p}/after
   '';
   unlines = lib.concatStringsSep "\n";
   loadPlugins = ps: lib.pipe ps [ (builtins.map loadPlugin) unlines ];
