@@ -45,6 +45,22 @@ in
   services = {
     blueman.enable = true;
     hardware.bolt.enable = true;
+    throttled.extraConfig = ''
+    '';
+    tlp.settings = {
+      # Do not suspend USB devices
+      USB_AUTOSUSPEND = 0;
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 40;
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 0;
+      CPU_HWP_DYN_BOOST_ON_AC = 1;
+      CPU_HWP_DYN_BOOST_ON_BAT = 0;
+    };
   };
 
   # Hardware configuration
