@@ -16,6 +16,7 @@ in
     git-crypt
     gnupg
     bottom
+    unstable.nix
   ];
 
   # Privat git
