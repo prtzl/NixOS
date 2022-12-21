@@ -39,6 +39,7 @@
       mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
       generators = import ./nix/generators.nix { inherit system lib home-manager pkgs; };
       mkSystem = generators.mkSystem;
+      unwrapSystem = generators.unwrapSystem;
       mkHome = generators.mkHome;
 
       stableOverlay = self: super: {
@@ -100,9 +101,9 @@
           matej-ubuntubox = mkHome "${path}/matej-ubuntubox.nix";
         };
 
-      nixbox = nixosConfigurations.nixbox;
-      nixtop = nixosConfigurations.nixtop;
-      testbox = nixosConfigurations.testbox;
+      nixbox = unwrapSystem nixosConfigurations.nixbox;
+      nixtop = unwrapSystem nixosConfigurations.nixtop;
+      testbox = unwrapSystem nixosConfigurations.testbox;
       matej-nixbox = homeConfigurations.matej-nixbox;
       matej-nixtop = homeConfigurations.matej-nixtop;
       test-testbox = homeConfigurations.test-testbox;
