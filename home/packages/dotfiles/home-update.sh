@@ -65,7 +65,7 @@ if [[ "$update_flake_lock" == "true" ]]; then
 fi
 
 info "Building derivation!"
-peval home-manager build --flake .\#"$home_derivation" --impure "$ARGS"
+peval nix build .\#"$home_derivation" --impure "$ARGS"
 peval nvd diff /nix/var/nix/profiles/per-user/$USER/home-manager result
 read -p "Perform switch? [y/Y] " answer
 if [[ "$answer" == [yY] ]]; then
