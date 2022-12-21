@@ -81,8 +81,8 @@
     {
       nixosConfigurations = {
         nixbox = mkSystem { configuration = "${builtins.getEnv "PWD"}/system/nixbox.nix"; };
-        nixtop = mkSystem { configuration = "${builtins.getEnv "PWD"}/home/nixtop.nix"; hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s; };
-        testbox = mkSystem { configuration = "${builtins.getEnv "PWD"}/home/testbox.nix"; };
+        nixtop = mkSystem { configuration = "${builtins.getEnv "PWD"}/system/nixtop.nix"; hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s; };
+        testbox = mkSystem { configuration = "${builtins.getEnv "PWD"}/system/testbox.nix"; };
       };
 
       homeConfigurations = {
