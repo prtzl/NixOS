@@ -32,8 +32,13 @@
     with inputs;
     let
       system = "x86_64-linux";
+      lib = inputs.nixpkgs-stable.lib;
+      home-manager = inputs.home-manager;
 
       mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
+      generators = import ./nix/generators.nix { inherit system lib home-manager pkgs; };
+      mkSystem = generators.mkSystem;
+      mkHome = generators.mkHome;
 
       stableOverlay = self: super: {
         # Packages
@@ -74,43 +79,19 @@
       };
     in
     {
-      nixosConfigurations =
-        let
-          mkSystem = { configuration, hardware ? false }: (inputs.nixpkgs-stable.lib.nixosSystem {
-            inherit system;
-            modules = [
-              {
-                nixpkgs.pkgs = pkgs;
-              }
-              ./system/${configuration}
-            ] ++ (if hardware != null then [ hardware ] else [ ]);
-          });
-        in
-        {
-          nixbox = mkSystem { configuration = "nixbox.nix"; };
-          nixtop = mkSystem { configuration = "nixtop.nix"; hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s; };
-          testbox = mkSystem { configuration = "testbox.nix"; };
-        };
+      nixosConfigurations = {
+        nixbox = mkSystem { configuration = "${builtins.getEnv "PWD"}/system/nixbox.nix"; };
+        nixtop = mkSystem { configuration = "${builtins.getEnv "PWD"}/home/nixtop.nix"; hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s; };
+        testbox = mkSystem { configuration = "${builtins.getEnv "PWD"}/home/testbox.nix"; };
+      };
 
-      homeConfigurations =
-        let
-          mkHome = home-derivation: (inputs.home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [
-              ./home/${home-derivation}
-            ];
-            extraSpecialArgs = {
-              lib = import "${inputs.home-manager}/modules/lib/stdlib-extended.nix" pkgs-unstable.lib;
-            };
-          });
-        in
-        {
-          matej-nixbox = mkHome "matej-nixbox.nix";
-          matej-nixtop = mkHome "matej-nixtop.nix";
-          test-testbox = mkHome "test-testbox.nix";
-          matej-work = mkHome "matej-work.nix";
-          matej-ubuntubox = mkHome "matej-ubuntubox.nix";
-        };
+      homeConfigurations = {
+        matej-nixbox = mkHome "${builtins.getEnv "PWD"}/home/matej-nixbox.nix";
+        matej-nixtop = mkHome "${builtins.getEnv "PWD"}/home/matej-nixtop.nix";
+        test-testbox = mkHome "${builtins.getEnv "PWD"}/home/test-testbox.nix";
+        matej-work = mkHome "${builtins.getEnv "PWD"}/home/matej-work.nix";
+        matej-ubuntubox = mkHome "${builtins.getEnv "PWD"}/home/matej-ubuntubox.nix";
+      };
 
       nixbox = self.nixosConfigurations.nixbox.config.system.build.toplevel;
       nixtop = self.nixosConfigurations.nixtop.config.system.build.toplevel;
