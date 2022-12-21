@@ -34,6 +34,7 @@
       system = "x86_64-linux";
       lib = inputs.nixpkgs-stable.lib;
       home-manager = inputs.home-manager;
+      PWD = builtins.getEnv "PWD";
 
       mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
       generators = import ./nix/generators.nix { inherit system lib home-manager pkgs; };
@@ -80,17 +81,17 @@
     in
     {
       nixosConfigurations = {
-        nixbox = mkSystem { configuration = "${builtins.getEnv "PWD"}/system/nixbox.nix"; };
-        nixtop = mkSystem { configuration = "${builtins.getEnv "PWD"}/system/nixtop.nix"; hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s; };
-        testbox = mkSystem { configuration = "${builtins.getEnv "PWD"}/system/testbox.nix"; };
+        nixbox = mkSystem { configuration = "${PWD}/system/nixbox.nix"; };
+        nixtop = mkSystem { configuration = "${PWD}/system/nixtop.nix"; hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s; };
+        testbox = mkSystem { configuration = "${PWD}/system/testbox.nix"; };
       };
 
       homeConfigurations = {
-        matej-nixbox = mkHome "${builtins.getEnv "PWD"}/home/matej-nixbox.nix";
-        matej-nixtop = mkHome "${builtins.getEnv "PWD"}/home/matej-nixtop.nix";
-        test-testbox = mkHome "${builtins.getEnv "PWD"}/home/test-testbox.nix";
-        matej-work = mkHome "${builtins.getEnv "PWD"}/home/matej-work.nix";
-        matej-ubuntubox = mkHome "${builtins.getEnv "PWD"}/home/matej-ubuntubox.nix";
+        matej-nixbox = mkHome "${PWD}/home/matej-nixbox.nix";
+        matej-nixtop = mkHome "${PWD}/home/matej-nixtop.nix";
+        test-testbox = mkHome "${PWD}/home/test-testbox.nix";
+        matej-work = mkHome "${PWD}/home/matej-work.nix";
+        matej-ubuntubox = mkHome "${PWD}/home/matej-ubuntubox.nix";
       };
 
       nixbox = self.nixosConfigurations.nixbox.config.system.build.toplevel;
