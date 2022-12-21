@@ -1,20 +1,18 @@
 { config, pkgs, lib, ... }:
 
 let
-  vimPlugins = {
-    stable = pkgs.vimPlugins;
-    unstable = pkgs.unstable.vimPlugins;
-    local = pkgs.local.vimPlugins;
-  };
+  # All packages related to function of nvim are from separate pkgs-nvim
+  pkgs-nvim = pkgs.pkgs-nvim;
+  vimPlugins = pkgs-nvim.vimPlugins;
   loadPlugin = p: ''
     set rtp^=${p.plugin or p}
     set rtp+=${p.plugin or p}/after
   '';
   unlines = lib.concatStringsSep "\n";
   loadPlugins = ps: lib.pipe ps [ (builtins.map loadPlugin) unlines ];
-  plugins = with vimPlugins.unstable; [
+  plugins = with vimPlugins; [
     # Plugins that I know and understand where and how they're used
-    (nvim-treesitter.withPlugins (_: pkgs.unstable.tree-sitter.allGrammars)) # syntax for everything
+    (nvim-treesitter.withPlugins (_: pkgs-nvim.tree-sitter.allGrammars)) # syntax for everything
     vim-cpp-enhanced-highlight # better looking cpp highlighting
     markdown-preview-nvim # opens markdown preview in browser
     fzfWrapper # fzf stuff
@@ -62,15 +60,16 @@ in
   home.packages = with pkgs; [
     bat
     ripgrep
+  ] ++ (with pkgs-nvim; [
     rnix-lsp # nix lsp
     texlab # latex lsp
     python39Packages.python-lsp-server # python lsp
     sumneko-lua-language-server # lua lsp
-    tree-sitter # treesitter - checkhealth fails otherwise
-  ];
+    (tree-sitter.withPlugins (_: tree-sitter.allGrammars))
+  ]);
   programs.neovim = {
     # Default is pkgs.neovim-unwrapped
-    package = pkgs.unstable.neovim-unwrapped;
+    package = pkgs-nvim.neovim-unwrapped;
     enable = true;
     viAlias = true;
     vimAlias = true;

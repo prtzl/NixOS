@@ -23,6 +23,9 @@
     nixpkgs-matej = {
       url = "github:prtzl/nixpkgs/master";
     };
+    nixpkgs-nvim = {
+      url = "github:nixos/nixpkgs/f994293d1eb8812f032e8919e10a594567cf6ef7";
+    };
   };
 
   outputs = inputs:
@@ -54,11 +57,13 @@
       };
 
       stableOverlay = self: super: {
+        # Packages
         unstable = pkgs-unstable;
+        pkgs-nvim = pkgs-nvim;
+        patched = pkgs-matej;
+        # Stable package overrides/additions
         jlink = mkFree inputs.jlink-pack-stable.defaultPackage.${system};
         glWrapIntel = glWrapIntel;
-        # Patched channel and overrides of packages for all platforms
-        patched = pkgs-matej;
         signal-desktop = pkgs-matej.signal-desktop;
         stm32cubemx = pkgs-matej.stm32cubemx;
       };
@@ -80,6 +85,11 @@
       };
 
       pkgs-matej = import inputs.nixpkgs-matej {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
+      pkgs-nvim = import inputs.nixpkgs-nvim {
         inherit system;
         config.allowUnfree = true;
       };
