@@ -1,7 +1,7 @@
 { system, pkgs, lib, home-manager, ... }:
 
 let
-  mkSystem = { configuration, hardware ? false }: (lib.nixosSystem {
+  mkSystem = { configuration, hardware ? false }: unwrapSystem (lib.nixosSystem {
     inherit system;
     modules = [
       {
@@ -11,13 +11,16 @@ let
     ] ++ (if hardware != null then [ hardware ] else [ ]);
   });
 
-  mkHome = home-derivation: (home-manager.lib.homeManagerConfiguration {
+  mkHome = home-derivation: unwrapHome (home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
     modules = [ "${home-derivation}" ];
     extraSpecialArgs = {
       lib = import "${home-manager}/modules/lib/stdlib-extended.nix" pkgs.unstable.lib;
     };
   });
+
+  unwrapSystem = nixos-derivation: nixos-derivation.config.system.build.toplevel;
+  unwrapHome = home-derivation: home-derivation.activationPackage;
 in
 {
   inherit mkSystem mkHome;
