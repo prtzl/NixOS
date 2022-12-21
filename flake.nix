@@ -79,29 +79,35 @@
         config.allowUnfree = true;
       };
     in
-    {
-      nixosConfigurations = {
-        nixbox = mkSystem { configuration = "${PWD}/system/nixbox.nix"; };
-        nixtop = mkSystem { configuration = "${PWD}/system/nixtop.nix"; hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s; };
-        testbox = mkSystem { configuration = "${PWD}/system/testbox.nix"; };
-      };
+    rec {
+      nixosConfigurations =
+        let path = "${PWD}/system";
+        in
+        rec {
+          nixbox = mkSystem { configuration = "${path}/nixbox.nix"; };
+          nixtop = mkSystem { configuration = "${path}/nixtop.nix"; hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s; };
+          testbox = mkSystem { configuration = "${path}/testbox.nix"; };
+        };
 
-      homeConfigurations = {
-        matej-nixbox = mkHome "${PWD}/home/matej-nixbox.nix";
-        matej-nixtop = mkHome "${PWD}/home/matej-nixtop.nix";
-        test-testbox = mkHome "${PWD}/home/test-testbox.nix";
-        matej-work = mkHome "${PWD}/home/matej-work.nix";
-        matej-ubuntubox = mkHome "${PWD}/home/matej-ubuntubox.nix";
-      };
+      homeConfigurations =
+        let path = "${PWD}/home";
+        in
+        rec {
+          matej-nixbox = mkHome "${path}/matej-nixbox.nix";
+          matej-nixtop = mkHome "${path}/matej-nixtop.nix";
+          test-testbox = mkHome "${path}/test-testbox.nix";
+          matej-work = mkHome "${path}/matej-work.nix";
+          matej-ubuntubox = mkHome "${path}/matej-ubuntubox.nix";
+        };
 
-      nixbox = self.nixosConfigurations.nixbox.config.system.build.toplevel;
-      nixtop = self.nixosConfigurations.nixtop.config.system.build.toplevel;
-      testbox = self.nixosConfigurations.testbox.config.system.build.toplevel;
-      matej-nixbox = self.homeConfigurations.matej-nixbox.activationPackage;
-      matej-nixtop = self.homeConfigurations.matej-nixtop.activationPackage;
-      test-testbox = self.homeConfigurations.test-testbox.activationPackage;
-      matej-work = self.homeConfigurations.matej-work.activationPackage;
-      matej-ubuntubox = self.homeConfigurations.matej-ubuntubox.activationPackage;
+      nixbox = nixosConfigurations.nixbox;
+      nixtop = nixosConfigurations.nixtop;
+      testbox = nixosConfigurations.testbox;
+      matej-nixbox = homeConfigurations.matej-nixbox;
+      matej-nixtop = homeConfigurations.matej-nixtop;
+      test-testbox = homeConfigurations.test-testbox;
+      matej-work = homeConfigurations.matej-work;
+      matej-ubuntubox = homeConfigurations.matej-ubuntubox;
 
     } // inputs.flake-utils.lib.eachDefaultSystem (system:
       let
