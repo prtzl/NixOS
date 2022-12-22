@@ -15,8 +15,7 @@ let
     (nvim-treesitter.withPlugins (_: pkgs-nvim.tree-sitter.allGrammars)) # syntax for everything
     vim-cpp-enhanced-highlight # better looking cpp highlighting
     markdown-preview-nvim # opens markdown preview in browser
-    fzfWrapper # fzf stuff
-    fzf-vim # as well
+    telescope-nvim
     lightline-vim # status bar
     vim-gitbranch # get git info for status bar
     impatient-nvim
