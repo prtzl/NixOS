@@ -1,5 +1,6 @@
 vim.api.nvim_set_hl(0, "TelescopeBorder", { ctermbg = 220 })
 vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "#252a35" })
+vim.api.nvim_set_hl(0, "TelescopeSelection", { bg = "#123456", fg = "#ffffff" })
 
 require('telescope').setup {
     defaults = {
