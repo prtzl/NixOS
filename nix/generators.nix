@@ -1,14 +1,14 @@
 { system, pkgs, lib, home-manager, ... }:
 
 let
-  mkSystem = { configuration, hardware ? false }: (lib.nixosSystem {
+  mkSystem = { configuration, hardware ? null }: (lib.nixosSystem {
     inherit system;
     modules = [
       {
         nixpkgs.pkgs = pkgs;
       }
       "${configuration}"
-    ]; # ++ (if hardware != null then [ hardware ] else [ ]);
+    ] ++ (if hardware != null then [ hardware ] else [ ]);
   });
 
   mkHome = home-derivation: unwrapHome (home-manager.lib.homeManagerConfiguration {
