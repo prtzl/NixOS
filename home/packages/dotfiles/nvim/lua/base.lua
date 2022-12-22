@@ -93,14 +93,6 @@ vim.cmd([[
     let g:cpp_class_scope_highlight = 1
     let g:cpp_member_variable_highlight = 1
 
-
-    " Fuzzy find
-    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
-    let $FZF_DEFAULT_OPTS="--prompt ':D' --ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=numbers,grid,header-filename --line-range :300 {}'"
-    let $FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git' --glob '!.cache' --glob '!.direnv' --sort path"
-    command! -bang -nargs=? -complete=dir Files
-        \ call fzf#vim#files(<q-args>, { 'options': "--prompt '> ' --ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=numbers,grid,header-filename --line-range :300 {}'"}, <bang>0)
-
     " Print opened file in tmux bar
     if exists('$TMUX')
       let windowName = system("tmux display-message -p '#W'")

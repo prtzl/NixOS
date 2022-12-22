@@ -38,10 +38,16 @@ map('i', '<c-k>', '<cmd>lua require"luasnip".jump(-1)<CR>', nil)
 map('s', '<c-k>', '<cmd>lua require"luasnip".jump(-1)<CR>', nil)
 
 -- FZF
-map('n', '<c-p>', ':Files<cr>', { silent = false })
-map('n', '<c-g>', ':Rg<cr>', { silent = false })
-map('n', '<c-f>', ':BLines<cr>', { silent = false })
-map('n', '<c-b>', ':Buffers<cr>', { silent = false })
+map('n', '<c-p>', '<cmd>lua require("telescope.builtin").find_files()<cr>', { silent = false })
+map('n', '<c-g>', '<cmd>lua require("telescope.builtin").live_grep()<cr>', { silent = false })
+map('n', '<c-b>', '<cmd>lua require("telescope.builtin").buffers()<cr>', { silent = false })
+map('n', '<c-f>', '<cmd>lua require("telescope.builtin").help_tags()<cr>', { silent = false })
+
+
+-- map('n', '<c-p>', '<cmd>lua require("fzf-commands").files()<cr>', { silent = false })
+-- map('n', '<c-g>', '<cmd>lua require("fzf-commands").rg()<cr>', { silent = false })
+-- map('n', '<c-f>', '<cmd>lua require("fzf-commands").bufferpicker()<cr>', { silent = false })
+-- map('n', '<c-b>', '<cmd>lua require("fzf-commands").bufferpicker()<cr>', { silent = false })
 
 -- Diagnostic
 map('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<cr>', nil)
