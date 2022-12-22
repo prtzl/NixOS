@@ -43,12 +43,6 @@ map('n', '<c-g>', '<cmd>lua require("telescope.builtin").live_grep()<cr>', { sil
 map('n', '<c-b>', '<cmd>lua require("telescope.builtin").buffers()<cr>', { silent = false })
 map('n', '<c-f>', '<cmd>lua require("telescope.builtin").help_tags()<cr>', { silent = false })
 
-
--- map('n', '<c-p>', '<cmd>lua require("fzf-commands").files()<cr>', { silent = false })
--- map('n', '<c-g>', '<cmd>lua require("fzf-commands").rg()<cr>', { silent = false })
--- map('n', '<c-f>', '<cmd>lua require("fzf-commands").bufferpicker()<cr>', { silent = false })
--- map('n', '<c-b>', '<cmd>lua require("fzf-commands").bufferpicker()<cr>', { silent = false })
-
 -- Diagnostic
 map('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<cr>', nil)
 map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', nil)
