@@ -50,6 +50,7 @@ in
     teams
     skypeforlinux
     signal-desktop
+    unstable.discord
 
     # Other
     nixgl.nixGLIntel
