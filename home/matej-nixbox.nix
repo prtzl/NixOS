@@ -31,7 +31,7 @@ in
     gnumake
     cmake
     unstable.jlink
-    unstable.stm32cubemx
+    stm32cubemx
     arduino
     drawio
 
@@ -69,7 +69,7 @@ in
     zoom-us
     teams
     skypeforlinux
-    discord
+    unstable.discord
     signal-desktop
   ];
 
