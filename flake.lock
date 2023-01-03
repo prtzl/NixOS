@@ -207,11 +207,11 @@
     },
     "nixpkgs-matej": {
       "locked": {
-        "lastModified": 1669548659,
-        "narHash": "sha256-ZpkCMSpmNXvG6vN01qKIK/F34Fiko25xhusidXMAckQ=",
+        "lastModified": 1672786751,
+        "narHash": "sha256-p2n/Jk1nlXIcbNU4zl4QNw5Lw4gpCEUBdtIxegeGr+U=",
         "owner": "prtzl",
         "repo": "nixpkgs",
-        "rev": "03934fe90cb272c5f599f4f6795506f254cead60",
+        "rev": "c85124d7882518f29b1f57904c61ac6a93ea3836",
         "type": "github"
       },
       "original": {
