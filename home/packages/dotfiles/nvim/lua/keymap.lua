@@ -16,8 +16,8 @@ map('i', '<c-w><down>', '<esc><right><c-w><down><ins>', nil)
 -- Resizing windows
 map('n', '<c-s-up>', ':resize +5<cr>', nil)
 map('n', '<c-s-down>', ':resize -5<cr>', nil)
-map('n', '<c-s-left>', ':vertical resize +5<cr>', nil)
-map('n', '<c-s-right>', ':vertical resize -5<cr>', nil)
+map('n', '<c-s-left>', ':vertical resize -5<cr>', nil)
+map('n', '<c-s-right>', ':vertical resize +5<cr>', nil)
 
 -- backspace delete
 map('!', '<c-bs>', '<c-w>', nil)
