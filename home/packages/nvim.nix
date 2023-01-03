@@ -64,7 +64,7 @@ in
     texlab # latex lsp
     python39Packages.python-lsp-server # python lsp
     sumneko-lua-language-server # lua lsp
-    (tree-sitter.withPlugins (_: tree-sitter.allGrammars))
+    tree-sitter
   ]);
   programs.neovim = {
     # Default is pkgs.neovim-unwrapped
