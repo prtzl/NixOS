@@ -21,7 +21,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixpkgs-matej = {
-      url = "github:prtzl/nixpkgs/master";
+      url = "github:prtzl/nixpkgs/patch";
     };
     nixpkgs-nvim = {
       url = "github:nixos/nixpkgs/f994293d1eb8812f032e8919e10a594567cf6ef7";
