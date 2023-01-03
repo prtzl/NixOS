@@ -26,6 +26,10 @@
     nixpkgs-nvim = {
       url = "github:nixos/nixpkgs/f994293d1eb8812f032e8919e10a594567cf6ef7";
     };
+    nix-monitored = {
+      url = "github:ners/nix-monitored/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = inputs:
@@ -48,6 +52,7 @@
         pkgs-nvim = pkgs-nvim;
         patched = pkgs-matej;
         # Stable package overrides/additions
+        nix-monitored = inputs.nix-monitored;
         jlink = mkFree inputs.jlink-pack-stable.defaultPackage.${system};
         glWrapIntel = (import ./nix/nixgl.nix { inherit pkgs; }).glWrapIntel;
         signal-desktop = pkgs-matej.signal-desktop;
