@@ -1,9 +1,5 @@
--- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 local cmp = require 'cmp'
-
 local luasnip = require 'luasnip'
-
--- Use it to format completion menu, comes with default icons as well
 local lspkind = require 'lspkind'
 
 -- some other good icons
@@ -62,14 +58,12 @@ cmp.setup({
 
         return true
     end,
-
     -- Enable LSP snippets
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
         end,
     },
-
     mapping = ({
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -104,13 +98,11 @@ cmp.setup({
             select = true,
         })
     }),
-
     -- Installed sources
     sources = {
         -- Language servers and snippets
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-
         -- Other sources
         { name = 'spell', option = { keep_all_entries = false }, },
         { name = 'buffer-lines' },
@@ -120,7 +112,6 @@ cmp.setup({
         { name = 'path' },
         { name = 'nvim_lua' },
     },
-
     -- Show: abbreviation, symbol + kind, menu
     -- In other words: short completion stirng, completion type icon and stirng, source of completion
     formatting = {
@@ -147,7 +138,6 @@ cmp.setup({
             end,
         },
     },
-
     window = {
         documentation = {
             border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
@@ -156,11 +146,9 @@ cmp.setup({
             border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
         },
     },
-
     experimental = {
         ghost_text = true,
     },
-
     view = {
         entries = {
             { name = 'custom', selection_order = 'near_cursor' }
@@ -194,6 +182,31 @@ cmp.setup.cmdline({ ':' }, {
     }
 })
 
+local border = {
+    { "╭", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
+}
+
+-- LSP settings (for overriding per client)
+local handlers = {
+    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+}
+
+-- To instead override globally
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+    opts = opts or {}
+    opts.border = opts.border or border
+    return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
 -- LSP servers
 -- This shit is added to every server and it made it so
 -- when you accept a suggestion like a function, it fills the signature and enters - finally
@@ -202,6 +215,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- C/C++ LSP
 require 'lspconfig'.clangd.setup {
+    handlers = handlers,
     capabilities = capabilities,
     cmd = {
         'clangd',
@@ -230,13 +244,14 @@ require 'lspconfig'.pylsp.setup {
     capabilities = capabilities,
 }
 
+-- lua LSP
 require 'lspconfig'.sumneko_lua.setup {
     capabilities = capabilities,
 }
 
--- lsp signature
+-- lsp signature - function signature
 require "lsp_signature".setup({
     hint_enable = false;
-    toggle_key = '<C-s>',
-    select_signature_key = '<C-l>'
+    toggle_key = '<C-s>', -- toggle signalture
+    select_signature_key = '<C-l>' -- switch signatures
 })
