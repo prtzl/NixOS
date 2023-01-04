@@ -41,21 +41,26 @@ local has_words_before = function()
 end
 
 cmp.setup({
-    -- Disable completion on comments and big files
     enabled = function()
+        -- Disable cmp in prompt buffers (default behaviour, but I overrided it :|)
+        if vim.bo.buftype == 'prompt' then
+            return false
+        end
+
         -- Disable cmp on too big files - laggy
         if vim.api.nvim_buf_line_count(0) > 5000 then
             return false
         end
+
         -- disable completion in comments
         local context = require 'cmp.config.context'
         -- keep command mode completion enabled when cursor is in a comment
-        if vim.api.nvim_get_mode().mode == 'c' then
-            return true
-        else
+        if vim.api.nvim_get_mode().mode ~= 'c' then
             return not context.in_treesitter_capture("comment")
                 and not context.in_syntax_group("Comment")
         end
+
+        return true
     end,
 
     -- Enable LSP snippets
