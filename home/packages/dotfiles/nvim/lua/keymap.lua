@@ -61,6 +61,7 @@ map('i', '<f6>', '<cmd>lua vim.g.toggleSpell()<cr>', nil)
 
 -- Autoformat toggle
 map('n', '<f9>', '<cmd>lua vim.g.toggleFormat()<cr>', nil)
+map('i', '<f9>', '<cmd>lua vim.g.toggleFormat()<cr>', nil)
 
 -- Comments
 map('n', '<c-_>', 'gcc', { noremap = false })
