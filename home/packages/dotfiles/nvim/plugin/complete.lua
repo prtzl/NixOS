@@ -107,11 +107,12 @@ cmp.setup({
         { name = 'luasnip' },
 
         -- Other sources
+        { name = 'spell', option = { keep_all_entries = false }, },
+        { name = 'buffer-lines' },
         { name = 'buffer' },
         { name = 'treesitter' },
         { name = 'omni' },
         { name = 'path' },
-        { name = 'spell', option = { keep_all_entries = false }, },
         { name = 'nvim_lua' },
     },
 
@@ -153,25 +154,22 @@ cmp.setup({
     },
 })
 
-cmp.setup.cmdline(':', {
+-- Enable `buffer` and `buffer-lines` for `/` and `?` in the command-line
+cmp.setup.cmdline({ "/", "?" }, {
+    mapping = require "cmp".mapping.preset.cmdline(),
     sources = {
-        { name = 'cmdline' }
+        {
+            name = "buffer",
+            option = { keyword_pattern = [[\k\+]] }
+        },
+        { name = "buffer-lines" }
     }
 })
-
-cmp.setup.cmdline('/', {
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp_signature_help' }
-    }, {
-        { name = 'buffer' }
-    })
-})
-
 
 -- LSP servers
 -- This shit is added to every server and it made it so
 -- when you accept a suggestion like a function, it fills the signature and enters - finally
-local capabilities =  vim.lsp.protocol.make_client_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- C/C++ LSP
