@@ -49,7 +49,7 @@ in
     zoom-us
     teams
     skypeforlinux
-    signal-desktop
+    unstable.signal-desktop-beta
     unstable.discord
 
     # Other
