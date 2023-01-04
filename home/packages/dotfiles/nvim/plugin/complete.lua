@@ -147,22 +147,45 @@ cmp.setup({
         documentation = {
             border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
         },
+        completion = {
+            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        },
     },
 
     experimental = {
         ghost_text = true,
     },
+
+    view = {
+        entries = {
+            { name = 'custom', selection_order = 'near_cursor' }
+        }
+    }
 })
 
 -- Enable `buffer` and `buffer-lines` for `/` and `?` in the command-line
 cmp.setup.cmdline({ "/", "?" }, {
-    mapping = require "cmp".mapping.preset.cmdline(),
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
         {
             name = "buffer",
             option = { keyword_pattern = [[\k\+]] }
         },
         { name = "buffer-lines" }
+    }
+})
+
+cmp.setup.cmdline({ ':' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = "cmdline" }
+    }, {
+        { name = 'path' }
+    }),
+    view = {
+        entries = {
+            { name = 'wildmenu', separator = '|' }
+        }
     }
 })
 
