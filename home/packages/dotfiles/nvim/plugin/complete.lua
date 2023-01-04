@@ -207,6 +207,9 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
     return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
+-- Add border around LspInfo
+require('lspconfig.ui.windows').default_options.border = 'single'
+
 -- LSP servers
 -- This shit is added to every server and it made it so
 -- when you accept a suggestion like a function, it fills the signature and enters - finally
