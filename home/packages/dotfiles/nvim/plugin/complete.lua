@@ -1,3 +1,4 @@
+-- Help: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 local lspkind = require 'lspkind'
