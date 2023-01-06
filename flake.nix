@@ -33,7 +33,6 @@
   };
 
   outputs = inputs:
-    with inputs;
     let
       system = "x86_64-linux";
       lib = inputs.nixpkgs-stable.lib;
