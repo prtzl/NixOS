@@ -11,6 +11,14 @@ in
     (p "virtualisation.nix")
   ];
 
+  # set top 8x2 = packages that do build will take some time, but oh well
+  nix.settings = {
+    # max-jobs = maximum packages built at once
+    max-jobs = 8;
+    # cores = maximum threads used by a job/package
+    cores = 2;
+  };
+
   # Networking - check your interface name enp<>s0
   networking = {
     hostName = "nixbox";
@@ -75,8 +83,8 @@ in
   hardware.video.hidpi.enable = true;
 
   fileSystems."/storage" = {
-      device = "/dev/disk/by-label/storage";
-      fsType = "ext4";
-      options = [ "defaults" "user" "rw" ];
-    };
+    device = "/dev/disk/by-label/storage";
+    fsType = "ext4";
+    options = [ "defaults" "user" "rw" ];
+  };
 }
