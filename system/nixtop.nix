@@ -11,6 +11,14 @@ in
     (p "virtualisation.nix")
   ];
 
+  # set to 4x2 = packages that do build will take some time, but oh well
+  nix.settings = {
+    # max-jobs = maximum packages built at once
+    max-jobs = 4;
+    # cores = maximum threads used by a job/package
+    cores = 2;
+  };
+
   # Networking - check your interface name enp<>s0
   networking = {
     hostName = "nixtop";

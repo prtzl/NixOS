@@ -33,10 +33,6 @@ in
     '';
     settings = {
       trusted-users = [ "root" "@wheel" ];
-      # max-jobs = maximum packages built at once
-      max-jobs = 8;
-      # cores = maximum threads used by a job/package
-      cores = 2;
       auto-optimise-store = true;
     };
   };
