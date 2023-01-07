@@ -2,5 +2,5 @@
 
 {
   home.packages = with pkgs; [ unstable.tio ];
-  home.file.".tiorc".source = ./dotfiles/tiorc;
+  home.file.".tiorc".source = ./dotfiles/tio/tiorc;
 }
