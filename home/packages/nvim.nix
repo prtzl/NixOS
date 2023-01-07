@@ -55,6 +55,12 @@ let
     nvim-lspconfig
     plenary-nvim
   ];
+  epics = pkgs.fetchFromGitHub {
+    owner = "minijackson";
+    repo = "epics.nvim";
+    rev = "55b253750dde9e2f772f1893c2ffa47e2c281276";
+    sha256 = "sha256-TczqbpnQ9FaSFeg2VZBP8Lp5o2oHuBI9IOnEuX1pFXk=";
+  };
 in
 {
   home.packages = with pkgs; [
@@ -79,6 +85,7 @@ in
     extraConfig = ''
       " Workaround for broken handling of packpath by vim8/neovim for ftplugins -- see https://github.com/NixOS/nixpkgs/issues/39364#issuecomment-425536054 for more info
       filetype off | syn off
+      ${loadPlugin epics}
       ${loadPlugins plugins}
       filetype indent plugin on | syn on
       ${builtins.readFile ./dotfiles/nvim/init.vim}
