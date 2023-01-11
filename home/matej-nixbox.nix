@@ -30,7 +30,7 @@ in
     clang-tools
     gnumake
     cmake
-    unstable.jlink
+    jlink
     stm32cubemx
     arduino
     drawio
