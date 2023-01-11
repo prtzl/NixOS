@@ -8,13 +8,9 @@
       url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
-    jlink-pack-stable = {
+    jlink-pack = {
       url = "github:prtzl/jlink-nix";
       inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-    jlink-pack-unstable = {
-      url = "github:prtzl/jlink-nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixgl = {
       url = "github:guibou/nixGL";
@@ -52,15 +48,13 @@
         patched = pkgs-matej;
         # Stable package overrides/additions
         nix-monitored = inputs.nix-monitored;
-        jlink = mkFree inputs.jlink-pack-stable.defaultPackage.${system};
+        jlink = mkFree inputs.jlink-pack.defaultPackage.${system};
         glWrapIntel = (import ./nix/nixgl.nix { inherit pkgs; }).glWrapIntel;
         signal-desktop = pkgs-matej.signal-desktop;
         stm32cubemx = pkgs-matej.stm32cubemx;
       };
 
-      unstableOverlay = self: super: {
-        jlink = mkFree inputs.jlink-pack-unstable.defaultPackage.${system};
-      };
+      unstableOverlay = self: super: { };
 
       pkgs = import inputs.nixpkgs-stable {
         inherit system;

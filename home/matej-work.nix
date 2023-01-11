@@ -29,6 +29,7 @@ in
     gnumake
     cmake
     stm32cubemx
+    jlink
 
     # Media
     gimp
