@@ -58,8 +58,8 @@ let
   epics = pkgs.fetchFromGitHub {
     owner = "minijackson";
     repo = "epics.nvim";
-    rev = "55b253750dde9e2f772f1893c2ffa47e2c281276";
-    sha256 = "sha256-TczqbpnQ9FaSFeg2VZBP8Lp5o2oHuBI9IOnEuX1pFXk=";
+    rev = "843c23847bf613c7966a9412e9969d7b240483e9";
+    sha256 = "sha256-/0FIxCv5b/+eFNDHhLLgROUwEytIzJy/0sYMMarqljc=";
   };
 in
 {
