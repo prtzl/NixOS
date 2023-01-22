@@ -15,15 +15,15 @@ let
     (nvim-treesitter.withPlugins (_: pkgs-nvim.tree-sitter.allGrammars)) # syntax for everything
     vim-cpp-enhanced-highlight # better looking cpp highlighting
     markdown-preview-nvim # opens markdown preview in browser
-    telescope-nvim
-    telescope-frecency-nvim
+    telescope-nvim # Fuzzy search
+    telescope-frecency-nvim # 
     lightline-vim # status bar
     vim-gitbranch # get git info for status bar
-    impatient-nvim
     gitsigns-nvim # git gutter
+    impatient-nvim # Everyone and their mother includes this
     incsearch-vim
     nvim-autopairs # autopair braces
-    nvim-tree-lua
+    nvim-tree-lua # file tree
     nvim-web-devicons # icons
     nvim-base16 # color themes
     comment-nvim # smart comments
