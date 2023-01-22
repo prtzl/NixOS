@@ -44,10 +44,13 @@ map('i', '<c-k>', '<cmd>lua require"luasnip".jump(-1)<CR>', nil)
 map('s', '<c-k>', '<cmd>lua require"luasnip".jump(-1)<CR>', nil)
 
 -- FZF
-map('n', '<c-p>', '<cmd>lua require("telescope.builtin").find_files()<cr>', { silent = false })
-map('n', '<c-g>', '<cmd>lua require("telescope.builtin").live_grep()<cr>', { silent = false })
-map('n', '<c-b>', '<cmd>lua require("telescope.builtin").buffers()<cr>', { silent = false })
-map('n', '<c-f>', '<cmd>lua require("telescope.builtin").help_tags()<cr>', { silent = false })
+map('n', '<c-p>', '<cmd>lua require("telescope.builtin").find_files()<cr>', nil)
+map('n', '<c-a>',
+    '<cmd>lua require("telescope.builtin").find_files({no_ignore = true, no_gnore_parent = true, hidden = true})<cr>',
+    nil)
+map('n', '<c-g>', '<cmd>lua require("telescope.builtin").live_grep()<cr>', nil)
+map('n', '<c-b>', '<cmd>lua require("telescope.builtin").buffers()<cr>', nil)
+map('n', '<c-f>', '<cmd>lua require("telescope.builtin").help_tags()<cr>', nil)
 
 -- Diagnostic
 map('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<cr>', nil)

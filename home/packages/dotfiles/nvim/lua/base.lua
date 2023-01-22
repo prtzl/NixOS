@@ -66,33 +66,36 @@ if vim.fn.executable("rg") then
     vim.opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 end
 
+-- Improved cpp
+vim.g.cpp_class_decl_highlight = 1
+vim.g.cpp_class_scope_highlight = 1
+vim.g.cpp_member_variable_highlight = 1
+
 -- Prevent strange file save behaviour.
 -- https://github.com/srid/emanote/issues/180
 vim.opt.backupcopy = 'yes'
 
+-- Status bar - lightline
+vim.g.lightline = {
+    colorscheme = 'wombat',
+    active = {
+        left = {
+            { 'mode', 'paste' },
+            { 'gitbranch', 'readonly', 'filename', 'modified' }
+        },
+        right = {
+            { 'lineinfo' },
+            { 'percent' },
+            { 'fileformat', 'fileencoding', 'filetype' }
+        },
+    },
+    component_function = {
+        gitbranch = 'gitbranch#name'
+    }
+}
+
 -- Can't be bothered to port
 vim.cmd([[
-    "" Status bar - lightline
-    let g:lightline = {
-          \ 'colorscheme': 'wombat',
-          \ 'active': {
-          \   'left': [ [ 'mode', 'paste' ],
-          \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-          \   'right': [ [ 'lineinfo' ],
-          \              [ 'percent' ],
-          \              [ 'fileformat', 'fileencoding', 'filetype', ] ]
-          \ },
-          \ 'component_function': {
-          \   'gitbranch': 'gitbranch#name'
-          \ },
-          \ }
-
-
-    " Improved cpp
-    let g:cpp_class_decl_highlight = 1
-    let g:cpp_class_scope_highlight = 1
-    let g:cpp_member_variable_highlight = 1
-
     " Print opened file in tmux bar
     if exists('$TMUX')
       let windowName = system("tmux display-message -p '#W'")
