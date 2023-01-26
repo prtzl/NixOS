@@ -56,11 +56,23 @@ in
 
     # Other
     nixgl.nixGLIntel
+
+    # Virtual
+    virt-manager
   ];
 
   # Non-nixos openGL patched programs
   programs.alacritty.package = pkgs.glWrapIntel {
     pkg = pkgs.alacritty;
+  };
+
+  # My eyes
+  services.redshift = {
+    enable = true;
+    temperature.night = 4000;
+    temperature.day = 4000;
+    latitude = "46.05";
+    longitude = "14.5";
   };
 
   home.sessionVariables = {
