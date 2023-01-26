@@ -3,11 +3,11 @@
     enable = true;
     settings = {
       font = {
-        family = "FiraCode Nerd Font";
-        style = "Regular";
+        normal = {
+          family = "FiraCode Nerd Font Mono";
+          style = "Regular";
+        };
         size = 12;
-        antialias = true;
-        autohint = true;
       };
       env.TERM = "xterm-256color";
       window = {

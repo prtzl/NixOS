@@ -190,7 +190,7 @@ in
 
     "org/gnome/desktop/interface" = {
       toolkit-accessibility = false;
-      monospace-font-name = "FiraCode Nerd Font 10"; # I want "{monospace-font.family}" + " ${monospace-font.style}";
+      monospace-font-name = "FiraCode Nerd Font Mono 10"; # I want "{monospace-font.family}" + " ${monospace-font.style}";
     };
 
     "org/gnome/libgnomekbd/keyboard" = {
