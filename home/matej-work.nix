@@ -57,9 +57,6 @@ in
 
     # Other
     nixgl.nixGLIntel
-
-    # Virtual
-    virt-manager
   ];
 
   # Non-nixos openGL patched programs
