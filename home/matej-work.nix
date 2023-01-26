@@ -10,7 +10,7 @@ in
     (p "tio.nix")
     (p "tmux.nix")
     (p "ranger.nix")
-    # (p "dconf-ubuntu.nix")
+    (p "dconf.nix")
     (p "fonts.nix")
     (p "zsh.nix")
     (p "alacritty.nix")
