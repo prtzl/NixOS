@@ -12,7 +12,6 @@ telescope.setup {
         sorting_strategy = 'ascending',
         scroll_strategy = 'limit',
         border = true,
-        path_display = 'absolute',
         mappings = {
             i = {
                 ["<esc>"] = actions.close,
