@@ -35,6 +35,7 @@ in
     gimp
     libreoffice
     unstable.evince
+    gnome.gnome-screenshot
 
     # Documents
     texlive.combined.scheme-full
