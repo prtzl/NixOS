@@ -10,14 +10,14 @@ in
     (p "tio.nix")
     (p "tmux.nix")
     (p "ranger.nix")
-    (p "dconf.nix")
+    # (p "dconf-ubuntu.nix")
     (p "fonts.nix")
     (p "zsh.nix")
     (p "alacritty.nix")
   ];
 
-  home.username = "matej";
-  home.homeDirectory = "/home/matej";
+  home.username = "mblagsic";
+  home.homeDirectory = "/home/mblagsic";
   home.stateVersion = "22.11";
 
   # Packages
@@ -41,6 +41,7 @@ in
     texstudio
 
     # Online
+    firefox
     chromium
     megasync
     enpass
