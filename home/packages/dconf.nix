@@ -84,13 +84,13 @@ in
 
     "org/cinnamon/desktop/keybindings/custom-keybindings/custom1" = {
       binding = [ "<Super>s" ];
-      command = "sh ${config.home.homeDirectory}/.save-windows.sh";
+      command = "bash ${config.home.homeDirectory}/.save-windows.sh";
       name = "save window states";
     };
 
     "org/cinnamon/desktop/keybindings/custom-keybindings/custom2" = {
       binding = [ "<Super>r" ];
-      command = "sh ${config.home.homeDirectory}/.load-windows.sh";
+      command = "bash ${config.home.homeDirectory}/.load-windows.sh";
       name = "restore window states";
     };
 

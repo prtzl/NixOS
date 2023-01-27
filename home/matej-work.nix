@@ -49,7 +49,6 @@ in
     transmission-gtk
 
     # Communication
-    zoom-us
     teams
     skypeforlinux
     unstable.signal-desktop-beta
