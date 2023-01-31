@@ -2,6 +2,8 @@
   inputs = {
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-matej.url = "github:prtzl/nixpkgs/patch";
+    nixpkgs-nvim.url = "github:nixos/nixpkgs/f994293d1eb8812f032e8919e10a594567cf6ef7";
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
@@ -15,12 +17,6 @@
     nixgl = {
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    nixpkgs-matej = {
-      url = "github:prtzl/nixpkgs/patch";
-    };
-    nixpkgs-nvim = {
-      url = "github:nixos/nixpkgs/f994293d1eb8812f032e8919e10a594567cf6ef7";
     };
     nix-monitored = {
       url = "github:ners/nix-monitored/master";
@@ -114,7 +110,7 @@
       let
       in
       {
-        devShells.default = pkgs.mkShell {
+        devShells.default = pkgs.mkShellNoCC {
           name = "Installation-shell";
           nativeBuildInputs = with pkgs-unstable; [ nix nixfmt nvd ];
         };
