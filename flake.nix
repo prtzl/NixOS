@@ -97,6 +97,7 @@
           test-testbox = mkHome "${path}/test-testbox.nix";
           matej-work = mkHome "${path}/matej-work.nix";
           matej-ubuntubox = mkHome "${path}/matej-ubuntubox.nix";
+          dev-epics = mkHome "${path}/dev-epics.nix";
         };
 
       nixbox = unwrapSystem nixosConfigurations.nixbox;
@@ -107,6 +108,7 @@
       test-testbox = homeConfigurations.test-testbox;
       matej-work = homeConfigurations.matej-work;
       matej-ubuntubox = homeConfigurations.matej-ubuntubox;
+      dev-epics = homeConfigurations.dev-epics;
 
     } // inputs.flake-utils.lib.eachDefaultSystem (system:
       let
