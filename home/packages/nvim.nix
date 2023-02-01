@@ -20,6 +20,7 @@ let
     lightline-vim # status bar
     vim-gitbranch # get git info for status bar
     gitsigns-nvim # git gutter
+    vim-fugitive # Git tool
     impatient-nvim # Everyone and their mother includes this
     incsearch-vim
     nvim-autopairs # autopair braces
