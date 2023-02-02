@@ -9,6 +9,7 @@ in
   # Packages
   home.packages = with pkgs; [
     home-update
+    nixfmt
     nvd
     roboto
     flac
