@@ -21,6 +21,7 @@ let
     vim-gitbranch # get git info for status bar
     gitsigns-nvim # git gutter
     vim-fugitive # Git tool
+    lazygit-nvim # Another git tool
     impatient-nvim # Everyone and their mother includes this
     incsearch-vim
     nvim-autopairs # autopair braces
@@ -73,6 +74,7 @@ in
     python39Packages.python-lsp-server # python lsp
     sumneko-lua-language-server # lua lsp
     tree-sitter
+    lazygit
   ]);
   programs.neovim = {
     # Default is pkgs.neovim-unwrapped
