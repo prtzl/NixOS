@@ -30,6 +30,7 @@ in
     cmake
     stm32cubemx
     jlink
+    podman
 
     # Media
     gimp
