@@ -50,7 +50,6 @@ in
     transmission-gtk
 
     # Communication
-    teams
     skypeforlinux
     unstable.signal-desktop-beta
     unstable.discord
