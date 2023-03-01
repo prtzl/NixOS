@@ -21,4 +21,11 @@ require 'nvim-treesitter.configs'.setup {
     parser_install_dir = vim.fn.stdpath("data") .. "/site",
 }
 
+-- Manualy add epics nvim plugin - just loads up epics treesitter modules at runtime
 require("epics").setup {}
+
+-- Set markdown conceal level to 0 - don't conceal anything
+-- Markdown preview with treesitter hides stuff such as
+-- text URLs, code block ticks and syntax type and makes it
+-- a pain in the ass to edit, don't conceal shit please
+vim.g.conceallevel = 0
