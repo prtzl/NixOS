@@ -74,6 +74,7 @@ in
 
     "org/cinnamon/desktop/keybindings" = {
       custom-list = [ "__dummy__" "custom0" "custom1" "custom2" ];
+      show-desklets = [ ];
     };
 
     "org/cinnamon/desktop/keybindings/custom-keybindings/custom0" = {
