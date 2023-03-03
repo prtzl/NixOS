@@ -48,6 +48,7 @@
         glWrapIntel = (import ./nix/nixgl.nix { inherit pkgs; }).glWrapIntel;
         signal-desktop = pkgs-matej.signal-desktop;
         stm32cubemx = pkgs-matej.stm32cubemx;
+        viber = super.viber.override { openssl = pkgs.openssl_1_1; };
       };
 
       unstableOverlay = self: super: { };

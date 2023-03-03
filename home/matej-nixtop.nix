@@ -58,10 +58,10 @@ in
 
     # Communication
     zoom-us
-    teams
     skypeforlinux
     discord
     signal-desktop
+    viber
   ];
 
   # My eyes
