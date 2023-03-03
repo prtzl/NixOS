@@ -1,7 +1,19 @@
-{ config, pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
-  p = package: ./. + "/packages/${package}";
+  # Create package path
+  p = package: (./. + ("/packages/" + "${package}"));
+  # Import a package with extra args
+  pp = { package, ... } @ args: (
+    let
+      path = ./. + ("/packages/" + "${package}");
+    in
+    import "${path}" (
+      args // {
+        inherit pkgs config;
+      }
+    )
+  );
 in
 {
   imports = [
@@ -14,6 +26,7 @@ in
     (p "fonts.nix")
     (p "zsh.nix")
     (p "alacritty.nix")
+    (pp { package = "startx.nix"; desktop-environment = "cinnamon-session"; })
   ];
 
   home.username = "mblagsic";
@@ -22,15 +35,9 @@ in
 
   # Packages
   home.packages = with pkgs; [
-    # Dev
-    gcc-arm-embedded
-    gcc
-    clang-tools
-    gnumake
-    cmake
     stm32cubemx
-    jlink
     podman
+    fuse-overlayfs
 
     # Media
     gimp
@@ -76,4 +83,5 @@ in
     NIX_HOME_DERIVATION = "matej-work";
   };
 }
+
 
