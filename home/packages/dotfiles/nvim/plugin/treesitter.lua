@@ -18,7 +18,10 @@ require 'nvim-treesitter.configs'.setup {
         -- colors = {}, -- table of hex strings
         -- termcolors = {} -- table of colour name strings
     },
+    -- Add parser install dir for "external (not nix, oops)" parsers, experimental, etc.
     parser_install_dir = vim.fn.stdpath("data") .. "/site",
+    autopairs = { enable = true },
+    indent = { enable = true, disable = { "yaml", "text" } }
 }
 
 -- Manualy add epics nvim plugin - just loads up epics treesitter modules at runtime
