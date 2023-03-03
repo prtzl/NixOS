@@ -78,7 +78,7 @@ in
   };
 
   dconf.settings = {
-  "org/cinnamon/desktop/peripherals/touchpad" = {tap-to-click = true;};
-    };
+    "org/cinnamon/desktop/peripherals/touchpad" = { tap-to-click = true; };
+  };
 }
 
