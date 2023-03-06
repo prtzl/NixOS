@@ -18,6 +18,7 @@ in
     gnupg
     bottom
     unstable.nix
+    joplin-desktop
   ];
 
   # Privat git
