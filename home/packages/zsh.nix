@@ -92,6 +92,7 @@
       ll = "ls -l";
       grep = "grep --color=always -n";
       ssh = "ssh -C";
+      xclip = "xclip -selection clipboard";
 
       # Programs
       pdf = "evince";
