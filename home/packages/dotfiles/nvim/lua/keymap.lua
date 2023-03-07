@@ -73,3 +73,6 @@ map('i', '<c-_>', '<esc>gcc<right>i', { noremap = false })
 
 -- Git - lazygit
 map('n', '<c-\\>', ':LazyGit<cr>', nil)
+
+-- nvim tree view
+map('n', '<c-t>', ':NvimTreeToggle<cr>', nil)
