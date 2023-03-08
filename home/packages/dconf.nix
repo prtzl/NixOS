@@ -52,6 +52,10 @@ in
 
     "org/cinnamon/desktop/screensaver" = {
       picture-options = "zoom";
+      show-album-art = false;
+      floating-widgets = false;
+      allow-media-control = false;
+      allow-keyboard-shortcuts = false;
       picture-uri = "file://${lockscreenPath}";
       picture-uri-dark = "file://${lockscreenPath}";
     };
