@@ -25,18 +25,12 @@ in
   # Packages
   home.packages = with pkgs; [
     # Dev
-    gcc-arm-embedded
-    gcc
-    clang-tools
-    gnumake
-    cmake
-    jlink
     stm32cubemx
-    arduino
     drawio
 
     # Content creation
     gimp
+    obs-studio
 
     # Net
     chromium

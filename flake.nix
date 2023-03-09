@@ -36,6 +36,7 @@
       mkSystem = generators.mkSystem;
       unwrapSystem = generators.unwrapSystem;
       mkHome = generators.mkHome;
+      mojaHrenokva = "hrenova";
 
       stableOverlay = self: super: {
         # Packages
