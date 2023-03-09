@@ -80,13 +80,7 @@
     enableCompletion = true;
 
     shellAliases = {
-      # Manage updating
-      update = "sudo nix-channel --update";
-      aps = "sudo nixos-rebuild switch";
-      upgrade = "update && aps";
-
       # Utilities 
-      nix-shell = "nix-shell --command zsh";
       ls = "exa --group-directories-first --color=always --icons";
       l = "ls -la";
       ll = "ls -l";
@@ -155,6 +149,8 @@
   };
 
   home.file.".profile.home".text = ''
+    # This file should be sourced by ~/.profile
+    # This is currently just for non-nixos platforms
     # Options for non-nixos systems
     if [ ! -d "/etc/nixos" ]; then
       export PATH=$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH
