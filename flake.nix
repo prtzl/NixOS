@@ -12,7 +12,7 @@
     };
     jlink-pack = {
       url = "github:prtzl/jlink-nix";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixgl = {
       url = "github:guibou/nixGL";
@@ -36,7 +36,6 @@
       mkSystem = generators.mkSystem;
       unwrapSystem = generators.unwrapSystem;
       mkHome = generators.mkHome;
-      mojaHrenokva = "hrenova";
 
       stableOverlay = self: super: {
         # Packages
@@ -52,8 +51,6 @@
         viber = super.viber.override { openssl = pkgs.openssl_1_1; };
       };
 
-      unstableOverlay = self: super: { };
-
       pkgs = import inputs.nixpkgs-stable {
         inherit system;
         config.allowUnfree = true;
@@ -63,7 +60,7 @@
       pkgs-unstable = import inputs.nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ unstableOverlay ];
+        overlays = [ ];
       };
 
       pkgs-matej = import inputs.nixpkgs-matej {
