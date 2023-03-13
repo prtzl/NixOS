@@ -7,5 +7,11 @@
     temperature.day = 4000;
     latitude = "46.05";
     longitude = "14.5";
+    settings = {
+      redshift = {
+        adjustment-method = "randr";
+      };
+      randr = { screen = 0; };
+    };
   };
 }
