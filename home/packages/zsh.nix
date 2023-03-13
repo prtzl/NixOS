@@ -164,8 +164,6 @@
     if [ ! -d "/etc/nixos" ]; then
       if [ -f "$HOME/.startx.home" ]; then
         source $HOME/.startx.home
-        # It looks like redshift, even if installed to home, does not start ...
-        systemctl --user start redshift.service
       fi
     fi
   '';
