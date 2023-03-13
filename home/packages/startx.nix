@@ -5,8 +5,8 @@
     # Start DE on first session
     de=$(which ${desktop-environment})
     available=$?
-    if [[ "$(tty)" = "/dev/tty1" && "$available" = "0" ]]; then
-      pgrep ${desktop-environment} || startx
+    if [[ "$(tty)" = "/dev/tty1" && "$available" = "0" && -z "''${DISPLAY}" ]]; then
+      pgrep ${desktop-environment} || exec startx
     fi
   '';
 
