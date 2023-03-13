@@ -16,6 +16,7 @@ in
     (p "ranger.nix")
     (p "tmux.nix")
     (p "fonts.nix")
+    (p "redshift.nix")
   ];
 
   home.username = "matej";
@@ -72,15 +73,6 @@ in
     unstable.discord
     signal-desktop
   ];
-
-  # My eyes
-  services.redshift = {
-    enable = true;
-    temperature.night = 4000;
-    temperature.day = 4000;
-    latitude = "46.05";
-    longitude = "14.5";
-  };
 
   home.sessionVariables = {
     NIX_HOME_DERIVATION = "matej-nixbox";
