@@ -111,7 +111,6 @@
 
     initExtra = ''
       autoload -U colors && colors
-      autoload -U compinit && compinit
       
       zstyle ':completion:*' menu select
       zstyle ':completion:*' group-name ""
