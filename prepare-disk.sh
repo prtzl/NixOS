@@ -70,8 +70,8 @@ partitionBios()
     parted -s $DISK mkpart primary linux-swap 1MiB 512MiB
     parted -s $DISK mkpart primary 512MiB 100%
     # Format
-    mkswap -F -L swap ${PART}1
-    mkfs.ext4 -F -L nixos ${PART}2
+    mkswap -L swap ${PART}1
+    mkfs.ext4 -L nixos ${PART}2
     # Mount and enable swap
     mount /dev/disk/by-label/nixos /mnt
     swapon /dev/disk/by-label/swap
