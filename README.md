@@ -1,14 +1,14 @@
 # NixOS configuration
 
 This is my NixOS configuration repository.  
-It contains system and user configuration files. System files in [system](./system) are used to build Nixos machine configurations and thus managing the state of the whole operating system.
+It contains system and user configuration files. System files in [system](./system) are used to build NixOS machine configurations and thus managing the state of the whole operating system.
 Home files in [home](./home) are used to configure user applications and dotfiles managed by home-manager, which is installed either by system or manually on non-nixos platforms.  
 More info on [nixos website](https://nixos.org).  
 Old readme can be found [here](./README_DETAILED.md).
 
-## Install Nixos
+## Install NixOS
 
-To install Nixos on a machine, follow the steps in the [nixos manual](./docs/nixos.md).
+To install NixOS on a machine, follow the steps in the [nixos manual](./docs/nixos.md).
 
 ## Install Nix on non-NixOS system
 
@@ -25,6 +25,8 @@ For maintenance of both system and home I created two scripts, each installed by
 Both scripts build the derivation, show the diff and ask for confirmation. System update requires sudo.  
 Both scripts also accept option `-r`, which updates the flake lock file and thus does a system update instead of just rebuild.  
 Other flags and options are passed on to the nix build command, excluding `-r` if present.  
+
+You can read more on each script in the docs for [NixOS](./docs/nixos.md) and [home-manager](./docs/home.md).
 
 ## Wallpaper
 
