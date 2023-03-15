@@ -110,7 +110,7 @@ ln -s ../home/<username>/nixos nixos
 
 Now we're ready to launch the installer.
 
-## Install Nixos
+## Install NixOS
 
 NixOS installer will look for `/mnt/etc/nixos/configuration.nix` or a flake in the same directory location. To run installer, run:
 
