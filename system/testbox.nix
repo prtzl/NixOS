@@ -12,7 +12,7 @@ in
   # Networking - check your interface name enp<>s0
   networking = {
     hostName = "testbox";
-    interfaces.enp9s0.useDHCP = true;
+    interfaces.enp1s0.useDHCP = true;
   };
 
   # Set your time zone - where are you ?
