@@ -1,7 +1,7 @@
 -- Format the file before it is written
 local formatToggle = function()
     if vim.g.formatToggle then
-        vim.lsp.buf.formatting()
+        vim.lsp.buf.format { async = true }
     end
 end
 

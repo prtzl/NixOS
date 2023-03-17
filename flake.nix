@@ -75,24 +75,26 @@
     in
     rec {
       nixosConfigurations =
-        let path = "${PWD}/system";
+        let
+          config = file: ./system + "/${file}";
         in
-        rec {
-          nixbox = mkSystem { configuration = "${path}/nixbox.nix"; };
-          nixtop = mkSystem { configuration = "${path}/nixtop.nix"; hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s; };
-          testbox = mkSystem { configuration = "${path}/testbox.nix"; };
+        {
+          nixbox = mkSystem { configuration = config "nixbox.nix"; };
+          nixtop = mkSystem { configuration = config "nixtop.nix"; hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s; };
+          testbox = mkSystem { configuration = config "testbox.nix"; };
         };
 
       homeConfigurations =
-        let path = "${PWD}/home";
+        let
+          config = file: ./home + "/${file}";
         in
         rec {
-          matej-nixbox = mkHome "${path}/matej-nixbox.nix";
-          matej-nixtop = mkHome "${path}/matej-nixtop.nix";
-          test-testbox = mkHome "${path}/test-testbox.nix";
-          matej-work = mkHome "${path}/matej-work.nix";
-          matej-ubuntubox = mkHome "${path}/matej-ubuntubox.nix";
-          dev-epics = mkHome "${path}/dev-epics.nix";
+          matej-nixbox = mkHome (config "matej-nixbox.nix");
+          matej-nixtop = mkHome (config "matej-nixtop.nix");
+          test-testbox = mkHome (config "test-testbox.nix");
+          matej-work = mkHome (config "matej-work.nix");
+          matej-ubuntubox = mkHome (config "matej-ubuntubox.nix");
+          dev-epics = mkHome (config "dev-epics.nix");
         };
 
       nixbox = unwrapSystem nixosConfigurations.nixbox;

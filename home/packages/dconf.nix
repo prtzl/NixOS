@@ -163,7 +163,7 @@ in
       workspace-cycle = false;
     };
 
-    "org/cinnamon/settings-daemon/peripherals/keyboard" = {
+    "org/cinnamon/desktop/peripherals/keyboard" = {
       delay = mkUint32 250;
       numlock-state = "on";
       repeat-interval = mkUint32 18;

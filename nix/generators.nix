@@ -7,13 +7,13 @@ let
       {
         nixpkgs.pkgs = pkgs;
       }
-      "${configuration}"
+      configuration
     ] ++ (if hardware != null then [ hardware ] else [ ]);
   });
 
   mkHome = home-derivation: unwrapHome (home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
-    modules = [ "${home-derivation}" ];
+    modules = [ home-derivation ];
     extraSpecialArgs = {
       lib = import "${home-manager}/modules/lib/stdlib-extended.nix" pkgs.unstable.lib;
     };
