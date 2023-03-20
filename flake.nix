@@ -32,7 +32,7 @@
       PWD = builtins.getEnv "PWD";
 
       mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
-      generators = import ./nix/generators.nix { inherit system lib home-manager pkgs; };
+      generators = import ./nix/generators.nix { inherit inputs system lib home-manager pkgs; };
       mkSystem = generators.mkSystem;
       unwrapSystem = generators.unwrapSystem;
       mkHome = generators.mkHome;

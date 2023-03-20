@@ -1,4 +1,4 @@
-{ system, pkgs, lib, home-manager, ... }:
+{ inputs, system, pkgs, lib, home-manager, ... }:
 
 let
   mkSystem = { configuration, hardware ? null }: (lib.nixosSystem {
@@ -9,12 +9,14 @@ let
       }
       configuration
     ] ++ (if hardware != null then [ hardware ] else [ ]);
+    specialArgs = { inherit inputs; };
   });
 
   mkHome = home-derivation: unwrapHome (home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
     modules = [ home-derivation ];
     extraSpecialArgs = {
+      inherit inputs;
       lib = import "${home-manager}/modules/lib/stdlib-extended.nix" pkgs.unstable.lib;
     };
   });
