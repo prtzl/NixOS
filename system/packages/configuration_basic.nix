@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 let
   nixos-update = pkgs.writeShellScriptBin "nixos-update" (builtins.readFile ./local-pkgs/nixos-update.sh);
@@ -19,6 +19,10 @@ in
   # Cleaning lady
   nix = {
     package = pkgs.unstable.nix;
+    registry = {
+      nixpkgs.flake = inputs.nixpkgs-stable;
+      unstable.flake = inputs.nixpkgs-unstable;
+    };
     gc = {
       automatic = true;
       dates = "weekly";
