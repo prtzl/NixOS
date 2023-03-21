@@ -1,9 +1,12 @@
+local custom_ayu_dark = require('lualine.themes.ayu_dark')
+custom_ayu_dark.normal.c.fg = '#e7e7e7'
+
 require('lualine').setup {
     options = {
         icons_enabled = true,
-        theme = 'ayu_dark',
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
+        theme = custom_ayu_dark,
+        component_separators = { left = '|', right = '|' },
+        section_separators = { left = '', right = '' },
         disabled_filetypes = {
             statusline = {},
             winbar = {},
@@ -33,8 +36,22 @@ require('lualine').setup {
         lualine_y = {},
         lualine_z = {}
     },
+    winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {}
+    },
+    inactive_winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {}
+    },
     tabline = {},
-    winbar = {},
-    inactive_winbar = {},
     extensions = {}
 }
