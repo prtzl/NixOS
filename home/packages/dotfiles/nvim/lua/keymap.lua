@@ -23,6 +23,9 @@ map('n', '<c-s-right>', ':vertical resize +5<cr>', nil)
 map('!', '<c-bs>', '<c-w>', nil)
 map('!', '<c-h>', '<c-w>', nil)
 
+-- move to the end of line while in insert mode
+map('i', '<c-]>', '<esc>A', nil)
+
 -- Move back and forth in buffers
 -- Note so self: <c-[> is maped as if <Esc> is pressed - higher power control, abandon hope
 map('n', '[[', ':bprev<cr>', nil)
