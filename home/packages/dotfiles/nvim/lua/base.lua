@@ -75,25 +75,6 @@ vim.g.cpp_member_variable_highlight = 1
 -- https://github.com/srid/emanote/issues/180
 vim.opt.backupcopy = 'yes'
 
--- Status bar - lightline
-vim.g.lightline = {
-    colorscheme = 'wombat',
-    active = {
-        left = {
-            { 'mode', 'paste' },
-            { 'gitbranch', 'readonly', 'filename', 'modified' }
-        },
-        right = {
-            { 'lineinfo' },
-            { 'percent' },
-            { 'fileformat', 'fileencoding', 'filetype' }
-        },
-    },
-    component_function = {
-        gitbranch = 'gitbranch#name'
-    }
-}
-
 -- Can't be bothered to port
 vim.cmd([[
     " Print opened file in tmux bar
