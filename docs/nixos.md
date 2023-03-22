@@ -122,7 +122,7 @@ nixos-install
 # In case of a flake with multiple configurations/NixOS outputs (this repo) 
 # In my case, my main PC uses configuration "nixbox". I also need to add "--impure" option
 cd /mnt/etc/nixos
-nixos-install --flake .#<nixos configuration> --impure
+nixos-install --flake .#<nixos configuration>
 ```
 
 When the install is finished you will be asked to set a root password. I enter "root" and change it later.  
