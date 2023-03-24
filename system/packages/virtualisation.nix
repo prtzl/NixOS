@@ -1,15 +1,16 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 
 let
   ovmf = pkgs.OVMF.override {
     secureBoot = true;
     tpmSupport = true;
   };
-in {
+in
+{
   virtualisation = {
     podman.enable = true;
     docker.enable = true;
-    #virtualbox.host.enable = true; // nixos 22.05 broken!
+    virtualbox.host.enable = true;
     spiceUSBRedirection.enable = true;
     libvirtd = {
       enable = true;
