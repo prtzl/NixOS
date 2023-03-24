@@ -51,6 +51,7 @@ in
   ];
 
   services = {
+    acpid.enable = true;
     blueman.enable = true;
     hardware.bolt.enable = true;
     throttled.extraConfig = ''
@@ -75,8 +76,8 @@ in
   boot = {
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "thunderbolt" ];
     initrd.kernelModules = [ ];
-    kernelModules = [ "kvm-intel" ];
-    extraModulePackages = [ ];
+    kernelModules = [ "kvm-intel" "acpi_call" "vboxdrv" "vboxnetflt" "vboxnetadp" "vboxpci" ];
+    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   };
 
   # More stuff
@@ -98,4 +99,5 @@ in
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.bluetooth.enable = true;
+  hardware.acpilight.enable = true;
 }
