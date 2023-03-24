@@ -55,7 +55,7 @@ in
     zoom-us
     skypeforlinux
     discord
-    signal-desktop
+    signal-desktop-beta
     viber
   ];
 
