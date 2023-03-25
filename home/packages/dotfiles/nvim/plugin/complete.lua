@@ -1,5 +1,6 @@
 -- Help: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt
 local cmp = require 'cmp'
+local select_opts = { behavior = cmp.SelectBehavior.Select }
 local luasnip = require 'luasnip'
 local lspkind = require 'lspkind'
 
@@ -90,8 +91,10 @@ cmp.setup({
         --['<Tab>'] = cmp.mapping.select_next_item(),
         ['<C-n>'] = cmp.config.disable,
         ['<C-p>'] = cmp.config.disable,
-        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+        ['<Up>'] = cmp.mapping.select_prev_item(select_opts),
+        ['<Down>'] = cmp.mapping.select_next_item(select_opts),
+        ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
         ['<C-k>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm({
@@ -101,16 +104,14 @@ cmp.setup({
     }),
     -- Installed sources
     sources = {
-        -- Language servers and snippets
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        -- Other sources
+        { name = 'path' },
+        { name = 'nvim_lsp', keyword_length = 1 },
+        { name = 'buffer', keyword_length = 3 },
+        { name = 'luasnip', keyword_length = 2 },
         { name = 'spell', option = { keep_all_entries = false }, },
         { name = 'buffer-lines' },
-        { name = 'buffer' },
         { name = 'treesitter' },
         { name = 'omni' },
-        { name = 'path' },
         { name = 'nvim_lua' },
     },
     -- Show: abbreviation, symbol + kind, menu
@@ -140,12 +141,8 @@ cmp.setup({
         },
     },
     window = {
-        documentation = {
-            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        },
-        completion = {
-            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        },
+        documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered()
     },
     experimental = {
         ghost_text = true,
