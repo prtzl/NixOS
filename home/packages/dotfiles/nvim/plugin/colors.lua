@@ -9,3 +9,6 @@ require('base16-colorscheme').setup({
     base0C = '#95e6cb', base0D = '#59c2ff', base0E = '#d2a6ff', base0F = '#e6b673'
 })
 vim.cmd 'set background=dark'
+
+-- Overrides
+vim.api.nvim_set_hl(0, "CmpItemAbbr", { cternbg = None, bg = None })
