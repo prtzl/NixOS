@@ -2,6 +2,7 @@
 local cmp = require 'cmp'
 local select_opts = { behavior = cmp.SelectBehavior.Select }
 local luasnip = require 'luasnip'
+require('luasnip/loaders/from_vscode').lazy_load()
 local lspkind = require 'lspkind'
 
 -- some other good icons
@@ -66,7 +67,14 @@ cmp.setup({
             luasnip.lsp_expand(args.body)
         end,
     },
+    completion = {
+        -- default, but I tried with disabled as well
+        autocomplete = true
+    },
     mapping = ({
+        -- My tab implementation differs from up/down arrows
+        -- Here the item is previewed whereas up/down just selects
+        -- Same with luasnip
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -106,9 +114,10 @@ cmp.setup({
     sources = {
         { name = 'path' },
         { name = 'nvim_lsp', keyword_length = 1 },
-        { name = 'buffer', keyword_length = 3 },
         { name = 'luasnip', keyword_length = 2 },
+        { name = 'buffer', keyword_length = 3 },
         { name = 'spell', option = { keep_all_entries = false }, },
+        { name = 'emoji' },
         { name = 'buffer-lines' },
         { name = 'treesitter' },
         { name = 'omni' },
@@ -139,6 +148,7 @@ cmp.setup({
                 return vim_item
             end,
         },
+        expendable_indicator = true;
     },
     window = {
         documentation = cmp.config.window.bordered(),
