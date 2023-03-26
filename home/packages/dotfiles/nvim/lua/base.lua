@@ -66,6 +66,9 @@ if vim.fn.executable("rg") then
     vim.opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 end
 
+-- Set floating window dimensions
+vim.opt.pumheight = 10 -- cap height for popup windows at 10 lines
+
 -- Improved cpp
 vim.g.cpp_class_decl_highlight = 1
 vim.g.cpp_class_scope_highlight = 1
