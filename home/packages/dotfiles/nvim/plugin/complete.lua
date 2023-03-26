@@ -67,10 +67,6 @@ cmp.setup({
             luasnip.lsp_expand(args.body)
         end,
     },
-    completion = {
-        -- default, but I tried with disabled as well
-        autocomplete = true
-    },
     mapping = ({
         -- My tab implementation differs from up/down arrows
         -- Here the item is previewed whereas up/down just selects
@@ -95,8 +91,6 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s" }),
-        --['<S-Tab>'] = cmp.mapping.select_prev_item(),
-        --['<Tab>'] = cmp.mapping.select_next_item(),
         ['<C-n>'] = cmp.config.disable,
         ['<C-p>'] = cmp.config.disable,
         ['<Up>'] = cmp.mapping.select_prev_item(select_opts),
