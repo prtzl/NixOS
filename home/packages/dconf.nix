@@ -161,6 +161,8 @@ in
       tile-hud-threshold = 25;
       tile-maximize = true;
       workspace-cycle = false;
+      center-new-windows = true;
+      draggable-border-width = 10;
     };
 
     "org/cinnamon/settings-daemon/peripherals/keyboard" = {
@@ -206,10 +208,6 @@ in
     "org/gnome/libgnomekbd/keyboard" = {
       layouts = [ "us" "si" ];
       options = [ "grp\tgrp:win_space_toggle" ];
-    };
-
-    "org/gnome/mutter" = {
-      dynamic-workspaces = false;
     };
 
     "org/gnome/nm-applet" = {
