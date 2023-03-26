@@ -45,6 +45,7 @@ let
     cmp-nvim-lsp-document-symbol
     cmp-spell
     cmp-nvim-lua
+    cmp-emoji
     fidget-nvim
     fzf-lsp-nvim
     lsp_extensions-nvim
