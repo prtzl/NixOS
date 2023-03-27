@@ -51,6 +51,7 @@ in
   ];
 
   services = {
+    fwupd.enable = true;
     acpid.enable = true;
     blueman.enable = true;
     hardware.bolt.enable = true;
