@@ -30,6 +30,7 @@ in
       panels-height = [ "1:30" ];
       startup-animation = false;
       workspace-osd-visible = false;
+      workspace-expo-view-as-grid = true;
     };
 
     "org/cinnamon/cinnamon-session" = {
