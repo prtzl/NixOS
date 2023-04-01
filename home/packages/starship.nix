@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, homeArgs, ... }:
 
+let
+  personal = if homeArgs == null then true else homeArgs.personal;
+in
 {
   programs.starship = {
     enable = true;
@@ -22,8 +25,9 @@
       hostname = {
         disabled = false;
         ssh_only = false;
-        style = "bold dimmed green";
-        format = "[@$hostname]($style)";
+        ssh_symbol = "  ";
+        style = "bold " + (if personal then "green" else "blue");
+        format = "[@$hostname$ssh_symbol]($style)";
       };
       directory = {
         truncation_length = 10;
