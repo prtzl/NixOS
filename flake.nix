@@ -86,12 +86,12 @@
           config = file: ./home + "/${file}";
         in
         rec {
-          matej-nixbox = mkHome (config "matej-nixbox.nix");
-          matej-nixtop = mkHome (config "matej-nixtop.nix");
-          test-testbox = mkHome (config "test-testbox.nix");
-          matej-work = mkHome (config "matej-work.nix");
-          matej-ubuntubox = mkHome (config "matej-ubuntubox.nix");
-          dev-epics = mkHome (config "dev-epics.nix");
+          matej-nixbox = mkHome { home-derivation = (config "matej-nixbox.nix"); };
+          matej-nixtop = mkHome { home-derivation = (config "matej-nixtop.nix"); };
+          test-testbox = mkHome { home-derivation = (config "test-testbox.nix"); homeArgs.personal = false; };
+          matej-work = mkHome { home-derivation = (config "matej-work.nix"); };
+          matej-ubuntubox = mkHome { home-derivation = (config "matej-ubuntubox.nix"); homeArgs.personal = false; };
+          dev-epics = mkHome { home-derivation = (config "dev-epics.nix"); homeArgs.personal = false; };
         };
 
       nixbox = unwrapSystem nixosConfigurations.nixbox;

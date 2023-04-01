@@ -12,11 +12,11 @@ let
     specialArgs = { inherit inputs; };
   });
 
-  mkHome = home-derivation: unwrapHome (home-manager.lib.homeManagerConfiguration {
+  mkHome = { home-derivation, homeArgs ? null }: unwrapHome (home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
     modules = [ home-derivation ];
     extraSpecialArgs = {
-      inherit inputs;
+      inherit inputs homeArgs;
       lib = import "${home-manager}/modules/lib/stdlib-extended.nix" pkgs.unstable.lib;
     };
   });
