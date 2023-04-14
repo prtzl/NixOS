@@ -8,7 +8,7 @@ in
     (p "home_basic.nix")
     (p "dconf.nix")
     (p "vscode.nix")
-    (p "alacritty.nix")
+    (p "kitty.nix")
     (p "zsh.nix")
     (p "nvim.nix")
     (p "tio.nix")
