@@ -42,7 +42,7 @@ in
     };
 
     "org/cinnamon/desktop/applications/terminal" = {
-      exec = "alacritty";
+      exec = "kitty";
     };
 
     "org/cinnamon/desktop/background" = {

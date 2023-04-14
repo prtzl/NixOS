@@ -25,7 +25,7 @@ in
     (p "dconf.nix")
     (p "fonts.nix")
     (p "zsh.nix")
-    (p "alacritty.nix")
+    (p "kitty.nix")
     (p "redshift.nix")
     (pp { package = "startx.nix"; desktop-environment = "cinnamon-session"; })
   ];
