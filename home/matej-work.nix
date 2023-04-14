@@ -70,6 +70,9 @@ in
   programs.alacritty.package = pkgs.glWrapIntel {
     pkg = pkgs.alacritty;
   };
+  programs.kitty.package = pkgs.glWrapIntel {
+    pkg = pkgs.kitty;
+  };
 
   home.sessionVariables = {
     NIX_HOME_DERIVATION = "matej-work";
