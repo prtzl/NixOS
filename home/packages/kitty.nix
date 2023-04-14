@@ -14,6 +14,7 @@
       remember_window_size = "no";
       initial_window_width = "960";
       initial_window_height = "640";
+      confirm_os_window_close = "0";
 
       # Font
       font_family = "FiraCode Nerd Font";

@@ -84,8 +84,8 @@ in
 
     "org/cinnamon/desktop/keybindings/custom-keybindings/custom0" = {
       binding = [ "<Primary><Alt>t" ];
-      command = "alacritty";
-      name = "alacritty";
+      command = "kitty";
+      name = "kitty";
     };
 
     "org/cinnamon/desktop/keybindings/custom-keybindings/custom1" = {
