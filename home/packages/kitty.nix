@@ -7,7 +7,7 @@
       "TERM" = "xterm-256color";
     };
     settings = {
-      font_size = "12.0";
+      font_size = "14.0";
       disable_ligatures = "cursor";
       mouse_hide_wait = "2.0";
       cursor_blink_interval = "0";
