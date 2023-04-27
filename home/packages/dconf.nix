@@ -42,7 +42,7 @@ in
     };
 
     "org/cinnamon/desktop/applications/terminal" = {
-      exec = "kitty";
+      exec = "alacritty";
     };
 
     "org/cinnamon/desktop/background" = {
@@ -84,8 +84,8 @@ in
 
     "org/cinnamon/desktop/keybindings/custom-keybindings/custom0" = {
       binding = [ "<Primary><Alt>t" ];
-      command = "kitty";
-      name = "kitty";
+      command = "alacritty";
+      name = "alacritty";
     };
 
     "org/cinnamon/desktop/keybindings/custom-keybindings/custom1" = {
