@@ -51,7 +51,7 @@
         pkgs-nvim = pkgs-nvim;
         patched = pkgs-matej;
         # Stable package overrides/additions
-        nix-monitored = inputs.nix-monitored;
+        nix-monitored = inputs.nix-monitored.packages.${system}.default;
         jlink = mkFree inputs.jlink-pack.defaultPackage.${system};
         glWrapIntel = (import ./nix/nixgl.nix { inherit pkgs; }).glWrapIntel;
         signal-desktop = pkgs-matej.signal-desktop;
@@ -62,6 +62,7 @@
       pkgs = import inputs.nixpkgs-stable {
         inherit system;
         config.allowUnfree = true;
+        overlays = [ stableOverlay inputs.nixgl.overlay ];
       };
 
       pkgs-unstable = import inputs.nixpkgs-unstable {
