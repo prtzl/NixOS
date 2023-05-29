@@ -19,8 +19,9 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nix-monitored = {
-      url = "github:ners/nix-monitored/master";
+      url = "github:ners/nix-monitored";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
 
@@ -33,6 +34,16 @@
 
       mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
       generators = import ./nix/generators.nix { inherit inputs system lib home-manager pkgs; };
+
+      nix-monitored-overlay = self: super: rec {
+        nix-monitored = inputs.nix-monitored.packages.${system}.default.override self;
+        nix-direnv = super.nix-direnv.override {
+          nix = nix-monitored;
+        };
+        nixos-rebuild = super.nixos-rebuild.override {
+          nix = nix-monitored;
+        };
+      };
 
       stableOverlay = self: super: {
         # Packages
@@ -51,7 +62,6 @@
       pkgs = import inputs.nixpkgs-stable {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ stableOverlay inputs.nixgl.overlay ];
       };
 
       pkgs-unstable = import inputs.nixpkgs-unstable {
