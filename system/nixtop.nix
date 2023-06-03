@@ -35,6 +35,7 @@ in
   console = { font = "Lat2-Terminus16"; };
 
   # User sh$t
+  programs.zsh.enable = true;
   users = {
     users = {
       matej = {
