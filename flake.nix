@@ -1,13 +1,13 @@
 {
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-matej.url = "github:prtzl/nixpkgs/patch";
     nixpkgs-nvim.url = "github:nixos/nixpkgs/f994293d1eb8812f032e8919e10a594567cf6ef7";
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.11";
+      url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     jlink-pack = {
@@ -35,28 +35,16 @@
       mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
       generators = import ./nix/generators.nix { inherit inputs system lib home-manager pkgs; };
 
-      nix-monitored-overlay = self: super: rec {
-        nix-monitored = inputs.nix-monitored.packages.${system}.default.override self;
-        nix-direnv = super.nix-direnv.override {
-          nix = nix-monitored;
-        };
-        nixos-rebuild = super.nixos-rebuild.override {
-          nix = nix-monitored;
-        };
-      };
-
       stableOverlay = self: super: {
         # Packages
         unstable = pkgs-unstable;
         pkgs-nvim = pkgs-nvim;
         patched = pkgs-matej;
         # Stable package overrides/additions
-        nix-monitored = inputs.nix-monitored.packages.${system}.default;
         jlink = mkFree inputs.jlink-pack.defaultPackage.${system};
         glWrapIntel = (import ./nix/nixgl.nix { inherit pkgs; }).glWrapIntel;
         signal-desktop = pkgs-matej.signal-desktop;
         stm32cubemx = pkgs-matej.stm32cubemx;
-        viber = super.viber.override { openssl = pkgs.openssl_1_1; };
       };
 
       pkgs = import inputs.nixpkgs-stable {

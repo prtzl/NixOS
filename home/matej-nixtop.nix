@@ -56,7 +56,6 @@ in
     skypeforlinux
     discord
     signal-desktop-beta
-    viber
   ];
 
   home.sessionVariables = {
