@@ -7,8 +7,13 @@ in
   nix = {
     package = pkgs.unstable.nix;
     registry = {
-      nixpkgs.flake = inputs.nixpkgs-stable;
+      stable.flake = inputs.nixpkgs-stable;
       unstable.flake = inputs.nixpkgs-unstable;
+      nixpkgs.to = {
+        owner = "nixos";
+        repo = "nixpkgs";
+        type = "github";
+      };
     };
   };
   programs.home-manager.enable = true;
