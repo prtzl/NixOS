@@ -7,9 +7,9 @@ in
   nix = {
     package = pkgs.unstable.nix;
     registry = {
-      stable.flake = inputs.nixpkgs-stable;
+      nixpkgs.flake = inputs.nixpkgs-stable;
       unstable.flake = inputs.nixpkgs-unstable;
-      nixpkgs.to = {
+      master.to = {
         owner = "nixos";
         repo = "nixpkgs";
         type = "github";
