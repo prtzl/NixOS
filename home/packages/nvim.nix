@@ -2,7 +2,7 @@
 
 let
   # All packages related to function of nvim are from separate pkgs-nvim
-  pkgs-nvim = pkgs.pkgs-nvim;
+  pkgs-nvim = pkgs.unstable; # pkgs.pkgs-nvim;
   vimPlugins = pkgs-nvim.vimPlugins;
   loadPlugin = p: ''
     set rtp^=${p.plugin or p}
