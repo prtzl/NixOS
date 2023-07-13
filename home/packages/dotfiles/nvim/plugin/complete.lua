@@ -107,10 +107,10 @@ cmp.setup({
     -- Installed sources
     sources = {
         { name = 'path' },
-        { name = 'nvim_lsp', keyword_length = 1 },
-        { name = 'luasnip', keyword_length = 2 },
-        { name = 'buffer', keyword_length = 3 },
-        { name = 'spell', option = { keep_all_entries = false }, },
+        { name = 'nvim_lsp',    keyword_length = 1 },
+        { name = 'luasnip',     keyword_length = 2 },
+        { name = 'buffer',      keyword_length = 3 },
+        { name = 'spell',       option = { keep_all_entries = false }, },
         { name = 'emoji' },
         { name = 'buffer-lines' },
         { name = 'treesitter' },
@@ -142,7 +142,7 @@ cmp.setup({
                 return vim_item
             end,
         },
-        expendable_indicator = true;
+        expendable_indicator = true,
     },
     window = {
         documentation = cmp.config.window.bordered(),
@@ -250,13 +250,13 @@ require 'lspconfig'.pylsp.setup {
 }
 
 -- lua LSP
-require 'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.lua_ls.setup {
     capabilities = capabilities,
 }
 
 -- lsp signature - function signature
 require "lsp_signature".setup({
-    hint_enable = false;
-    toggle_key = '<C-s>', -- toggle signalture
+    hint_enable = false,
+    toggle_key = '<C-s>',          -- toggle signalture
     select_signature_key = '<C-l>' -- switch signatures
 })
