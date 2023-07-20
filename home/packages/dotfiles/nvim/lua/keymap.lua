@@ -28,8 +28,8 @@ map('i', '<c-]>', '<esc>A', nil)
 
 -- Move back and forth in buffers
 -- Note so self: <c-[> is maped as if <Esc> is pressed - higher power control, abandon hope
-map('n', '[[', ':bprev<cr>', nil)
-map('n', ']]', ':bnext<cr>', nil)
+map('n', '[[', ':bnext<cr>', nil)
+map('n', ']]', ':bprev<cr>', nil)
 
 -- LSP
 map('n', 'gd', '<cmd>lua vim.lsp.buf.declaration()<cr>', nil)
