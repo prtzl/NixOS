@@ -4,15 +4,9 @@ let
   # All packages related to function of nvim are from separate pkgs-nvim
   pkgs-nvim = pkgs.unstable; # pkgs.pkgs-nvim;
   vimPlugins = pkgs-nvim.vimPlugins;
-  loadPlugin = p: ''
-    set rtp^=${p.plugin or p}
-    set rtp+=${p.plugin or p}/after
-  '';
-  unlines = lib.concatStringsSep "\n";
-  loadPlugins = ps: lib.pipe ps [ (builtins.map loadPlugin) unlines ];
   plugins = with vimPlugins; [
     # Plugins that I know and understand where and how they're used
-    (nvim-treesitter.withPlugins (_: pkgs-nvim.tree-sitter.allGrammars)) # syntax for everything
+    nvim-treesitter # syntax for everything
     vim-cpp-enhanced-highlight # better looking cpp highlighting
     markdown-preview-nvim # opens markdown preview in browser
     telescope-nvim # Fuzzy search
@@ -57,6 +51,8 @@ let
     nvim-dap-ui
     nvim-lspconfig
     plenary-nvim
+
+    epics
   ];
   epics = pkgs.fetchFromGitHub {
     owner = "minijackson";
@@ -86,11 +82,10 @@ in
     vimdiffAlias = true;
     withNodeJs = true;
     withPython3 = true;
+    plugins = plugins;
     extraConfig = ''
       " Workaround for broken handling of packpath by vim8/neovim for ftplugins -- see https://github.com/NixOS/nixpkgs/issues/39364#issuecomment-425536054 for more info
       filetype off | syn off
-      ${loadPlugin epics}
-      ${loadPlugins plugins}
       filetype indent plugin on | syn on
       ${builtins.readFile ./dotfiles/nvim/init.vim}
       lua << EOF
