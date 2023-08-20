@@ -20,3 +20,7 @@ telescope.setup {
         }
     },
 }
+
+local worktree = require 'git-worktree'
+worktree.setup()
+telescope.load_extension('git-worktree')
