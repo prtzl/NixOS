@@ -13,6 +13,7 @@ let
     telescope-frecency-nvim # 
     lualine-nvim # status bar
     vim-gitbranch # get git info for status bar
+    git-worktree-nvim # telescope extension for git worktree
     gitsigns-nvim # git gutter
     vim-fugitive # Git tool
     lazygit-nvim # Another git tool
@@ -68,7 +69,7 @@ in
   ] ++ (with pkgs-nvim; [
     rnix-lsp # nix lsp
     texlab # latex lsp
-    python39Packages.python-lsp-server # python lsp
+    python311Packages.python-lsp-server # python lsp
     sumneko-lua-language-server # lua lsp
     tree-sitter
     lazygit
