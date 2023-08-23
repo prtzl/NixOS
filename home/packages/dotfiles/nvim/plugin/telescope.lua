@@ -21,6 +21,11 @@ telescope.setup {
     },
 }
 
-local worktree = require 'git-worktree'
-worktree.setup()
-telescope.load_extension('git-worktree')
+-- Shit doesn't work
+-- 'git-worktree' extension doesn't exist or isn't installed: module 'telescope._extensions. git-worktree' not found:
+-- require("git-worktree").setup()
+-- require("telescope").load_extension("git-worktree")
+
+-- local worktree = require 'git-worktree'
+-- worktree.setup()
+-- telescope.load_extension('git-worktree')
