@@ -166,10 +166,10 @@ in
       draggable-border-width = 10;
     };
 
-    "org/cinnamon/settings-daemon/peripherals/keyboard" = {
-      delay = mkUint32 250;
-      repeat-interval = mkUint32 18;
-    };
+    # "org/cinnamon/settings-daemon/peripherals/keyboard" = {
+    #   delay = mkUint32 250;
+    #   repeat-interval = mkUint32 18;
+    # };
 
     "org/cinnamon/desktop/peripherals/keyboard" = {
       delay = mkUint32 250;

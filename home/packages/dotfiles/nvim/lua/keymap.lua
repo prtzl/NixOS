@@ -53,7 +53,7 @@ map('n', '<c-a>',
     nil)
 map('n', '<c-g>', '<cmd>lua require("telescope.builtin").live_grep()<cr>', nil)
 map('n', '<c-b>', '<cmd>lua require("telescope.builtin").buffers()<cr>', nil)
-map('n', '<c-f>', '<cmd>lua require("telescope.builtin").help_tags()<cr>', nil)
+map('n', '<c-f>', '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<cr>', nil)
 
 -- Diagnostic
 map('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<cr>', nil)
