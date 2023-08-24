@@ -87,7 +87,7 @@
           matej-nixbox = mkHome { home-derivation = (config "matej-nixbox.nix"); };
           matej-nixtop = mkHome { home-derivation = (config "matej-nixtop.nix"); };
           test-testbox = mkHome { home-derivation = (config "test-testbox.nix"); homeArgs.personal = false; };
-          matej-work = mkHome { home-derivation = (config "matej-work.nix"); };
+          matej-work = mkHome { home-derivation = (config "matej-work.nix"); notNixos = true; };
           matej-ubuntubox = mkHome { home-derivation = (config "matej-ubuntubox.nix"); homeArgs.personal = false; };
           dev-epics = mkHome { home-derivation = (config "dev-epics.nix"); homeArgs.personal = false; };
         };
