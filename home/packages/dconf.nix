@@ -1,5 +1,5 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, notNixos, ... }:
 
 with lib.hm.gvariant;
 
@@ -166,10 +166,12 @@ in
       draggable-border-width = 10;
     };
 
-    # "org/cinnamon/settings-daemon/peripherals/keyboard" = {
-    #   delay = mkUint32 250;
-    #   repeat-interval = mkUint32 18;
-    # };
+    "org/cinnamon/settings-daemon/peripherals/keyboard" =
+      if notNixos then
+        {
+          delay = mkUint32 250;
+          repeat-interval = mkUint32 18;
+        } else { };
 
     "org/cinnamon/desktop/peripherals/keyboard" = {
       delay = mkUint32 250;
