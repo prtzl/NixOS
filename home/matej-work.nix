@@ -61,6 +61,7 @@ in
     skypeforlinux
     unstable.signal-desktop-beta
     unstable.discord
+    remmina
 
     # Other
     nixgl.nixGLIntel
