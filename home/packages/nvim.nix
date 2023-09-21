@@ -6,7 +6,7 @@ let
   vimPlugins = pkgs-nvim.vimPlugins;
   plugins = with vimPlugins; [
     # Plugins that I know and understand where and how they're used
-    nvim-treesitter # syntax for everything
+    nvim-treesitter.withAllGrammars # syntax for everything
     vim-cpp-enhanced-highlight # better looking cpp highlighting
     markdown-preview-nvim # opens markdown preview in browser
     telescope-nvim # Fuzzy search
