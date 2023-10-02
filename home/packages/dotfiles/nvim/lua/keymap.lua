@@ -13,6 +13,11 @@ map('i', '<c-w><right>', '<esc><right><c-w><right><ins>', nil)
 map('i', '<c-w><up>', '<esc><right><c-w><up><ins>', nil)
 map('i', '<c-w><down>', '<esc><right><c-w><down><ins>', nil)
 
+map('n', '<s-up>', ':move-2<cr>', nil)
+map('n', '<s-down>', ':move+1<cr>', nil)
+map('i', '<s-up>', '<esc>:move-2<cr><ins><right>', nil)
+map('i', '<s-down>', '<esc>:move+1<cr><ins><right>', nil)
+
 -- Resizing windows
 map('n', '<c-s-up>', ':resize +5<cr>', nil)
 map('n', '<c-s-down>', ':resize -5<cr>', nil)
