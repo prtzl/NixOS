@@ -38,7 +38,7 @@ in
     };
 
     "org/cinnamon/desktop/applications/calculator" = {
-      exec = "gnome-calculator";
+      exec = "qalculate-gtk";
     };
 
     "org/cinnamon/desktop/applications/terminal" = {
