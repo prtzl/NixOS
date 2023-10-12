@@ -14,7 +14,7 @@ in
     ./pipewire.nix
   ];
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 
   # Cleaning lady
   nix = {

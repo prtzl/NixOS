@@ -32,7 +32,7 @@ in
 
   home.username = "mblagsic";
   home.homeDirectory = "/home/mblagsic";
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 
   # Packages
   home.packages = with pkgs; [
