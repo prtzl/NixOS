@@ -67,12 +67,12 @@ map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', nil)
 map('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<cr>', nil)
 
 -- Spell toggle
-map('n', '<f6>', '<cmd>lua vim.g.toggleSpell()<cr>', nil)
-map('i', '<f6>', '<cmd>lua vim.g.toggleSpell()<cr>', nil)
+map('n', '<f3>', '<cmd>lua vim.g.toggleSpell()<cr>', nil)
+map('i', '<f3>', '<cmd>lua vim.g.toggleSpell()<cr>', nil)
 
 -- Autoformat toggle
-map('n', '<f9>', '<cmd>lua vim.g.toggleFormat()<cr>', nil)
-map('i', '<f9>', '<cmd>lua vim.g.toggleFormat()<cr>', nil)
+map('n', '<f4>', '<cmd>lua vim.g.toggleFormat()<cr>', nil)
+map('i', '<f4>', '<cmd>lua vim.g.toggleFormat()<cr>', nil)
 
 -- Comments
 map('n', '<c-_>', 'gcc', { noremap = false })
