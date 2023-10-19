@@ -42,7 +42,7 @@ in
 
     # Utility
     enpass
-    megasync
+    # megasync
     pavucontrol
     transmission-gtk
 

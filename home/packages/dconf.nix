@@ -46,7 +46,7 @@ in
     };
 
     "org/cinnamon/desktop/background" = {
-      picture-options = "zoom";
+      picture-options = "scaled";
       picture-uri = "file://${backgroundPath}";
       picture-uri-dark = "file://${backgroundPath}";
     };
