@@ -2,7 +2,7 @@
 
 let
   # All packages related to function of nvim are from separate pkgs-nvim
-  pkgs-nvim = pkgs; # pkgs.pkgs-nvim;
+  pkgs-nvim = pkgs.pkgs-nvim; # pkgs.pkgs-nvim;
   vimPlugins = pkgs-nvim.vimPlugins;
   plugins = with vimPlugins; [
     # Plugins that I know and understand where and how they're used
