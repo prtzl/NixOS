@@ -5,35 +5,6 @@ local luasnip = require 'luasnip'
 require('luasnip/loaders/from_vscode').lazy_load()
 local lspkind = require 'lspkind'
 
--- some other good icons
-local kind_icons = {
-    Text = "",
-    Method = "",
-    Function = "",
-    Constructor = "",
-    Field = "ﰠ",
-    Variable = "",
-    Class = "",
-    Interface = "",
-    Module = "",
-    Property = "",
-    Unit = "",
-    Value = "",
-    Enum = "",
-    Keyword = "",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "פּ",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
-}
-
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -127,7 +98,7 @@ cmp.setup({
             before = function(entry, vim_item)
                 local shorten_abbr = string.sub(vim_item.abbr, 1, 30)
                 if shorten_abbr ~= vim_item.abbr then vim_item.abbr = shorten_abbr .. "..." end
-                vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
+                vim_item.kind = string.format("%s %s", lspkind.symbol_map[vim_item.kind], vim_item.kind)
                 vim_item.menu = ({
                     buffer = "[BUF]",
                     nvim_lsp = "[LSP]",
