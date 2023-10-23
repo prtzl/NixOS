@@ -53,7 +53,6 @@ in
     # Online
     firefox
     chromium
-    megasync
     enpass
     transmission-gtk
 
