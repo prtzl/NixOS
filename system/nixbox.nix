@@ -34,6 +34,7 @@ in
   console = { font = "Lat2-Terminus16"; };
 
   # User sh$t
+  programs.zsh.enable = true;
   users = {
     users = {
       matej = {
@@ -80,7 +81,6 @@ in
 
   services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.cpu.amd.updateMicrocode = true;
-  hardware.video.hidpi.enable = true;
 
   fileSystems."/storage" = {
     device = "/dev/disk/by-label/storage";

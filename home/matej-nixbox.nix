@@ -54,7 +54,6 @@ in
 
     # Utility
     enpass
-    megasync
     pavucontrol
     transmission-gtk
 
@@ -68,10 +67,9 @@ in
 
     # Communication
     zoom-us
-    teams
     skypeforlinux
     unstable.discord
-    signal-desktop
+    signal-desktop-beta
   ];
 
   home.sessionVariables = {
