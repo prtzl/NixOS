@@ -32,6 +32,12 @@ cmp.setup({
 
         return true
     end,
+
+    -- Experiment: disable autocomplete, so it has to be triggered with <c-k> (toggle) - like VSCode <c-space>
+    completion = {
+        autocomplete = false
+    },
+
     -- Enable LSP snippets
     snippet = {
         expand = function(args)
@@ -68,7 +74,23 @@ cmp.setup({
         ['<Down>'] = cmp.mapping.select_next_item(select_opts),
         ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
         ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-        ['<C-k>'] = cmp.mapping.complete(),
+        -- ['<C-k>'] = cmp.mapping.complete(),
+        ["<C-k>"] = cmp.mapping({
+            i = function()
+                if cmp.visible() then
+                    cmp.abort()
+                else
+                    cmp.complete()
+                end
+            end,
+            c = function()
+                if cmp.visible() then
+                    cmp.close()
+                else
+                    cmp.complete()
+                end
+            end,
+        }),
         ['<C-e>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
