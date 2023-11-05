@@ -33,6 +33,7 @@
 
       mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
       generators = import ./nix/generators.nix { inherit inputs system lib home-manager pkgs; };
+      inherit (generators) unwrapSystem mkSystem mkHome;
 
       stableOverlay = self: super: {
         # Packages
@@ -68,7 +69,7 @@
         config.allowUnfree = true;
       };
     in
-    with generators; rec {
+    rec {
       nixosConfigurations =
         let
           config = file: ./system + "/${file}";
