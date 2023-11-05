@@ -1,21 +1,22 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, notNixos, ... }:
 
 let
   home-update = pkgs.writeShellScriptBin "home-update" (builtins.readFile ./dotfiles/home-update.sh);
 in
 {
-  # nix = {
-  #   package = pkgs.unstable.nix;
-  #   registry = {
-  #     nixpkgs.flake = inputs.nixpkgs-stable;
-  #     unstable.flake = inputs.nixpkgs-unstable;
-  #     master.to = {
-  #       owner = "nixos";
-  #       repo = "nixpkgs";
-  #       type = "github";
-  #     };
-  #   };
-  # };
+  nix =
+    if notNixos then {
+      package = pkgs.unstable.nix;
+      registry = {
+        nixpkgs.flake = inputs.nixpkgs-stable;
+        unstable.flake = inputs.nixpkgs-unstable;
+        master.to = {
+          owner = "nixos";
+          repo = "nixpkgs";
+          type = "github";
+        };
+      };
+    } else { };
   programs.home-manager.enable = true;
 
   # Packages
