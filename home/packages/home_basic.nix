@@ -4,18 +4,18 @@ let
   home-update = pkgs.writeShellScriptBin "home-update" (builtins.readFile ./dotfiles/home-update.sh);
 in
 {
-  nix = {
-    package = pkgs.unstable.nix;
-    registry = {
-      nixpkgs.flake = inputs.nixpkgs-stable;
-      unstable.flake = inputs.nixpkgs-unstable;
-      master.to = {
-        owner = "nixos";
-        repo = "nixpkgs";
-        type = "github";
-      };
-    };
-  };
+  # nix = {
+  #   package = pkgs.unstable.nix;
+  #   registry = {
+  #     nixpkgs.flake = inputs.nixpkgs-stable;
+  #     unstable.flake = inputs.nixpkgs-unstable;
+  #     master.to = {
+  #       owner = "nixos";
+  #       repo = "nixpkgs";
+  #       type = "github";
+  #     };
+  #   };
+  # };
   programs.home-manager.enable = true;
 
   # Packages
@@ -29,7 +29,6 @@ in
     git-crypt
     gnupg
     bottom
-    unstable.nix
     joplin-desktop
   ];
 

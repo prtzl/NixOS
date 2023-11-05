@@ -7,6 +7,7 @@ in
 {
   # Additional configuration
   imports = [
+    inputs.nix-monitored.nixosModules.default
     ./bootloader.nix
     ./filesystem.nix
     ./hardware-configuration_basic.nix
@@ -18,7 +19,8 @@ in
 
   # Cleaning lady
   nix = {
-    package = pkgs.unstable.nix;
+    monitored.enable = true;
+    # monitored.package = inputs.nix-monitored.packages.${pkgs.system}.default;
     registry = {
       nixpkgs.flake = inputs.nixpkgs-stable;
       unstable.flake = inputs.nixpkgs-unstable;
@@ -91,7 +93,7 @@ in
       htop
       lm_sensors
       neofetch
-      nix-index
+      unstable.nix-index
       nixgen
       nixos-update
       nvd
