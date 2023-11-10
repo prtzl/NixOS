@@ -20,10 +20,14 @@ in
   # Cleaning lady
   nix = {
     monitored.enable = true;
-    # monitored.package = inputs.nix-monitored.packages.${pkgs.system}.default;
     registry = {
       nixpkgs.flake = inputs.nixpkgs-stable;
       unstable.flake = inputs.nixpkgs-unstable;
+      master.to = {
+        owner = "nixos";
+        repo = "nixpkgs";
+        type = "github";
+      };
     };
     gc = {
       automatic = true;
