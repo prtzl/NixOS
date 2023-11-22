@@ -61,6 +61,7 @@ in
     ffmpeg
     libreoffice
     rhythmbox
+    tauon
     easytag
     soundconverter
     jamesdsp
