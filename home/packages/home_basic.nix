@@ -6,7 +6,7 @@ in
 {
   nix =
     if notNixos then {
-      package = inputs.nix-monitored.package.${pkgs.system}.default;
+      # package = inputs.nix-monitored.package.${pkgs.system}.default;
       registry = {
         nixpkgs.flake = inputs.nixpkgs-stable;
         unstable.flake = inputs.nixpkgs-unstable;
