@@ -15,8 +15,6 @@ in
     ./pipewire.nix
   ];
 
-  system.stateVersion = "23.05";
-
   # Cleaning lady
   nix = {
     monitored.enable = true;
@@ -47,12 +45,6 @@ in
     };
   };
 
-  # Packages
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowBroken = false;
-  };
-
   systemd.services.systemd-time-wait-sync.wantedBy = [ "multi-user.target" ];
   systemd.additionalUpstreamSystemUnits = [ "systemd-time-wait-sync.service" ];
 
@@ -77,8 +69,6 @@ in
     flatpak.enable = true;
   };
 
-  xdg.portal.enable = true; # For flatpak
-
   # System packages - minimal usable system
   environment = {
     shells = with pkgs; [ bashInteractive zsh ];
@@ -87,8 +77,6 @@ in
       NIX_FLAKE_DIR = "/etc/nixos"; # a symlink to this repo
     };
     systemPackages = with pkgs; [
-      bat
-      exa
       fd
       file
       firefox
@@ -103,7 +91,6 @@ in
       nvd
       parted
       ripgrep
-      sl
       unstable.tio
       tree
       unzip

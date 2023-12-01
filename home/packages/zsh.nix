@@ -5,7 +5,7 @@
     ./starship.nix
   ];
 
-  home.packages = with pkgs; [ fzf zsh-completions xclip exa fd ripgrep ];
+  home.packages = with pkgs; [ fzf zsh-completions xclip eza fd ripgrep ];
 
   programs.direnv = {
     enable = true;
