@@ -20,7 +20,7 @@
 
     shellAliases = {
       # Utilities 
-      ls = "exa --group-directories-first --color=always --icons";
+      ls = "eza --group-directories-first --color=always --icons";
       l = "ls -la";
       ll = "ls -l";
       grep = "grep --color=always -n";
