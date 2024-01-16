@@ -70,7 +70,7 @@ in
     zoom-us
     skypeforlinux
     unstable.discord
-    signal-desktop-beta
+    unstable.signal-desktop-beta
   ];
 
   home.sessionVariables = {
