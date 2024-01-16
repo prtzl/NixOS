@@ -18,6 +18,7 @@ in
   # Cleaning lady
   nix = {
     monitored.enable = true;
+    monitored.notify = false;
     registry = {
       nixpkgs.flake = inputs.nixpkgs-stable;
       unstable.flake = inputs.nixpkgs-unstable;
