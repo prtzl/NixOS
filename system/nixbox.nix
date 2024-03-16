@@ -26,6 +26,7 @@ in
     hostName = "nixbox";
     interfaces.enp9s0.useDHCP = true;
   };
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Set your time zone - where are you ?
   location.provider = "geoclue2";
@@ -81,7 +82,6 @@ in
     cpuFreqGovernor = lib.mkDefault "performance";
   };
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.cpu.amd.updateMicrocode = true;
 
   fileSystems."/storage" = {
