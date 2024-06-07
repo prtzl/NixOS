@@ -11,7 +11,7 @@ in
     (p "virtualisation.nix")
   ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   # set to 4x2 = packages that do build will take some time, but oh well
   nix.settings = {

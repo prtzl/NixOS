@@ -11,7 +11,7 @@ in
     (p "virtualisation.nix")
   ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   # set top 8x2 = packages that do build will take some time, but oh well
   nix.settings = {
@@ -25,6 +25,13 @@ in
   networking = {
     hostName = "nixbox";
     interfaces.enp9s0.useDHCP = true;
+    firewall = {
+      enable = true;
+    };
+  };
+
+  services = {
+    xserver.videoDrivers = [ "amdgpu" ];
   };
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
