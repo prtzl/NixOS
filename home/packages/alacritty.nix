@@ -14,14 +14,15 @@
         opacity = 1;
         title = "";
         dynamic_title = true;
-        scrolling = {
-          history = 1000;
-          multiplier = 2;
-        };
+
         padding = {
           x = 5;
           y = 5;
         };
+      };
+      scrolling = {
+        history = 1000;
+        multiplier = 2;
       };
       # ayu_dark
       colors = {
@@ -31,8 +32,8 @@
 
           dim_foreground = "0xdbdbdb";
           bright_foreground = "0xd9d9d9";
-          dim_background = "0x202020";
-          bright_background = "0x3a3a3a";
+          #bright_background = "0x3a3a3a";
+          #dim_background = "0x202020";
         };
         normal = {
           black = "0x01060E";

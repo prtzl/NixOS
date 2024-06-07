@@ -8,7 +8,8 @@
     celluloid
     gnome.gnome-system-monitor
     gnome.gnome-disk-utility
-    qalculate-gtk
+    gnome.gnome-calculator
+    # qalculate-gtk
     gnome.gnome-screenshot
   ];
 
