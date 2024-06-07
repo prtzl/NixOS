@@ -72,9 +72,9 @@ in
       cursor-blink-time = 1200;
       cursor-theme = "Adwaita";
       first-day-of-week = 1;
-      gtk-theme = "Mint-Y-Dark-Aqua";
+      gtk-theme = "Mint-Y-Dark-Blue";
       icon-theme = "Papirus-Dark";
-      scaling-factor = mkUint32 0;
+      scaling-factor = 0;
     };
 
     "org/cinnamon/desktop/keybindings" = {
@@ -184,7 +184,7 @@ in
     };
 
     "org/cinnamon/theme" = {
-      name = "Mint-Y-Dark-Aqua";
+      name = "Mint-Y-Dark-Blue";
     };
 
     "org/gnome/calculator" = {
