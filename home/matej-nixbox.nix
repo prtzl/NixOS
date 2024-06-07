@@ -21,7 +21,7 @@ in
 
   home.username = "matej";
   home.homeDirectory = "/home/matej";
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   # Packages
   home.packages = with pkgs; [
@@ -43,7 +43,7 @@ in
 
     # Games
     steam
-    minecraft
+    # minecraft # broken on NixOS since 1.19 upwards, bummer
 
     # Net
     chromium
