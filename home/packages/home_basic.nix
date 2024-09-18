@@ -25,12 +25,10 @@ in
     nixfmt-classic
     nvd
     roboto
-    flac
     zip
     git-crypt
     gnupg
     bottom
-    joplin-desktop
   ];
 
   # Privat git

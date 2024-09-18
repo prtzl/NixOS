@@ -95,6 +95,7 @@
           matej-work = mkHome { home-derivation = (config "matej-work.nix"); notNixos = true; };
           matej-ubuntubox = mkHome { home-derivation = (config "matej-ubuntubox.nix"); homeArgs.personal = false; };
           dev-epics = mkHome { home-derivation = (config "dev-epics.nix"); homeArgs.personal = false; };
+          nixos-wsl = mkHome { home-derivation = (config "nixos-wsl.nix"); homeArgs.personal = false; };
         };
 
       nixbox = unwrapSystem nixosConfigurations.nixbox;
@@ -106,6 +107,7 @@
       matej-work = homeConfigurations.matej-work;
       matej-ubuntubox = homeConfigurations.matej-ubuntubox;
       dev-epics = homeConfigurations.dev-epics;
+      nixos-wsl = homeConfigurations.nixos-wsl;
 
     } // inputs.flake-utils.lib.eachDefaultSystem (system:
       let
