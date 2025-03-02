@@ -3,30 +3,26 @@
 {
   # This gives some basic gui applications: image viewers, players, readers ...
   environment.systemPackages = with pkgs; [
-    gnome.eog
-    unstable.evince
+    eog
+    evince
     celluloid
-    gnome.gnome-system-monitor
-    gnome.gnome-disk-utility
-    gnome.gnome-calculator
-    # qalculate-gtk
-    gnome.gnome-screenshot
+    gnome-system-monitor
+    gnome-disk-utility
+    gnome-calculator
+    gnome-screenshot
   ];
 
   # xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   services = {
+    displayManager.ly.enable = true;
     xserver = {
       enable = true;
-      layout = "us";
-      xkbOptions = "eurosign:e";
-      desktopManager = {
-        gnome.enable = false;
-        cinnamon.enable = true;
+      xkb = {
+        options = "eurosign:e";
+        layout = "us";
       };
-      displayManager = {
-        gdm.enable = true;
-        gdm.wayland = true;
-        gdm.autoSuspend = false;
+      desktopManager = {
+        cinnamon.enable = true;
       };
     };
     gnome.core-utilities.enable = false;

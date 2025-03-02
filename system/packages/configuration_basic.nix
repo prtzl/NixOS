@@ -51,21 +51,11 @@ in
 
   # Usefull services
   services = {
-    avahi = {
-      enable = true;
-      nssmdns = true;
-    };
-    printing = {
-      enable = true;
-      drivers = [ pkgs.hplipWithPlugin pkgs.gutenprint pkgs.gutenprintBin ];
-      browsing = true;
-    };
     sshd.enable = true;
     openssh = {
       enable = true;
       settings.X11Forwarding = true;
     };
-    localtimed.enable = true;
     geoclue2.enable = true;
     flatpak.enable = true;
   };

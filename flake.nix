@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-matej.url = "github:prtzl/nixpkgs/patch";
     nixpkgs-nvim.url = "github:nixos/nixpkgs/91a22f76cd1716f9d0149e8a5c68424bb691de15";

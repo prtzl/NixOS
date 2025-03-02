@@ -55,7 +55,7 @@ in
     # Utility
     enpass
     pavucontrol
-    transmission-gtk
+    transmission_4-gtk
 
     # Media
     ffmpeg
@@ -70,7 +70,7 @@ in
     zoom-us
     skypeforlinux
     unstable.discord
-    unstable.signal-desktop-beta
+    unstable.signal-desktop
 
     (import (pkgs.fetchFromGitHub {
       owner = "prtzl";

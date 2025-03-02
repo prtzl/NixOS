@@ -14,7 +14,7 @@ in
 {
   home.file.".save-windows.sh".source = ./dotfiles/save.sh;
   home.file.".load-windows.sh".source = ./dotfiles/load.sh;
-  home.packages = with pkgs; [ wmctrl gnome.zenity xorg.xwininfo papirus-icon-theme cinnamon.mint-themes ];
+  home.packages = with pkgs; [ wmctrl zenity xorg.xwininfo papirus-icon-theme mint-themes ];
 
   dconf.settings = {
     "org/cinnamon" = {
