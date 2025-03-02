@@ -22,7 +22,7 @@ in
   # Packages
   home.packages = with pkgs; [
     home-update
-    nixfmt
+    nixfmt-classic
     nvd
     roboto
     flac

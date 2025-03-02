@@ -3,12 +3,10 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
     extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
-    setLdLibraryPath = true;
   };
 
   hardware.pulseaudio.enable = false;

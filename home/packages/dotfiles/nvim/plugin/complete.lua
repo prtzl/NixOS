@@ -228,7 +228,7 @@ require 'lspconfig'.clangd.setup {
 }
 
 -- Nix LSP
-require 'lspconfig'.rnix.setup {
+require 'lspconfig'.nil_ls.setup {
     capabilities = capabilities,
 }
 

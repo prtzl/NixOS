@@ -28,15 +28,16 @@ in
     firewall = {
       enable = true;
     };
-  };
+    enableIPv6 = false;
+  };# Disable IPv6
 
   services = {
     xserver.videoDrivers = [ "amdgpu" ];
+    fwupd.enable = true;
   };
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Set your time zone - where are you ?
-  location.provider = "geoclue2";
   time.timeZone = "Europe/Ljubljana";
 
   # Select internationalisation properties
@@ -51,13 +52,19 @@ in
         isNormalUser = true;
         isSystemUser = false;
         createHome = true;
-        extraGroups = [ "wheel" "libvirtd" "networkmanager" "dialout" "audio" "video" "usb" "podman" "docker" "openrazer" ];
+        extraGroups = [ "wheel" "libvirtd" "networkmanager" "dialout" "audio" "video" "usb" "podman" "docker" "openrazer" "kvm" "adbusers" ];
       };
     };
   };
 
+  programs.wireshark.enable = true;
+
+  programs.adb.enable = true;
+
   environment.systemPackages = with pkgs; [
     wineWowPackages.stable
+    android-udev-rules
+    fwup
   ];
 
   # Hardware settings
@@ -66,27 +73,21 @@ in
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
-  };
-
-  # More stuff
-  boot.kernelParams = [
-    "noibrs"
-    "noibpb"
-    "nopti"
-    "nospectre_v2"
-    "nospectre_v1"
-    "l1tf=off"
-    "nospec_store_bypass_disable"
-    "no_stf_barrier"
-    "mds=off"
-    "tsx=on"
-    "tsx_async_abort=off"
-    "mitigations=off"
-  ];
-
-  powerManagement = {
-    enable = true;
-    cpuFreqGovernor = lib.mkDefault "performance";
+    kernelParams = [
+      "ipv6.disable=1"
+      "noibrs"
+      "noibpb"
+      "nopti"
+      "nospectre_v2"
+      "nospectre_v1"
+      "l1tf=off"
+      "nospec_store_bypass_disable"
+      "no_stf_barrier"
+      "mds=off"
+      "tsx=on"
+      "tsx_async_abort=off"
+      "mitigations=off"
+    ];
   };
 
   hardware.cpu.amd.updateMicrocode = true;

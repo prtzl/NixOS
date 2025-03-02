@@ -23,9 +23,11 @@ let
     nvim-tree-lua # file tree
     nvim-web-devicons # icons
     nvim-base16 # color themes
+    # base16-nvim # color themes
     comment-nvim # smart comments
     vim-latex-live-preview # preview latex pdf inside editor
     nvim-ts-rainbow # colored parentheses using treesitter
+    # rainbow-delimiters-nvim
     alpha-nvim # greet dashboard
     indentLine # Show indentation levels
 
@@ -67,7 +69,7 @@ in
     bat
     ripgrep
   ] ++ (with pkgs-nvim; [
-    rnix-lsp # nix lsp
+    nil # nix lsp
     texlab # latex lsp
     python311Packages.python-lsp-server # python lsp
     sumneko-lua-language-server # lua lsp
@@ -76,7 +78,7 @@ in
   ]);
   programs.neovim = {
     # Default is pkgs.neovim-unwrapped
-    package = pkgs-nvim.neovim-unwrapped;
+    package = pkgs.neovim-unwrapped;
     enable = true;
     viAlias = true;
     vimAlias = true;
