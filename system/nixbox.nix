@@ -27,6 +27,9 @@ in
     interfaces.enp9s0.useDHCP = true;
     firewall = {
       enable = true;
+      allowedTCPPortRanges = [
+        { from = 42000; to = 42001; }
+      ];
     };
     enableIPv6 = false;
   };# Disable IPv6

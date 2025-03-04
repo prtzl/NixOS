@@ -65,7 +65,7 @@ in
     zoom-us
     skypeforlinux
     unstable.discord
-    unstable.signal-desktop
+    signal-desktop
 
     (import (pkgs.fetchFromGitHub {
       owner = "prtzl";
