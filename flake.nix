@@ -8,7 +8,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+    inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     jlink-pack = {
       url = "github:prtzl/jlink-nix";
@@ -21,6 +21,11 @@
     nix-monitored = {
       url = "github:ners/nix-monitored";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    nvimnix = {
+      url = "github:prtzl/nvimnix";
+      # not following "this" nixpkgs allows original package to "lock" a configuration that works
+      # Adding one allows this system to use "any" version of nixpkgs, so it kind of "updates" all pacakges but the config.
     };
   };
 
@@ -43,8 +48,7 @@
         # Stable package overrides/additions
         jlink = mkFree inputs.jlink-pack.defaultPackage.${system};
         glWrapIntel = (import ./nix/nixgl.nix { inherit pkgs; }).glWrapIntel;
-        signal-desktop = pkgs-matej.signal-desktop;
-        stm32cubemx = pkgs-matej.stm32cubemx;
+        nvimnix = inputs.nvimnix;
       };
 
       pkgs = import inputs.nixpkgs-stable {

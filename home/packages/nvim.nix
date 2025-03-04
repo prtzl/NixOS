@@ -1,73 +1,15 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, system, ... }:
 
 let
-  # All packages related to function of nvim are from separate pkgs-nvim
-  pkgs-nvim = pkgs.pkgs-nvim; # pkgs.pkgs-nvim;
-  vimPlugins = pkgs-nvim.vimPlugins;
-  plugins = with vimPlugins; [
-    # Plugins that I know and understand where and how they're used
-    nvim-treesitter.withAllGrammars # syntax for everything
-    vim-cpp-enhanced-highlight # better looking cpp highlighting
-    markdown-preview-nvim # opens markdown preview in browser
-    telescope-nvim # Fuzzy search
-    telescope-frecency-nvim # 
-    lualine-nvim # status bar
-    vim-gitbranch # get git info for status bar
-    git-worktree-nvim # telescope extension for git worktree
-    gitsigns-nvim # git gutter
-    vim-fugitive # Git tool
-    lazygit-nvim # Another git tool
-    impatient-nvim # Everyone and their mother includes this
-    incsearch-vim
-    nvim-autopairs # autopair braces
-    nvim-tree-lua # file tree
-    nvim-web-devicons # icons
-    nvim-base16 # color themes
-    # base16-nvim # color themes
-    comment-nvim # smart comments
-    vim-latex-live-preview # preview latex pdf inside editor
-    nvim-ts-rainbow # colored parentheses using treesitter
-    # rainbow-delimiters-nvim
-    alpha-nvim # greet dashboard
-    indentLine # Show indentation levels
-
-    # LSP stuff
-    cmp-buffer
-    cmp-cmdline
-    cmp-nvim-lsp
-    cmp-omni
-    cmp-path
-    cmp-treesitter
-    cmp_luasnip
-    cmp-nvim-lsp-document-symbol
-    cmp-spell
-    cmp-nvim-lua
-    cmp-emoji
-    fidget-nvim
-    fzf-lsp-nvim
-    lsp_extensions-nvim
-    lsp_signature-nvim
-    luasnip
-    lspkind-nvim
-    nvim-cmp
-    nvim-dap
-    nvim-dap-ui
-    nvim-lspconfig
-    plenary-nvim
-
-    epics
-  ];
-  epics = pkgs.fetchFromGitHub {
-    owner = "minijackson";
-    repo = "epics.nvim";
-    rev = "843c23847bf613c7966a9412e9969d7b240483e9";
-    sha256 = "sha256-/0FIxCv5b/+eFNDHhLLgROUwEytIzJy/0sYMMarqljc=";
-  };
+  pkgs-nvim = pkgs;
+  mynvim = pkgs.nvimnix.packages.x86_64-linux.default; # this is oh shit moment. But it works hahahah
 in
 {
-  home.packages = with pkgs; [
+  # My fancy pantsy portable nvimnix does not bring it's own programs, so keep this here for now
+  home.packages = with pkgs-nvim; [
     bat
     ripgrep
+    mynvim
   ] ++ (with pkgs-nvim; [
     nil # nix lsp
     texlab # latex lsp
@@ -76,29 +18,13 @@ in
     tree-sitter
     lazygit
   ]);
-  programs.neovim = {
-    # Default is pkgs.neovim-unwrapped
-    package = pkgs.neovim-unwrapped;
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-    withNodeJs = true;
-    withPython3 = true;
-    plugins = plugins;
-    extraConfig = ''
-      " Workaround for broken handling of packpath by vim8/neovim for ftplugins -- see https://github.com/NixOS/nixpkgs/issues/39364#issuecomment-425536054 for more info
-      filetype off | syn off
-      filetype indent plugin on | syn on
-      ${builtins.readFile ./dotfiles/nvim/init.vim}
-      lua << EOF
-      ${builtins.readFile ./dotfiles/nvim/init.lua}
-      EOF
-    '';
-  };
-  xdg.configFile = {
-    "nvim/lua".source = ./dotfiles/nvim/lua;
-    "nvim/plugin".source = ./dotfiles/nvim/plugin;
-    "nvim/ftplugin".source = ./dotfiles/nvim/ftplugin;
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   package = pkgs.nvimnix.packages.x86_64-linux.default;
+  #   viAlias = true;
+  #   vimAlias = true;
+  #   vimdiffAlias = true;
+  #   withNodeJs = true;
+  #   withPython3 = true;
+  # };
 }

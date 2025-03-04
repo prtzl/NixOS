@@ -55,7 +55,7 @@ in
     zoom-us
     skypeforlinux
     discord
-    unstable.signal-desktop-beta
+    signal-desktop
   ];
 
   home.sessionVariables = {
