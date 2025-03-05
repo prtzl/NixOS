@@ -33,7 +33,7 @@ in
   ];
 
   home.sessionVariables = {
-    NIX_HOME_DERIVATION = "nixos";
+    NIX_HOME_DERIVATION = "nixos-wsl";
   };
 }
 
