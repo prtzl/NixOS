@@ -213,11 +213,19 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
+<<<<<<< Updated upstream
         "lastModified": 1741124102,
         "narHash": "sha256-gO1GIR6hyizz+J/NLtT8UIGo7r/fQHTDEJ3QDVcvCFU=",
         "owner": "prtzl",
         "repo": "nvimnix",
         "rev": "842727238f4673785d21aa947ee826b29db22b2b",
+=======
+        "lastModified": 1741169354,
+        "narHash": "sha256-evC9j54LxXD9adejR10Eve15puTr29/XT+rNTSINayY=",
+        "owner": "prtzl",
+        "repo": "nvimnix",
+        "rev": "ee2d9ce29ae4a5c5e60528c5950696b53b3b58f1",
+>>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
