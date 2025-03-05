@@ -66,7 +66,12 @@ fi
 
 info "Building derivation!"
 peval nix build .\#"$home_derivation" --impure "$ARGS"
-peval nvd diff /nix/var/nix/profiles/per-user/$USER/profile result
+
+path=/nix/var/nix/profiles/per-user/$USER/profile
+if [ -f $path ]; then
+    peval nvd diff $path result
+fi
+
 read -p "Perform switch? [y/Y] " answer
 if [[ "$answer" == [yY] ]]; then
     info Applying update!
