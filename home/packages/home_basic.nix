@@ -29,33 +29,34 @@ in
     git-crypt
     gnupg
     bottom
+    git
   ];
 
   # Privat git
-  programs.git = {
-    enable = true;
-    userName = "prtzl";
-    userEmail = "matej.blagsic@protonmail.com";
-    extraConfig = {
-      core = {
-        init.defaultBranch = "master";
-      };
-      push.default = "current";
-    };
-    aliases = {
-      ci = "commit";
-      st = "status";
-      co = "checkout";
-      di = "diff --color-words";
-      br = "branch";
-      cob = "checkout -b";
-      cm = "!git add -A && git commit -m";
-      fc = "!git fetch && git checkout";
-      save = "!git add -A && git commit -m 'SAVEPOINT'";
-      wip = "commit -am 'WIP'";
-      sub = "submodule update --init --recursive"; # pulls all the submodules at correct commit
-    };
-  };
+  # programs.git = {
+  #   enable = true;
+  #   # userName = "prtzl";
+  #   # userEmail = "matej.blagsic@protonmail.com";
+  #   extraConfig = {
+  #     core = {
+  #       init.defaultBranch = "master";
+  #     };
+  #     push.default = "current";
+  #   };
+  #   aliases = {
+  #     ci = "commit";
+  #     st = "status";
+  #     co = "checkout";
+  #     di = "diff --color-words";
+  #     br = "branch";
+  #     cob = "checkout -b";
+  #     cm = "!git add -A && git commit -m";
+  #     fc = "!git fetch && git checkout";
+  #     save = "!git add -A && git commit -m 'SAVEPOINT'";
+  #     wip = "commit -am 'WIP'";
+  #     sub = "submodule update --init --recursive"; # pulls all the submodules at correct commit
+  #   };
+  # };
 
   home.file.".background".source = ./wallpaper/tux-nix-1440p.png;
   home.file.".lockscreen".source = ./wallpaper/lockscreen.png;

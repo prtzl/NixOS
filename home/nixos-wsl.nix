@@ -21,7 +21,6 @@ in
     (p "nvim.nix")
     (p "tmux.nix")
     (p "ranger.nix")
-    (p "fonts.nix")
     (p "zsh.nix")
   ];
 
