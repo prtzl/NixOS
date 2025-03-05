@@ -41,13 +41,14 @@ in
         format = "[ $symbol$branch]($style)";
       };
       git_commit = {
+        disabled = true;
         only_detached = false;
         tag_disabled = false;
         tag_symbol = ":";
         format = "[\\($hash$tag\\)]($style)";
       };
       git_status = {
-        disabled = false;
+        disabled = true;
         conflicted = "🏳";
         untracked = "🤷";
         stashed = "📦";
