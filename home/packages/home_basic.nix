@@ -62,6 +62,10 @@ in {
   home.file.".lockscreen".source = ./wallpaper/lockscreen.png;
   home.file.".black".source = ./wallpaper/black.png;
 
+  home.file."config/picom/picom.conf".text = ''
+    vsync = true;
+  '';
+
   home.file.".config/dunst/dunstrc".text = ''
     [global]
       origin = top-center
@@ -69,6 +73,7 @@ in {
       notification_limit = 3
       offset = 0x10
       separator_height = 1
+      font = FiraCode 14
 
     [volume]
       appname = volume
@@ -85,6 +90,58 @@ in {
 
     [urgency_critical]
       timeout = 5
+  '';
+
+  home.file.".config/i3status/config".text = ''
+    general {
+            colors = true
+            interval = 5
+    }
+
+    order += "disk /"
+    order += "cpu_temperature 0"
+    order += "cpu_temperature 1"
+    order += "cpu_temperature 2"
+    order += "load"
+    order += "memory"
+    order += "tztime local"
+
+    tztime local {
+            format = "%d.%m.%Y   %H:%M:%S"
+    }
+
+    load {
+            format = "Load: %1min"
+    }
+
+    cpu_temperature 0 {
+            format = "CPU: %degrees °C"
+            path = "/sys/class/hwmon/hwmon2/temp3_input" # fixme - this is for my desktop only
+    }
+
+    cpu_temperature 1 {
+            format = "GPU: %degrees °C"
+            path = "/sys/class/hwmon/hwmon5/temp1_input" # fixme - this is for my desktop only
+    }
+
+    cpu_temperature 2 {
+            format = "GPU: %degrees mW"
+            path = "/sys/class/hwmon/hwmon5/power1_input" # fixme - this is for my desktop only
+    }
+
+    memory {
+            format = "Memory: %used"
+            threshold_degraded = "10%"
+            format_degraded = "MEMORY: %free"
+    }
+
+    disk "/" {
+            format = "Free disk: %free"
+    }
+
+    read_file uptime {
+            path = "/proc/uptime"
+    }
   '';
 
   home.file.".config/i3/config".text = ''
@@ -115,7 +172,9 @@ in {
 
     # Enable i3status bar
     bar {
-        status_command i3status
+      position top
+      font pango:FiraCode 12
+      status_command i3status
     }
 
     ### Apps ###
@@ -160,6 +219,16 @@ in {
     bindsym $mod+$smod+$wm_setting_key_up    move up
     bindsym $mod+$smod+$wm_setting_key_right move right
 
+    # Change split orientation
+    bindsym $mod+h split h
+    bindsym $mod+v split v
+
+    # Resize windows with Ctrl + Shift + Mod + Arrow Keys
+    bindsym Ctrl+Shift+$mod+Left  resize shrink width 10 px
+    bindsym Ctrl+Shift+$mod+Right resize grow width 10 px
+    bindsym Ctrl+Shift+$mod+Up    resize shrink height 10 px
+    bindsym Ctrl+Shift+$mod+Down  resize grow height 10 px
+
     ### Utils ###
     # Enter fullscreen mode for the focused window
     bindsym $mod+f fullscreen toggle
@@ -170,16 +239,22 @@ in {
     # Kill the focused window
     bindsym $mod+$smod+q kill
 
-    # Increase volume
-    #bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && notify-send "Volume Up"
-    # Decrease volume
-    #bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && notify-send "Volume Down"
-    # Mute/unmute audio
-    #bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && notify-send "Mute Toggled"
-
-    bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && dunstify "🔊 Volume Up" -t 1000 -r 6969 -a "volume" -u "low" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100) "%"}')"
-    bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && dunstify "🔉 Volume Down" -t 1000 -r 6969 -a "volume" -u "low" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100) "%"}')"
-    bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && dunstify "🔇 Muted" -t 1000 -r 6969 -a "volume" -u "low" -h int:value:"0"
+    # Volume slider up, down, mute with print of output sink and percentage number
+    bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ && \
+      dunstify "$(printf "🔊 Volume Up: %s\n%s" \
+      "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100) "%"}')" \
+      "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'device.profile.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
+      -t 1000 -r 6969 -a "volume" -u "low" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
+    bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && \
+      dunstify "$(printf "🔊 Volume Down: %s\n%s" \
+      "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100) "%"}')" \
+      "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'device.profile.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
+      -t 1000 -r 6969 -a "volume" -u "low" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
+    bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && \
+      dunstify "$(printf "🔇 Muted: %s\n%s" \
+      "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100) "%"}')" \
+      "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'device.profile.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
+      -t 1000 -r 6969 -a "volume" -u "low" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
 
     ### Ending ###
 
@@ -187,7 +262,7 @@ in {
     bindsym $mod+Shift+e exec i3-msg exit
 
     # Start compositor
-    exec_always --no-startup-id picom
+    exec_always --no-startup-id picom --backend glx
   '';
 
   home.sessionVariables = { NIX_FLAKE_DIR_HOME = "$HOME/.config/nixpkgs/"; };
