@@ -1,10 +1,11 @@
 { inputs, config, pkgs, ... }:
 
 let
-  nixos-update = pkgs.writeShellScriptBin "nixos-update" (builtins.readFile ./local-pkgs/nixos-update.sh);
-  nixgen = pkgs.writeShellScriptBin "nixgen" (builtins.readFile ./local-pkgs/nixgen.sh);
-in
-{
+  nixos-update = pkgs.writeShellScriptBin "nixos-update"
+    (builtins.readFile ./local-pkgs/nixos-update.sh);
+  nixgen = pkgs.writeShellScriptBin "nixgen"
+    (builtins.readFile ./local-pkgs/nixgen.sh);
+in {
   # Additional configuration
   imports = [
     inputs.nix-monitored.nixosModules.default
@@ -57,7 +58,6 @@ in
       settings.X11Forwarding = true;
     };
     geoclue2.enable = true;
-    flatpak.enable = true;
   };
 
   # System packages - minimal usable system
@@ -93,9 +93,7 @@ in
 
   networking = {
     networkmanager.enable = true;
-    firewall = {
-      enable = true;
-    };
+    firewall = { enable = true; };
   };
 
   users.defaultUserShell = pkgs.zsh;
