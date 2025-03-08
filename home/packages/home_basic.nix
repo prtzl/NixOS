@@ -116,17 +116,17 @@ in {
 
     cpu_temperature 0 {
             format = "CPU: %degrees °C"
-            path = "/sys/class/hwmon/hwmon2/temp3_input" # fixme - this is for my desktop only
+            path = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon3/temp3_input" # fixme - this is for my desktop only
     }
 
     cpu_temperature 1 {
             format = "GPU: %degrees °C"
-            path = "/sys/class/hwmon/hwmon5/temp1_input" # fixme - this is for my desktop only
+            path = "/sys/devices/pci0000:00/0000:00:03.1/0000:0a:00.0/hwmon/hwmon0/temp1_input" # fixme - this is for my desktop only
     }
 
     cpu_temperature 2 {
             format = "GPU: %degrees mW"
-            path = "/sys/class/hwmon/hwmon5/power1_input" # fixme - this is for my desktop only
+            path = "/sys/devices/pci0000:00/0000:00:03.1/0000:0a:00.0/hwmon/hwmon0/power1_input" # fixme - this is for my desktop only
     }
 
     memory {
@@ -168,7 +168,7 @@ in {
     bindsym $mod+Shift+r restart
 
     # Lock screen
-    bindsym $mod+Shift+l exec i3lock
+    bindsym $mod+Shift+l exec i3lock -c 000000
 
     # Enable i3status bar
     bar {
@@ -240,7 +240,8 @@ in {
     bindsym $mod+$smod+q kill
 
     # Volume slider up, down, mute with print of output sink and percentage number
-    bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ && \
+    # Volume up has limit of 100%
+    bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 2%+ && \
       dunstify "$(printf "🔊 Volume Up: %s\n%s" \
       "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100) "%"}')" \
       "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'device.profile.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
