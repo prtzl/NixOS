@@ -4,16 +4,11 @@ let p = package: ./. + "/packages/${package}";
 in {
   imports = [
     (p "home_basic.nix")
-    (p "vscode.nix")
     (p "alacritty.nix")
-    (p "zsh.nix")
-    (p "nvim.nix")
     (p "tio.nix")
     (p "vscode.nix")
-    (p "ranger.nix")
-    (p "tmux.nix")
-    (p "fonts.nix")
     (p "redshift.nix")
+    (p "i3.nix")
   ];
 
   home.username = "matej";
