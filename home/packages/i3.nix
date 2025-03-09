@@ -1,9 +1,84 @@
 { config, lib, pkgs, ... }:
 
-{
-  home.file."config/picom/picom.conf".text = ''
-    vsync = true;
-  '';
+let
+  i3-resize-script = pkgs.writeTextFile {
+    name = "i3-resize.py";
+    text = ''
+      import sys
+      from i3ipc import Connection
+
+      def get_data(current):
+          rightmost = True
+          bottommost = True
+
+          while True:
+              if current.type == "workspace":
+                  return rightmost, bottommost
+
+              parent = current.parent
+              children = parent.nodes
+
+              for i, child in enumerate(children):
+                  if child.id == current.id:
+                      current_i = i
+
+              if current_i != len(children) - 1:
+                  match parent.layout:
+                      case "splith":
+                          rightmost = False
+                      case "splitv":
+                          bottommost = False
+
+              current = parent
+
+      def main():
+          direction = sys.argv[1]
+          amount = sys.argv[2]
+
+          i3 = Connection()
+          tree = i3.get_tree()
+          focused = tree.find_focused()
+
+          rightmost, bottommost = get_data(focused)
+
+          match direction:
+              case "left":
+                  if rightmost:
+                      i3args = "grow left"
+                  else:
+                      i3args = "shrink right"
+              case "right":
+                  if rightmost:
+                      i3args = "shrink left"
+                  else:
+                      i3args = "grow right"
+              case "up":
+                  if bottommost:
+                      i3args = "grow up"
+                  else:
+                      i3args = "shrink down"
+              case "down":
+                  if bottommost:
+                      i3args = "shrink up"
+                  else:
+                      i3args = "grow down"
+          
+          i3.command(f"resize {i3args} {amount} px")
+
+      if __name__ == "__main__":
+          main()
+    '';
+  };
+  i3-resize = pkgs.writeShellApplication {
+    name = "i3-resize";
+    runtimeInputs = with pkgs;
+      [ (python311.withPackages (p: with p; [ i3ipc ])) ];
+    text = ''
+      python3 ${i3-resize-script} "$@"
+    '';
+  };
+in {
+  home.file."resize.sh".source = "${i3-resize}/bin/i3-resize";
 
   home.file.".config/dunst/dunstrc".text = ''
     [global]
@@ -163,10 +238,10 @@
     bindsym $mod+v split v
 
     # Resize windows with Ctrl + Shift + Mod + Arrow Keys
-    bindsym Ctrl+Shift+$mod+Left  resize shrink width 10 px
-    bindsym Ctrl+Shift+$mod+Right resize grow width 10 px
-    bindsym Ctrl+Shift+$mod+Up    resize shrink height 10 px
-    bindsym Ctrl+Shift+$mod+Down  resize grow height 10 px
+    bindsym Ctrl+Shift+$mod+Left  exec ${i3-resize}/bin/i3-resize left 50px
+    bindsym Ctrl+Shift+$mod+Right exec ${i3-resize}/bin/i3-resize right 50px
+    bindsym Ctrl+Shift+$mod+Up    exec ${i3-resize}/bin/i3-resize up 50px
+    bindsym Ctrl+Shift+$mod+Down  exec ${i3-resize}/bin/i3-resize down 50px
 
     ### Utils ###
     # Enter fullscreen mode for the focused window
@@ -183,17 +258,17 @@
     bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 2%+ && \
       dunstify "$(printf "🔊 Volume Up: %s\n%s" \
       "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100) "%"}')" \
-      "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'device.profile.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
+      "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'node.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
       -t 1000 -r 6969 -a "volume" -u "low" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
     bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && \
       dunstify "$(printf "🔊 Volume Down: %s\n%s" \
       "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100) "%"}')" \
-      "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'device.profile.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
+      "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'node.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
       -t 1000 -r 6969 -a "volume" -u "low" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
     bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && \
       dunstify "$(printf "🔇 Muted: %s\n%s" \
       "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100) "%"}')" \
-      "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'device.profile.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
+      "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'node.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
       -t 1000 -r 6969 -a "volume" -u "low" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
 
     ### Ending ###
