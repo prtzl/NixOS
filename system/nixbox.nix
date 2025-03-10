@@ -1,12 +1,16 @@
 { config, pkgs, lib, modulesPath, ... }:
 
-let p = package: ./. + "/packages/${package}";
-in {
+{
   # Additional configuration
   imports = [
-    (p "configuration_basic.nix")
-    (p "graphics.nix")
-    (p "virtualisation.nix")
+    ./packages/bootloader.nix
+    ./packages/configuration_basic.nix
+    ./packages/filesystem.nix
+    ./packages/graphics.nix
+    ./packages/hardware-configuration_basic.nix
+    ./packages/pipewire.nix
+    ./packages/udev.nix
+    ./packages/virtualisation.nix
   ];
 
   system.stateVersion = "24.11";
