@@ -1,9 +1,7 @@
 { config, pkgs, lib, modulesPath, ... }:
 
-let
-  p = package: ./. + "/packages/${package}";
-in
-{
+let p = package: ./. + "/packages/${package}";
+in {
   # Additional configuration
   imports = [
     (p "configuration_basic.nix")
@@ -11,7 +9,7 @@ in
     (p "virtualisation.nix")
   ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 
   # set top 8x2 = packages that do build will take some time, but oh well
   nix.settings = {
@@ -27,15 +25,21 @@ in
     interfaces.enp9s0.useDHCP = true;
     firewall = {
       enable = true;
-      allowedTCPPortRanges = [
-        { from = 42000; to = 42001; }
-      ];
+      allowedTCPPortRanges = [{
+        from = 42000;
+        to = 42001;
+      }];
     };
     enableIPv6 = false;
-  };# Disable IPv6
+  }; # Disable IPv6
 
   services = {
-    xserver.videoDrivers = [ "amdgpu" ];
+    xserver = {
+      videoDrivers = [ "amdgpu" ];
+      deviceSection = ''
+        Option "TearFree" "on"
+      '';
+    };
     fwupd.enable = true;
   };
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
@@ -55,7 +59,20 @@ in
         isNormalUser = true;
         isSystemUser = false;
         createHome = true;
-        extraGroups = [ "wheel" "libvirtd" "networkmanager" "dialout" "audio" "video" "usb" "podman" "docker" "openrazer" "kvm" "adbusers" ];
+        extraGroups = [
+          "wheel"
+          "libvirtd"
+          "networkmanager"
+          "dialout"
+          "audio"
+          "video"
+          "usb"
+          "podman"
+          "docker"
+          "openrazer"
+          "kvm"
+          "adbusers"
+        ];
       };
     };
   };
@@ -68,12 +85,14 @@ in
     wineWowPackages.stable
     android-udev-rules
     fwup
+    xorg.xf86videoamdgpu
   ];
 
   # Hardware settings
   boot = {
-    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-    initrd.kernelModules = [ ];
+    initrd.availableKernelModules =
+      [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+    initrd.kernelModules = [ "amdgpu" ];
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
     kernelParams = [
