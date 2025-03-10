@@ -1,11 +1,14 @@
 { config, lib, pkgs, ... }:
 
+let
+  wslgit = pkgs.writeShellScriptBin "wslgit" (builtins.readFile ./dotfiles/wslgit.sh);
+in
 {
   imports = [
     ./starship.nix
   ];
 
-  home.packages = with pkgs; [ fzf zsh-completions xclip eza fd ripgrep ];
+  home.packages = with pkgs; [ fzf zsh-completions xclip eza fd ripgrep wslgit ];
 
   programs.direnv = {
     enable = true;
@@ -38,6 +41,8 @@
       reboot = "read -s \\?\"Reboot? [ENTER]: \" && if [ -z \"$REPLY\" ];then env reboot;else echo \"Canceled\";fi";
       poweroff = "read -s \\?\"Poweroff? [ENTER]: \" && if [ -z \"$REPLY\" ];then env poweroff;else echo \"Canceled\";fi";
       udevreload = "sudo udevadm control --reload-rules && sudo udevadm trigger";
+
+      git = "wslgit";
     };
 
     history = {
