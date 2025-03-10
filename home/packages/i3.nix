@@ -78,7 +78,7 @@ let
     '';
   };
 in {
-  home.file."resize.sh".source = "${i3-resize}/bin/i3-resize";
+  home.file."resize.sh".source = "${i3-resize}/bin/${i3-resize.name}";
 
   home.file.".config/dunst/dunstrc".text = ''
     [global]
@@ -238,10 +238,10 @@ in {
     bindsym $mod+v split v
 
     # Resize windows with Ctrl + Shift + Mod + Arrow Keys
-    bindsym Ctrl+Shift+$mod+Left  exec ${i3-resize}/bin/i3-resize left 50px
-    bindsym Ctrl+Shift+$mod+Right exec ${i3-resize}/bin/i3-resize right 50px
-    bindsym Ctrl+Shift+$mod+Up    exec ${i3-resize}/bin/i3-resize up 50px
-    bindsym Ctrl+Shift+$mod+Down  exec ${i3-resize}/bin/i3-resize down 50px
+    bindsym Ctrl+Shift+$mod+Left  exec ${i3-resize}/bin/${i3-resize.name} left 50px
+    bindsym Ctrl+Shift+$mod+Right exec ${i3-resize}/bin/${i3-resize.name} right 50px
+    bindsym Ctrl+Shift+$mod+Up    exec ${i3-resize}/bin/${i3-resize.name} up 50px
+    bindsym Ctrl+Shift+$mod+Down  exec ${i3-resize}/bin/${i3-resize.name} down 50px
 
     ### Utils ###
     # Enter fullscreen mode for the focused window
