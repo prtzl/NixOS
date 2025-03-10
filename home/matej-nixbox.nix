@@ -33,6 +33,7 @@ in {
     # minecraft # broken on NixOS since 1.19 upwards, bummer
 
     # Net
+    firefox
     chromium
 
     # Latex
