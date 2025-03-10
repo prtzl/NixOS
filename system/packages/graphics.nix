@@ -10,9 +10,19 @@
     gnome-disk-utility
     gnome-calculator
     gnome-screenshot
+
+    i3status
+    i3lock
+    dmenu
+    rofi
+    feh
+    picom
+    volumeicon # for volume control
+    lxappearance # for GTK theme management
+    dunst # notification daemon
+    libnotify # sends notification to notification daemon (dunst)
   ];
 
-  # xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   services = {
     displayManager.ly.enable = true;
     xserver = {
@@ -21,11 +31,27 @@
         options = "eurosign:e";
         layout = "us";
       };
-      desktopManager = {
-        cinnamon.enable = true;
+      windowManager.i3 = { enable = true; };
+      autoRepeatDelay = 180;
+      autoRepeatInterval = 15;
+    };
+  };
+
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      fira-code
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+    ];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Noto Sans" ];
+        monospace = [ "FiraCode Nerd Font" ];
       };
     };
-    gnome.core-utilities.enable = false;
-    cinnamon.apps.enable = false;
   };
 }
