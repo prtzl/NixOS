@@ -3,12 +3,13 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-matej.url = "github:prtzl/nixpkgs/patch";
-    nixpkgs-nvim.url = "github:nixos/nixpkgs/91a22f76cd1716f9d0149e8a5c68424bb691de15";
+    nixpkgs-nvim.url =
+      "github:nixos/nixpkgs/91a22f76cd1716f9d0149e8a5c68424bb691de15";
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
       url = "github:nix-community/home-manager";
-    inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     jlink-pack = {
       url = "github:prtzl/jlink-nix";
@@ -36,8 +37,11 @@
       home-manager = inputs.home-manager;
       PWD = builtins.getEnv "PWD";
 
-      mkFree = drv: drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
-      generators = import ./nix/generators.nix { inherit inputs system lib home-manager pkgs; };
+      mkFree = drv:
+        drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
+      generators = import ./nix/generators.nix {
+        inherit inputs system lib home-manager pkgs;
+      };
       inherit (generators) unwrapSystem mkSystem mkHome;
 
       stableOverlay = self: super: {
@@ -72,48 +76,58 @@
         inherit system;
         config.allowUnfree = true;
       };
-    in
-    rec {
-      nixosConfigurations =
-        let
-          config = file: ./system + "/${file}";
-        in
-        {
-          nixbox = mkSystem { configuration = config "nixbox.nix"; };
-          nixtop = mkSystem { configuration = config "nixtop.nix"; hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s; };
-          testbox = mkSystem { configuration = config "testbox.nix"; };
+    in rec {
+      nixosConfigurations = {
+        nixbox = mkSystem { configuration = ./system/nixbox.nix; };
+        nixtop = mkSystem {
+          configuration = ./system/nixtop.nix;
+          hardware = inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s;
         };
+        testbox = mkSystem { configuration = ./system/testbox.nix; };
+        wsl = mkSystem { configuration = ./system/wsl.nix; };
+      };
 
-      homeConfigurations =
-        let
-          config = file: ./home + "/${file}";
-        in
-        rec {
-          matej-nixbox = mkHome { home-derivation = (config "matej-nixbox.nix"); };
-          matej-nixtop = mkHome { home-derivation = (config "matej-nixtop.nix"); };
-          test-testbox = mkHome { home-derivation = (config "test-testbox.nix"); homeArgs.personal = false; };
-          matej-work = mkHome { home-derivation = (config "matej-work.nix"); notNixos = true; };
-          matej-ubuntubox = mkHome { home-derivation = (config "matej-ubuntubox.nix"); homeArgs.personal = false; };
-          dev-epics = mkHome { home-derivation = (config "dev-epics.nix"); homeArgs.personal = false; };
+      homeConfigurations = {
+        matej-nixbox = mkHome { home-derivation = ./home/matej-nixbox.nix; };
+        matej-nixtop = mkHome { home-derivation = ./home/matej-nixtop.nix; };
+        test-testbox = mkHome {
+          home-derivation = ./home/test-testbox.nix;
+          homeArgs.personal = false;
         };
+        matej-work = mkHome {
+          home-derivation = ./home/matej-work.nix;
+          notNixos = true;
+        };
+        matej-ubuntubox = mkHome {
+          home-derivation = ./home/matej-ubuntubox.nix;
+          homeArgs.personal = false;
+        };
+        dev-epics = mkHome {
+          home-derivation = ./home/dev-epics.nix;
+          homeArgs.personal = false;
+        };
+        nixos-wsl = mkHome {
+          home-derivation = ./home/nixos-wsl.nix;
+          homeArgs.personal = false;
+        };
+      };
 
       nixbox = unwrapSystem nixosConfigurations.nixbox;
       nixtop = unwrapSystem nixosConfigurations.nixtop;
       testbox = unwrapSystem nixosConfigurations.testbox;
+      wsl = unwrapSystem nixosConfigurations.wsl;
       matej-nixbox = homeConfigurations.matej-nixbox;
       matej-nixtop = homeConfigurations.matej-nixtop;
       test-testbox = homeConfigurations.test-testbox;
       matej-work = homeConfigurations.matej-work;
       matej-ubuntubox = homeConfigurations.matej-ubuntubox;
       dev-epics = homeConfigurations.dev-epics;
+      nixos-wsl = homeConfigurations.nixos-wsl;
 
-    } // inputs.flake-utils.lib.eachDefaultSystem (system:
-      let
-      in
-      {
-        devShells.default = pkgs.mkShellNoCC {
-          name = "Installation-shell";
-          nativeBuildInputs = with pkgs-unstable; [ nix nixfmt nvd ];
-        };
-      });
+    } // inputs.flake-utils.lib.eachDefaultSystem (system: {
+      devShells.default = pkgs.mkShellNoCC {
+        name = "Installation-shell";
+        nativeBuildInputs = with pkgs-unstable; [ nix nixfmt nvd ];
+      };
+    });
 }

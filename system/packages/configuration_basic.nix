@@ -7,14 +7,7 @@ let
     (builtins.readFile ./local-pkgs/nixgen.sh);
 in {
   # Additional configuration
-  imports = [
-    inputs.nix-monitored.nixosModules.default
-    ./bootloader.nix
-    ./filesystem.nix
-    ./hardware-configuration_basic.nix
-    ./udev.nix
-    ./pipewire.nix
-  ];
+  imports = [ inputs.nix-monitored.nixosModules.default ];
 
   # Cleaning lady
   nix = {
@@ -70,7 +63,6 @@ in {
     systemPackages = with pkgs; [
       fd
       file
-      firefox
       git
       home-manager
       htop
@@ -82,7 +74,7 @@ in {
       nvd
       parted
       ripgrep
-      unstable.tio
+      tio
       tree
       unzip
       usbutils
@@ -94,6 +86,7 @@ in {
   networking = {
     networkmanager.enable = true;
     firewall = { enable = true; };
+    enableIPv6 = false;
   };
 
   users.defaultUserShell = pkgs.zsh;
