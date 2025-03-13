@@ -87,7 +87,7 @@ in {
       notification_limit = 3
       offset = 0x10
       separator_height = 1
-      font = FiraCode 14
+      font = FiraCode 18
 
     [volume]
       appname = volume
