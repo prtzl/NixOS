@@ -1,24 +1,26 @@
 { config, pkgs, lib, modulesPath, ... }:
 
-let
-  p = package: ./. + "/packages/${package}";
-in
 {
   # Additional configuration
   imports = [
-    (p "configuration_basic.nix")
-    (p "graphics.nix")
-    (p "virtualisation.nix")
+    ./packages/bootloader.nix
+    ./packages/configuration_basic.nix
+    ./packages/filesystem.nix
+    ./packages/graphics.nix
+    ./packages/hardware-configuration_basic.nix
+    ./packages/pipewire.nix
+    ./packages/udev.nix
+    ./packages/virtualisation.nix
   ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 
   # set to 4x2 = packages that do build will take some time, but oh well
   nix.settings = {
     # max-jobs = maximum packages built at once
-    max-jobs = 4;
+    max-jobs = 2;
     # cores = maximum threads used by a job/package
-    cores = 2;
+    cores = 8;
   };
 
   # Networking - check your interface name enp<>s0
@@ -26,10 +28,13 @@ in
     hostName = "nixtop";
     interfaces.enp0s31f6.useDHCP = true;
     interfaces.wlp61s0.useDHCP = true;
+    firewall = {
+      enable = true;
+    };
+    enableIPv6 = false;
   };
 
   # Set your time zone - where are you ?
-  location.provider = "geoclue2";
   time.timeZone = "Europe/Ljubljana";
 
   # Select internationalisation properties
@@ -52,6 +57,7 @@ in
   environment.systemPackages = with pkgs; [
     wineWowPackages.stable
   ];
+  programs.wireshark.enable = true;
 
   services = {
     fwupd.enable = true;
@@ -75,6 +81,7 @@ in
       CPU_HWP_DYN_BOOST_ON_BAT = 0;
     };
   };
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Hardware configuration
   boot = {

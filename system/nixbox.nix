@@ -88,7 +88,6 @@
   environment.systemPackages = with pkgs; [
     wineWowPackages.stable
     android-udev-rules
-    fwup
     xorg.xf86videoamdgpu
   ];
 
