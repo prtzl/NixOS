@@ -38,12 +38,7 @@
   }; # Disable IPv6
 
   services = {
-    xserver = {
-      videoDrivers = [ "amdgpu" ];
-      deviceSection = ''
-        Option "TearFree" "on"
-      '';
-    };
+    xserver = { videoDrivers = [ "amdgpu" ]; };
     fwupd.enable = true;
   };
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
