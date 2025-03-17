@@ -34,6 +34,9 @@
       windowManager.i3 = { enable = true; };
       autoRepeatDelay = 180;
       autoRepeatInterval = 15;
+      deviceSection = ''
+        Option "TearFree" "on"
+      '';
     };
   };
 

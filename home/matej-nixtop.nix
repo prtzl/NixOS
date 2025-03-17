@@ -1,27 +1,18 @@
 { config, pkgs, ... }:
 
-let
-  p = package: ./. + "/packages/${package}";
-in
 {
   imports = [
-    (p "home_basic.nix")
-    (p "dconf.nix")
-    (p "vscode.nix")
-    (p "alacritty.nix")
-    (p "zsh.nix")
-    (p "nvim.nix")
-    (p "tio.nix")
-    (p "vscode.nix")
-    (p "ranger.nix")
-    (p "tmux.nix")
-    (p "fonts.nix")
-    (p "redshift.nix")
+    ./packages/alacritty.nix
+    ./packages/home_basic.nix
+    ./packages/i3.nix
+    ./packages/redshift.nix
+    ./packages/tio.nix
+    ./packages/vscode.nix
   ];
 
   home.username = "matej";
   home.homeDirectory = "/home/matej";
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
 
   # Packages
   home.packages = with pkgs; [
@@ -31,39 +22,24 @@ in
 
     # Content creation
     gimp
-    obs-studio
 
     # Net
+    firefox
     chromium
-
-    # Latex
-    texlive.combined.scheme-full
-    texstudio
 
     # Utility
     enpass
-    # megasync
-    pavucontrol
-    transmission-gtk
+    transmission_4-gtk
 
     # Media
     ffmpeg
     libreoffice
-    rhythmbox
 
     # Communication
-    zoom-us
-    skypeforlinux
-    discord
     signal-desktop
   ];
 
   home.sessionVariables = {
     NIX_HOME_DERIVATION = "matej-nixtop";
   };
-
-  dconf.settings = {
-    "org/cinnamon/desktop/peripherals/touchpad" = { tap-to-click = true; };
-  };
 }
-

@@ -1,14 +1,13 @@
 { config, pkgs, ... }:
 
-let p = package: ./. + "/packages/${package}";
-in {
+{
   imports = [
-    (p "home_basic.nix")
-    (p "alacritty.nix")
-    (p "tio.nix")
-    (p "vscode.nix")
-    (p "redshift.nix")
-    (p "i3.nix")
+    ./packages/alacritty.nix
+    ./packages/home_basic.nix
+    ./packages/i3.nix
+    ./packages/redshift.nix
+    ./packages/tio.nix
+    ./packages/vscode.nix
   ];
 
   home.username = "matej";
@@ -48,16 +47,12 @@ in {
     # Media
     ffmpeg
     libreoffice
-    rhythmbox
     tauon
     easytag
     soundconverter
     jamesdsp
 
     # Communication
-    zoom-us
-    skypeforlinux
-    unstable.discord
     signal-desktop
 
     (import (pkgs.fetchFromGitHub {
