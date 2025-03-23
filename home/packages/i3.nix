@@ -97,7 +97,7 @@ in {
       replace = yes
 
     [urgency_low]
-      timeout = 1
+      timeout = 3
 
     [urgency_normal]
       timeout = 3
