@@ -38,8 +38,22 @@
   }; # Disable IPv6
 
   services = {
-    xserver = { videoDrivers = [ "amdgpu" ]; };
+    xserver = {
+      videoDrivers = [ "amdgpu" ];
+      deviceSection = ''
+        Option "TearFree" "on"
+      '';
+      xkb.options = "caps:escape";
+      extraConfig = "\n        keycode 135 = Super_L\n      ";
+    };
     fwupd.enable = true;
+    udev = {
+      extraRules = ''
+        # Give CPU temp a stable device path
+        # AMD Ryzen 7 3800x, Gigabyte B550M
+        ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x1022", ATTRS{device}=="0x1443", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp3_input /dev/cpu_temp'"
+      '';
+    };
   };
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
