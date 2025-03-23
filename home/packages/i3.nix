@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   i3-resize-script = pkgs.writeTextFile {
@@ -79,32 +79,6 @@ let
   };
 in {
   home.file."resize.sh".source = "${i3-resize}/bin/${i3-resize.name}";
-
-  home.file.".config/dunst/dunstrc".text = ''
-    [global]
-      origin = top-center
-      alignment = center
-      notification_limit = 3
-      offset = 0x10
-      separator_height = 1
-      font = FiraCode 18
-
-    [volume]
-      appname = volume
-      origin = center
-      timeout = 1
-      notification_limit = 1
-      replace = yes
-
-    [urgency_low]
-      timeout = 3
-
-    [urgency_normal]
-      timeout = 3
-
-    [urgency_critical]
-      timeout = 5
-  '';
 
   home.file.".config/i3status/config".text = ''
     general {
@@ -259,17 +233,17 @@ in {
       dunstify "$(printf "🔊 Volume Up: %s\n%s" \
       "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100) "%"}')" \
       "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'node.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
-      -t 1000 -r 6969 -a "volume" -u "low" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
+      -t 1000 -r 6969 -a "volume" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
     bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && \
       dunstify "$(printf "🔊 Volume Down: %s\n%s" \
       "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100) "%"}')" \
       "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'node.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
-      -t 1000 -r 6969 -a "volume" -u "low" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
+      -t 1000 -r 6969 -a "volume" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
     bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && \
       dunstify "$(printf "🔇 Muted: %s\n%s" \
       "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100) "%"}')" \
       "$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'node.description' | sed -E 's/.*"([^"]+)".*/\1/')")" \
-      -t 1000 -r 6969 -a "volume" -u "low" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
+      -t 1000 -r 6969 -a "volume" -h int:value:"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')"
 
     ### Ending ###
 

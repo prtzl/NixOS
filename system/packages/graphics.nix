@@ -19,7 +19,7 @@
     picom
     volumeicon # for volume control
     lxappearance # for GTK theme management
-    dunst # notification daemon
+    unstable.dunst # notification daemon
     libnotify # sends notification to notification daemon (dunst)
   ];
 
