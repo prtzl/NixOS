@@ -3,6 +3,7 @@
 {
   imports = [
     ./packages/alacritty.nix
+    ./packages/dunst.nix
     ./packages/home_basic.nix
     ./packages/i3.nix
     ./packages/redshift.nix
@@ -39,7 +40,5 @@
     signal-desktop
   ];
 
-  home.sessionVariables = {
-    NIX_HOME_DERIVATION = "matej-nixtop";
-  };
+  home.sessionVariables = { NIX_HOME_DERIVATION = "matej-nixtop"; };
 }
