@@ -27,10 +27,7 @@
     displayManager.ly.enable = true;
     xserver = {
       enable = true;
-      xkb = {
-        options = "eurosign:e";
-        layout = "us";
-      };
+      xkb = { layout = "us"; };
       windowManager.i3 = { enable = true; };
       autoRepeatDelay = 180;
       autoRepeatInterval = 15;
