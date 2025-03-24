@@ -104,17 +104,17 @@ in {
 
     cpu_temperature 0 {
             format = "CPU: %degrees °C"
-            path = "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon3/temp3_input" # fixme - this is for my desktop only
+            path = "/dev/cpu_temp"
     }
 
     cpu_temperature 1 {
             format = "GPU: %degrees °C"
-            path = "/sys/devices/pci0000:00/0000:00:03.1/0000:0a:00.0/hwmon/hwmon0/temp1_input" # fixme - this is for my desktop only
+            path = "/dev/gpu_temp"
     }
 
     cpu_temperature 2 {
             format = "GPU: %degrees mW"
-            path = "/sys/devices/pci0000:00/0000:00:03.1/0000:0a:00.0/hwmon/hwmon0/power1_input" # fixme - this is for my desktop only
+            path = "/dev/gpu_power"
     }
 
     memory {

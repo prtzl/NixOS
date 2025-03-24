@@ -51,6 +51,10 @@
         # Give CPU temp a stable device path
         # AMD Ryzen 7 3800x, Gigabyte B550M
         ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x1022", ATTRS{device}=="0x1443", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp3_input /dev/cpu_temp'"
+
+        # Create GPU core temp aliases with use of vid and pid of the card/interface
+        ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x1002", ATTRS{device}=="0x67df", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp1_input /dev/gpu_temp'"
+        ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x1002", ATTRS{device}=="0x67df", RUN+="/bin/sh -c 'ln -s /sys$devpath/power1_input /dev/gpu_power'"
       '';
     };
   };
