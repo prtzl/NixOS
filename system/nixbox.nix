@@ -40,11 +40,10 @@
   services = {
     xserver = {
       videoDrivers = [ "amdgpu" ];
-      deviceSection = ''
-        Option "TearFree" "on"
-      '';
-      xkb.options = "caps:escape";
-      extraConfig = "\n        keycode 135 = Super_L\n      ";
+      # Move keycode 135 (sometimes called Menu, looks like paper/screen with lines) to super key for better access from the right.
+      # Probably specific to razer keyboard, but oh well
+      displayManager.sessionCommands =
+        "${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 135 = Super_L' -display ''$DISPLAY";
     };
     fwupd.enable = true;
     udev = {

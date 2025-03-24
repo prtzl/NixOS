@@ -1,25 +1,24 @@
 { config, pkgs, ... }:
 
 {
-  # This gives some basic gui applications: image viewers, players, readers ...
   environment.systemPackages = with pkgs; [
-    eog
-    evince
-    celluloid
+    eog # image viewer
+    evince # pdf viewer
+    celluloid # video/music player
     gnome-system-monitor
     gnome-disk-utility
     gnome-calculator
     gnome-screenshot
 
-    i3status
-    i3lock
-    dmenu
-    rofi
-    feh
-    picom
-    volumeicon # for volume control
-    lxappearance # for GTK theme management
-    unstable.dunst # notification daemon
+    i3status # i3 status bar
+    i3lock # lock screen
+    dmenu # ugly stauts bar search, but works, heh
+    rofi # i don't knopw
+    feh # either
+    picom # compositor
+    volumeicon # sounds like volume, but I don't know where it work
+    lxappearance # for GTK theme management, I don't know if it works
+    unstable.dunst # notification daemon (unstable is at 1.12 which I need for new features like dynamic size)
     libnotify # sends notification to notification daemon (dunst)
   ];
 
@@ -27,8 +26,11 @@
     displayManager.ly.enable = true;
     xserver = {
       enable = true;
-      xkb = { layout = "us"; };
-      windowManager.i3 = { enable = true; };
+      xkb = {
+        layout = "us";
+        options = "caps:swapescape"; # swap caps and escape keys - vim yeah
+      };
+      windowManager.i3.enable = true;
       autoRepeatDelay = 180;
       autoRepeatInterval = 15;
       deviceSection = ''

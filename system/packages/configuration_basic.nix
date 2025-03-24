@@ -43,16 +43,6 @@ in {
   systemd.services.systemd-time-wait-sync.wantedBy = [ "multi-user.target" ];
   systemd.additionalUpstreamSystemUnits = [ "systemd-time-wait-sync.service" ];
 
-  # Usefull services
-  services = {
-    sshd.enable = true;
-    openssh = {
-      enable = true;
-      settings.X11Forwarding = true;
-    };
-    geoclue2.enable = true;
-  };
-
   # System packages - minimal usable system
   environment = {
     shells = with pkgs; [ bashInteractive zsh ];
@@ -85,7 +75,7 @@ in {
 
   networking = {
     networkmanager.enable = true;
-    firewall = { enable = true; };
+    firewall.enable = true;
     enableIPv6 = false;
   };
 
