@@ -11,10 +11,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
-    jlink-pack = {
-      url = "github:prtzl/jlink-nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    jlink-pack = { url = "github:prtzl/jlink-nix"; };
     nixgl = {
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
