@@ -1,43 +1,37 @@
-{ config, pkgs, ... }:
+{ pkgs, system, ... }:
 
 {
   environment.systemPackages = with pkgs; [
+    # Apps required for desktop environment (Hyprland)
+    hyprshade
+    wl-clipboard
+    wofi
+    waybar
+    unstable.dunst # notification daemon (unstable is at 1.12 which I need for new features like dynamic size)
+    libnotify # sends notification to notification daemon (dunst)
+
+    # nice to have GUI apps for a desktop
     eog # image viewer
     evince # pdf viewer
     celluloid # video/music player
-    gnome-system-monitor
-    gnome-disk-utility
-    gnome-calculator
-    gnome-screenshot
-
-    i3status # i3 status bar
-    i3lock # lock screen
-    dmenu # ugly stauts bar search, but works, heh
-    rofi # i don't knopw
-    feh # either
-    picom # compositor
-    volumeicon # sounds like volume, but I don't know where it work
-    lxappearance # for GTK theme management, I don't know if it works
-    unstable.dunst # notification daemon (unstable is at 1.12 which I need for new features like dynamic size)
-    libnotify # sends notification to notification daemon (dunst)
+    vlc # multimedia in case celluloid sucks
+    gnome-calculator # calculatror
+    dolphin # file explorer
   ];
 
-  services = {
-    displayManager.ly.enable = true;
-    xserver = {
-      enable = true;
-      xkb = {
-        layout = "us";
-        options = "caps:swapescape"; # swap caps and escape keys - vim yeah
-      };
-      windowManager.i3.enable = true;
-      autoRepeatDelay = 180;
-      autoRepeatInterval = 15;
-      deviceSection = ''
-        Option "TearFree" "on"
-      '';
-    };
+  # DE of choice
+  programs.hyprland = {
+    enable = true;
+    package =
+      (pkgs.hyprland.override { # or inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
+        enableXWayland = true; # whether to enable XWayland
+        legacyRenderer =
+          false; # whether to use the legacy renderer (for old GPUs)
+        withSystemd = true; # whether to build with systemd support
+      });
   };
+  services.displayManager.ly.enable =
+    true; # works anywhere (TUI!), use non-systemd hyprland
 
   fonts = {
     fontDir.enable = true;
