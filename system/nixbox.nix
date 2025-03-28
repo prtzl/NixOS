@@ -38,13 +38,6 @@
   }; # Disable IPv6
 
   services = {
-    xserver = {
-      videoDrivers = [ "amdgpu" ];
-      # Move keycode 135 (sometimes called Menu, looks like paper/screen with lines) to super key for better access from the right.
-      # Probably specific to razer keyboard, but oh well
-      displayManager.sessionCommands =
-        "${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 135 = Super_L' -display ''$DISPLAY";
-    };
     fwupd.enable = true;
     udev = {
       extraRules = ''
@@ -100,7 +93,6 @@
   environment.systemPackages = with pkgs; [
     wineWowPackages.stable
     android-udev-rules
-    xorg.xf86videoamdgpu
   ];
 
   # Hardware settings
