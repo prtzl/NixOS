@@ -5,8 +5,7 @@
     ./packages/alacritty.nix
     ./packages/dunst.nix
     ./packages/home_basic.nix
-    ./packages/i3.nix
-    ./packages/redshift.nix
+    ./packages/hyprland.nix
     ./packages/tio.nix
     ./packages/vscode.nix
   ];
