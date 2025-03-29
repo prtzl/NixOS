@@ -9,6 +9,8 @@
     waybar
     unstable.dunst # notification daemon (unstable is at 1.12 which I need for new features like dynamic size)
     libnotify # sends notification to notification daemon (dunst)
+    hyprcursor # I guess this has to come separately
+    rose-pine-hyprcursor
 
     # nice to have GUI apps for a desktop
     eog # image viewer
