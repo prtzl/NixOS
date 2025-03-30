@@ -1,59 +1,24 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./packages/alacritty.nix
-    ./packages/dunst.nix
-    ./packages/home_basic.nix
-    ./packages/hyprland.nix
-    ./packages/themes.nix
-    ./packages/tio.nix
-    ./packages/vscode.nix
-  ];
+  imports = [ ./packages/home_base.nix ./packages/home_graphics.nix ];
 
   home.username = "matej";
   home.homeDirectory = "/home/matej";
 
   # Packages
   home.packages = with pkgs; [
-    # Dev
-    jlink
-    stm32cubemx
-    arduino
-    drawio
-
     # Content creation
-    audacity
-    gimp
     obs-studio
 
     # Games
     steam
     # minecraft # broken on NixOS since 1.19 upwards, bummer
 
-    # Net
-    firefox
-    chromium
-
-    # Latex
-    texlive.combined.scheme-full
-    texstudio
-
-    # Utility
-    enpass
-    pavucontrol
-    transmission_4-gtk
-
     # Media
-    ffmpeg
-    libreoffice
-    tauon
     easytag
     soundconverter
     jamesdsp
-
-    # Communication
-    signal-desktop
 
     (import (pkgs.fetchFromGitHub {
       owner = "prtzl";
