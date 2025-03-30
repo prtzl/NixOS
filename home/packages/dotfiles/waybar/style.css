@@ -1,5 +1,5 @@
 * {
-    font-size: 20px;
+    font-size: 1.2rem;
     font-family: monospace;
     min-height: 0;
 }
@@ -38,14 +38,14 @@ window#waybar {
 #workspaces {
     background: #292b2e;
     transition: none;
-    margin-left: 20px;
+    margin-left: 0.5rem;
 }
 #workspaces button {
     background: #1a1a1a;
     color: @content_inactive;
     transition: none;
-    padding: 5px 20px;
-    margin: 0 1px;
+    padding: 0.5rem 2rem;
+    margin: 0 0.5rem;
 }
 #workspaces button.active {
     color: #1a1a1a;
@@ -58,7 +58,7 @@ window#waybar {
 }
 #workspaces button.urgent {
 	background:  rgba(255, 200, 0, 0.35);
-	border-bottom: 3px dashed @warning_color;
+	border-bottom: 0.5rem dashed @warning_color;
 	color: @warning_color;
     transition: none;
 }
@@ -80,7 +80,6 @@ window#waybar {
 }
 #cpu {
     color: #6c71c4;
-    min-width: 120px;
 }
 #battery {
     color: #859900;
@@ -96,7 +95,7 @@ window#waybar {
 }
 
 #clock.1 {
-    padding: 0 40px;
+    padding: 0 2rem;
 }
 
 #clock,
@@ -108,6 +107,6 @@ window#waybar {
 #battery,
 #temperature,
 #disk {
-    padding: 0 20px;
-    margin: 0 5px;
+    padding: 0 0.5rem;
+    margin: 0 0.2rem;
 }
