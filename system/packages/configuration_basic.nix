@@ -9,6 +9,8 @@ in {
   # Additional configuration
   imports = [ inputs.nix-monitored.nixosModules.default ];
 
+  system.stateVersion = "24.11";
+
   # Cleaning lady
   nix = {
     monitored.enable = true;
@@ -43,6 +45,8 @@ in {
   systemd.services.systemd-time-wait-sync.wantedBy = [ "multi-user.target" ];
   systemd.additionalUpstreamSystemUnits = [ "systemd-time-wait-sync.service" ];
 
+  services = { fwupd.enable = true; };
+
   # System packages - minimal usable system
   environment = {
     shells = with pkgs; [ bashInteractive zsh ];
@@ -57,21 +61,24 @@ in {
       home-manager
       htop
       lm_sensors
-      neofetch
-      unstable.nix-index
       nixgen
       nixos-update
       nvd
       parted
+      pciutils
       ripgrep
       tio
       tree
+      unstable.nix-index
       unzip
       usbutils
       vim
       wget
     ];
   };
+
+  programs.wireshark.enable = true;
+  programs.zsh.enable = true;
 
   networking = {
     networkmanager.enable = true;

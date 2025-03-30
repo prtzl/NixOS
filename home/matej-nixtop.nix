@@ -1,19 +1,17 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     ./packages/alacritty.nix
     ./packages/dunst.nix
     ./packages/home_basic.nix
-    ./packages/i3.nix
-    ./packages/redshift.nix
+    ./packages/themes.nix
     ./packages/tio.nix
     ./packages/vscode.nix
   ];
 
   home.username = "matej";
   home.homeDirectory = "/home/matej";
-  home.stateVersion = "24.11";
 
   # Packages
   home.packages = with pkgs; [

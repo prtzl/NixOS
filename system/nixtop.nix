@@ -1,4 +1,4 @@
-{ config, pkgs, lib, modulesPath, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Additional configuration
@@ -13,8 +13,6 @@
     ./packages/virtualisation.nix
   ];
 
-  system.stateVersion = "24.11";
-
   # set to 4x2 = packages that do build will take some time, but oh well
   nix.settings = {
     # max-jobs = maximum packages built at once
@@ -28,9 +26,7 @@
     hostName = "nixtop";
     interfaces.enp0s31f6.useDHCP = true;
     interfaces.wlp61s0.useDHCP = true;
-    firewall = {
-      enable = true;
-    };
+    firewall = { enable = true; };
     enableIPv6 = false;
   };
 
@@ -42,30 +38,32 @@
   console = { font = "Lat2-Terminus16"; };
 
   # User sh$t
-  programs.zsh.enable = true;
   users = {
     users = {
       matej = {
         isNormalUser = true;
         isSystemUser = false;
         createHome = true;
-        extraGroups = [ "wheel" "libvirtd" "networkmanager" "dialout" "audio" "video" "usb" "podman" "docker" ];
+        extraGroups = [
+          "wheel"
+          "libvirtd"
+          "networkmanager"
+          "dialout"
+          "audio"
+          "video"
+          "usb"
+          "podman"
+          "docker"
+        ];
       };
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    wineWowPackages.stable
-  ];
-  programs.wireshark.enable = true;
-
   services = {
-    fwupd.enable = true;
     acpid.enable = true;
     blueman.enable = true;
     hardware.bolt.enable = true;
-    throttled.extraConfig = ''
-    '';
+    throttled.extraConfig = "";
     tlp.settings = {
       # Do not suspend USB devices
       USB_AUTOSUSPEND = 0;
@@ -85,9 +83,18 @@
 
   # Hardware configuration
   boot = {
-    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "thunderbolt" ];
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "ahci"
+      "usb_storage"
+      "usbhid"
+      "sd_mod"
+      "thunderbolt"
+    ];
     initrd.kernelModules = [ ];
-    kernelModules = [ "kvm-intel" "acpi_call" "vboxdrv" "vboxnetflt" "vboxnetadp" "vboxpci" ];
+    kernelModules =
+      [ "kvm-intel" "acpi_call" "vboxdrv" "vboxnetflt" "vboxnetadp" "vboxpci" ];
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   };
 
@@ -108,7 +115,8 @@
   ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.bluetooth.enable = true;
   hardware.acpilight.enable = true;
 }
