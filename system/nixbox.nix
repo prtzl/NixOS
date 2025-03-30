@@ -33,6 +33,12 @@
     udev = {
       extraRules = ''
         # Give CPU temp a stable device path
+        # 1: Find the cpu temperature hwmon device: cat /sys/class/hwmon/hwmon{1..9}/name
+        # 2: Find one with the name that would be of the cpu monitor device. Intel laptop has dedicated "coretemp", amd has a device
+        # 3: Find the temperature input of the cpu core dye in the hwmon device
+        # 4.a: Find unique way to find the device either by vendor/product ID (like a chip/driver) or if it's dedicated (intel coretemp) by "name"
+        # 4.b: Run: udevadm info --attribute-walk --path=/sys/class/hwmon/hwmon<number> to get unique info mentioned above
+        # 5: Copy pase bottom code and either use vendor/product id, name, or whatever else. For various temperatures be sure to rename the link under which it will be available!
         # AMD Ryzen 7 3800x, Gigabyte B550M
         ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x1022", ATTRS{device}=="0x1443", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp3_input /dev/cpu_temp'"
 
