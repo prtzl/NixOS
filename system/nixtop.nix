@@ -78,6 +78,13 @@
       CPU_HWP_DYN_BOOST_ON_AC = 1;
       CPU_HWP_DYN_BOOST_ON_BAT = 0;
     };
+    udev = {
+      extraRules = ''
+        # Give CPU temp a stable device path
+        # Intel i7 8550U
+        ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{name}=="coretemp"RUN+="/bin/sh -c 'ln -s /sys$devpath/temp1_input /dev/cpu_temp'"
+      '';
+    };
   };
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
