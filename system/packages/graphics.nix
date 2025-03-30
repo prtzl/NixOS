@@ -18,7 +18,7 @@
     celluloid # video/music player
     vlc # multimedia in case celluloid sucks
     gnome-calculator # calculatror
-    dolphin # file explorer
+    nautilus # file explorer
   ];
 
   # DE of choice
