@@ -1,13 +1,8 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./packages/alacritty.nix
-    ./packages/dunst.nix
-    ./packages/hyprland.nix
-    ./packages/themes.nix
-    ./packages/vscode.nix
-  ];
+  imports =
+    [ ./alacritty.nix ./dunst.nix ./hyprland.nix ./themes.nix ./vscode.nix ];
 
   home.packages = with pkgs; [
     # Dev

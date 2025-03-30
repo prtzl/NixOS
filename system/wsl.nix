@@ -1,8 +1,8 @@
-{ config, pkgs, lib, modulesPath, ... }:
+{ lib, ... }:
 
 {
   # Additional configuration
-  imports = [ ./packages/configuration_basic.nix <nixos-wsl/modules> ];
+  imports = [ ./packages/system_base.nix <nixos-wsl/modules> ];
 
   wsl.enable = true;
   wsl.defaultUser = "nixos";

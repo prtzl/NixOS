@@ -1,6 +1,9 @@
-{ pkgs, system, ... }:
+{ pkgs, ... }:
 
 {
+  # Rational is that graphics systems need audo as well, non-graphics do NOT
+  imports = [ ./pipewire.nix ];
+
   environment.systemPackages = with pkgs; [
     # Apps required for desktop environment (Hyprland)
     hyprshade
