@@ -23,6 +23,7 @@
     gtk3.extraConfig = {
       Settings = ''
         gtk-cursor-theme-name=Numix-Cursor
+        gtk-tooltip-timeout = 100
       '';
     };
   };
