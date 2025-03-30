@@ -1,17 +1,16 @@
 {
   inputs = {
+    # nixpkgs stores
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-matej.url = "github:prtzl/nixpkgs/patch";
-    nixpkgs-nvim.url =
-      "github:nixos/nixpkgs/91a22f76cd1716f9d0149e8a5c68424bb691de15";
+
+    # Utilities by third parties
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
-    jlink-pack = { url = "github:prtzl/jlink-nix"; };
     nixgl = {
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -20,11 +19,12 @@
       url = "github:ners/nix-monitored";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    nvimnix = {
-      url = "github:prtzl/nvimnix";
-      # not following "this" nixpkgs allows original package to "lock" a configuration that works
-      # Adding one allows this system to use "any" version of nixpkgs, so it kind of "updates" all pacakges but the config.
-    };
+
+    # My stuff :)
+    # not following "this" nixpkgs allows original package to "lock" a configuration that works
+    # Adding one allows this system to use "any" version of nixpkgs, so it kind of "updates" all pacakges but the config.
+    jlink-pack.url = "github:prtzl/jlink-nix";
+    nvimnix.url = "github:prtzl/nvimnix/rel_24.11-04";
   };
 
   outputs = inputs:
@@ -32,7 +32,6 @@
       system = "x86_64-linux";
       lib = inputs.nixpkgs-stable.lib;
       home-manager = inputs.home-manager;
-      PWD = builtins.getEnv "PWD";
 
       mkFree = drv:
         drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
@@ -44,8 +43,7 @@
       stableOverlay = self: super: {
         # Packages
         unstable = pkgs-unstable;
-        pkgs-nvim = pkgs-nvim;
-        patched = pkgs-matej;
+
         # Stable package overrides/additions
         jlink = mkFree inputs.jlink-pack.defaultPackage.${system};
         glWrapIntel = (import ./nix/nixgl.nix { inherit pkgs; }).glWrapIntel;
@@ -62,16 +60,6 @@
         inherit system;
         config.allowUnfree = true;
         overlays = [ ];
-      };
-
-      pkgs-matej = import inputs.nixpkgs-matej {
-        inherit system;
-        config.allowUnfree = true;
-      };
-
-      pkgs-nvim = import inputs.nixpkgs-nvim {
-        inherit system;
-        config.allowUnfree = true;
       };
     in rec {
       nixosConfigurations = {
