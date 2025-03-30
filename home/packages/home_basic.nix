@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, notNixos, ... }:
+{ inputs, pkgs, notNixos, ... }:
 
 let
   home-update = pkgs.writeShellScriptBin "home-update"
@@ -20,6 +20,7 @@ in {
 
   imports = [ ./fonts.nix ./nvim.nix ./ranger.nix ./tmux.nix ./zsh.nix ];
 
+  home.stateVersion = "24.11";
   programs.home-manager.enable = true;
 
   # Packages

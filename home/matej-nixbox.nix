@@ -12,7 +12,6 @@
 
   home.username = "matej";
   home.homeDirectory = "/home/matej";
-  home.stateVersion = "24.11";
 
   # Packages
   home.packages = with pkgs; [

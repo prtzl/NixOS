@@ -1,4 +1,4 @@
-{ config, pkgs, lib, modulesPath, ... }:
+{ pkgs, lib, ... }:
 
 {
   # Additional configuration
@@ -13,8 +13,6 @@
     ./packages/virtualisation.nix
   ];
 
-  system.stateVersion = "24.11";
-
   # set top 8x2 = packages that do build will take some time, but oh well
   nix.settings = {
     # max-jobs = maximum packages built at once
@@ -27,18 +25,11 @@
   networking = {
     hostName = "nixbox";
     interfaces.enp9s0.useDHCP = true;
-    firewall = {
-      enable = true;
-      allowedTCPPortRanges = [{
-        from = 42000;
-        to = 42001;
-      }];
-    };
+    firewall = { enable = true; };
     enableIPv6 = false;
   }; # Disable IPv6
 
   services = {
-    fwupd.enable = true;
     udev = {
       extraRules = ''
         # Give CPU temp a stable device path
@@ -61,7 +52,6 @@
   console = { font = "Lat2-Terminus16"; };
 
   # User sh$t
-  programs.zsh.enable = true;
   users = {
     users = {
       matej = {
@@ -85,15 +75,6 @@
       };
     };
   };
-
-  programs.wireshark.enable = true;
-
-  programs.adb.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    wineWowPackages.stable
-    android-udev-rules
-  ];
 
   # Hardware settings
   boot = {
