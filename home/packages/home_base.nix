@@ -18,22 +18,38 @@ in {
   } else
     { };
 
-  imports = [ ./fonts.nix ./nvim.nix ./ranger.nix ./tmux.nix ./zsh.nix ];
+  imports = [
+    ./fonts.nix
+    ./nvim.nix
+    ./ranger.nix
+    ./tmux.nix
+    ./zsh.nix
+    ./packages/tio.nix
+  ];
 
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
 
-  # Packages
   home.packages = with pkgs; [
+    # Util
+    bottom
+    git-crypt
+    gnupg
     home-update
     nixfmt-classic
     nvd
-    roboto
     zip
-    git-crypt
-    gnupg
-    bottom
+
+    # Dev
     git
+    jlink
+
+    # Latex
+    texlive.combined.scheme-full
+
+    # Media
+    ffmpeg
+    libreoffice
   ];
 
   # Privat git
