@@ -5,6 +5,7 @@
     ./packages/alacritty.nix
     ./packages/dunst.nix
     ./packages/home_basic.nix
+    ./packages/hyprland.nix
     ./packages/themes.nix
     ./packages/tio.nix
     ./packages/vscode.nix
