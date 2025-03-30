@@ -3,14 +3,9 @@
 {
   # Additional configuration
   imports = [
-    ./packages/bootloader.nix
-    ./packages/configuration_basic.nix
-    ./packages/filesystem.nix
-    ./packages/graphics.nix
-    ./packages/hardware-configuration_basic.nix
-    ./packages/pipewire.nix
-    ./packages/udev.nix
-    ./packages/virtualisation.nix
+    ./packages/system_base.nix
+    ./packages/system_graphics.nix
+    ./packages/system_hardware.nix
   ];
 
   # set top 8x2 = packages that do build will take some time, but oh well
