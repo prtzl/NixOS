@@ -6,10 +6,10 @@
 
   environment.systemPackages = with pkgs; [
     # Apps required for desktop environment (Hyprland)
-    hyprshade
+    unstable.hyprshade
     wl-clipboard
     wofi
-    waybar
+    unstable.waybar
     unstable.dunst # notification daemon (unstable is at 1.12 which I need for new features like dynamic size)
     libnotify # sends notification to notification daemon (dunst)
     hyprcursor # I guess this has to come separately
@@ -29,7 +29,7 @@
   programs.hyprland = {
     enable = true;
     package =
-      (pkgs.hyprland.override { # or inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
+      (pkgs.unstable.hyprland.override { # or inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
         enableXWayland = true; # whether to enable XWayland
         legacyRenderer =
           false; # whether to use the legacy renderer (for old GPUs)
