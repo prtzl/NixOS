@@ -24,7 +24,7 @@
     # not following "this" nixpkgs allows original package to "lock" a configuration that works
     # Adding one allows this system to use "any" version of nixpkgs, so it kind of "updates" all pacakges but the config.
     jlink-pack.url = "github:prtzl/jlink-nix";
-    nvimnix.url = "github:prtzl/nvimnix/rel_24.11-04";
+    nvimnix.url = "github:prtzl/nvimnix";
   };
 
   outputs = inputs:
