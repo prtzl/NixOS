@@ -1,14 +1,22 @@
 { config, lib, pkgs, ... }:
 
 let
-  wslgit = pkgs.writeShellScriptBin "wslgit" (builtins.readFile ./dotfiles/wslgit.sh);
-in
-{
-  imports = [
-    ./starship.nix
-  ];
+  wslgit =
+    pkgs.writeShellScriptBin "wslgit" (builtins.readFile ./dotfiles/wslgit.sh);
+in {
+  imports = [ ./starship.nix ];
 
-  home.packages = with pkgs; [ fzf zsh-completions xclip eza fd ripgrep wslgit ];
+  home.packages = with pkgs; [
+    fzf
+    zsh-completions
+    xclip
+    eza
+    fd
+    ripgrep
+    wslgit
+    lazygit
+    bat
+  ];
 
   programs.direnv = {
     enable = true;
@@ -38,9 +46,12 @@ in
       gvim = "nvim-qt";
 
       # System
-      reboot = "read -s \\?\"Reboot? [ENTER]: \" && if [ -z \"$REPLY\" ];then env reboot;else echo \"Canceled\";fi";
-      poweroff = "read -s \\?\"Poweroff? [ENTER]: \" && if [ -z \"$REPLY\" ];then env poweroff;else echo \"Canceled\";fi";
-      udevreload = "sudo udevadm control --reload-rules && sudo udevadm trigger";
+      reboot = ''
+        read -s \?"Reboot? [ENTER]: " && if [ -z "$REPLY" ];then env reboot;else echo "Canceled";fi'';
+      poweroff = ''
+        read -s \?"Poweroff? [ENTER]: " && if [ -z "$REPLY" ];then env poweroff;else echo "Canceled";fi'';
+      udevreload =
+        "sudo udevadm control --reload-rules && sudo udevadm trigger";
 
       git = "wslgit";
     };
@@ -55,7 +66,7 @@ in
 
     initExtra = ''
       autoload -U colors && colors
-      
+
       zstyle ':completion:*' menu select
       zstyle ':completion:*' group-name ""
       zstyle ':completion:*' matcher-list "" 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
