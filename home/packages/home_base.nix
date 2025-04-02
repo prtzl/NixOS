@@ -38,9 +38,6 @@ in {
     git
     jlink
 
-    # Latex
-    texlive.combined.scheme-full
-
     # Media
     ffmpeg
     libreoffice

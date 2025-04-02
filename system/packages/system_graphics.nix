@@ -36,24 +36,6 @@
         withSystemd = true; # whether to build with systemd support
       });
   };
-  services.displayManager.ly.enable =
-    true; # works anywhere (TUI!), use non-systemd hyprland
-
-  fonts = {
-    fontDir.enable = true;
-    packages = with pkgs; [
-      fira-code
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-    ];
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        serif = [ "Noto Serif" ];
-        sansSerif = [ "Noto Sans" ];
-        monospace = [ "FiraCode Nerd Font" ];
-      };
-    };
-  };
+  # works anywhere (TUI!), use non-systemd hyprland
+  services.displayManager.ly.enable = true;
 }
