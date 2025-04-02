@@ -18,8 +18,7 @@ in {
   } else
     { };
 
-  imports =
-    [ ./fonts.nix ./nvim.nix ./ranger.nix ./tmux.nix ./zsh.nix ./tio.nix ];
+  imports = [ ./nvim.nix ./ranger.nix ./tmux.nix ./zsh.nix ./tio.nix ];
 
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
