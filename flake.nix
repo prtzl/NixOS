@@ -38,7 +38,11 @@
       generators = import ./nix/generators.nix {
         inherit inputs system lib home-manager pkgs;
       };
-      inherit (generators) unwrapSystem mkSystem mkHome;
+      inherit (generators) unwrapSystem mkSystem;
+      # Make indirection for home to push in modules just for home (buggy shit)
+      mkHome = args@{ ... }:
+        generators.mkHome
+        ({ modules = [ inputs.nvimnix.nixosModules.default ]; } // args);
 
       stableOverlay = self: super: {
         # Packages
