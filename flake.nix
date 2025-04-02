@@ -38,11 +38,17 @@
       generators = import ./nix/generators.nix {
         inherit inputs system lib home-manager pkgs;
       };
-      inherit (generators) unwrapSystem mkSystem;
+      inherit (generators) unwrapSystem;
       # Make indirection for home to push in modules just for home (buggy shit)
+      mkSystem = args@{ ... }:
+        generators.mkSystem ({
+          modules =
+            [ inputs.nix-monitored.nixosModules.default ./global/fonts.nix ];
+        } // args);
       mkHome = args@{ ... }:
-        generators.mkHome
-        ({ modules = [ inputs.nvimnix.nixosModules.default ]; } // args);
+        generators.mkHome ({
+          modules = [ inputs.nvimnix.nixosModules.default ./global/fonts.nix ];
+        } // args);
 
       stableOverlay = self: super: {
         # Packages
@@ -78,16 +84,16 @@
       homeConfigurations = {
         matej-nixbox = mkHome {
           home-derivation = ./home/matej-nixbox.nix;
-          homeArgs.personal = true;
+          args.personal = true;
         };
         matej-nixtop = mkHome {
           home-derivation = ./home/matej-nixtop.nix;
-          homeArgs.personal = true;
+          args.personal = true;
         };
         test-testbox = mkHome { home-derivation = ./home/test-testbox.nix; };
         matej-work = mkHome {
           home-derivation = ./home/matej-work.nix;
-          homeArgs = { notNixos = true; };
+          args = { notNixos = true; };
         };
         nixos-wsl = mkHome { home-derivation = ./home/nixos-wsl.nix; };
       };

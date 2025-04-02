@@ -6,9 +6,6 @@ let
   nixgen = pkgs.writeShellScriptBin "nixgen"
     (builtins.readFile ./local-pkgs/nixgen.sh);
 in {
-  # Additional configuration
-  imports = [ inputs.nix-monitored.nixosModules.default ];
-
   system.stateVersion = "24.11";
 
   # Cleaning lady
@@ -87,24 +84,4 @@ in {
   };
 
   users.defaultUserShell = pkgs.zsh;
-
-  fonts = {
-    fontDir.enable = true;
-    enableDefaultPackages = true;
-    packages = with pkgs; [
-      fira-code
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-    ];
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        serif = [ "Noto Serif" ];
-        sansSerif = [ "Noto Sans" ];
-        monospace = [ "FiraCode Nerd Font" ];
-      };
-    };
-  };
 }
-
