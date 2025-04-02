@@ -4,18 +4,15 @@ let
   mkSystem = { configuration, hardware ? null }:
     (lib.nixosSystem {
       inherit system;
-      modules = [
-        { nixpkgs.pkgs = pkgs; }
-        configuration
-        inputs.nvimnix.nixosModules.default
-      ] ++ (if hardware != null then [ hardware ] else [ ]);
+      modules = [ { nixpkgs.pkgs = pkgs; } configuration ]
+        ++ (if hardware != null then [ hardware ] else [ ]);
       specialArgs = { inherit inputs; };
     });
 
-  mkHome = { home-derivation, homeArgs ? { } }:
+  mkHome = { home-derivation, homeArgs ? { }, modules ? [ ] }:
     unwrapHome (home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [ home-derivation inputs.nvimnix.nixosModules.default ];
+      modules = [ home-derivation ] ++ modules;
       extraSpecialArgs = {
         inherit inputs homeArgs;
         lib = import "${home-manager}/modules/lib/stdlib-extended.nix"
