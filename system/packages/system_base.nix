@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 let
   nixos-update = pkgs.writeShellScriptBin "nixos-update"
@@ -27,7 +27,7 @@ in {
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 7d";
     };
     extraOptions = ''
       experimental-features = nix-command flakes ca-derivations
