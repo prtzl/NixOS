@@ -1,9 +1,13 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.tmux = {
-    package = pkgs.unstable.tmux;
     enable = true;
-    extraConfig = builtins.readFile ./dotfiles/tmux/tmux.conf;
+    package = pkgs.unstable.tmux;
+    extraConfig = (builtins.readFile ./dotfiles/tmux/tmux.conf) + ''
+      run-shell ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/resurrect.tmux
+      set -g @resurrect-strategy-nvim 'session'
+      set -g @resurrect-capture-pane-contents 'on'
+    '';
   };
 }

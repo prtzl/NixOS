@@ -15,6 +15,9 @@
     steam
     # minecraft # broken on NixOS since 1.19 upwards, bummer
 
+    # Latex
+    texlive.combined.scheme-full
+
     # Media
     easytag
     soundconverter
