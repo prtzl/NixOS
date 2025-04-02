@@ -1,9 +1,7 @@
-{ config, pkgs, homeArgs, ... }:
+{ homeArgs, ... }:
 
-let
-  personal = if homeArgs == null then true else homeArgs.personal;
-in
-{
+let personal = homeArgs ? personal && homeArgs.personal;
+in {
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
@@ -53,11 +51,11 @@ in
         untracked = "🤷";
         stashed = "📦";
         modified = "📝";
-        staged = "[++\($count\)](green)";
+        staged = "[++($count)](green)";
         up_to_date = "✓";
-        ahead = "⇡\($count\)";
-        diverged = "⇕⇡\($ahead_count\)⇣\($behind_count\)";
-        behind = "⇣\($count\)";
+        ahead = "⇡($count)";
+        diverged = "⇕⇡($ahead_count)⇣($behind_count)";
+        behind = "⇣($count)";
         style = " bold yellow";
         format = "[\\[$all_status$ahead_behind\\]]($style)";
       };

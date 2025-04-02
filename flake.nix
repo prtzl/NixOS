@@ -47,7 +47,6 @@
         # Stable package overrides/additions
         jlink = mkFree inputs.jlink-pack.defaultPackage.${system};
         glWrapIntel = (import ./nix/nixgl.nix { inherit pkgs; }).glWrapIntel;
-        nvimnix = inputs.nvimnix;
       };
 
       pkgs = import inputs.nixpkgs-stable {
@@ -73,40 +72,31 @@
       };
 
       homeConfigurations = {
-        matej-nixbox = mkHome { home-derivation = ./home/matej-nixbox.nix; };
-        matej-nixtop = mkHome { home-derivation = ./home/matej-nixtop.nix; };
-        test-testbox = mkHome {
-          home-derivation = ./home/test-testbox.nix;
-          homeArgs.personal = false;
+        matej-nixbox = mkHome {
+          home-derivation = ./home/matej-nixbox.nix;
+          homeArgs.personal = true;
         };
+        matej-nixtop = mkHome {
+          home-derivation = ./home/matej-nixtop.nix;
+          homeArgs.personal = true;
+        };
+        test-testbox = mkHome { home-derivation = ./home/test-testbox.nix; };
         matej-work = mkHome {
           home-derivation = ./home/matej-work.nix;
-          notNixos = true;
+          homeArgs = { notNixos = true; };
         };
-        matej-ubuntubox = mkHome {
-          home-derivation = ./home/matej-ubuntubox.nix;
-          homeArgs.personal = false;
-        };
-        dev-epics = mkHome {
-          home-derivation = ./home/dev-epics.nix;
-          homeArgs.personal = false;
-        };
-        nixos-wsl = mkHome {
-          home-derivation = ./home/nixos-wsl.nix;
-          homeArgs.personal = false;
-        };
+        nixos-wsl = mkHome { home-derivation = ./home/nixos-wsl.nix; };
       };
 
       nixbox = unwrapSystem nixosConfigurations.nixbox;
       nixtop = unwrapSystem nixosConfigurations.nixtop;
       testbox = unwrapSystem nixosConfigurations.testbox;
       wsl = unwrapSystem nixosConfigurations.wsl;
+
       matej-nixbox = homeConfigurations.matej-nixbox;
       matej-nixtop = homeConfigurations.matej-nixtop;
       test-testbox = homeConfigurations.test-testbox;
       matej-work = homeConfigurations.matej-work;
-      matej-ubuntubox = homeConfigurations.matej-ubuntubox;
-      dev-epics = homeConfigurations.dev-epics;
       nixos-wsl = homeConfigurations.nixos-wsl;
 
     } // inputs.flake-utils.lib.eachDefaultSystem (system: {

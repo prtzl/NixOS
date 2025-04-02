@@ -1,4 +1,4 @@
-{ desktop-environment, config, ... }:
+{ desktop-environment, ... }:
 
 {
   home.file.".startx.home".text = ''

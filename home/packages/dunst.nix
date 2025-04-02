@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   home.file.".config/dunst/dunstrc".text = ''
     [global]
