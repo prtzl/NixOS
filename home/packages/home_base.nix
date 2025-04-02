@@ -1,10 +1,10 @@
-{ inputs, pkgs, notNixos, ... }:
+{ inputs, pkgs, homeArgs, ... }:
 
 let
   home-update = pkgs.writeShellScriptBin "home-update"
     (builtins.readFile ./dotfiles/home-update.sh);
 in {
-  nix = if notNixos then {
+  nix = if (homeArgs ? notNixos && homeArgs.notNixos) then {
     # package = inputs.nix-monitored.package.${pkgs.system}.default;
     registry = {
       nixpkgs.flake = inputs.nixpkgs-stable;
@@ -44,29 +44,31 @@ in {
   ];
 
   # Privat git
-  programs.git = {
-    enable = true;
+  programs.git = (if (homeArgs ? personal && homeArgs.personal) then {
     userName = "prtzl";
     userEmail = "matej.blagsic@protonmail.com";
-    extraConfig = {
-      core = { init.defaultBranch = "master"; };
-      push.default = "current";
+  } else
+    { }) // {
+      enable = true;
+      extraConfig = {
+        core = { init.defaultBranch = "master"; };
+        push.default = "current";
+      };
+      aliases = {
+        ci = "commit";
+        st = "status";
+        co = "checkout";
+        di = "diff --color-words";
+        br = "branch";
+        cob = "checkout -b";
+        cm = "!git add -A && git commit -m";
+        fc = "!git fetch && git checkout";
+        save = "!git add -A && git commit -m 'SAVEPOINT'";
+        wip = "commit -am 'WIP'";
+        sub =
+          "submodule update --init --recursive"; # pulls all the submodules at correct commit
+      };
     };
-    aliases = {
-      ci = "commit";
-      st = "status";
-      co = "checkout";
-      di = "diff --color-words";
-      br = "branch";
-      cob = "checkout -b";
-      cm = "!git add -A && git commit -m";
-      fc = "!git fetch && git checkout";
-      save = "!git add -A && git commit -m 'SAVEPOINT'";
-      wip = "commit -am 'WIP'";
-      sub =
-        "submodule update --init --recursive"; # pulls all the submodules at correct commit
-    };
-  };
 
   home.file.".background".source = ./wallpaper/tux-nix-1440p.png;
   home.file.".lockscreen".source = ./wallpaper/lockscreen.png;

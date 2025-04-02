@@ -1,14 +1,10 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./alacritty.nix
-    ./dunst.nix
-    ./hyprland.nix
-    ./themes.nix
-    ./vscode.nix
-    ./waybar.nix
-  ];
+  imports =
+    [ ./alacritty.nix ./dunst.nix ./hyprland.nix ./themes.nix ./waybar.nix ];
+
+  programs.vscode.enable = true;
 
   home.packages = with pkgs; [
     # Dev
