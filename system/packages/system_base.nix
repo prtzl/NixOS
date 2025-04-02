@@ -87,5 +87,23 @@ in {
   };
 
   users.defaultUserShell = pkgs.zsh;
+
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      fira-code
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+    ];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Noto Sans" ];
+        monospace = [ "FiraCode Nerd Font" ];
+      };
+    };
+  };
 }
 
