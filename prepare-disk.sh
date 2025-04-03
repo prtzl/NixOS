@@ -48,20 +48,22 @@ fi
 # EFI
 partitionEfi()
 {
-    parted -s $DISK mklabel gpt
-    parted -s $DISK mkpart ESP fat32 1MiB 512MiB
-    parted -s $DISK set 1 esp on
-    parted -s $DISK mkpart primary linux-swap 512MiB 2560MiB
-    parted -s $DISK mkpart primary 2560MiB 100%
+    parted -s $DISK -- mklabel gpt
+    parted -s $DISK -- mkpart ESP fat32 1MB 512MB
+    parted -s $DISK -- mkpart primary linux-swap 512MB 4608MB
+    parted -s $DISK -- mkpart primary 4608MB 100%
+    parted -s $DISK -- set 1 esp on
     # Format
     mkfs.fat -F 32 -n boot ${PART}1
     mkswap -L swap ${PART}2
     mkfs.ext4 -L nixos ${PART}3
     # Mount and enable swap
-    mount /dev/disk/by-label/nixos /mnt
-    mkdir -p /mnt/boot/efi
-    mount /dev/disk/by-label/boot /mnt/boot
-    swapon /dev/disk/by-label/swap
+    mount ${PART}3 /mnt
+    mount --mkdir ${PART}1 /mnt/boot
+    swapon ${PART}2
+
+    # Saw it somewhere - maybe solves vm issues
+    mount -t efivarfs efivarfs /sys/firmware/efi/efivars
 }
 # BIOS
 partitionBios()
@@ -75,7 +77,6 @@ partitionBios()
     # Mount and enable swap
     mount /dev/disk/by-label/nixos /mnt
     swapon /dev/disk/by-label/swap
-
 }
 
 # Are you chure prompt
