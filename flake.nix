@@ -42,12 +42,19 @@
       # Make indirection for home to push in modules just for home (buggy shit)
       mkSystem = args@{ ... }:
         generators.mkSystem ({
-          modules =
-            [ inputs.nix-monitored.nixosModules.default ./global/fonts.nix ];
+          modules = [
+            inputs.nix-monitored.nixosModules.default
+            ./global/fonts.nix
+            ./global/findre.nix
+          ];
         } // args);
       mkHome = args@{ ... }:
         generators.mkHome ({
-          modules = [ inputs.nvimnix.nixosModules.default ./global/fonts.nix ];
+          modules = [
+            inputs.nvimnix.nixosModules.default
+            ./global/fonts.nix
+            ./global/findre.nix
+          ];
         } // args);
 
       stableOverlay = self: super: {
