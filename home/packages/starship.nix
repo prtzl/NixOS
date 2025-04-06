@@ -46,7 +46,7 @@ in {
         format = "[\\($hash$tag\\)]($style)";
       };
       git_status = {
-        disabled = true;
+        disabled = false;
         conflicted = "🏳";
         untracked = "🤷";
         stashed = "📦";
