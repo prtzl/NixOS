@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   wslgit =
@@ -7,15 +7,15 @@ in {
   imports = [ ./starship.nix ];
 
   home.packages = with pkgs; [
-    fzf
-    zsh-completions
-    xclip
+    bat
     eza
     fd
+    fzf
+    lazygit
     ripgrep
     wslgit
-    lazygit
-    bat
+    xclip
+    zsh-completions
   ];
 
   programs.direnv = {
@@ -99,6 +99,8 @@ in {
 
       # Add paths that can be missing sometimes (non-nixos)
       export PATH=$PATH:/usr/sbin:/usr/local/sbin
+
+      export DIRENV_LOG_FORMAT=""
     '';
   };
 
