@@ -1,6 +1,9 @@
 {
     "layer": "top",
     "position": "top",
+    "center": {
+        "expand": true
+    },
 
     "modules-left": [
         "hyprland/workspaces"
@@ -31,7 +34,7 @@
         "interval": 1,
         "format": "{:%H:%M:%S}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "expand": 1,
+        "expand": false,
         "align": "center",
         "calendar": {
             "mode"          : "year",
