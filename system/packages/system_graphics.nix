@@ -29,7 +29,7 @@
   programs.hyprland = {
     enable = true;
     package =
-      (pkgs.unstable.hyprland.override { # or inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
+      (pkgs.hyprland.override { # or inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
         enableXWayland = true; # whether to enable XWayland
         legacyRenderer =
           false; # whether to use the legacy renderer (for old GPUs)
