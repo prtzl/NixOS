@@ -33,10 +33,7 @@
     xwayland.enable = true;
   };
 
-  services.displayManager.ly = {
-    enable = true;
-    settings = { tty = 1; };
-  };
+  services.displayManager.ly = { enable = true; };
 
   # Fixes electron apps in wayland, so I've read.
   environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
