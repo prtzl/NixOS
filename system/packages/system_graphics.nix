@@ -31,7 +31,11 @@
     enable = true;
     package = pkgs.hyprland;
     xwayland.enable = true;
-    withUWSM = true;
+  };
+
+  services.displayManager.ly = {
+    enable = true;
+    settings = { tty = 1; };
   };
 
   # Fixes electron apps in wayland, so I've read.
