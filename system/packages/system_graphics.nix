@@ -5,16 +5,17 @@
   imports = [ ./pipewire.nix ];
 
   environment.systemPackages = with pkgs; [
-    # Apps required for desktop environment (Hyprland)
+    # Crytical for Hyprland - currently unstable since it's all a bit new so let's go with latest
     unstable.hyprshade
-    wl-clipboard
-    wofi
-    unstable.waybar
+    unstable.wl-clipboard # clipboard (why is this additional, like  what?)
+    unstable.waybar # status bar
     unstable.dunst # notification daemon (unstable is at 1.12 which I need for new features like dynamic size)
-    libnotify # sends notification to notification daemon (dunst)
-    hyprcursor # I guess this has to come separately
-    hyprshot
-    rose-pine-hyprcursor
+    unstable.libnotify # sends notification to notification daemon (dunst)
+    unstable.hyprcursor # I guess this has to come separately
+
+    # Helpers (not crytical, but important)
+    rofi # app launcher
+    hyprshot # screenshot util
 
     # nice to have GUI apps for a desktop
     eog # image viewer
@@ -25,17 +26,20 @@
     nautilus # file explorer
   ];
 
-  # DE of choice
+  # DE of choice - unstable does not work, it does not boot, I don't know why
   programs.hyprland = {
     enable = true;
-    package =
-      (pkgs.hyprland.override { # or inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
-        enableXWayland = true; # whether to enable XWayland
-        legacyRenderer =
-          false; # whether to use the legacy renderer (for old GPUs)
-        withSystemd = true; # whether to build with systemd support
-      });
+    package = pkgs.hyprland;
+    xwayland.enable = true;
+    withUWSM = true;
   };
-  # works anywhere (TUI!), use non-systemd hyprland
-  services.displayManager.ly.enable = true;
+
+  # Fixes electron apps in wayland, so I've read.
+  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+
+  # I still don't know  what this is. It ran fine without, but I guess this is better?
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+  };
 }
