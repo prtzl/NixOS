@@ -6,7 +6,7 @@
     platformTheme.name = "gtk";
   };
 
-  gtk = {
+  gtk = rec {
     enable = true;
     theme = {
       name = "Materia-dark";
@@ -20,12 +20,12 @@
       name = "Numix-Cursor";
       package = pkgs.numix-cursor-theme;
     };
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-cursor-theme-name=Numix-Cursor
-        gtk-tooltip-timeout = 100
-      '';
-    };
+    gtk2.extraConfig = ''
+      gtk-cursor-theme-name=Numix-Cursor
+      gtk-tooltip-timeout = 100
+    '';
+    gtk3.extraConfig.Settings = gtk2.extraConfig;
+    gtk4.extraConfig = gtk3.extraConfig;
   };
 
   dconf.settings = {
