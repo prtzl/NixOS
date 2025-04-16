@@ -32,7 +32,6 @@
     bottom
     git-crypt
     gnupg
-    home-update
     nixfmt-classic
     nvd
     zip
