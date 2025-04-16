@@ -8,7 +8,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     nixgl = {
@@ -120,7 +120,7 @@
     } // inputs.flake-utils.lib.eachDefaultSystem (system: {
       devShells.default = pkgs.mkShellNoCC {
         name = "Installation-shell";
-        nativeBuildInputs = with pkgs-unstable; [ nix nixfmt nvd ];
+        nativeBuildInputs = with pkgs-unstable; [ nix nixfmt-classic nvd ];
       };
     });
 }
