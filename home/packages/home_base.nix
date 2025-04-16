@@ -1,9 +1,6 @@
 { inputs, pkgs, homeArgs, ... }:
 
-let
-  home-update = pkgs.writeShellScriptBin "home-update"
-    (builtins.readFile ./dotfiles/home-update.sh);
-in {
+{
   nix = if (homeArgs ? notNixos && homeArgs.notNixos) then {
     # package = inputs.nix-monitored.package.${pkgs.system}.default;
     registry = {
@@ -18,7 +15,14 @@ in {
   } else
     { };
 
-  imports = [ ./nvim.nix ./ranger.nix ./tmux.nix ./zsh.nix ./tio.nix ];
+  imports = [
+    ./home-update.nix
+    ./nvim.nix
+    ./ranger.nix
+    ./tio.nix
+    ./tmux.nix
+    ./zsh.nix
+  ];
 
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
