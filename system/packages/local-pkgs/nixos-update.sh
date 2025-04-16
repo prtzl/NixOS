@@ -60,15 +60,21 @@ fi
 info "Building derivation!"
 peval nix build .\#${system_derivation} "$ARGS"
 peval nvd diff /run/current-system result
+
 read -p "Perform switch? [y/Y] (sudo)" answer
 if [[ "$answer" == [yY] ]]; then
     info Applying update!
-    # this shit still does not not enter the derivation into /nix/var/nix/profiles - no changes after reboot
-    #peval sudo ./result/bin/switch-to-configuration switch
-    if ! peval sudo nixos-rebuild switch --flake .\#${system_derivation} $ARGS; then
-        rm result
+
+    if ! (peval sudo nix-env --profile /nix/var/nix/profiles/system --set ./result \
+        && peval sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch); then
+
+        warn "Manual switch failed, falling back to nixos-rebuild"
+        if ! peval sudo nixos-rebuild switch --flake .\#${system_derivation} $ARGS; then
+            rm result
         fatal "Failed to activate!"
+        fi
     fi
+
     info Update finished!
 else
     info Update canceled!
