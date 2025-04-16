@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   services.udev = {
-    packages = with pkgs; [ stlink unstable.tio jlink ];
+    packages = with pkgs; [ stlink tio jlink ];
     extraRules = ''
       # Add all USB devices to usb group -> don't forget with your user
       KERNEL=="*", SUBSYSTEMS=="usb", MODE="0664", GROUP="usb"
@@ -14,4 +14,4 @@
       ${builtins.readFile "${pkgs.jlink}/lib/udev/rules.d/99-jlink.rules"}
     '';
   };
-}   
+}

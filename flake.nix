@@ -13,11 +13,11 @@
     };
     nixgl = {
       url = "github:guibou/nixGL";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     nix-monitored = {
       url = "github:ners/nix-monitored";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     # My stuff :)
@@ -44,6 +44,7 @@
         generators.mkSystem ({
           modules = [
             inputs.nix-monitored.nixosModules.default
+            inputs.nvimnix.nixosModules.nixos
             ./global/fonts.nix
             ./global/findre.nix
           ];
@@ -51,7 +52,7 @@
       mkHome = args@{ ... }:
         generators.mkHome ({
           modules = [
-            inputs.nvimnix.nixosModules.default
+            inputs.nvimnix.nixosModules.home
             ./global/fonts.nix
             ./global/findre.nix
           ];
