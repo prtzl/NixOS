@@ -29,7 +29,7 @@ function peval()
 
 function checkForFlake()
 {
-    [ -f $1/flake.nix ]
+    [ -f "$1"/flake.nix ]
 }
 
 # Default location - for me, /etc/nixos is a symlink to git repository
@@ -38,7 +38,6 @@ home_derivation=${NIX_HOME_DERIVATION:-$USER-$(hostname)}
 # Check for flake dir in nixos or non-nixos variables, else default in ~/.config/nixpkgs
 if checkForFlake "$NIX_FLAKE_DIR"; then
     flake_dir="$NIX_FLAKE_DIR"
-    system="nixos"
 elif checkForFlake "$NIX_FLAKE_DIR_HOME"; then
     flake_dir="$NIX_FLAKE_DIR_HOME"
 else
@@ -58,14 +57,14 @@ for var in "$@"; do
     ARGS[${#ARGS[@]}]="$var"
 done
 
-peval cd $flake_dir
+peval cd "$flake_dir"
 if [[ "$update_flake_lock" == "true" ]]; then
     info "Updating flake.lock!"
     peval nix flake update
 fi
 
 info "Building derivation!"
-peval nix build .\#"$home_derivation" "$ARGS"
+peval nix build .\#"$home_derivation" "${ARGS[@]}"
 
 
 profile_path="/nix/var/nix/profiles/per-user/$USER/profile"
@@ -75,7 +74,7 @@ else
     info "No existing profile found to diff against."
 fi
 
-read -p "Perform switch? [y/Y] " answer
+read -r -p "Perform switch? [y/Y] " answer
 if [[ "$answer" == [yY] ]]; then
     info Applying update!
     if ! peval ./result/activate; then
