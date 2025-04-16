@@ -23,12 +23,12 @@
     soundconverter
     jamesdsp
 
-    (import (pkgs.fetchFromGitHub {
-      owner = "prtzl";
-      repo = "proxsign-nix";
-      rev = "b54cb7773977efa5831e6aae0a8faab1969421ef";
-      sha256 = "sha256-J+QioJsw2MK+3uGDUf+IcAD28tiMxr8Isykb21Ovf5A=";
-    }))
+    # (import (pkgs.fetchFromGitHub {
+    #   owner = "prtzl";
+    #   repo = "proxsign-nix";
+    #   rev = "b54cb7773977efa5831e6aae0a8faab1969421ef";
+    #   sha256 = "sha256-J+QioJsw2MK+3uGDUf+IcAD28tiMxr8Isykb21Ovf5A=";
+    # }))
   ];
 
   home.sessionVariables = { NIX_HOME_DERIVATION = "matej-nixbox"; };
