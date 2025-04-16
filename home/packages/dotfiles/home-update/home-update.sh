@@ -1,4 +1,4 @@
-#! /usr/bin/env sh
+#!/usr/bin/env bash
 set -e
 
 function info()
@@ -46,6 +46,7 @@ fi
 
 # Remove arguments ment for this script and only pass ARGS to other tools
 declare -a ARGS
+update_flake_lock="false"
 for var in "$@"; do
     if [[ "$var" == "-r" ]]; then
         update_flake_lock="true"
@@ -67,9 +68,9 @@ info "Building derivation!"
 peval nix build .\#"$home_derivation" "${ARGS[@]}"
 
 
-profile_path="/nix/var/nix/profiles/per-user/$USER/profile"
+profile_path="$HOME/.local/state/nix/profiles/home-manager"
 if [ -e "$profile_path" ]; then
-    peval nvd diff "$(readlink -f "$profile_path")" result
+    peval nvd diff "$(readlink -f "$profile_path")" "$(readlink -f ./result)"
 else
     info "No existing profile found to diff against."
 fi
