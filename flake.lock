@@ -74,7 +74,7 @@
     "nix-monitored": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs-stable"
         ]
       },
       "locked": {
@@ -95,7 +95,7 @@
       "inputs": {
         "flake-utils": "flake-utils_2",
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs-stable"
         ]
       },
       "locked": {
@@ -196,11 +196,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1744634219,
-        "narHash": "sha256-6lya9ZbWlfjaHvIxwyvpJ94Frm1HOoTbnNdBZIBJR68=",
+        "lastModified": 1744788807,
+        "narHash": "sha256-Fqs2qrX1ekZVl46hTRUgnsOfQWRdcmkB/94f/CZhz3M=",
         "owner": "prtzl",
         "repo": "nvimnix",
-        "rev": "4b978846797781055ac1857679568c073fb5aa44",
+        "rev": "4ffdd36e6bf950a370d8468e79e7a9b451637c29",
         "type": "github"
       },
       "original": {

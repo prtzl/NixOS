@@ -21,8 +21,7 @@ let
       modules = [ home-derivation ] ++ modules;
       extraSpecialArgs = {
         inherit inputs homeArgs systemArgs;
-        lib = import "${home-manager}/modules/lib/stdlib-extended.nix"
-          pkgs.unstable.lib;
+        lib = import "${home-manager}/modules/lib/stdlib-extended.nix" pkgs.lib;
       };
     });
 
