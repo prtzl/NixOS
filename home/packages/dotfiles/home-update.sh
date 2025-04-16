@@ -65,11 +65,14 @@ if [[ "$update_flake_lock" == "true" ]]; then
 fi
 
 info "Building derivation!"
-peval nix build .\#"$home_derivation" --impure "$ARGS"
+peval nix build .\#"$home_derivation" "$ARGS"
 
-path=/nix/var/nix/profiles/per-user/$USER/profile
-if [ -f $path ]; then
-    peval nvd diff $path result
+
+profile_path="/nix/var/nix/profiles/per-user/$USER/profile"
+if [ -e "$profile_path" ]; then
+    peval nvd diff "$(readlink -f "$profile_path")" result
+else
+    info "No existing profile found to diff against."
 fi
 
 read -p "Perform switch? [y/Y] " answer
