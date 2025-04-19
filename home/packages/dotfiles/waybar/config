@@ -23,6 +23,7 @@
         "disk#1",
         "disk#2",
         "hyprland/language",
+        "network",
         "pulseaudio"
     ],
     "clock#1": {
@@ -123,7 +124,7 @@
         "interval": 5
     },
     "network": {
-        "interface": "wlp2s0",
+        "interface": "enp9s0",
         "format": "{ifname}",
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ifname} ",
@@ -133,6 +134,7 @@
         "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
         "tooltip-format-ethernet": "{ifname} ",
         "tooltip-format-disconnected": "Disconnected",
-        "max-length": 50
+        "max-length": 50,
+        "on-click": "nm-connection-editor",
     }
 }
