@@ -35,7 +35,7 @@
 
       mkFree = drv:
         drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
-      generators = import ./nix/generators.nix {
+      generators = import ./global/generators.nix {
         inherit inputs system lib home-manager pkgs;
       };
       inherit (generators) unwrapSystem;
@@ -64,7 +64,7 @@
 
         # Stable package overrides/additions
         jlink = mkFree inputs.jlink-pack.defaultPackage.${system};
-        glWrapIntel = (import ./nix/nixgl.nix { inherit pkgs; }).glWrapIntel;
+        glWrapIntel = (import ./global/nixgl.nix { inherit pkgs; }).glWrapIntel;
       };
 
       pkgs = import inputs.nixpkgs-stable {

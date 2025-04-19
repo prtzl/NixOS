@@ -8,7 +8,7 @@ let
   findre = pkgs.writeShellApplication {
     name = "findre";
     runtimeInputs = with pkgs; [ fd ripgrep ];
-    text = builtins.readFile ./findre.sh;
+    text = builtins.readFile ./dotfiles/findre.sh;
   };
 in lib.mkMerge [
   (if (systemArgs ? isSystem && systemArgs.isSystem) then ({
