@@ -36,13 +36,8 @@
     nvd
     zip
 
-    # Dev
-    git
-    jlink
-
     # Media
     ffmpeg
-    libreoffice
   ];
 
   # Privat git

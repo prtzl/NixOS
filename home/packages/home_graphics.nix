@@ -19,15 +19,11 @@
     # Dev
     arduino
     drawio
-    jlink
-    stm32cubemx
 
     # Content creation
     audacity
     gimp
-
-    # Latex
-    texstudio
+    libreoffice
 
     # Utility
     enpass

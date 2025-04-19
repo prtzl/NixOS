@@ -1,5 +1,10 @@
 { pkgs, ... }:
 
+# Hyprland should be installed system-wide so that it's in the boot entries
+# home configuration adds all programs and utilities + configuration
+# This configuration thus follows whatever is installed with nixos.
+# On non-nixos systems the version of hyprland installed in whichever way, has to match.
+
 let
   # Currently pull hyprland resources from unstable - latest
   pkgs-hyprland = pkgs.unstable;

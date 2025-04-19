@@ -16,6 +16,7 @@
     # minecraft # broken on NixOS since 1.19 upwards, bummer
 
     # Latex
+    texstudio
     texlive.combined.scheme-full
 
     # Media
