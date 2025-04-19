@@ -18,7 +18,6 @@ in {
     # Hyprland configuration
     pkgs-hyprland.hyprcursor # I guess this has to come separately
     pkgs-hyprland.hyprshade
-    pkgs-hyprland.waybar # status bar
     pkgs-hyprland.wl-clipboard # clipboard (why is this additional, like  what?)
     pkgs-hyprland.hyprshot # screenshot util
     pkgs-hyprland.rofi # app launcher

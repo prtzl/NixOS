@@ -16,11 +16,14 @@ let
     let
       homeArgs = args // { isHome = true; };
       systemArgs = { };
+      configName = lib.removeSuffix ".nix" (lib.last
+        (lib.strings.splitString "-"
+          (lib.last (lib.strings.splitString "/" (toString home-derivation)))));
     in unwrapHome (home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [ home-derivation ] ++ modules;
       extraSpecialArgs = {
-        inherit inputs homeArgs systemArgs;
+        inherit inputs homeArgs systemArgs configName;
         lib = import "${home-manager}/modules/lib/stdlib-extended.nix" pkgs.lib;
       };
     });

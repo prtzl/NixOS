@@ -9,7 +9,6 @@ window#waybar {
     color: #fdf6e3;
 }
 
-#network,
 #workspaces,
 #clock.1,
 #clock.2,
@@ -18,8 +17,6 @@ window#waybar {
 #memory,
 #cpu,
 #battery,
-#disk.1,
-#disk.2,
 #temperature.1,
 #temperature.2,
 #tray {
@@ -85,9 +82,6 @@ window#waybar {
 #battery {
     color: #859900;
 }
-#disk.1, #disk.2 {
-    color: #b58900;
-}
 #temperature.1 {
     color: #3ffc81;
 }
@@ -110,7 +104,3 @@ window#waybar {
 #tray,
 #battery,
 #temperature,
-#disk.1, #disk.2 {
-    padding: 0 0.5rem;
-    margin: 0 0.2rem;
-}
