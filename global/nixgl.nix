@@ -2,7 +2,7 @@
 
 let
   glWrapIntel = { pkg, deps ? [ ] }:
-    pkgs.stdenv.mkDerivation rec {
+    pkgs.stdenv.mkDerivation {
       pname = pkg.pname + "-glwrap";
       version = pkg.version;
       src = pkg;

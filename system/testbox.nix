@@ -1,12 +1,11 @@
-{ config, pkgs, lib, modulesPath, ... }:
+{ lib, ... }:
 
-let
-  p = package: ./. + "/packages/${package}";
-in
 {
   # Additional configuration
   imports = [
-    (p "configuration_basic.nix")
+    ./packages/system_base.nix
+    ./packages/system_graphics.nix
+    ./packages/system_hardware.nix
   ];
 
   # Networking - check your interface name enp<>s0
@@ -14,6 +13,8 @@ in
     hostName = "testbox";
     interfaces.enp1s0.useDHCP = true;
   };
+
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Set your time zone - where are you ?
   location.provider = "geoclue2";
@@ -30,14 +31,16 @@ in
         isNormalUser = true;
         isSystemUser = false;
         createHome = true;
-        extraGroups = [ "wheel" "networkmanager" "dialout" "audio" "video" "usb" ];
+        extraGroups =
+          [ "wheel" "networkmanager" "dialout" "audio" "video" "usb" ];
       };
     };
   };
 
   # Hardware configuration
   boot = {
-    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+    initrd.availableKernelModules =
+      [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
     initrd.kernelModules = [ ];
     kernelModules = [ ];
     extraModulePackages = [ ];
