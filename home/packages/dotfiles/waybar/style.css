@@ -5,8 +5,11 @@
 }
 
 window#waybar {
-    background: #292b2e;
+    /* background: #292b2e; */
+    background: #1a1a1a;
     color: #fdf6e3;
+    padding: 0 0.3rem;
+    margin: 0 0.1rem;
 }
 
 #workspaces,
@@ -40,8 +43,6 @@ window#waybar {
     background: #1a1a1a;
     color: @content_inactive;
     transition: none;
-    padding: 0.5rem 2rem;
-    margin: 0 0.1rem;
 }
 #workspaces button.active {
     color: #1a1a1a;
@@ -81,17 +82,3 @@ window#waybar {
     color: #859900;
 }
 
-#clock.1,
-#clock.2
-#clock.3 {
-    padding: 0 0.5rem;
-    margin: 0 0.2rem;
-}
-
-#clock,
-#pulseaudio,
-#memory,
-#cpu,
-#language,
-#tray,
-#battery,
