@@ -77,7 +77,7 @@
       extraRules = ''
         # Give CPU temp a stable device path
         # Intel i7 8550U
-        ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{name}=="coretemp"RUN+="/bin/sh -c 'ln -s /sys$devpath/temp1_input /dev/cpu_temp'"
+        ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{name}=="coretemp", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp1_input /dev/cpu_temp'"
       '';
     };
   };
