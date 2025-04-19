@@ -16,8 +16,6 @@
     ],
     "modules-right": [
         "tray",
-        "temperature#1",
-        "temperature#2",
         "cpu",
         "memory",
         "hyprland/language",
@@ -99,15 +97,5 @@
         "format-en": "us",
         "format-si": "si",
         "format-sl": "si"
-    },
-    "temperature#1": {
-        "hwmon-path": ["/dev/cpu_temp"],
-        "format": "  {temperatureC}°C ",
-        "interval": 5
-    },
-    "temperature#2": {
-        "hwmon-path": ["/dev/gpu_temp"],
-        "format": "🏭  {temperatureC}°C ",
-        "interval": 5
     }
 }
