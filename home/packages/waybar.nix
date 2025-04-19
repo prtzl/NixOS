@@ -50,9 +50,6 @@ let
     in ''
       temperature#${builtins.toString index} {
         color: ${color};
-        background: #1a1a1a;
-        padding: 0 0.5rem;
-        margin: 0 0.2rem;
       }
     '';
   tempStyle = builtins.concatStringsSep "\n"
@@ -62,6 +59,8 @@ let
   disks = {
     nixbox = [ "/" "/storage" ];
     nixtop = [ "/" ];
+    wsl = [ "/" ];
+    testbox = [ "/" ];
   };
 
   makeDisks = path: index: {
@@ -88,9 +87,6 @@ let
   '' diskConfigNames + ''
     {
       color: #b58900;
-      background: #1a1a1a;
-      padding: 0 0.5rem;
-      margin: 0 0.2rem;
     }
   '';
 
@@ -98,21 +94,25 @@ let
   interfaces = {
     nixbox = [ "enp9s0" ];
     nixtop = [ "enp0s31f6" "wlp61s0" ];
+    wsl = [ "eth0" ];
+    testbox = [ "enp1s0" ];
   };
 
   makeInterface = name: index: {
     "network#${builtins.toString index}" = {
       interface = "${name}";
       format = "{ifname}";
-      format-wifi = "{essid} ";
-      format-ethernet = "{ifname} ";
-      format-disconnected = "";
+      format-wifi = "   {essid} ";
+      format-ethernet = "   {ifname} ";
+      format-disconnected = " 🚫 ";
+      format-disabled = "  ";
       tooltip-format = "{ifname}";
-      tooltip-format-wifi = "{essid} ({signalStrength}%) ";
-      tooltip-format-ethernet = "{ifname} ";
-      tooltip-format-disconnected = "Disconnected";
-      max-length = 30;
+      tooltip-format-wifi = " {essid} ({signalStrength}%)  ";
+      tooltip-format-ethernet = " {ifname}  ";
+      tooltip-format-disconnected = "{ifname} disconnected";
+      max-length = 100;
       on-click = "nm-connection-editor";
+      interval = 5;
     };
   };
 
@@ -125,15 +125,7 @@ let
   networkConfigNames = makeNetworkConfigNames selectedInterfaces;
 
   # Create css block for styling network interfaces
-  networkStyle = builtins.concatStringsSep ''
-    ,
-  '' networkConfigNames + ''
-    {
-      background: #1a1a1a;
-      padding: 0 0.5rem;
-      margin: 0 0.2rem;
-    }
-  '';
+  networkStyle = "";
 
   # Create attrset of network config option blocks
   makeNetworkConfigs = configs:

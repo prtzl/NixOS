@@ -78,12 +78,12 @@
         "interval": 5,
         "justify": "center",
         "align": 0,
-        "format": "  {icon} {usage:3}%",
+        "format": " {icon}{usage:3}%",
         "format-icons": ["▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██"]
     },
     "memory": {
         "interval": 5,
-        "format": "  {used:0.1f}G/{total:0.1f}G"
+        "format": " {used:0.1f}G/{total:0.1f}G"
     },
     "tray": {
         "icon-size": 24,
