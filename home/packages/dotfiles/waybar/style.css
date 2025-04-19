@@ -9,6 +9,7 @@ window#waybar {
     color: #fdf6e3;
 }
 
+#network,
 #workspaces,
 #clock.1,
 #clock.2,

@@ -22,6 +22,7 @@ in {
     pkgs-hyprland.wl-clipboard # clipboard (why is this additional, like  what?)
     pkgs-hyprland.hyprshot # screenshot util
     pkgs-hyprland.rofi # app launcher
+    pkgs-hyprland.networkmanagerapplet # brings network manager applet functionality
 
     # nice to have GUI apps for a desktop
     celluloid # video/music player
