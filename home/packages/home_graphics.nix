@@ -1,10 +1,19 @@
 { pkgs, ... }:
 
 {
-  imports =
-    [ ./alacritty.nix ./dunst.nix ./hyprland.nix ./themes.nix ./waybar.nix ];
+  imports = [
+    ./alacritty.nix
+    ./hyprland.nix
+    ./notifications.nix
+    ./themes.nix
+    ./waybar.nix
+  ];
 
-  programs.vscode.enable = true;
+  programs = {
+    firefox.enable = true;
+    chromium.enable = true;
+    vscode.enable = true;
+  };
 
   home.packages = with pkgs; [
     # Dev
@@ -12,10 +21,6 @@
     drawio
     jlink
     stm32cubemx
-
-    # Net
-    chromium
-    firefox
 
     # Content creation
     audacity

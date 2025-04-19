@@ -11,10 +11,8 @@ let
 in {
   home.packages = with pkgs; [
     # Hyprland configuration
-    pkgs-hyprland.dunst # notification daemon (unstable is at 1.12 which I need for new features like dynamic size)
     pkgs-hyprland.hyprcursor # I guess this has to come separately
     pkgs-hyprland.hyprshade
-    pkgs-hyprland.libnotify # sends notification to notification daemon (dunst)
     pkgs-hyprland.waybar # status bar
     pkgs-hyprland.wl-clipboard # clipboard (why is this additional, like  what?)
     pkgs-hyprland.hyprshot # screenshot util
