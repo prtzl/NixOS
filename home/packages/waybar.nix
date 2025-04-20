@@ -29,10 +29,9 @@ let
 
   selectedTemps = temps.${configName};
 
-  makeTempConfigNames = configs:
+  tempConfigNames =
     lib.lists.imap1 (index: name: "temperature#${builtins.toString index}")
-    configs;
-  tempConfigNames = makeTempConfigNames selectedTemps;
+    selectedTemps;
 
   makeTempConfigs = configs:
     lib.lists.imap1 (index: name: makeTemps name index) configs;
@@ -48,7 +47,7 @@ let
       else
         "#ffffff"; # fallback/default
     in ''
-      temperature.${builtins.toString index} {
+      #temperature.${builtins.toString index} {
         color: ${color};
       }
     '';
@@ -73,10 +72,9 @@ let
 
   selectedDisks = disks.${configName};
 
-  makeDiskConfigNames = sep: configs:
-    lib.lists.imap1 (index: name: "disk${sep}${builtins.toString index}")
-    configs;
-  diskConfigNames = makeDiskConfigNames "#" selectedDisks;
+  diskConfigNames =
+    lib.lists.imap1 (index: name: "disk#${builtins.toString index}")
+    selectedDisks;
 
   makeDiskConfigs = configs:
     lib.lists.imap1 (index: name: makeDisks name index) configs;
@@ -85,11 +83,12 @@ let
 
   diskStyle = builtins.concatStringsSep ''
     ,
-  '' (makeDiskConfigNames "." selectedDisks) + ''
-    {
-      color: #b58900;
-    }
-  '';
+  '' (lib.lists.imap1 (index: name: "#disk.${builtins.toString index}")
+    selectedDisks) + ''
+      {
+        color: #b58900;
+      }
+    '';
 
   ## INTERFACES
   interfaces = {
@@ -121,19 +120,19 @@ let
   selectedInterfaces = interfaces.${configName};
 
   # Create list of network interfaces
-  makeNetworkConfigNames = sep: configs:
-    lib.lists.imap1 (index: name: "network${sep}${builtins.toString index}")
-    configs;
-  networkConfigNames = makeNetworkConfigNames "#" selectedInterfaces;
+  networkConfigNames =
+    lib.lists.imap1 (index: name: "network#${builtins.toString index}")
+    selectedInterfaces;
 
   # Create css block for styling network interfaces
   networkStyle = builtins.concatStringsSep ''
     ,
-  '' (makeNetworkConfigNames "." selectedInterfaces) + ''
-    {
-      color: #4c8959;
-    }
-  '';
+  '' (lib.lists.imap1 (index: name: "#network.${builtins.toString index}")
+    selectedInterfaces) + ''
+      {
+        color: #4c8959;
+      }
+    '';
 
   # Create attrset of network config option blocks
   makeNetworkConfigs = configs:
