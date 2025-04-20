@@ -2,14 +2,15 @@
     font-size: 1.2rem;
     font-family: monospace;
     min-height: 0;
+    padding: 0 0.3rem;
+    margin: 0 0.1rem;
+    font-weight: bold;
 }
 
 window#waybar {
     /* background: #292b2e; */
     background: #1a1a1a;
     color: #fdf6e3;
-    padding: 0 0.3rem;
-    margin: 0 0.1rem;
 }
 
 #workspaces,
@@ -81,4 +82,9 @@ window#waybar {
 #battery {
     color: #859900;
 }
+
+#language {
+    color: #a6799d;
+}
+
 

@@ -48,7 +48,7 @@ let
       else
         "#ffffff"; # fallback/default
     in ''
-      temperature#${builtins.toString index} {
+      temperature.${builtins.toString index} {
         color: ${color};
       }
     '';
@@ -73,9 +73,10 @@ let
 
   selectedDisks = disks.${configName};
 
-  makeDiskConfigNames = configs:
-    lib.lists.imap1 (index: name: "disk#${builtins.toString index}") configs;
-  diskConfigNames = makeDiskConfigNames selectedDisks;
+  makeDiskConfigNames = sep: configs:
+    lib.lists.imap1 (index: name: "disk${sep}${builtins.toString index}")
+    configs;
+  diskConfigNames = makeDiskConfigNames "#" selectedDisks;
 
   makeDiskConfigs = configs:
     lib.lists.imap1 (index: name: makeDisks name index) configs;
@@ -84,7 +85,7 @@ let
 
   diskStyle = builtins.concatStringsSep ''
     ,
-  '' diskConfigNames + ''
+  '' (makeDiskConfigNames "." selectedDisks) + ''
     {
       color: #b58900;
     }
@@ -120,12 +121,19 @@ let
   selectedInterfaces = interfaces.${configName};
 
   # Create list of network interfaces
-  makeNetworkConfigNames = configs:
-    lib.lists.imap1 (index: name: "network#${builtins.toString index}") configs;
-  networkConfigNames = makeNetworkConfigNames selectedInterfaces;
+  makeNetworkConfigNames = sep: configs:
+    lib.lists.imap1 (index: name: "network${sep}${builtins.toString index}")
+    configs;
+  networkConfigNames = makeNetworkConfigNames "#" selectedInterfaces;
 
   # Create css block for styling network interfaces
-  networkStyle = "";
+  networkStyle = builtins.concatStringsSep ''
+    ,
+  '' (makeNetworkConfigNames "." selectedInterfaces) + ''
+    {
+      color: #4c8959;
+    }
+  '';
 
   # Create attrset of network config option blocks
   makeNetworkConfigs = configs:
