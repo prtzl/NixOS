@@ -78,7 +78,7 @@
         config.allowUnfree = true;
         overlays = [ ];
       };
-    in rec {
+    in {
       nixosConfigurations = {
         nixbox = mkSystem { configuration = ./system/nixbox.nix; };
         nixtop = mkSystem {
@@ -105,17 +105,6 @@
         };
         nixos-wsl = mkHome { home-derivation = ./home/nixos-wsl.nix; };
       };
-
-      nixbox = unwrapSystem nixosConfigurations.nixbox;
-      nixtop = unwrapSystem nixosConfigurations.nixtop;
-      testbox = unwrapSystem nixosConfigurations.testbox;
-      wsl = unwrapSystem nixosConfigurations.wsl;
-
-      matej-nixbox = homeConfigurations.matej-nixbox;
-      matej-nixtop = homeConfigurations.matej-nixtop;
-      test-testbox = homeConfigurations.test-testbox;
-      matej-work = homeConfigurations.matej-work;
-      nixos-wsl = homeConfigurations.nixos-wsl;
 
     } // inputs.flake-utils.lib.eachDefaultSystem (system: {
       devShells.default = pkgs.mkShellNoCC {

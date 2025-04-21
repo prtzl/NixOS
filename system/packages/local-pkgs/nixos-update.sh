@@ -58,7 +58,7 @@ if [[ "$update_flake_lock" == "true" ]]; then
 fi
 
 info "Building derivation!"
-peval nix build .\#${system_derivation} "$ARGS"
+peval nixos-rebuild build .\#"${system_derivation}" "${ARGS[@]}"
 peval nvd diff /run/current-system result
 
 read -p "Perform switch? [y/Y] (sudo)" answer

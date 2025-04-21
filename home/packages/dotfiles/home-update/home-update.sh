@@ -65,7 +65,7 @@ if [[ "$update_flake_lock" == "true" ]]; then
 fi
 
 info "Building derivation!"
-peval nix build .\#"$home_derivation" "${ARGS[@]}"
+peval home-manager build --flake .\#"${home_derivation}" "${ARGS[@]}"
 
 
 profile_path="$HOME/.local/state/nix/profiles/home-manager"
