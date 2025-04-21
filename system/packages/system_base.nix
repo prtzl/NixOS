@@ -1,8 +1,6 @@
 { inputs, pkgs, ... }:
 
 let
-  nixos-update = pkgs.writeShellScriptBin "nixos-update"
-    (builtins.readFile ./local-pkgs/nixos-update.sh);
   nixgen = pkgs.writeShellScriptBin "nixgen"
     (builtins.readFile ./local-pkgs/nixgen.sh);
 in {
@@ -67,7 +65,7 @@ in {
       htop
       lm_sensors
       nixgen
-      nixos-update
+      # nixos-update
       nvd
       parted
       pciutils

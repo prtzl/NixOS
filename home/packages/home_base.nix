@@ -15,15 +15,8 @@
   } else
     { };
 
-  imports = [
-    ./home-update.nix
-    ./nvim.nix
-    ./ranger.nix
-    ./shell.nix
-    ./tio.nix
-    ./tmux.nix
-    ./zsh.nix
-  ];
+  imports =
+    [ ./nvim.nix ./ranger.nix ./shell.nix ./tio.nix ./tmux.nix ./zsh.nix ];
 
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;

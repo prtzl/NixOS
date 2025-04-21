@@ -25,6 +25,10 @@
     # Adding one allows this system to use "any" version of nixpkgs, so it kind of "updates" all pacakges but the config.
     jlink-pack.url = "github:prtzl/jlink-nix";
     nvimnix.url = "github:prtzl/nvimnix";
+    # nvimnix = {
+    #   url = "/home/matej/nixvim";
+    #   input.flake-utils.follows = "flake-utils";
+    # };
   };
 
   outputs = inputs:
@@ -38,23 +42,24 @@
       generators = import ./global/generators.nix {
         inherit inputs system lib home-manager pkgs;
       };
-      inherit (generators) unwrapSystem;
       # Make indirection for home to push in modules just for home (buggy shit)
       mkSystem = args@{ ... }:
         generators.mkSystem ({
           modules = [
             inputs.nix-monitored.nixosModules.default
-            inputs.nvimnix.nixosModules.nixos
-            ./global/fonts.nix
+            inputs.nvimnix.nixosModules.default
             ./global/findre.nix
+            ./global/fonts.nix
+            ./global/update.nix
           ];
         } // args);
       mkHome = args@{ ... }:
         generators.mkHome ({
           modules = [
-            inputs.nvimnix.nixosModules.home
-            ./global/fonts.nix
+            inputs.nvimnix.nixosModules.default
             ./global/findre.nix
+            ./global/fonts.nix
+            ./global/update.nix
           ];
         } // args);
 
