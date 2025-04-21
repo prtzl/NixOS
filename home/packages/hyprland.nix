@@ -41,10 +41,10 @@ in {
     extraConfig = builtins.readFile ./dotfiles/hyprland/hyprland.conf;
   };
 
-  # Start the uwsm hyprland by default
+  # Start the uwsm hyprland by default on tty1
   home.file.".profile.uwsm".text = ''
-    if uwsm check may-start > /dev/null && uwsm select; then
-        exec systemd-cat -t uwsm_start uwsm start default
+    if uwsm check may-start && [ "$(tty)" = "/dev/tty1" ]; then
+        exec uwsm start hyprland-uwsm.desktop
     fi
   '';
 
