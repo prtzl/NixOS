@@ -35,6 +35,12 @@ in {
     hypershot_shader_toggle # Custom screenshot utility
   ];
 
+  wayland.windowManager.hyprland = {
+    enable = true;
+    systemd.enable = true;
+    extraConfig = builtins.readFile ./dotfiles/hyprland/hyprland.conf;
+  };
+
   # Actual hyprland configuration in dotfiles
-  home.file.".config/hypr".source = ./dotfiles/hyprland;
+  home.file.".config/hypr/shaders".source = ./dotfiles/hyprland/shaders;
 }
