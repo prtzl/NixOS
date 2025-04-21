@@ -41,6 +41,13 @@ in {
     extraConfig = builtins.readFile ./dotfiles/hyprland/hyprland.conf;
   };
 
+  # Start the uwsm hyprland by default
+  home.file.".profile.uwsm".text = ''
+    if uwsm check may-start > /dev/null && uwsm select; then
+        exec systemd-cat -t uwsm_start uwsm start default
+    fi
+  '';
+
   # Actual hyprland configuration in dotfiles
   home.file.".config/hypr/shaders".source = ./dotfiles/hyprland/shaders;
 }

@@ -19,6 +19,7 @@
     ./home-update.nix
     ./nvim.nix
     ./ranger.nix
+    ./shell.nix
     ./tio.nix
     ./tmux.nix
     ./zsh.nix
