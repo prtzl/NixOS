@@ -46,11 +46,8 @@
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Set your time zone - where are you ?
+  # Since each nixos could be anywhere, define it in each nixos config.
   time.timeZone = "Europe/Ljubljana";
-
-  # Select internationalisation properties
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = { font = "Lat2-Terminus16"; };
 
   # User sh$t
   users = {

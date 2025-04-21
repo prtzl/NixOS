@@ -39,6 +39,17 @@ in {
     };
   };
 
+  # Select internationalisation properties
+  console.font = "iso02-12x22";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_TIME = "sl_SI.UTF-8";
+      LC_NUMERIC = "sl_SI.UTF-8";
+      LC_MONETARY = "sl_SI.UTF-8";
+    };
+  };
+
   systemd.services.systemd-time-wait-sync.wantedBy = [ "multi-user.target" ];
   systemd.additionalUpstreamSystemUnits = [ "systemd-time-wait-sync.service" ];
 
