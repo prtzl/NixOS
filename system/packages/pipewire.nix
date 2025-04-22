@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   environment.systemPackages = with pkgs; [ qpwgraph ];
@@ -28,6 +28,6 @@
     wireplumber = { enable = true; };
   };
 
-  hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = lib.mkFalse;
 }
 

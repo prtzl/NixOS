@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, modulesPath, ... }:
 
 {
   # Rational is that graphics systems need audo as well, non-graphics do NOT
-  imports = [ ./pipewire.nix ];
+  imports =
+    [ ./pipewire.nix (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # DE of choice - unstable does not work, it does not boot, I don't know why
   programs.hyprland = {
@@ -21,5 +22,11 @@
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+  };
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
   };
 }
