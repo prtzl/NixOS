@@ -6,6 +6,8 @@ Home files in [home](./home) are used to configure user applications and dotfile
 More info on [nixos website](https://nixos.org).  
 Old readme can be found [here](./README_DETAILED.md).
 
+![configuration](configuration_diagram.png "Configuration of the system flake")
+
 ## Install NixOS
 
 To install NixOS on a machine, follow the steps in the [nixos manual](./docs/nixos.md).

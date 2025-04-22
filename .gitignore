@@ -4,14 +4,13 @@
 !README.md
 !README_DETAILED.md
 !todo.md
+!configuration_diagram.drawio
+!configuration_diagram.png
 
 !flake.nix
 !flake.lock
-!shell.nix
-!.envrc
 
 !prepare-disk.sh
-!channels.sh
 
 !/home
 !/system
