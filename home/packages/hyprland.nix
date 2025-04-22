@@ -35,6 +35,7 @@ in {
     hypershot_shader_toggle # Custom screenshot utility
   ];
 
+  # The jummy thing about this is that now as a service it reloads on configurations change automatically!
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
@@ -42,6 +43,7 @@ in {
   };
 
   # Start the uwsm hyprland by default on tty1
+  # This has to be sourced in "globlal" .profile (shell.nix)
   home.file.".profile.uwsm".text = ''
     if uwsm check may-start && [ "$(tty)" = "/dev/tty1" ]; then
         exec uwsm start hyprland-uwsm.desktop

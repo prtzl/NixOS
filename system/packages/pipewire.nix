@@ -28,6 +28,6 @@
     wireplumber = { enable = true; };
   };
 
-  hardware.pulseaudio.enable = lib.mkFalse;
+  hardware.pulseaudio.enable = lib.mkForce false;
 }
 
