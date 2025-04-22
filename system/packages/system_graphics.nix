@@ -1,7 +1,7 @@
 { pkgs, modulesPath, ... }:
 
 {
-  # Rational is that graphics systems need audo as well, non-graphics do NOT
+  # Rational is that every nixos supporting graphics (real PC, wsl) will also support audio
   imports =
     [ ./pipewire.nix (modulesPath + "/installer/scan/not-detected.nix") ];
 

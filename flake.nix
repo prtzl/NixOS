@@ -37,11 +37,13 @@
       lib = inputs.nixpkgs-stable.lib;
       home-manager = inputs.home-manager;
 
+      # tools
       mkFree = drv:
         drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
       generators = import ./global/generators.nix {
         inherit inputs system lib home-manager pkgs;
       };
+
       # Make indirection for home to push in modules just for home (buggy shit)
       mkSystem = args@{ ... }:
         generators.mkSystem ({
