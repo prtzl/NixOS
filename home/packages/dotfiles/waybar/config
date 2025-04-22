@@ -33,7 +33,7 @@
         "expand": false,
         "align": "center",
         "calendar": {
-            "mode"          : "year",
+            "mode"          : "month",
             "mode-mon-col"  : 3,
             "weeks-pos"     : "left",
             "on-scroll"     : 1,
@@ -47,7 +47,7 @@
             }
         },
         "actions": {
-            "on-click": "mode",
+            "on-click-right": "mode",
             "on-click-forward": "tz_up",
             "on-click-backward": "tz_down",
             "on-scroll-up": "shift_up",
@@ -71,19 +71,19 @@
             ]
         },
         "scroll-step": 5,
-        "on-click": "pamixer -t",
-        "on-click-right": "pavucontrol"
+        "on-click": "pavucontrol"
     },
     "cpu": {
-        "interval": 5,
-        "justify": "center",
-        "align": 0,
-        "format": " {icon}{usage:3}%",
-        "format-icons": ["▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██"]
+      "interval": 5,
+      "format": "{usage:3}%",
+      "max-length": 10
     },
     "memory": {
         "interval": 5,
-        "format": " {used:0.1f}G/{total:0.1f}G"
+        "format": "  {percentage}%",
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": "RAM: {used:0.1f}G/{total:0.1f}G"
     },
     "tray": {
         "icon-size": 24,

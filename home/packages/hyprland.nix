@@ -20,7 +20,6 @@ in {
     pkgs-hyprland.hyprshade
     pkgs-hyprland.wl-clipboard # clipboard (why is this additional, like  what?)
     pkgs-hyprland.hyprshot # screenshot util
-    pkgs-hyprland.rofi # app launcher
     pkgs-hyprland.networkmanagerapplet # brings network manager applet functionality
 
     # nice to have GUI apps for a desktop
@@ -34,6 +33,12 @@ in {
     # My stuff
     hypershot_shader_toggle # Custom screenshot utility
   ];
+
+  programs.rofi = {
+    enable = true;
+    package = pkgs-hyprland.rofi-wayland;
+    theme = "Arc-Dark";
+  };
 
   # The jummy thing about this is that now as a service it reloads on configurations change automatically!
   wayland.windowManager.hyprland = {

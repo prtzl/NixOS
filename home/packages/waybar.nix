@@ -21,9 +21,10 @@ let
         ""; # fallback/default
     in {
       "temperature#${builtins.toString index}" = {
-        hwmon-path = [ "/dev/${path}" ];
         format = "${icon}  {temperatureC}°C";
+        hwmon-path = [ "/dev/${path}" ];
         interval = 5;
+        tooltip-format = "${path}: {temperatureC}°C";
       };
     };
 
@@ -64,9 +65,12 @@ let
 
   makeDisks = path: index: {
     "disk#${builtins.toString index}" = {
+      format = "󰋊 {percentage_used}%";
       interval = 5;
-      format = "${builtins.toString index}⛃ {percentage_used}%";
       path = "${path}";
+      tooltip = true;
+      tooltip-format = "{path}: Available {free} of {total}";
+      unit = "GB";
     };
   };
 

@@ -108,7 +108,7 @@
         test-testbox = mkHome { home-derivation = ./home/test-testbox.nix; };
         matej-work = mkHome {
           home-derivation = ./home/matej-work.nix;
-          args = { notNixos = true; };
+          args.notNixos = true;
         };
         nixos-wsl = mkHome { home-derivation = ./home/nixos-wsl.nix; };
       };
