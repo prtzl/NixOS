@@ -103,13 +103,13 @@
         "lastModified": 1713543440,
         "narHash": "sha256-lnzZQYG0+EXl/6NkGpyIz+FEOc/DSEG57AP1VsdeNrM=",
         "owner": "guibou",
-        "repo": "nixGL",
+        "repo": "nixgl",
         "rev": "310f8e49a149e4c9ea52f1adf70cdc768ec53f8a",
         "type": "github"
       },
       "original": {
         "owner": "guibou",
-        "repo": "nixGL",
+        "repo": "nixgl",
         "type": "github"
       }
     },
@@ -117,13 +117,13 @@
       "locked": {
         "lastModified": 1744633460,
         "narHash": "sha256-fbWE4Xpw6eH0Q6in+ymNuDwTkqmFmtxcQEmtRuKDTTk=",
-        "owner": "NixOS",
+        "owner": "nixos",
         "repo": "nixos-hardware",
         "rev": "9a049b4a421076d27fee3eec664a18b2066824cb",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "nixos",
         "repo": "nixos-hardware",
         "type": "github"
       }

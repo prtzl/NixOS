@@ -6,13 +6,13 @@
 
     # Utilities by third parties
     flake-utils.url = "github:numtide/flake-utils";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     nixgl = {
-      url = "github:guibou/nixGL";
+      url = "github:guibou/nixgl";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     nix-monitored = {
@@ -63,7 +63,7 @@
           ];
         } // args);
 
-      stableOverlay = self: super: {
+      overlay = self: super: {
         # Packages
         unstable = pkgs-unstable;
 
@@ -75,7 +75,7 @@
       pkgs = import inputs.nixpkgs-stable {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ stableOverlay inputs.nixgl.overlay ];
+        overlays = [ overlay inputs.nixgl.overlay ];
       };
 
       pkgs-unstable = import inputs.nixpkgs-unstable {
@@ -111,10 +111,12 @@
         nixos-wsl = mkHome { home-derivation = ./home/nixos-wsl.nix; };
       };
 
-    } // inputs.flake-utils.lib.eachDefaultSystem (system: {
-      devShells.default = pkgs.mkShellNoCC {
-        name = "Installation-shell";
-        nativeBuildInputs = with pkgs-unstable; [ nix nixfmt-classic nvd ];
-      };
-    });
+    } // inputs.flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = import inputs.nixpkgs-unstable { inherit system; };
+      in {
+        devShells.default = pkgs.mkShellNoCC {
+          name = "Installation-shell";
+          nativeBuildInputs = with pkgs; [ nix nixfmt-classic nvd ];
+        };
+      });
 }
