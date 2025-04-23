@@ -19,7 +19,7 @@
 
   # Networking - check your interface name enp<>s0
   networking = {
-    hostName = "nixbox";
+    hostName = "wsl";
     interfaces.eth0.useDHCP = true;
   };
 

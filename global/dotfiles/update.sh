@@ -40,54 +40,56 @@ function checkForFlake()
     [ -f "$1"/flake.nix ]
 }
 
+function cleanup()
+{
+    rm -f ${out_link}
+}
+
 ## Boilerplate finished
 
 # First argument is build type and should only be home or nixos.
 # With this define main build, diff, and switch implementation functions
 derivation_type=$1
 if [[ "$1" == "home" ]]; then
-    function derivation_build()
-    {
-        peval home-manager build --flake .\#"${home_derivation}" "${ARGS[@]}"
-    }
+    # Expand later with ""
+    out_link="/tmp/home-build-result"
+    derivation='homeConfigurations.${home_derivation}.activation-script'
     function derivation_diff()
     {
         profile_path="$HOME/.local/state/nix/profiles/home-manager"
         if [ -e "$profile_path" ]; then
-            peval nvd diff "$(readlink -f "$profile_path")" "$(readlink -f ./result)"
+            peval nvd diff "$(readlink -f "$profile_path")" "$(readlink -f "${out_link}")"
         else
             info "No existing profile found to diff against."
         fi
     }
     function derivation_apply()
     {
-        if ! peval ./result/activate; then
-            rm result
+        if ! peval "${out_link}"/activate; then
+            cleanup
             fatal "Failed to activate!"
         fi
     }
 elif [[ "$1" == "nixos" ]]; then
-    function derivation_build()
-    {
-        peval nixos-rebuild build --flake .\#"${system_derivation}" "${ARGS[@]}"
-    }
+    out_link="/tmp/nixos-build-result"
+    derivation='nixosConfigurations.${nixos_derivation}.config.system.build.toplevel'
     function derivation_diff()
     {
         profile_path="/run/current-system"
         if [ -e "$profile_path" ]; then
-            peval nvd diff "$(readlink -f "$profile_path")" "$(readlink -f ./result)"
+            peval nvd diff "$(readlink -f "$profile_path")" "$(readlink -f "${out_link}")"
         else
             info "No existing profile found to diff against."
         fi
     }
     function derivation_apply()
     {
-        if ! (peval sudo nix-env --profile /nix/var/nix/profiles/system --set ./result \
+        if ! (peval sudo nix-env --profile /nix/var/nix/profiles/system --set "${out_link}" \
             && peval sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch); then
 
             warn "Manual switch failed, falling back to nixos-rebuild"
-            if ! peval sudo nixos-rebuild switch --flake .\#"${system_derivation}" "${ARGS[@]}"; then
-                rm result
+            if ! peval sudo nixos-rebuild switch --flake .\#"${nixos_derivation}" "${ARGS[@]}"; then
+                cleanup
             fatal "Failed to activate!"
             fi
         fi
@@ -96,9 +98,15 @@ else
     fatal "Choose home or nixos for first argument!"
 fi
 
+# Made generic with "derivation" variable
+function derivation_build()
+{
+    peval nix build .\#"${derivation}" --out-link "${out_link}" "${ARGS[@]}"
+}
+
 # Default location - for me, /etc/nixos is a symlink to git repository
 home_derivation=${NIX_HOME_DERIVATION:-$USER-$(hostname)}
-system_derivation=$(hostname)
+nixos_derivation=$(hostname)
 
 # Check for flake dir in nixos or non-nixos variables, else default in ~/.config/nixpkgs
 if checkForFlake "$NIX_FLAKE_DIR"; then
@@ -147,4 +155,4 @@ if [[ "$answer" == [yY] ]]; then
 else
     info Update canceled!
 fi
-peval rm -f result
+peval rm -f "${out_link}"
