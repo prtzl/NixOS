@@ -9,6 +9,13 @@ function info()
 	tput sgr 0
 }
 
+function warn()
+{
+	tput setaf 3 >&2
+	echo "${@}" >&2
+	tput sgr 0 >&2
+}
+
 function error()
 {
 	tput setaf 1 >&2
