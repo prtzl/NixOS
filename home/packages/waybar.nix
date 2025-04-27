@@ -5,6 +5,43 @@ let
   baseconfig = (builtins.fromJSON (builtins.readFile ./dotfiles/waybar/config));
   basestyle = builtins.readFile ./dotfiles/waybar/style.css;
 
+  batteries = [ "nixtop" ];
+
+  makeBatteries = path: index: {
+    battery = {
+      bat = "BAT0";
+      interval = 60;
+      states = {
+        warning = 30;
+        critical = 15;
+      };
+      format = "{capacity}% {icon}";
+      format-icons = [ "" "" "" "" "" ];
+      max-length = 25;
+    };
+  };
+
+  selectedBatteries = batteries;
+
+  batteryConfigNames =
+    lib.lists.imap1 (index: name: "battery") selectedBatteries;
+
+  makeBatteryConfigs = configs:
+    lib.lists.imap1 (index: name: makeBatteries name index) configs;
+  batteryConfigs =
+    lib.foldl' (acc: x: acc // x) { } (makeBatteryConfigs selectedBatteries);
+
+  makeBatterieStyle = name: index:
+    let color = "green";
+    in ''
+      #battery {
+        color: ${color};
+      }
+    '';
+  batteryStyle = builtins.concatStringsSep "\n"
+    (lib.lists.imap1 (index: name: makeBatterieStyle name index)
+      selectedBatteries);
+
   # Temperatures
   temps = {
     nixbox = [ "cpu_temp" "gpu_temp" ];
@@ -154,13 +191,13 @@ let
     # Leaves with last 2
     secondBase = lib.lists.take 2 (lib.lists.drop 3 original);
   in firstBase ++ tempConfigNames ++ diskConfigNames ++ networkConfigNames
-  ++ secondBase;
+  ++ batteryConfigNames ++ secondBase;
 
   # Write new config and style
   config = baseconfig // {
     modules-right = modules-right;
-  } // networkConfigs // diskConfigs // tempConfigs;
-  style = basestyle + networkStyle + diskStyle + tempStyle;
+  } // networkConfigs // diskConfigs // tempConfigs // batteryConfigs;
+  style = basestyle + networkStyle + diskStyle + tempStyle + batteryStyle;
 
 in {
   programs.waybar = {
