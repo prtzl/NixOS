@@ -44,10 +44,12 @@ window#waybar {
 
 #workspaces {
     transition: none;
+    padding: 0 0;
 }
 #workspaces button {
     color: @content_inactive;
     transition: none;
+    margin: 0.1rem 0.1rem;
 }
 #workspaces button.active {
     color: #1a1a1a;
