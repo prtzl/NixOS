@@ -5,11 +5,10 @@ let
     secureBoot = true;
     tpmSupport = true;
   };
-in
-{
+in {
   virtualisation = {
-    podman.enable = true;
-    docker.enable = true;
+    podman.enable = false; # haven't used it in ages
+    docker.enable = false;
     # virtualbox.host.enable = true;
     spiceUSBRedirection.enable = true;
     libvirtd = {
