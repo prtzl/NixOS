@@ -2,46 +2,50 @@
     font-size: 1.3rem;
     font-family: monospace;
     min-height: 0;
-    padding: 0 0.3rem;
     margin: 0 0.1rem;
     font-weight: bold;
 }
 
 window#waybar {
-    /* background: #292b2e; */
     background: #1a1a1a;
     color: #fdf6e3;
+    border-radius: 10px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
-#workspaces,
-#clock.1,
-#clock.2,
-#clock.3,
-#pulseaudio,
-#memory,
 #cpu,
-#battery,
+#disk,
+#language,
+#memory,
+#network,
+#pulseaudio,
+#temperature,
+#clock,
+#tray,
+#workspaces {
+    border: 0.1rem solid white;
+    border-radius: 5px;
+    margin: 0 0.3rem;
+    padding: 0 0.3rem;
+}
+
 #tray {
-    background: #1a1a1a;
+    border: 0.1rem solid white;
+    padding: 0.2rem;
 }
 #tray > .passive {
     -gtk-icon-effect: dim;
 }
-
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
     background-color: #eb4d4b;
 }
-#language {
-    background: #1a1a1a;
-}
 
 #workspaces {
-    background: #292b2e;
     transition: none;
 }
 #workspaces button {
-    background: #1a1a1a;
     color: @content_inactive;
     transition: none;
 }
@@ -55,9 +59,9 @@ window#waybar {
     transition: none;
 }
 #workspaces button.urgent {
-	background:  rgba(255, 200, 0, 0.35);
-	border-bottom: 0.5rem dashed @warning_color;
-	color: @warning_color;
+    background:  rgba(255, 200, 0, 0.35);
+    border-bottom: 0.5rem dashed @warning_color;
+    color: @warning_color;
     transition: none;
 }
 #workspaces button:hover {
@@ -73,18 +77,15 @@ window#waybar {
     color: #be2528;
     font-weight: bold;
 }
+
 #memory {
     color: #2aa198;
 }
+
 #cpu {
     color: #6c71c4;
-}
-#battery {
-    color: #859900;
 }
 
 #language {
     color: #a6799d;
 }
-
-

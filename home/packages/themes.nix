@@ -6,7 +6,10 @@
     platformTheme.name = "gtk";
   };
 
-  gtk = rec {
+  gtk = let
+    tooltipTimeout = 100;
+    gtkExtraConfig = { gtk-tooltip-timeout = tooltipTimeout; };
+  in {
     enable = true;
     theme = {
       name = "Materia-dark";
@@ -21,11 +24,10 @@
       package = pkgs.numix-cursor-theme;
     };
     gtk2.extraConfig = ''
-      gtk-cursor-theme-name=Numix-Cursor
-      gtk-tooltip-timeout = 100
+      gtk-tooltip-timeout = ${builtins.toString tooltipTimeout};
     '';
-    gtk3.extraConfig.Settings = gtk2.extraConfig;
-    gtk4.extraConfig = gtk3.extraConfig;
+    gtk3.extraConfig = gtkExtraConfig;
+    gtk4.extraConfig = gtkExtraConfig;
   };
 
   dconf.settings = {
