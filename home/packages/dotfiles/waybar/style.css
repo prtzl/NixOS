@@ -24,15 +24,14 @@ window#waybar {
 #clock,
 #tray,
 #workspaces {
-    border: 0.1rem solid white;
+    border: 0.1rem solid #404040;
     border-radius: 5px;
-    margin: 0 0.3rem;
-    padding: 0 0.3rem;
+    margin: 0 0.2rem;
+    padding: 0 0.5rem;
 }
 
 #tray {
-    border: 0.1rem solid white;
-    padding: 0.2rem;
+    padding: 0 0.5rem;
 }
 #tray > .passive {
     -gtk-icon-effect: dim;
@@ -49,7 +48,7 @@ window#waybar {
 #workspaces button {
     color: @content_inactive;
     transition: none;
-    margin: 0.1rem 0.1rem;
+    margin: 0 0.1rem;
 }
 #workspaces button.active {
     color: #1a1a1a;
@@ -91,3 +90,6 @@ window#waybar {
 #language {
     color: #a6799d;
 }
+
+
+
