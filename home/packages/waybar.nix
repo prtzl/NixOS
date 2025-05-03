@@ -204,7 +204,7 @@ in {
     enable = true;
     package = pkgs.unstable.waybar;
     systemd.enable = true;
-    # Latch onto hyprland configured in wayland.windowManager.hyprland.systemd.enable
+    # Latch onto hyprland configured in wayland.windowManager.hyprland.systemd.enable, otherwise it crashes if started before hyprlanb
     systemd.target = "hyprland-session.target";
     settings = [ config ];
     style = style;
