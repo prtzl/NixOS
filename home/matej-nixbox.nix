@@ -20,6 +20,7 @@
     texlive.combined.scheme-full
 
     # Media
+    tauon
     easytag
     soundconverter
     jamesdsp

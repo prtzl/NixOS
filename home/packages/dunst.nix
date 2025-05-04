@@ -7,7 +7,7 @@ let
     text = builtins.readFile ./dotfiles/dunst/volume.sh;
   };
 in {
-  home.packages = with pkgs; [ volume libnotify ];
+  home.packages = with pkgs.unstable; [ volume libnotify ];
   services.dunst = {
     enable = true;
     package = pkgs.unstable.dunst;

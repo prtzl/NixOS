@@ -1,13 +1,8 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./alacritty.nix
-    ./hyprland.nix
-    ./notifications.nix
-    ./themes.nix
-    ./waybar.nix
-  ];
+  imports =
+    [ ./alacritty.nix ./dunst.nix ./hyprland.nix ./themes.nix ./waybar.nix ];
 
   programs = {
     firefox.enable = true;
@@ -31,7 +26,12 @@
     transmission_4-gtk
 
     # Media
-    tauon
+    celluloid # video/music player
+    eog # image viewer
+    evince # pdf viewer
+    gnome-calculator # calculatror
+    nautilus # file explorer
+    vlc # multimedia in case celluloid sucks
 
     # Communication
     signal-desktop

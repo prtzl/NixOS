@@ -7,28 +7,20 @@
 
 let
   # Currently pull hyprland resources from unstable - latest
-  pkgs-hyprland = pkgs.unstable;
+  pkgs-hypr = pkgs.unstable;
   hypershot_shader_toggle = pkgs.writeShellApplication {
     name = "hypershot_shader_toggle";
-    runtimeInputs = with pkgs-hyprland; [ hyprcursor hyprshade hyprshot ];
+    runtimeInputs = with pkgs-hypr; [ hyprcursor hyprshade hyprshot ];
     text = builtins.readFile ./dotfiles/hyprshot/hyprshot_shader_toggle.sh;
   };
 in {
-  home.packages = with pkgs; [
+  home.packages = with pkgs-hypr; [
     # Hyprland configuration
-    pkgs-hyprland.hyprcursor # I guess this has to come separately
-    pkgs-hyprland.hyprshade
-    pkgs-hyprland.wl-clipboard # clipboard (why is this additional, like  what?)
-    pkgs-hyprland.hyprshot # screenshot util
-    pkgs-hyprland.networkmanagerapplet # brings network manager applet functionality
-
-    # nice to have GUI apps for a desktop
-    celluloid # video/music player
-    eog # image viewer
-    evince # pdf viewer
-    gnome-calculator # calculatror
-    nautilus # file explorer
-    vlc # multimedia in case celluloid sucks
+    hyprcursor # I guess this has to come separately
+    hyprshade
+    wl-clipboard # clipboard (why is this additional, like  what?)
+    hyprshot # screenshot util
+    networkmanagerapplet # brings network manager applet functionality
 
     # My stuff
     hypershot_shader_toggle # Custom screenshot utility
@@ -36,13 +28,18 @@ in {
 
   programs.rofi = {
     enable = true;
-    package = pkgs-hyprland.rofi-wayland;
+    package = pkgs-hypr.rofi-wayland;
     theme = "Arc-Dark";
   };
 
   # The jummy thing about this is that now as a service it reloads on configurations change automatically!
   wayland.windowManager.hyprland = {
     enable = true;
+    # Tricky mamma. Is installed system-wide on nixos
+    # so it should match that. If it's not, then ehh.
+    package = pkgs.hyprland;
+    # Enabled hyprland-session.target which links to graphical-session.target.
+    # Using this target for other services waiting for the "gui" to start (for example waybar)
     systemd.enable = true;
     extraConfig = builtins.readFile ./dotfiles/hyprland/hyprland.conf;
   };
