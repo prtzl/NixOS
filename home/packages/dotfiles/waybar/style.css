@@ -1,19 +1,17 @@
 * {
-    font-size: 1.3rem;
     font-family: monospace;
-    min-height: 0;
-    margin: 0 0.1rem;
+    font-size: 1.3rem;
     font-weight: bold;
+    margin: 0 0.1rem;
+    min-height: 0;
 }
 
 window#waybar {
-    background: #1a1a1a;
-    color: #fdf6e3;
-    border-radius: 10px;
     margin-left: 0;
     margin-right: 0;
 }
 
+/* Should include global settings for ALL widgets, so only excluding the bar itself (configured a few lines up) */
 #cpu,
 #disk,
 #language,
@@ -24,8 +22,10 @@ window#waybar {
 #clock,
 #tray,
 #workspaces {
-    border: 0.1rem solid #404040;
+    background: #1a1a1a;
     border-radius: 5px;
+    border: 0.1rem solid #404040;
+    color: #fdf6e3;
     margin: 0 0.2rem;
     padding: 0 0.5rem;
 }
