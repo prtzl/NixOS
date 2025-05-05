@@ -47,6 +47,9 @@
 
   services = { fwupd.enable = true; };
 
+  # Programs
+
+  programs.zsh.enable = true;
   # System packages - minimal usable system
   environment = {
     shells = with pkgs; [ bashInteractive zsh ];
@@ -58,25 +61,16 @@
       fd
       file
       git
-      home-manager
-      htop
-      lm_sensors
-      nvd
       parted
-      pciutils
       ripgrep
       tio
       tree
       unstable.nix-index
       unzip
-      usbutils
       vim
       wget
     ];
   };
-
-  programs.wireshark.enable = true;
-  programs.zsh.enable = true;
 
   networking = {
     networkmanager.enable = true;
