@@ -1,9 +1,6 @@
 { inputs, pkgs, ... }:
 
-let
-  nixgen = pkgs.writeShellScriptBin "nixgen"
-    (builtins.readFile ./local-pkgs/nixgen.sh);
-in {
+{
   system.stateVersion = "24.11";
 
   # Cleaning lady
@@ -64,8 +61,6 @@ in {
       home-manager
       htop
       lm_sensors
-      nixgen
-      # nixos-update
       nvd
       parted
       pciutils
