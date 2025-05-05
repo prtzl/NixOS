@@ -1,25 +1,16 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
-let
-  ovmf = pkgs.OVMF.override {
-    secureBoot = true;
-    tpmSupport = true;
-  };
-in {
+{
   virtualisation = {
     podman.enable = false; # haven't used it in ages
     docker.enable = false;
-    # virtualbox.host.enable = true;
     spiceUSBRedirection.enable = true;
     libvirtd = {
       enable = true;
       onBoot = "ignore";
       onShutdown = "shutdown";
       qemu = {
-        ovmf = {
-          enable = true;
-          #package = ovmf;
-        };
+        ovmf = { enable = true; };
         runAsRoot = false;
       };
     };
@@ -31,8 +22,8 @@ in {
     spice-vdagent
     virt-manager
     virt-viewer
-    docker-compose
-    podman-compose
+    # docker-compose
+    # podman-compose
   ];
 
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
