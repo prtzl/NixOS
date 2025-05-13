@@ -95,6 +95,10 @@
       "tsx=on"
       "tsx_async_abort=off"
       "mitigations=off"
+
+      "amdgpu.dpm=1"
+      "amdgpu.dc=1"
+      "amdgpu.ppfeaturemask=0xfffd7fff"
     ];
   };
 
