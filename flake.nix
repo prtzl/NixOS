@@ -26,8 +26,8 @@
     jlink-pack.url = "github:prtzl/jlink-nix";
     nvimnix.url = "github:prtzl/nvimnix";
     # nvimnix = {
-    #   url = "/home/matej/nixvim";
-    #   input.flake-utils.follows = "flake-utils";
+    #   url = "/home/nixos/nvimnix";
+    #   inputs.flake-utils.follows = "flake-utils";
     # };
   };
 
@@ -49,7 +49,7 @@
         generators.mkSystem ({
           modules = [
             inputs.nix-monitored.nixosModules.default
-            inputs.nvimnix.nixosModules.default
+            inputs.nvimnix.nixosModules.nixos
             ./global/findre.nix
             ./global/fonts.nix
             ./global/update.nix
@@ -58,7 +58,7 @@
       mkHome = args@{ ... }:
         generators.mkHome ({
           modules = [
-            inputs.nvimnix.nixosModules.default
+            inputs.nvimnix.nixosModules.home
             ./global/findre.nix
             ./global/fonts.nix
             ./global/update.nix
