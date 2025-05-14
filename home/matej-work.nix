@@ -1,21 +1,14 @@
+# TODO: fix this to match other derivations, figure out cinnamon config as well
 { pkgs, config, ... }:
 
 let
   # Create package path
   p = package: (./. + ("/packages/" + "${package}"));
   # Import a package with extra args
-  pp = { package, ... } @ args: (
-    let
-      path = ./. + ("/packages/" + "${package}");
-    in
-    import "${path}" (
-      args // {
-        inherit pkgs config;
-      }
-    )
-  );
-in
-{
+  pp = { package, ... }@args:
+    (let path = ./. + ("/packages/" + "${package}");
+    in import "${path}" (args // { inherit pkgs config; }));
+in {
   imports = [
     (p "home_basic.nix")
     (p "nvim.nix")
@@ -27,12 +20,14 @@ in
     (p "zsh.nix")
     (p "alacritty.nix")
     (p "redshift.nix")
-    (pp { package = "startx.nix"; desktop-environment = "cinnamon-session"; })
+    (pp {
+      package = "startx.nix";
+      desktop-environment = "cinnamon-session";
+    })
   ];
 
   home.username = "mblagsic";
   home.homeDirectory = "/home/mblagsic";
-  home.stateVersion = "24.05";
 
   # Packages
   home.packages = with pkgs; [
@@ -67,16 +62,6 @@ in
   ];
 
   # Non-nixos openGL patched programs
-  programs.alacritty.package = pkgs.glWrapIntel {
-    pkg = pkgs.alacritty;
-  };
-  programs.kitty.package = pkgs.glWrapIntel {
-    pkg = pkgs.kitty;
-  };
-
-  home.sessionVariables = {
-    NIX_HOME_DERIVATION = "matej-work";
-  };
+  programs.alacritty.package = pkgs.glWrapIntel { pkg = pkgs.alacritty; };
+  programs.kitty.package = pkgs.glWrapIntel { pkg = pkgs.kitty; };
 }
-
-

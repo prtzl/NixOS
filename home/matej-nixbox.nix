@@ -32,7 +32,4 @@
     #   sha256 = "sha256-J+QioJsw2MK+3uGDUf+IcAD28tiMxr8Isykb21Ovf5A=";
     # }))
   ];
-
-  home.sessionVariables = { NIX_HOME_DERIVATION = "matej-nixbox"; };
 }
-

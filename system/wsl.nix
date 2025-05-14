@@ -7,8 +7,6 @@
   wsl.enable = true;
   wsl.defaultUser = "nixos";
 
-  system.stateVersion = "24.11";
-
   # set top 8x2 = packages that do build will take some time, but oh well
   nix.settings = {
     # max-jobs = maximum packages built at once
