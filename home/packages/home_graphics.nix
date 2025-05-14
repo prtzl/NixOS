@@ -6,11 +6,13 @@
 
   programs = {
     firefox.enable = true;
-    chromium.enable = true;
     vscode.enable = true;
   };
 
   home.packages = with pkgs; [
+    # Browsing
+    ungoogled-chromium
+
     # Dev
     arduino
     drawio

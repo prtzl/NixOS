@@ -17,15 +17,17 @@ in {
   home.packages = with pkgs-hypr; [
     # Hyprland configuration
     hyprcursor # I guess this has to come separately
-    hyprshade
+    hyprshade # applies a openGL shader to the screen - used for yellow tinging (replacement for redshift on x11)
     wl-clipboard # clipboard (why is this additional, like  what?)
     hyprshot # screenshot util
     networkmanagerapplet # brings network manager applet functionality
 
     # My stuff
-    hypershot_shader_toggle # Custom screenshot utility
+    # Custom screenshot utility that toggles shader off (if turned on) before taking one and then restoring the shader state
+    hypershot_shader_toggle
   ];
 
+  # App launcher
   programs.rofi = {
     enable = true;
     package = pkgs-hypr.rofi-wayland;
@@ -45,13 +47,13 @@ in {
   };
 
   # Start the uwsm hyprland by default on tty1
-  # This has to be sourced in "globlal" .profile (shell.nix)
+  # This has to be sourced in "global" .profile (shell.nix)
   home.file.".profile.uwsm".text = ''
     if uwsm check may-start && [ "$(tty)" = "/dev/tty1" ]; then
         exec uwsm start hyprland-uwsm.desktop
     fi
   '';
 
-  # Actual hyprland configuration in dotfiles
+  # Save shaders manually
   home.file.".config/hypr/shaders".source = ./dotfiles/hyprland/shaders;
 }
