@@ -1,9 +1,8 @@
-{ pkgs, modulesPath, ... }:
+{ pkgs, ... }:
 
 {
   # Rational is that every nixos supporting graphics (real PC, wsl) will also support audio
-  imports =
-    [ ./pipewire.nix (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [ ./pipewire.nix ];
 
   # DE of choice - unstable does not work, it does not boot, I don't know why
   programs.hyprland = {
