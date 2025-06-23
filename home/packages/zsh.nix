@@ -64,7 +64,7 @@ in {
       path = "$HOME/.cache/zsh/history";
     };
 
-    initExtra = ''
+    initContent = ''
       autoload -U colors && colors
 
       zstyle ':completion:*' menu select

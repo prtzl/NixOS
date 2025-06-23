@@ -16,7 +16,7 @@ lib.mkMerge [
       (if (systemArgs ? isSystem && systemArgs.isSystem) then ({
         fontDir.enable = true;
         packages = with pkgs; [
-          (nerdfonts.override { fonts = [ "FiraCode" ]; })
+          nerd-fonts.fira-code
           noto-fonts
           noto-fonts-cjk-sans
           noto-fonts-emoji
@@ -27,7 +27,7 @@ lib.mkMerge [
   })
   (if (homeArgs ? isHome && homeArgs.isHome) then ({
     home.packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      nerd-fonts.fira-code
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
