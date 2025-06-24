@@ -2,16 +2,17 @@
 
 {
   environment.systemPackages = with pkgs; [ qpwgraph ];
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
-    audio.enable = true;
+    pulse.enable = true;
+    jack.enable = true;
+    wireplumber.enable = true;
     alsa = {
       enable = true;
       support32Bit = true;
     };
-    pulse.enable = true;
-    jack.enable = false;
     extraConfig.pipewire.samplerate = {
       "context.properties" = {
         "log.level" = 2;
@@ -26,7 +27,6 @@
         "clock.power-of-two-quantum" = true; # more efficient
       };
     };
-    wireplumber = { enable = true; };
   };
 
   services.pulseaudio.enable = false;
