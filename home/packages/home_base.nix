@@ -18,7 +18,7 @@
   imports =
     [ ./nvim.nix ./ranger.nix ./shell.nix ./tio.nix ./tmux.nix ./zsh.nix ];
 
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
