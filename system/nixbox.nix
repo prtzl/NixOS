@@ -102,7 +102,10 @@
     ];
   };
 
-  hardware.cpu.amd.updateMicrocode = true;
+  hardware = {
+    enableAllFirmware = true;
+    cpu.amd.updateMicrocode = true;
+  };
 
   fileSystems."/storage" = {
     device = "/dev/disk/by-label/storage";
