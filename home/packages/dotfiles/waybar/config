@@ -11,14 +11,13 @@
     "modules-center": [
         "clock#1",
         "clock#2",
-        "clock#3",
-        "custom/divider"
+        "clock#3"
     ],
     "modules-right": [
         "tray",
+        "hyprland/language",
         "cpu",
         "memory",
-        "hyprland/language",
         "pulseaudio"
     ],
     "clock#1": {
@@ -60,9 +59,9 @@
         "expand": false
     },
     "pulseaudio": {
-        "format": "{icon}  {volume:3}%",
-        "format-bluetooth": "{icon}  {volume}%",
-        "format-muted": "{icon}  MUTE",
+        "format": "{icon} {volume:3}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-muted": "{icon} MUTE",
         "format-icons": {
             "headphones": "",
             "default": [
@@ -80,7 +79,7 @@
     },
     "memory": {
         "interval": 5,
-        "format": "  {percentage}%",
+        "format": " {percentage}%",
         "max-length": 10,
         "tooltip": true,
         "tooltip-format": "RAM: {used:0.1f}G/{total:0.1f}G"
@@ -93,7 +92,7 @@
         "all-outputs": true
     },
     "hyprland/language": {
-        "format": "⌨  {}",
+        "format": "⌨ {}",
         "format-en": "us",
         "format-si": "si",
         "format-sl": "si"

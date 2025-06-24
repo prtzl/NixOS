@@ -15,8 +15,7 @@ let
         warning = 30;
         critical = 15;
       };
-      format = "{capacity}% {icon}";
-      format-icons = [ "" "" "" "" "" ];
+      format = "{capacity}%";
       max-length = 25;
     };
   };
@@ -32,7 +31,7 @@ let
     lib.foldl' (acc: x: acc // x) { } (makeBatteryConfigs selectedBatteries);
 
   makeBatterieStyle = name: index:
-    let color = "green";
+    let color = "#028909";
     in ''
       #battery {
         color: ${color};
@@ -58,7 +57,7 @@ let
         ""; # fallback/default
     in {
       "temperature#${builtins.toString index}" = {
-        format = "${icon}  {temperatureC}°C";
+        format = "${icon} {temperatureC}°C";
         hwmon-path = [ "/dev/${path}" ];
         interval = 5;
         tooltip-format = "${path}: {temperatureC}°C";
@@ -142,16 +141,15 @@ let
   makeInterface = name: index: {
     "network#${builtins.toString index}" = {
       interface = "${name}";
-      format = "{ifname}";
-      format-wifi = "  {essid}";
-      format-ethernet = "  {ifname}";
+      format-wifi = " ";
+      format-ethernet = " ";
       format-disconnected = "🚫";
-      format-disabled = "";
+      format-disabled = " ";
       tooltip-format = "{ifname}";
-      tooltip-format-wifi = "{essid} ({signalStrength}%) ";
-      tooltip-format-ethernet = "{ifname} ";
+      tooltip-format-wifi = " {essid} ({signalStrength}%) {ipaddr}";
+      tooltip-format-ethernet = " {ifname} {ipaddr}";
       tooltip-format-disconnected = "{ifname} disconnected";
-      max-length = 100;
+      max-length = 200;
       on-click = "nm-connection-editor";
       interval = 5;
     };
@@ -171,7 +169,7 @@ let
   '' (lib.lists.imap1 (index: name: "#network.${builtins.toString index}")
     selectedInterfaces) + ''
       {
-        color: #4c8959;
+        color: #800080;
       }
     '';
 
@@ -183,13 +181,13 @@ let
 
   ## Output configs
 
-  # Append network interfaces before last element (audio)
+  # modues-right has cpu - memory - pulse. Put the "dynamic modules" between first two and last.
   modules-right = let
     original = baseconfig.modules-right;
-    # First three are tray, cpu, and memory;
-    firstBase = lib.lists.take 3 original;
-    # Leaves with last 2
-    secondBase = lib.lists.take 2 (lib.lists.drop 3 original);
+    # First are tray, language, cpu, and memory;
+    firstBase = lib.lists.take 4 original;
+    # Leaves with pulse
+    secondBase = lib.lists.take 1 (lib.lists.drop 4 original);
   in firstBase ++ tempConfigNames ++ diskConfigNames ++ networkConfigNames
   ++ batteryConfigNames ++ secondBase;
 

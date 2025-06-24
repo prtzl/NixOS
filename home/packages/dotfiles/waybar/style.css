@@ -12,6 +12,8 @@ window#waybar {
 }
 
 /* Should include global settings for ALL widgets, so only excluding the bar itself (configured a few lines up) */
+#battery,
+#clock,
 #cpu,
 #disk,
 #language,
@@ -19,7 +21,6 @@ window#waybar {
 #network,
 #pulseaudio,
 #temperature,
-#clock,
 #tray,
 #workspaces {
     background: #1a1a1a;
