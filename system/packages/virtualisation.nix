@@ -25,6 +25,4 @@
     # docker-compose
     # podman-compose
   ];
-
-  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
 }
