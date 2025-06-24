@@ -114,6 +114,7 @@
 
   # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware = {
+    enableAllFirmware = true;
     cpu.intel.updateMicrocode =
       lib.mkDefault config.hardware.enableRedistributableFirmware;
     bluetooth.enable = true;
