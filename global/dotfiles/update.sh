@@ -127,14 +127,18 @@ fi
 # Remove arguments ment for this script and only pass ARGS to other tools
 declare -a ARGS
 update_flake_lock="false"
+autoaccept="false"
 for var in "$@"; do
     if [[ "$var" == "-r" ]]; then
         update_flake_lock="true"
         continue;
+    elif [[ "$var" == "-y" ]]; then
+        autoaccept="true"
+        continue;
     elif [[ "$var" == "$derivation_type" ]]; then
         continue;
     elif [[ "$var" = "-h" || "$var" == "--help" ]]; then
-        info "This script updates lock file, builds derivation, shows update diff and applies it.\nAdd option '-r' to skip lock file update (just rebuild)."
+        info "This script updates lock file, builds derivation, shows update diff and applies it.\nAdd option '-r' to update lock file.\nAdd option '-y' to accept changes and update."
         exit 0
     fi
     ARGS[${#ARGS[@]}]="$var";
@@ -155,7 +159,12 @@ info "Diffing generation with current:"
 derivation_diff
 
 
-read -r -p "Perform switch? [y/Y] " answer
+if [[ "$autoaccept" == "true" ]]; then
+    info "Approved update with \"-y\""
+    answer="y"
+else
+    read -r -p "Perform switch? [y/Y] " answer
+fi
 if [[ "$answer" == [yY] ]]; then
     info Applying update!
     derivation_apply
