@@ -43,6 +43,7 @@ in {
       img = "eog";
       play = "celluloid";
       sl = "sl -ead -999";
+      vim = "nvim";
       gvim = "nvim-qt";
 
       # System
