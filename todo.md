@@ -1,9 +1,4 @@
-# TODO and FIXME
-
-## TODO
-
-Waybar:
-* abstract battery widget for Waybar
+# TODO and FIXME and cry me
 
 Wireplumber:
 * rename devices
@@ -13,7 +8,7 @@ Wireplumber:
 When moving between 24.11 and 25.05 pipewire got borked. Service didn't run, only pipewire-pulse.
 Waybar was having panic attach, lagging, etc.
 
-Cause were invalid links to pipewire service and socket config in ~/.config/systemd/user/pipewire.<socket/service>
+Causing this were invalid links to pipewire service and socket config in ~/.config/systemd/user/pipewire.<socket/service>
 This was seen with eza since the links were red.
 
 I did the following to get it going again.
