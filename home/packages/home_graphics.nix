@@ -32,7 +32,10 @@
     eog # image viewer
     evince # pdf viewer
     gnome-calculator # calculatror
-    nautilus # file explorer
+    # file explorer
+    xfce.thunar
+    xfce.thunar-archive-plugin
+    xfce.tumbler
     vlc # multimedia in case celluloid sucks
 
     # Communication
