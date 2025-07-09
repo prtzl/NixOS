@@ -25,6 +25,7 @@
     # Util
     bottom
     git-crypt
+    git-lfs
     gnupg
     nixfmt-classic
     nvd
@@ -41,6 +42,7 @@
   } else
     { }) // {
       enable = true;
+      lfs.enable = true;
       extraConfig = {
         core = { init.defaultBranch = "master"; };
         push.default = "current";
