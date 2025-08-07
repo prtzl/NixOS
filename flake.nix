@@ -58,7 +58,7 @@
       mkHome = args@{ ... }:
         generators.mkHome ({
           modules = [
-            inputs.nvimnix.nixosModules.home
+            inputs.nvimnix.homeManagerModules.nvimnix
             ./global/findre.nix
             ./global/fonts.nix
             ./global/update.nix
