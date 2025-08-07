@@ -1,4 +1,4 @@
-{ inputs, pkgs, homeArgs, ... }:
+{ inputs, lib, pkgs, homeArgs, ... }:
 
 {
   nix = if (homeArgs ? notNixos && homeArgs.notNixos) then {
@@ -42,6 +42,8 @@
   } else
     { }) // {
       enable = true;
+      difftastic.enable = lib.mkDefault true;
+      extraConfig.log.date = lib.mkDefault "iso";
       lfs.enable = true;
       extraConfig = {
         core = { init.defaultBranch = "master"; };
