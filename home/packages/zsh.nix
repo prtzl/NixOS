@@ -58,10 +58,10 @@ in {
     };
 
     history = {
-      size = 10000;
+      size = 100000;
       ignoreDups = true;
       expireDuplicatesFirst = true;
-      share = false;
+      share = true;
       path = "$HOME/.cache/zsh/history";
     };
 
