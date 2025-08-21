@@ -31,39 +31,59 @@
     # };
   };
 
-  outputs = inputs:
+  outputs =
+    inputs:
     let
       system = "x86_64-linux";
       lib = inputs.nixpkgs-stable.lib;
       home-manager = inputs.home-manager;
 
       # tools
-      mkFree = drv:
-        drv.overrideAttrs (attrs: { meta = attrs.meta // { license = ""; }; });
+      mkFree =
+        drv:
+        drv.overrideAttrs (attrs: {
+          meta = attrs.meta // {
+            license = "";
+          };
+        });
       generators = import ./global/generators.nix {
-        inherit inputs system lib home-manager pkgs;
+        inherit
+          inputs
+          system
+          lib
+          home-manager
+          pkgs
+          ;
       };
 
       # Make indirection for home to push in modules just for home (buggy shit)
-      mkSystem = args@{ ... }:
-        generators.mkSystem ({
-          modules = [
-            inputs.nix-monitored.nixosModules.default
-            inputs.nvimnix.nixosModules.nixos
-            ./global/findre.nix
-            ./global/fonts.nix
-            ./global/update.nix
-          ];
-        } // args);
-      mkHome = args@{ ... }:
-        generators.mkHome ({
-          modules = [
-            inputs.nvimnix.homeManagerModules.nvimnix
-            ./global/findre.nix
-            ./global/fonts.nix
-            ./global/update.nix
-          ];
-        } // args);
+      mkSystem =
+        args@{ ... }:
+        generators.mkSystem (
+          {
+            modules = [
+              inputs.nix-monitored.nixosModules.default
+              inputs.nvimnix.nixosModules.nvimnix
+              ./global/findre.nix
+              ./global/fonts.nix
+              ./global/update.nix
+            ];
+          }
+          // args
+        );
+      mkHome =
+        args@{ ... }:
+        generators.mkHome (
+          {
+            modules = [
+              inputs.nvimnix.homeManagerModules.nvimnix
+              ./global/findre.nix
+              ./global/fonts.nix
+              ./global/update.nix
+            ];
+          }
+          // args
+        );
 
       overlay = self: super: {
         # Packages
@@ -77,7 +97,10 @@
       pkgs = import inputs.nixpkgs-stable {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ overlay inputs.nixgl.overlay ];
+        overlays = [
+          overlay
+          inputs.nixgl.overlay
+        ];
       };
 
       pkgs-unstable = import inputs.nixpkgs-unstable {
@@ -85,7 +108,8 @@
         config.allowUnfree = true;
         overlays = [ ];
       };
-    in {
+    in
+    {
       nixosConfigurations = {
         nixbox = mkSystem { configuration = ./system/nixbox.nix; };
         nixtop = mkSystem {
@@ -113,12 +137,21 @@
         nixos-wsl = mkHome { home-derivation = ./home/nixos-wsl.nix; };
       };
 
-    } // inputs.flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = import inputs.nixpkgs-unstable { inherit system; };
-      in {
+    }
+    // inputs.flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import inputs.nixpkgs-unstable { inherit system; };
+      in
+      {
         devShells.default = pkgs.mkShellNoCC {
           name = "Installation-shell";
-          nativeBuildInputs = with pkgs; [ nix nixfmt-classic nvd ];
+          nativeBuildInputs = with pkgs; [
+            nix
+            nixfmt-classic
+            nvd
+          ];
         };
-      });
+      }
+    );
 }
