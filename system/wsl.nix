@@ -2,7 +2,11 @@
 
 {
   # Additional configuration
-  imports = [ ./packages/system_base.nix <nixos-wsl/modules> ];
+  imports = [
+    ./packages/system_base.nix
+    <nixos-wsl/modules>
+    ./packages/udev.nix
+  ];
 
   wsl.enable = true;
   wsl.defaultUser = "nixos";
