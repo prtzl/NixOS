@@ -13,6 +13,7 @@ in {
     fzf
     lazygit
     ripgrep
+    tree
     wslgit
     xclip
     zsh-completions
@@ -24,13 +25,34 @@ in {
     nix-direnv.enable = true;
   };
 
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    fileWidgetOptions = [
+      "--walker-skip .git,node_modules,target"
+      "--preview 'bat -n --color=always {}'"
+      "--bind 'ctrl-/:change-preview-window(down|hidden|)'"
+    ];
+    changeDirWidgetOptions = [
+      "--walker-skip .git,node_modules,target"
+      "--preview 'tree -C {}'"
+    ];
+    historyWidgetOptions = [
+      "--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'"
+      "--color header:italic"
+      "--header 'Press CTRL-Y to copy command into clipboard'"
+    ];
+  };
+
   programs.zsh = {
     enable = true;
-    autosuggestion.enable = true;
     enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    historySubstringSearch.enable = true;
 
     shellAliases = {
-      # Utilities 
+      # Utilities
       ls = "eza --group-directories-first --color=always --icons";
       l = "ls -la";
       ll = "ls -l";
@@ -40,50 +62,32 @@ in {
 
       # Programs
       pdf = "evince";
-      img = "eog";
+      img = "";
       play = "celluloid";
       sl = "sl -ead -999";
       vim = "nvim";
       gvim = "nvim-qt";
 
       # System
-      reboot = ''
-        read -s \?"Reboot? [ENTER]: " && if [ -z "$REPLY" ];then env reboot;else echo "Canceled";fi'';
-      poweroff = ''
-        read -s \?"Poweroff? [ENTER]: " && if [ -z "$REPLY" ];then env poweroff;else echo "Canceled";fi'';
-      udevreload =
-        "sudo udevadm control --reload-rules && sudo udevadm trigger";
+      reboot = ''read -s \?"Reboot? [ENTER]: " && if [ -z "$REPLY" ];then env reboot;else echo "Canceled";fi'';
+      poweroff = ''read -s \?"Poweroff? [ENTER]: " && if [ -z "$REPLY" ];then env poweroff;else echo "Canceled";fi'';
+      udevreload = "sudo udevadm control --reload-rules && sudo udevadm trigger";
 
       git = "wslgit";
     };
 
     history = {
-      size = 100000;
-      ignoreDups = true;
       expireDuplicatesFirst = true;
+      ignoreAllDups = true;
+      ignoreDups = true;
+      ignoreSpace = true;
+      save = 100000;
       share = true;
-      path = "$HOME/.cache/zsh/history";
+      size = 100000;
     };
 
     initContent = ''
       autoload -U colors && colors
-
-      zstyle ':completion:*' menu select
-      zstyle ':completion:*' group-name ""
-      zstyle ':completion:*' matcher-list "" 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-      _comp_options+=(globdots)
-
-
-      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-      source ${pkgs.nix-zsh-completions}/share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh
-
-
-      source ${pkgs.fzf}/share/fzf/completion.zsh
-      source ${pkgs.fzf}/share/fzf/key-bindings.zsh
-      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
-      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/lib/zsh-ls-colors/ls-colors.zsh
-
 
       # Add history command complete
       source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -102,6 +106,14 @@ in {
       export PATH=$PATH:/usr/sbin:/usr/local/sbin
 
       export DIRENV_LOG_FORMAT=""
+
+      viewimage() {
+        gthumb "''${@:-.}" >/dev/null 2>&1 & disown
+      }
+
+      usage() {
+        du -h "''${1:-.}" --max-depth=1 2> /dev/null | sort -hr
+      }
     '';
   };
 
