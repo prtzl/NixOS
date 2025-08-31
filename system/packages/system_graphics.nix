@@ -16,7 +16,9 @@
   programs.xfconf.enable = true;
 
   # Fixes electron apps in wayland, so I've read.
-  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
 
   # I still don't know  what this is. It ran fine without, but I guess this is better?
   xdg.portal = {

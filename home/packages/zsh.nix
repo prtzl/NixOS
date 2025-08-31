@@ -1,9 +1,14 @@
-{ pkgs, lib, homeArgs, ... }:
+{
+  pkgs,
+  lib,
+  homeArgs,
+  ...
+}:
 
 let
-  wslgit =
-    pkgs.writeShellScriptBin "wslgit" (builtins.readFile ./dotfiles/wslgit.sh);
-in {
+  wslgit = pkgs.writeShellScriptBin "wslgit" (builtins.readFile ./dotfiles/wslgit.sh);
+in
+{
   imports = [ ./starship.nix ];
 
   home.packages = with pkgs; [
@@ -89,6 +94,11 @@ in {
     initContent = ''
       autoload -U colors && colors
 
+      zstyle ':completion:*' menu select
+      zstyle ':completion:*' group-name ""
+      zstyle ':completion:*' matcher-list "" 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+      _comp_options+=(globdots)
+
       # Add history command complete
       source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
       bindkey "^[[A" history-substring-search-up
@@ -133,7 +143,7 @@ in {
     TERM = "xterm-256color";
   };
 
-  home.file.".profile.home" = lib.mkIf (homeArgs ? notNixos ? homeArgs.notNixos) {
+  home.file.".profile.home" = lib.mkIf (homeArgs ? notNixos && homeArgs.notNixos) {
     text = ''
       # This file should be sourced by ~/.profile
       # This is currently just for non-nixos platforms

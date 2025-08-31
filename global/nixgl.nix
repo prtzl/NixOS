@@ -1,12 +1,20 @@
 { pkgs, ... }:
 
 let
-  glWrapIntel = { pkg, deps ? [ ] }:
+  glWrapIntel =
+    {
+      pkg,
+      deps ? [ ],
+    }:
     pkgs.stdenv.mkDerivation {
       pname = pkg.pname + "-glwrap";
       version = pkg.version;
       src = pkg;
-      nativeBuildInputs = [ pkg pkgs.nixgl.nixGLIntel ] ++ deps;
+      nativeBuildInputs = [
+        pkg
+        pkgs.nixgl.nixGLIntel
+      ]
+      ++ deps;
       installPhase = ''
         mkdir -p $out/bin
         for d in `find $src -maxdepth 1 -type d ! -path $src | grep -v bin`; do
@@ -22,4 +30,5 @@ let
         done
       '';
     };
-in glWrapIntel
+in
+glWrapIntel

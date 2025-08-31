@@ -1,22 +1,37 @@
-{ inputs, lib, pkgs, homeArgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  homeArgs,
+  ...
+}:
 
 {
-  nix = if (homeArgs ? notNixos && homeArgs.notNixos) then {
-    # package = inputs.nix-monitored.package.${pkgs.system}.default;
-    registry = {
-      nixpkgs.flake = inputs.nixpkgs-stable;
-      unstable.flake = inputs.nixpkgs-unstable;
-      master.to = {
-        owner = "nixos";
-        repo = "nixpkgs";
-        type = "github";
-      };
-    };
-  } else
-    { };
+  nix =
+    if (homeArgs ? notNixos && homeArgs.notNixos) then
+      {
+        # package = inputs.nix-monitored.package.${pkgs.system}.default;
+        registry = {
+          nixpkgs.flake = inputs.nixpkgs-stable;
+          unstable.flake = inputs.nixpkgs-unstable;
+          master.to = {
+            owner = "nixos";
+            repo = "nixpkgs";
+            type = "github";
+          };
+        };
+      }
+    else
+      { };
 
-  imports =
-    [ ./nvim.nix ./ranger.nix ./shell.nix ./tio.nix ./tmux.nix ./zsh.nix ];
+  imports = [
+    ./nvim.nix
+    ./ranger.nix
+    ./shell.nix
+    ./tio.nix
+    ./tmux.nix
+    ./zsh.nix
+  ];
 
   home.stateVersion = "25.05";
   programs.home-manager.enable = true;
@@ -36,17 +51,25 @@
   ];
 
   # Privat git
-  programs.git = (if (homeArgs ? personal && homeArgs.personal) then {
-    userName = "prtzl";
-    userEmail = "matej.blagsic@protonmail.com";
-  } else
-    { }) // {
+  programs.git =
+    (
+      if (homeArgs ? personal && homeArgs.personal) then
+        {
+          userName = "prtzl";
+          userEmail = "matej.blagsic@protonmail.com";
+        }
+      else
+        { }
+    )
+    // {
       enable = true;
       difftastic.enable = lib.mkDefault true;
       extraConfig.log.date = lib.mkDefault "iso";
       lfs.enable = true;
       extraConfig = {
-        core = { init.defaultBranch = "master"; };
+        core = {
+          init.defaultBranch = "master";
+        };
         push.default = "current";
       };
       aliases = {
@@ -60,8 +83,7 @@
         fc = "!git fetch && git checkout";
         save = "!git add -A && git commit -m 'SAVEPOINT'";
         wip = "commit -am 'WIP'";
-        sub =
-          "submodule update --init --recursive"; # pulls all the submodules at correct commit
+        sub = "submodule update --init --recursive"; # pulls all the submodules at correct commit
       };
     };
 
@@ -69,6 +91,7 @@
   home.file.".lockscreen".source = ./wallpaper/lockscreen.png;
   home.file.".black".source = ./wallpaper/black.png;
 
-  home.sessionVariables = { NIX_FLAKE_DIR_HOME = "$HOME/.config/nixpkgs/"; };
+  home.sessionVariables = {
+    NIX_FLAKE_DIR_HOME = "$HOME/.config/nixpkgs/";
+  };
 }
-

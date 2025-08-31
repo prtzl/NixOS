@@ -10,10 +10,15 @@ let
   pkgs-hypr = pkgs.unstable;
   hypershot_shader_toggle = pkgs.writeShellApplication {
     name = "hypershot_shader_toggle";
-    runtimeInputs = with pkgs-hypr; [ hyprcursor hyprshade hyprshot ];
+    runtimeInputs = with pkgs-hypr; [
+      hyprcursor
+      hyprshade
+      hyprshot
+    ];
     text = builtins.readFile ./dotfiles/hyprshot/hyprshot_shader_toggle.sh;
   };
-in {
+in
+{
   home.packages = with pkgs-hypr; [
     # Hyprland configuration
     hyprcursor # I guess this has to come separately

@@ -1,7 +1,9 @@
 { homeArgs, ... }:
 
-let personal = homeArgs ? personal && homeArgs.personal;
-in {
+let
+  personal = homeArgs ? personal && homeArgs.personal;
+in
+{
   programs.starship = {
     enable = true;
     enableZshIntegration = true;

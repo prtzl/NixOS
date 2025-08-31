@@ -27,16 +27,28 @@
         isNormalUser = true;
         isSystemUser = false;
         createHome = true;
-        extraGroups =
-          [ "wheel" "networkmanager" "dialout" "audio" "video" "usb" ];
+        extraGroups = [
+          "wheel"
+          "networkmanager"
+          "dialout"
+          "audio"
+          "video"
+          "usb"
+        ];
       };
     };
   };
 
   # Hardware configuration
   boot = {
-    initrd.availableKernelModules =
-      [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "ahci"
+      "usb_storage"
+      "usbhid"
+      "sd_mod"
+    ];
     initrd.kernelModules = [ ];
     kernelModules = [ ];
     extraModulePackages = [ ];

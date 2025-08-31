@@ -1,31 +1,68 @@
-{ inputs, system, pkgs, lib, home-manager, ... }:
+{
+  inputs,
+  system,
+  pkgs,
+  lib,
+  home-manager,
+  ...
+}:
 
 let
-  mkSystem = { configuration, hardware ? null, modules ? [ ] }:
+  mkSystem =
+    {
+      configuration,
+      hardware ? null,
+      modules ? [ ],
+    }:
     let
-      systemArgs = { isSystem = true; };
+      systemArgs = {
+        isSystem = true;
+      };
       homeArgs = { };
-    in (lib.nixosSystem {
+    in
+    (lib.nixosSystem {
       inherit system;
-      modules = [ { nixpkgs.pkgs = pkgs; } configuration ] ++ modules
-        ++ (if hardware != null then [ hardware ] else [ ]);
+      modules = [
+        { nixpkgs.pkgs = pkgs; }
+        configuration
+      ]
+      ++ modules
+      ++ (if hardware != null then [ hardware ] else [ ]);
       specialArgs = { inherit inputs systemArgs homeArgs; };
     });
 
-  mkHome = { home-derivation, args ? { }, modules ? [ ] }:
+  mkHome =
+    {
+      home-derivation,
+      args ? { },
+      modules ? [ ],
+    }:
     let
-      homeArgs = args // { isHome = true; };
+      homeArgs = args // {
+        isHome = true;
+      };
       systemArgs = { };
-      configName = lib.removeSuffix ".nix" (lib.last
-        (lib.strings.splitString "-"
-          (lib.last (lib.strings.splitString "/" (toString home-derivation)))));
-    in home-manager.lib.homeManagerConfiguration {
+      configName = lib.removeSuffix ".nix" (
+        lib.last (
+          lib.strings.splitString "-" (lib.last (lib.strings.splitString "/" (toString home-derivation)))
+        )
+      );
+    in
+    home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [ home-derivation ] ++ modules;
       extraSpecialArgs = {
-        inherit inputs homeArgs systemArgs configName;
+        inherit
+          inputs
+          homeArgs
+          systemArgs
+          configName
+          ;
         lib = import "${home-manager}/modules/lib/stdlib-extended.nix" pkgs.lib;
       };
     };
 
-in { inherit mkSystem mkHome; }
+in
+{
+  inherit mkSystem mkHome;
+}

@@ -20,7 +20,9 @@
   networking = {
     hostName = "nixbox";
     interfaces.enp9s0.useDHCP = true;
-    firewall = { enable = true; };
+    firewall = {
+      enable = true;
+    };
     enableIPv6 = false;
   }; # Disable IPv6
 
@@ -76,8 +78,14 @@
 
   # Hardware settings
   boot = {
-    initrd.availableKernelModules =
-      [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "ahci"
+      "usb_storage"
+      "usbhid"
+      "sd_mod"
+    ];
     initrd.kernelModules = [ "amdgpu" ];
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
@@ -110,6 +118,10 @@
   fileSystems."/storage" = {
     device = "/dev/disk/by-label/storage";
     fsType = "ext4";
-    options = [ "defaults" "user" "rw" ];
+    options = [
+      "defaults"
+      "user"
+      "rw"
+    ];
   };
 }

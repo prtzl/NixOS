@@ -21,7 +21,9 @@
     hostName = "nixtop";
     interfaces.enp0s31f6.useDHCP = true;
     interfaces.wlp61s0.useDHCP = true;
-    firewall = { enable = true; };
+    firewall = {
+      enable = true;
+    };
     enableIPv6 = false;
   };
 
@@ -91,8 +93,14 @@
       "thunderbolt"
     ];
     initrd.kernelModules = [ ];
-    kernelModules =
-      [ "kvm-intel" "acpi_call" "vboxdrv" "vboxnetflt" "vboxnetadp" "vboxpci" ];
+    kernelModules = [
+      "kvm-intel"
+      "acpi_call"
+      "vboxdrv"
+      "vboxnetflt"
+      "vboxnetadp"
+      "vboxpci"
+    ];
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   };
 
@@ -116,8 +124,7 @@
   hardware = {
     # Following line fixed missing drivers for the wireless card when upgrading from 24.11 to 25.05.
     enableAllFirmware = true;
-    cpu.intel.updateMicrocode =
-      lib.mkDefault config.hardware.enableRedistributableFirmware;
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     bluetooth.enable = true;
     acpilight.enable = true;
   };

@@ -1,8 +1,13 @@
 { pkgs, ... }:
 
 {
-  imports =
-    [ ./alacritty.nix ./dunst.nix ./hyprland.nix ./themes.nix ./waybar.nix ];
+  imports = [
+    ./alacritty.nix
+    ./dunst.nix
+    ./hyprland.nix
+    ./themes.nix
+    ./waybar.nix
+  ];
 
   programs = {
     firefox.enable = true;

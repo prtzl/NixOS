@@ -1,4 +1,10 @@
-{ pkgs, lib, systemArgs, homeArgs, ... }:
+{
+  pkgs,
+  lib,
+  systemArgs,
+  homeArgs,
+  ...
+}:
 
 lib.mkMerge [
   ({
@@ -13,25 +19,33 @@ lib.mkMerge [
           };
         };
       })
-      (if (systemArgs ? isSystem && systemArgs.isSystem) then ({
-        fontDir.enable = true;
-        packages = with pkgs; [
+      (
+        if (systemArgs ? isSystem && systemArgs.isSystem) then
+          ({
+            fontDir.enable = true;
+            packages = with pkgs; [
+              nerd-fonts.fira-code
+              noto-fonts
+              noto-fonts-cjk-sans
+              noto-fonts-emoji
+            ];
+          })
+        else
+          { }
+      )
+    ];
+  })
+  (
+    if (homeArgs ? isHome && homeArgs.isHome) then
+      ({
+        home.packages = with pkgs; [
           nerd-fonts.fira-code
           noto-fonts
           noto-fonts-cjk-sans
           noto-fonts-emoji
         ];
-      }) else
-        { })
-    ];
-  })
-  (if (homeArgs ? isHome && homeArgs.isHome) then ({
-    home.packages = with pkgs; [
-      nerd-fonts.fira-code
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-    ];
-  }) else
-    { })
+      })
+    else
+      { }
+  )
 ]

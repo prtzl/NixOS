@@ -18,7 +18,12 @@
         "log.level" = 2;
 
         "default.clock.rate" = 44100;
-        "default.clock.allowed-rates" = [ 44100 48000 88200 96000 ];
+        "default.clock.allowed-rates" = [
+          44100
+          48000
+          88200
+          96000
+        ];
 
         "default.clock.quantum" = 512; # ~10.64mn latency
         "default.clock.min" = 32;
