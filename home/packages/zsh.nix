@@ -70,6 +70,10 @@ in
       poweroff = ''read -s \?"Poweroff? [ENTER]: " && if [ -z "$REPLY" ];then env poweroff;else echo "Canceled";fi'';
       udevreload = "sudo udevadm control --reload-rules && sudo udevadm trigger";
     };
+    initExtra = ''
+      # Prevents direnv from yapping too much
+      export DIRENV_LOG_FORMAT=""
+    '';
   };
 
   programs.zsh = {
