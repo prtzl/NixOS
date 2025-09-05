@@ -51,14 +51,6 @@ in
     extraConfig = builtins.readFile ./dotfiles/hyprland/hyprland.conf;
   };
 
-  # Start the uwsm hyprland by default on tty1
-  # This has to be sourced in "global" .profile (shell.nix)
-  home.file.".profile.uwsm".text = ''
-    if uwsm check may-start && [ "$(tty)" = "/dev/tty1" ]; then
-        exec uwsm start hyprland-uwsm.desktop
-    fi
-  '';
-
   # Save shaders manually
   home.file.".config/hypr/shaders".source = ./dotfiles/hyprland/shaders;
 }

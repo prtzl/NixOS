@@ -9,8 +9,9 @@
     enable = true;
     package = pkgs.hyprland;
     xwayland.enable = true;
-    withUWSM = true;
   };
+
+  services.displayManager.ly.enable = true;
 
   # needed by xfce apps to save config - yikes, well, at least not gnome
   programs.xfconf.enable = true;
