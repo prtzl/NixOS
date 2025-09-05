@@ -1,12 +1,21 @@
 command=${1:-""}
 
+function muted()
+{
+    wpctl get-volume @DEFAULT_AUDIO_SINK@ | command grep -o '\[MUTED\]' || true
+}
+
 # Check the passed argument for Volume Up or Volume Down
 if [ "$command" == "up" ]; then
-    # Volume Up
     wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 2%+
+    if [[ -n "$(muted)" ]]; then
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+    fi
 elif [ "$command" == "down" ]; then
-    # Volume Down
     wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 2%-
+    if [[ -n "$(muted)" ]]; then
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+    fi
 elif [ "$command" == "mute" ]; then
     wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 else
@@ -19,7 +28,7 @@ volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')
 device=$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep 'node.description' | sed -E 's/.*"([^"]+)".*/\1/')
 
 # Check if the system is muted
-muted=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | command grep -o '\[MUTED\]' || true)
+muted=$(muted)
 
 # Labels for Volume Up, Volume Down, and Mute
 label_up="🔊 Volume Up:"
@@ -49,27 +58,30 @@ format_line() {
 format_mute_line() {
     local label="$1"
     local vol=${2:-""}
+    local padding=$((target_width - ${#label}))
+    local spaces
+    spaces=$(printf '%*s' "$padding" "")
     if [ -z "$vol" ]; then
         printf "%s\n%s" "$label" "$device"
     else
-        printf "%s%3d%%\n%s" "$label" "$vol" "$device"
+        printf "%s%s%3d%%\n%s" "$label" "$spaces" "$vol" "$device"
     fi
 }
 
 # Check the passed argument for Volume Up, Volume Down, or Mute
 if [ "$command" == "up" ]; then
     # Volume Up
-    dunstify -a $'\u200B' "$(format_line "$label_up" "$volume")" -t 1000 -r 6969 -h int:value:"$volume"
+    dunstify -a "volume" "$(format_line "$label_up" "$volume")" -t 1000 -r 6969 -h int:value:"$volume"
 elif [ "$command" == "down" ]; then
     # Volume Down
-    dunstify -a $'\u200B' "$(format_line "$label_down" "$volume")" -t 1000 -r 6969 -h int:value:"$volume"
+    dunstify -a "volume" "$(format_line "$label_down" "$volume")" -t 1000 -r 6969 -h int:value:"$volume"
 elif [ "$command" == "mute" ]; then
     if [ -z "$muted" ]; then
         # unmuted
-        dunstify -a $'\u200B' "$(format_mute_line "$label_unmute" "$volume")" -t 1000 -r 6969 -h int:value:"$volume"
+        dunstify -a "volume" "$(format_mute_line "$label_unmute" "$volume")" -t 1000 -r 6969 -h int:value:"$volume"
     else
         # muted
-        dunstify -a $'\u200B' "$(format_mute_line "$label_mute")" -t 1000 -r 6969 -h int:value:"$volume"
+        dunstify -a "volume" "$(format_mute_line "$label_mute")" -t 1000 -r 6969 -h int:value:"$volume"
     fi
 else
     echo "Usage: $0 {up|down|mute}"
