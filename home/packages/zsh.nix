@@ -135,10 +135,13 @@ in
       bindkey '^[[1;5C' forward-word
       bindkey '\e[11~' "urxvt &\n"
 
-      # Add paths that can be missing sometimes (non-nixos)
-      export PATH=$PATH:/usr/sbin:/usr/local/sbin
-
       export DIRENV_LOG_FORMAT=""
+
+      # Don't save a command into history if it failed to evaluate.
+      # If it runs but fails, it is still saved. No worries of loosing typoed commands.
+      zshaddhistory() {
+        whence ''${''${(z)1}[1]} >| /dev/null || return 1
+      }
 
       viewimage() {
         gthumb "''${@:-.}" >/dev/null 2>&1 & disown
