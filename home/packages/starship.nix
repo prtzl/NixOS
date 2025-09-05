@@ -6,6 +6,7 @@ in
 {
   programs.starship = {
     enable = true;
+    enableBashIntegration = true;
     enableZshIntegration = true;
     settings = {
       command_timeout = 50; # It's very noticable and anoying beyond this
