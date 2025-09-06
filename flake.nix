@@ -110,6 +110,8 @@
       };
     in
     {
+      formatter.${system} = pkgs.nixfmt-tree;
+
       nixosConfigurations = {
         nixbox = mkSystem { configuration = ./system/nixbox.nix; };
         nixtop = mkSystem {
