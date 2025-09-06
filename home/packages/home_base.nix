@@ -25,6 +25,7 @@
       { };
 
   imports = [
+    ./btop.nix
     ./nvim.nix
     ./ranger.nix
     ./shell.nix
