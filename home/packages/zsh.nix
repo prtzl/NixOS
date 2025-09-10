@@ -139,6 +139,9 @@ in
       bindkey '^[[1;5C' forward-word
       bindkey '\e[11~' "urxvt &\n"
 
+      # enable vim mode (default is insert, esc gets you to normal)
+      bindkey -v
+
       export DIRENV_LOG_FORMAT=""
 
       # Don't save a command into history if it failed to evaluate.
