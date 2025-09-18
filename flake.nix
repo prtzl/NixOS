@@ -63,7 +63,7 @@
           {
             modules = [
               inputs.nix-monitored.nixosModules.default
-              inputs.nvimnix.nixosModules.${system}.nvimnix
+              inputs.nvimnix.nixosModules.default
               ./global/findre.nix
               ./global/fonts.nix
               ./global/update.nix
@@ -76,7 +76,7 @@
         generators.mkHome (
           {
             modules = [
-              inputs.nvimnix.homeManagerModules.${system}.nvimnix
+              inputs.nvimnix.homeManagerModules.default
               ./global/findre.nix
               ./global/fonts.nix
               ./global/update.nix
